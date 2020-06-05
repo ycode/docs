@@ -1,3 +1,5 @@
+# List rendering
+
 ### Always use `key` with `v-for`.
 
 `key` with `v-for` is _always_ required on components, in order to maintain internal component state down the subtree. Even for elements though, it's a good practice to maintain predictable behavior, such as [object constancy](https://bost.ocks.org/mike/constancy/) in animations.
