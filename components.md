@@ -1,12 +1,3 @@
----
-
-title: Components
-description: 'Get started with ycode.'
-position: 2
-category: Style Guide
-
----#
-
 Component names should always be multi-word, except for root `App` components, and built-in components provided by Vue, such as `<transition>` or `<component>`.
 
 This [prevents conflicts](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name) with existing and future HTML elements, since all HTML elements are a single word.
