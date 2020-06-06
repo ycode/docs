@@ -1,6 +1,6 @@
- Ycode Documentation
+ # Ycode Documentation
 
 - ## Getting Started
-    - [Introduction](/docs/introduction)
-    - [Components](/docs/components)
-    - [List rendering](/docs/list-rendering)
+    - [Introduction](/introduction)
+    - [Components](/components)
+    - [List rendering](/list-rendering)
