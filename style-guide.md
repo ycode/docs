@@ -1,12 +1,3 @@
----
-
-title: Style Guide
-description: 'Get started with ycode.'
-position: 3
-category: Getting started
-
----#
-
 > We follow [official Vue.js styleguide](https://vuejs.org/v2/style-guide/), but since it suggest multiple ways of doing thing, we clarified it and highlighted which options we choose and follow in our apps.
 
 ## Components
@@ -41,34 +32,34 @@ When using the `data` property on a component (i.e. anywhere except on `new Vue`
 ```js
 // Bad
 
-Vue.component('some-comp', {
+Vue.component("some-comp", {
   data: {
-    foo: 'bar'
-  }
-})
+    foo: "bar",
+  },
+});
 
 export default {
   data: {
-    foo: 'bar'
-  }
-}
+    foo: "bar",
+  },
+};
 
 // Good
-Vue.component('some-comp', {
-  data: function() {
+Vue.component("some-comp", {
+  data: function () {
     return {
-      foo: 'bar'
-    }
-  }
-})
+      foo: "bar",
+    };
+  },
+});
 
 export default {
   data() {
     return {
-      foo: 'bar'
-    }
-  }
-}
+      foo: "bar",
+    };
+  },
+};
 ```
 
 It's OK to use an object directly in a root Vue instance, since only a single instance will ever exist.
@@ -76,9 +67,9 @@ It's OK to use an object directly in a root Vue instance, since only a single in
 ```js
 new Vue({
   data: {
-    foo: 'bar'
-  }
-})
+    foo: "bar",
+  },
+});
 ```
 
 #### Prop definitions should be as detailed as possible.
@@ -257,48 +248,48 @@ This makes overriding internal styles easier, with human-readable class names th
 var myGreatMixin = {
   // ...
   methods: {
-    update: function() {
+    update: function () {
       // ...
-    }
-  }
-}
+    },
+  },
+};
 
 var myGreatMixin = {
   // ...
   methods: {
-    _update: function() {
+    _update: function () {
       // ...
-    }
-  }
-}
+    },
+  },
+};
 
 var myGreatMixin = {
   // ...
   methods: {
-    $update: function() {
+    $update: function () {
       // ...
-    }
-  }
-}
+    },
+  },
+};
 
 var myGreatMixin = {
   // ...
   methods: {
-    $_update: function() {
+    $_update: function () {
       // ...
-    }
-  }
-}
+    },
+  },
+};
 
 // Good
 var myGreatMixin = {
   // ...
   methods: {
-    $_myGreatMixin_update: function() {
+    $_myGreatMixin_update: function () {
       // ...
-    }
-  }
-}
+    },
+  },
+};
 
 // Even better!
 var myGreatMixin = {
@@ -306,16 +297,16 @@ var myGreatMixin = {
   methods: {
     publicMethod() {
       // ...
-      myPrivateFunction()
-    }
-  }
-}
+      myPrivateFunction();
+    },
+  },
+};
 
 function myPrivateFunction() {
   // ...
 }
 
-export default myGreatMixin
+export default myGreatMixin;
 ```
 
 **Whenever a build system is available to concatenate files, each component should be in its own file.**
@@ -324,13 +315,13 @@ This helps you to more quickly find a component when you need to edit it or revi
 
 ```js
 // Bad (multiple components defined in single file)
-Vue.component('TodoList', {
+Vue.component("TodoList", {
   // ...
-})
+});
 
-Vue.component('TodoItem', {
+Vue.component("TodoItem", {
   // ...
-})
+});
 ```
 
 ```
@@ -550,37 +541,37 @@ Also note that if you've already invested heavily in kebab-case, consistency wit
 
 ```js
 // Bad
-Vue.component('myComponent', {
+Vue.component("myComponent", {
   // ...
-})
+});
 
-import myComponent from './MyComponent.vue'
-
-export default {
-  name: 'myComponent'
-  // ...
-}
+import myComponent from "./MyComponent.vue";
 
 export default {
-  name: 'my-component'
+  name: "myComponent",
   // ...
-}
+};
+
+export default {
+  name: "my-component",
+  // ...
+};
 
 // Good
-Vue.component('MyComponent', {
+Vue.component("MyComponent", {
   // ...
-})
+});
 
-Vue.component('my-component', {
+Vue.component("my-component", {
   // ...
-})
+});
 
-import MyComponent from './MyComponent.vue'
+import MyComponent from "./MyComponent.vue";
 
 export default {
-  name: 'MyComponent'
+  name: "MyComponent",
   // ...
-}
+};
 ```
 
 **Component names should prefer full words over abbreviations.**
@@ -619,7 +610,7 @@ props: {
 ```js
 // Good
 props: {
-  greetingText: String
+  greetingText: String;
 }
 ```
 
@@ -1022,30 +1013,30 @@ The problem is, there are also many _simple_ cases where these patterns may offe
 
 ```js
 // Bad
-Vue.component('TodoItem', {
+Vue.component("TodoItem", {
   props: {
     todo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  template: '<input v-model="todo.text">'
-})
+  template: '<input v-model="todo.text">',
+});
 
-Vue.component('TodoItem', {
+Vue.component("TodoItem", {
   props: {
     todo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     removeTodo() {
-      var vm = this
-      vm.$parent.todos = vm.$parent.todos.filter(function(todo) {
-        return todo.id !== vm.todo.id
-      })
-    }
+      var vm = this;
+      vm.$parent.todos = vm.$parent.todos.filter(function (todo) {
+        return todo.id !== vm.todo.id;
+      });
+    },
   },
   template: `
     <span>
@@ -1054,31 +1045,31 @@ Vue.component('TodoItem', {
         X
       </button>
     </span>
-  `
-})
+  `,
+});
 
 // Good
-Vue.component('TodoItem', {
+Vue.component("TodoItem", {
   props: {
     todo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
     <input
       :value="todo.text"
       @input="$emit('input', $event.target.value)"
     >
-  `
-})
+  `,
+});
 
-Vue.component('TodoItem', {
+Vue.component("TodoItem", {
   props: {
     todo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
     <span>
@@ -1087,8 +1078,8 @@ Vue.component('TodoItem', {
         X
       </button>
     </span>
-  `
-})
+  `,
+});
 ```
 
 **[Vuex](https://github.com/vuejs/vuex) should be preferred for global state management, instead of `this.$root` or a global event bus.**
@@ -1101,39 +1092,39 @@ Vuex is the [official flux-like implementation](https://vuejs.org/v2/guide/state
 // Bad
 new Vue({
   data: {
-    todos: []
+    todos: [],
   },
-  created: function() {
-    this.$on('remove-todo', this.removeTodo)
+  created: function () {
+    this.$on("remove-todo", this.removeTodo);
   },
   methods: {
-    removeTodo: function(todo) {
-      var todoIdToRemove = todo.id
-      this.todos = this.todos.filter(function(todo) {
-        return todo.id !== todoIdToRemove
-      })
-    }
-  }
-})
+    removeTodo: function (todo) {
+      var todoIdToRemove = todo.id;
+      this.todos = this.todos.filter(function (todo) {
+        return todo.id !== todoIdToRemove;
+      });
+    },
+  },
+});
 ```
 
 ```js
 // Good
 export default {
   state: {
-    list: []
+    list: [],
   },
   mutations: {
     REMOVE_TODO(state, todoId) {
-      state.list = state.list.filter(todo => todo.id !== todoId)
-    }
+      state.list = state.list.filter((todo) => todo.id !== todoId);
+    },
   },
   actions: {
     removeTodo({ commit, state }, todo) {
-      commit('REMOVE_TODO', todo.id)
-    }
-  }
-}
+      commit("REMOVE_TODO", todo.id);
+    },
+  },
+};
 ```
 
 Together with:
@@ -1149,16 +1140,16 @@ Together with:
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions } from "vuex";
 
   export default {
     props: {
       todo: {
         type: Object,
-        required: true
-      }
+        required: true,
+      },
     },
-    methods: mapActions(['removeTodo'])
-  }
+    methods: mapActions(["removeTodo"]),
+  };
 </script>
 ```
