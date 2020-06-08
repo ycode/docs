@@ -1,4 +1,0 @@
-- ## Getting Started
-    - [Introduction](/docs/{{version}}/introduction)
-    - [Components](/docs/{{version}}/components)
-    - [List rendering](/docs/{{version}}/list-rendering)
