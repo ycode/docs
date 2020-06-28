@@ -10,6 +10,4 @@ This is a place to keep all the code related documentation.
 
 ## Index
 
-- [Introduction](/introduction.md)
-- [Components](/components.md)
-- [List rendering](/list-rendering.md)
+- [Style guide](/style-guide.md)
