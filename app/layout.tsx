@@ -23,8 +23,15 @@ export const metadata: Metadata = {
 
 const navbar = (
   <Navbar
-    logo={<span style={{ fontWeight: 800, fontSize: '1.1em' }}>Ycode Docs</span>}
-    projectLink="https://github.com/ygnax/ycode-docs"
+    logo={
+      <img
+        src="/ycode-logo.svg"
+        alt="Ycode"
+        style={{ height: 24 }}
+        className="dark:invert"
+      />
+    }
+    projectLink="https://github.com/ycode/docs"
   />
 )
 
@@ -52,7 +59,7 @@ export default async function RootLayout({
         <Layout
           navbar={navbar}
           footer={footer}
-          docsRepositoryBase="https://github.com/ygnax/ycode-docs/tree/main"
+          docsRepositoryBase="https://github.com/ycode/docs/tree/main"
           pageMap={await getPageMap()}
         >
           {children}

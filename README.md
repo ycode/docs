@@ -1,6 +1,6 @@
 # Ycode Documentation
 
-The official documentation for [Ycode](https://github.com/ygnax/ycode) — a visual website builder available as [Ycode Cloud](https://www.ycode.com) (managed) and [Open Source](https://github.com/ygnax/ycode) (self-hosted).
+The official documentation for [Ycode](https://github.com/ycode/ycode) — a visual website builder available as [Ycode Cloud](https://www.ycode.com) (managed) and [Open Source](https://github.com/ycode/ycode) (self-hosted).
 
 Built with [Nextra](https://nextra.site/) (Next.js + MDX).
 
