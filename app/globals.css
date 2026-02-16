@@ -1,8 +1,10 @@
 @import "tailwindcss";
 @source "../components";
 
-/* Override Nextra's light blue backgrounds with Ycode's brand tint */
+/* Override Nextra's primary color scale with Ycode blue (#007DFF) */
 :root {
   --x-color-primary-50: #5eabff1a;
   --x-color-primary-100: #5eabff33;
+  --x-color-primary-600: #007DFF;
+  --x-color-primary-800: #007DFF;
 }
