@@ -1,1 +1,80 @@
-/* Custom styles for Ycode documentation */
+/* Feature Grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .feature-grid--cols-2,
+  .feature-grid--cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .feature-grid--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Feature Card */
+.feature-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.feature-card-link:hover {
+  text-decoration: none;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.feature-card:hover {
+  border-color: #d1d5db;
+  background-color: #f9fafb;
+}
+
+:is([data-theme="dark"], .dark) .feature-card {
+  border-color: #404040;
+}
+
+:is([data-theme="dark"], .dark) .feature-card:hover {
+  border-color: #525252;
+  background-color: rgba(38, 38, 38, 0.5);
+}
+
+.feature-card-icon {
+  font-size: 1.5rem;
+}
+
+.feature-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+:is([data-theme="dark"], .dark) .feature-card-title {
+  color: #fff;
+}
+
+.feature-card-description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+  color: #4b5563;
+}
+
+:is([data-theme="dark"], .dark) .feature-card-description {
+  color: #a3a3a3;
+}
