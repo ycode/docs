@@ -11,11 +11,13 @@
     "screenshots": "npx playwright test --config scripts/screenshots/playwright.config.ts"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
     "next": "^15.3.0",
     "nextra": "^4.0.0",
     "nextra-theme-docs": "^4.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

@@ -18,8 +18,8 @@ export function Video({
   const videoPath = src.startsWith('/') ? src : `/videos/${src}`
 
   return (
-    <figure className="video">
-      <div className="video-container">
+    <figure className="my-6">
+      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm dark:border-neutral-700 max-w-3xl mx-auto">
         <video
           src={videoPath}
           autoPlay={autoPlay}
@@ -27,12 +27,14 @@ export function Video({
           muted={muted}
           playsInline
           controls
-          className="video-player"
+          className="w-full h-auto"
           style={width ? { maxWidth: width } : undefined}
         />
       </div>
       {caption && (
-        <figcaption className="video-caption">{caption}</figcaption>
+        <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-neutral-400">
+          {caption}
+        </figcaption>
       )}
     </figure>
   )
