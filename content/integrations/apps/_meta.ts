@@ -1,9 +1,7 @@
 import type { MetaRecord } from 'nextra'
 
 const meta: MetaRecord = {
-  apps: 'Apps',
-  webhooks: 'Webhooks',
-  api: 'API'
+  'mailer-lite': 'MailerLite'
 }
 
 export default meta
