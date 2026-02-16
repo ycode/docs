@@ -68,7 +68,7 @@ export function Callout({ type = 'info', title, children }: CalloutProps) {
         {title && (
           <p className="font-semibold mb-1">{title}</p>
         )}
-        <div>{children}</div>
+        <div className="[&_p]:!leading-[150%]">{children}</div>
       </div>
     </div>
   )

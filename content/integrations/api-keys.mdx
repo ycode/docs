@@ -1,0 +1,57 @@
+---
+title: API Keys
+---
+
+import { Callout } from 'nextra/components'
+
+# API Keys
+
+Create and manage API keys for authenticating requests to the public v1 API. API keys provide programmatic access to collections, forms, and submissions.
+
+## Creating an API Key
+
+1. Go to project settings
+2. Navigate to **Integrations** > **API Keys**
+3. Click **Create Key**
+4. Copy the generated key immediately
+
+<Callout type="warning" title="One-time display">
+The full API key is shown only once at creation. Store it securely. If you lose it, you must create a new key and revoke the old one.
+</Callout>
+
+## Key Format
+
+API keys use a 64-character hexadecimal string, often with a prefix (e.g. `ycode_`). Keys are stored as SHA-256 hashes; the plain value is never stored or displayed again.
+
+## Using API Keys
+
+Include the API key in the `Authorization` header as a Bearer token:
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  https://your-project.ycode.dev/ycode/api/v1/collections
+```
+
+All v1 API endpoints require this header. Requests without a valid key return 401 Unauthorized.
+
+## Permissions
+
+API keys grant access to the public v1 API:
+
+- List and read collections and items
+- List and read forms and submissions
+- Create form submissions (POST)
+
+Access is scoped to the project. Keys do not grant access to the Ycode dashboard or admin functions.
+
+## Last Used Tracking
+
+Each key records `last_used_at` when it is used for a request. Check this in the API Keys settings to identify unused keys and rotate them.
+
+## Revoking Keys
+
+Revoke an API key at any time from the API Keys settings page. Revoked keys stop working immediately. Any application using the key will receive 401 responses until you provide a new key.
+
+<Callout type="info" title="Security">
+Rotate keys periodically and revoke keys that may have been exposed. Use separate keys per environment (development, staging, production) when possible.
+</Callout>

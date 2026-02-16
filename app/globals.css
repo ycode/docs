@@ -1,7 +1,12 @@
-@import "tailwindcss";
+@import "tailwindcss" prefix(x);
 @source "../components";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Override Nextra's primary color scale with Ycode blue (#007DFF) */
+body {
+  line-height: 16px;
+}
+
 :root {
   --x-color-primary-50: #5eabff1a;
   --x-color-primary-100: #5eabff33;
