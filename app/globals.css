@@ -11,7 +11,8 @@
 .nextra-callout {
   border: none !important;
   background-color: #5eabff1a !important;
-  color: #1a1a1a !important;
+  color: #007DFF !important;
+  font-size: 0.875rem !important;
   border-radius: 0.75rem !important;
 }
 
@@ -21,7 +22,7 @@
 
 :is([data-theme="dark"], .dark) .nextra-callout {
   background-color: rgba(94, 171, 255, 0.12) !important;
-  color: #e5e5e5 !important;
+  color: #5eabff !important;
 }
 
 :is([data-theme="dark"], .dark) .nextra-callout svg {
