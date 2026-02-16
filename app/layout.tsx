@@ -1,9 +1,12 @@
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
+import { Inter } from 'next/font/google'
 import 'nextra-theme-docs/style.css'
 import './globals.css'
 import type { Metadata } from 'next'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
@@ -61,7 +64,7 @@ export default async function RootLayout({
           lightness: { light: 50, dark: 55 }
         }}
       />
-      <body>
+      <body className={inter.className}>
         <Layout
           navbar={navbar}
           footer={footer}
