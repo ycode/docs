@@ -29,9 +29,9 @@ export function Screenshot({
 
   return (
     <>
-      <figure className="my-6">
+      <figure className="screenshot">
         <div
-          className={`overflow-hidden rounded-lg border border-gray-200 shadow-sm dark:border-neutral-700 cursor-zoom-in ${full ? '' : 'max-w-3xl mx-auto'}`}
+          className={`screenshot-container${full ? ' screenshot-container--full' : ''}`}
           onClick={handleOpen}
           role="button"
           tabIndex={0}
@@ -42,20 +42,18 @@ export function Screenshot({
             alt={alt}
             width={width}
             height={height}
-            className="w-full h-auto"
+            className="screenshot-img"
             unoptimized
           />
         </div>
         {caption && (
-          <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-neutral-400">
-            {caption}
-          </figcaption>
+          <figcaption className="screenshot-caption">{caption}</figcaption>
         )}
       </figure>
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-zoom-out p-4"
+          className="screenshot-lightbox"
           onClick={handleClose}
           role="dialog"
           aria-modal="true"
@@ -65,7 +63,7 @@ export function Screenshot({
             alt={alt}
             width={width * 2}
             height={height * 2}
-            className="max-w-full max-h-full object-contain"
+            className="screenshot-lightbox-img"
             unoptimized
           />
         </div>
