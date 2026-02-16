@@ -59,7 +59,7 @@ export function Callout({ type = 'info', title, children }: CalloutProps) {
 
   return (
     <div
-      className={`flex gap-3 rounded-xl px-4 py-3 my-5 text-sm leading-snug ${variant.wrapper}`}
+      className={`flex gap-3 rounded-xl px-4 py-3 my-5 text-sm leading-tight ${variant.wrapper}`}
     >
       <div className={`mt-0.5 shrink-0 ${variant.icon}`}>
         {icons[type]}
