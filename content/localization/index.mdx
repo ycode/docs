@@ -1,0 +1,64 @@
+---
+title: Multi-Language Support
+---
+
+import { Callout } from 'nextra/components'
+
+# Multi-Language Support
+
+Build multilingual websites with Ycode's localization system. You add languages, translate content, and publish translations independently.
+
+## Adding Languages
+
+1. Go to project settings
+2. Navigate to the **Languages** (or **Locales**) section
+3. Add the languages you want to support
+4. Set one language as the default
+5. Mark languages as published when they are ready for visitors
+
+Each locale has a code (e.g. `en`, `fr`, `de`), a label, and flags for default and published status.
+
+## Draft and Publish
+
+Locales and translations use a draft/publish workflow. You edit translations in draft mode and publish when ready. Visitors see only published content until you publish updates.
+
+## Translating Content
+
+Translations are stored per source type and source ID. Supported sources:
+
+| Source Type | Description |
+|-------------|-------------|
+| page | Static page content |
+| folder | Folder-level content |
+| component | Reusable component content |
+| cms | Collection and CMS content |
+
+Each translation has a `content_key`, `content_type` (text, richtext, or asset_id), and `content_value`. Mark translations as completed to track progress.
+
+## URL Structure
+
+Each language uses its own URL prefix based on the locale code:
+
+- Default language: `/about` (no prefix)
+- French: `/fr/about`
+- German: `/de/about`
+
+The locale code appears in the path for all non-default languages. This structure is SEO-friendly and lets search engines index each language version.
+
+## Locale Selector Element
+
+Add a locale selector element to your pages so visitors can switch languages. The element displays available locales and links to the same page in each language. Configure which locales appear and how the selector is styled.
+
+## Publishing Translations
+
+When you finish translating:
+
+1. Review draft translations
+2. Publish the locale if it is new
+3. Publish translations from draft to published
+
+Published translations appear on the live site. Unpublishing reverts to the previous published version or the default language.
+
+<Callout type="info" title="Tip">
+Translate high-traffic pages first. Use the completion status to track which content still needs translation.
+</Callout>

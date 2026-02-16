@@ -1,0 +1,37 @@
+---
+title: Redirects
+---
+
+import { Callout } from 'nextra/components'
+
+# Redirects
+
+Set up URL redirects for moved pages, legacy URLs, and vanity links. Redirects are managed in project settings.
+
+## Adding Redirects
+
+1. Go to project settings
+2. Navigate to **Settings** > **Redirects**
+3. Click **Add Redirect**
+4. Enter the source path (the URL visitors request)
+5. Enter the destination path (where they are sent)
+6. Select the redirect type (301 or 302)
+7. Save
+
+## Redirect Types
+
+| Type | Use Case |
+|------|----------|
+| 301 Permanent | The page has permanently moved. Search engines transfer ranking signals to the new URL |
+| 302 Temporary | The page is temporarily at a different location. Use for maintenance or A/B tests |
+
+## Use Cases
+
+- **Renamed pages** — Redirect old URLs to new ones after restructuring
+- **Legacy links** — Preserve links from old marketing campaigns or external sites
+- **Vanity URLs** — Short or memorable paths that redirect to longer destinations
+- **Trailing slashes** — Normalize URLs with or without trailing slashes
+
+<Callout type="info" title="Tip">
+Prefer 301 for permanent moves. Use 302 when the move is temporary so search engines keep indexing the original URL.
+</Callout>

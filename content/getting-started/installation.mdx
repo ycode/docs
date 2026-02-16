@@ -1,0 +1,109 @@
+---
+title: Installation
+---
+
+import { Steps } from 'nextra/components'
+
+# Installation
+
+This guide walks you through installing Ycode either on Vercel (recommended for production) or locally for development.
+
+## Prerequisites
+
+- Node.js 18 or later
+- A Supabase project (free tier works)
+- Git
+- npm
+
+## Option 1: Deploy to Vercel (Recommended)
+
+<Steps>
+
+### Step 1: Fork the repository
+
+Fork the [Ycode repository](https://github.com/niceformal/ycode) on GitHub. This creates a copy under your account that you can deploy.
+
+### Step 2: Deploy on Vercel
+
+1. Go to [vercel.com](https://vercel.com) and sign in.
+2. Click **Add New Project** and import your forked Ycode repository.
+3. Accept the default build settings and deploy.
+4. Wait for the deployment to finish. You will get a URL like `your-project.vercel.app`.
+
+### Step 3: Create a Supabase project
+
+1. Go to [supabase.com](https://supabase.com) and create a new project.
+2. Wait for the project to finish provisioning.
+3. Go to **Settings > API** and copy:
+   - Project URL (or use it to derive the connection string)
+   - `anon` public key
+   - `service_role` secret key
+4. Go to **Settings > Database** and copy the connection string. Use the **Transaction Pooler** connection method (port 6543).
+
+### Step 4: Add environment variables in Vercel
+
+1. In your Vercel project, go to **Settings > Environment Variables**.
+2. Add the required variables (see [Configuration](/docs/getting-started/configuration) for the full list):
+   - `SUPABASE_PUBLISHABLE_KEY` – your Supabase anon/public key
+   - `SUPABASE_SECRET_KEY` – your Supabase service role key
+   - `SUPABASE_CONNECTION_URL` – PostgreSQL connection string (Transaction Pooler)
+   - `SUPABASE_DB_PASSWORD` – your database password
+
+### Step 5: Redeploy
+
+Trigger a new deployment so Vercel picks up the environment variables. Use **Deployments > ... > Redeploy** on the latest deployment.
+
+### Step 6: Run the setup wizard
+
+1. Visit your deployed site.
+2. Go to `/ycode/welcome` (e.g. `https://your-project.vercel.app/ycode/welcome`).
+3. Follow the setup wizard to create your admin account and run database migrations.
+4. When done, you can open the editor at `/ycode`.
+
+</Steps>
+
+## Option 2: Local Development
+
+<Steps>
+
+### Step 1: Clone the repository
+
+```bash
+git clone https://github.com/niceformal/ycode.git
+cd ycode
+```
+
+### Step 2: Install dependencies
+
+```bash
+npm install
+```
+
+### Step 3: Copy environment file
+
+```bash
+cp .env.example .env
+```
+
+### Step 4: Add Supabase credentials
+
+Edit `.env` and fill in your Supabase credentials. See [Configuration](/docs/getting-started/configuration) for the exact variable names and where to find them in the Supabase dashboard.
+
+### Step 5: Start the development server
+
+```bash
+npm run dev
+```
+
+### Step 6: Run the setup wizard
+
+1. Open `http://localhost:3002/ycode/welcome` in your browser.
+2. Follow the setup wizard to create your admin account and run migrations.
+3. When done, open the editor at `http://localhost:3002/ycode`.
+
+</Steps>
+
+## Next Steps
+
+- [Configuration](/docs/getting-started/configuration) – Environment variables and Supabase setup
+- [Your First Project](/docs/getting-started/first-project) – Create a page and use the editor

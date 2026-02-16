@@ -1,0 +1,74 @@
+---
+title: Submissions
+---
+
+import { Callout } from 'nextra/components'
+
+# Submissions
+
+Form submissions are stored in the `form_submissions` table. Each submission includes the form ID, payload (field values), metadata, and status. You view and manage them in the Forms section of the editor.
+
+## Viewing Submissions
+
+1. Navigate to the **Forms** section in the editor
+2. Select a form to see its submissions
+3. Click a submission to view full details
+
+Each submission displays the payload (all field values), metadata, and status. You can filter and sort by status or date.
+
+## Submission Data
+
+| Field | Description |
+|-------|-------------|
+| **form_id** | ID of the form that received the submission |
+| **payload** | Object with field names and submitted values |
+| **metadata** | Additional context about the submission |
+| **status** | Current status (new, read, archived, spam) |
+
+## Metadata
+
+The `metadata` object stores:
+
+| Key | Description |
+|-----|-------------|
+| **ip** | Visitor IP address |
+| **user_agent** | Browser user agent string |
+| **referrer** | Referring page URL |
+| **page_url** | URL of the page where the form was submitted |
+
+This data helps you analyze traffic sources and troubleshoot submissions.
+
+## Statuses
+
+Submissions use four statuses:
+
+| Status | Description |
+|--------|-------------|
+| **new** | Unread submission; default for new submissions |
+| **read** | Submission has been viewed |
+| **archived** | Kept for records but no longer active |
+| **spam** | Marked as spam; can be filtered out |
+
+You change status from the submissions list or the submission detail view. Use statuses to track which submissions need attention and which are done.
+
+## Email Notifications
+
+When email notifications are enabled in the form settings, Ycode sends an email to the configured address on each submission. The email includes the submitted data and uses the subject you set.
+
+Configure this in the form element settings under `email_notification`: set `enabled: true`, `to` (recipient), and `subject`.
+
+## Webhook Triggers
+
+On submit, Ycode can trigger webhooks configured in your project. The webhook receives a payload with the event type, timestamp, and submission data. Use webhooks to send data to external services, CRMs, or automation tools.
+
+See [Webhooks](/docs/integrations/webhooks) for setting up webhook endpoints and events.
+
+## App Integrations
+
+Form submissions can trigger app integrations such as MailerLite. When an integration is connected, new submissions may add contacts to a list, send to a CRM, or perform other actions based on the integration configuration.
+
+See [Integrations](/docs/integrations) for available integrations and setup.
+
+<Callout type="info" title="Tip">
+Use the spam status to filter out unwanted submissions while keeping them in the database for audit purposes.
+</Callout>

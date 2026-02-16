@@ -1,0 +1,60 @@
+---
+title: Introduction
+---
+
+import { FeatureGrid, FeatureCard } from '@/components/feature-card'
+
+# Ycode Documentation
+
+Welcome to Ycode. Ycode is an open-source visual website builder that gives you full control over your site. Think of it as an alternative to Wix or Squarespace that you host yourself. You get a drag-and-drop editor, a built-in CMS, forms, and more, without vendor lock-in.
+
+Ycode is built with Next.js, React, Supabase, and Tailwind CSS. You deploy it on Vercel and Supabase, so you own your data and infrastructure. No monthly SaaS fees, no limits on pages or visitors.
+
+## Key Features
+
+<FeatureGrid cols={3}>
+  <FeatureCard
+    title="Visual Editor"
+    description="Drag-and-drop page builder with layers, design controls, and responsive breakpoints."
+    href="/docs/editor"
+  />
+  <FeatureCard
+    title="CMS Collections"
+    description="Create collections, define fields, and bind dynamic content to your pages."
+    href="/docs/cms"
+  />
+  <FeatureCard
+    title="Forms"
+    description="Build forms visually, collect submissions, and manage responses in a dashboard."
+    href="/docs/forms"
+  />
+  <FeatureCard
+    title="Localization"
+    description="Build multilingual sites with per-language content and URL prefixes."
+    href="/docs/localization"
+  />
+  <FeatureCard
+    title="Custom Code"
+    description="Inject HTML, CSS, and JavaScript for embeds, tracking, and custom behavior."
+    href="/docs/editor/custom-code"
+  />
+  <FeatureCard
+    title="API"
+    description="Access your content and forms via REST APIs for integrations and headless use."
+    href="/docs/api-reference"
+  />
+</FeatureGrid>
+
+## Quick Start
+
+1. Fork the [Ycode repository](https://github.com/niceformal/ycode) on GitHub.
+2. Deploy your fork on Vercel and create a Supabase project.
+3. Add your Supabase credentials as environment variables.
+4. Visit the setup wizard to create your admin account and run migrations.
+5. Open the editor and start building.
+
+See the [Getting Started](/docs/getting-started) guide for detailed installation and configuration steps.
+
+## Community
+
+Ycode is open source. Contributions, issues, and feedback are welcome on [GitHub](https://github.com/niceformal/ycode).

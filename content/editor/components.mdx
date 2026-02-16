@@ -1,0 +1,61 @@
+---
+title: Components
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+import { KeyboardShortcut } from '@/components/keyboard-shortcut'
+
+# Components
+
+Components are reusable building blocks. You design a component once and place instances across multiple pages. When you edit the master component, all instances update automatically.
+
+## Creating a Component
+
+<Steps>
+
+### Select layers
+
+Select one or more layers in the Layers panel or on the canvas. The selection becomes the component content.
+
+### Create the component
+
+Press <KeyboardShortcut keys="Opt+Cmd+K" /> or right-click and choose **Create Component** from the context menu.
+
+### Name the component
+
+Enter a name in the Create Component dialog. The component is added to your component library and the selection is replaced with an instance.
+
+</Steps>
+
+## Component Variables
+
+Components support variables for content that varies per instance:
+
+- **Text** — Overridable text content
+- **Image** — Overridable image source
+- **Link** — Overridable link URL
+
+You define variables when creating or editing the component. Each instance can override these values without affecting the master or other instances.
+
+## Editing Components
+
+Double-click any component instance to enter **edit mode**. The canvas shows only the component content. Changes you make apply to the master component and propagate to all instances.
+
+Exit edit mode by clicking outside the component or using the breadcrumb navigation to return to the page.
+
+## Detaching Components
+
+To break the link between an instance and the master, select the instance and press <KeyboardShortcut keys="Opt+Cmd+B" /> or use the context menu **Detach Component**. The instance is replaced with inline layers. Those layers no longer update when the master changes.
+
+<Callout type="warning" title="Irreversible">
+Detaching is irreversible. The detached layers are independent copies. You cannot reattach them to the component.
+</Callout>
+
+## Instances
+
+Every placement of a component is an instance. Instances share the same structure and styles as the master. You can override component variables per instance. All instances update when you edit the master.
+
+<Callout type="info" title="Tip">
+Use components for repeated patterns: headers, footers, cards, buttons, and navigation. Component variables let you customize content while keeping structure and styling consistent.
+</Callout>

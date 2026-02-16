@@ -1,0 +1,45 @@
+---
+title: Responsive Design
+---
+
+import { Callout } from 'nextra/components'
+
+# Responsive Design
+
+Ycode uses a desktop-first responsive system. You design for desktop first, then override styles for tablet and mobile breakpoints. Styles cascade from larger to smaller viewports.
+
+## Breakpoints
+
+Three breakpoints define the responsive behavior:
+
+| Breakpoint | Media query | Viewport (editor) |
+|------------|-------------|-------------------|
+| **Desktop** | Base (no prefix) | 1366px |
+| **Tablet** | max-lg: (≤1023px) | 768px |
+| **Mobile** | max-md: (≤767px) | 375px |
+
+Desktop is the base. Tablet and mobile styles apply only when the viewport is at or below their thresholds.
+
+## Inheritance
+
+Desktop styles serve as the default. When you set a property at desktop, it applies at all breakpoints unless you override it.
+
+At tablet, you override only what changes. Unset properties inherit from desktop. The same applies from tablet to mobile: mobile inherits from tablet, and tablet inherits from desktop.
+
+## Viewport Controls
+
+The center canvas toolbar includes viewport controls. You switch between desktop, tablet, and mobile to preview your layout at each breakpoint. The canvas resizes to the breakpoint viewport so you see how the page renders on different devices.
+
+## Testing
+
+Use the viewport controls to test your design at each breakpoint. Check that:
+
+- Layout reflows correctly
+- Text remains readable
+- Touch targets are large enough on mobile
+- Images scale appropriately
+- Navigation and interactive elements work at all sizes
+
+<Callout type="info" title="Tip">
+Start with desktop layout and typography, then adjust for tablet and mobile. Focus on the most impactful changes: layout direction, spacing, font sizes, and visibility of elements.
+</Callout>

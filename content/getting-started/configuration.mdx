@@ -1,0 +1,84 @@
+---
+title: Configuration
+---
+
+# Configuration
+
+Configure your Ycode instance with environment variables and Supabase. This guide covers the required settings and how to obtain them.
+
+## Environment Variables
+
+Set these in your `.env` file for local development, or in your Vercel project under **Settings > Environment Variables** for production.
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `SUPABASE_PUBLISHABLE_KEY` | Yes | Supabase anon/public key. Used for client-side access. |
+| `SUPABASE_SECRET_KEY` | Yes | Supabase service role key. Used for server-side operations. Keep this secret. |
+| `SUPABASE_CONNECTION_URL` | Yes | PostgreSQL connection string. Use the Transaction Pooler connection method. |
+| `SUPABASE_DB_PASSWORD` | Yes | Database password for your Supabase project. |
+| `NEXT_PUBLIC_SITE_URL` | No | Base URL for sitemap and robots.txt (e.g. `https://yoursite.com`). |
+| `PAGE_AUTH_SECRET` | No | Secret for page auth cookies. Generate a random string if you use page-level auth. |
+| `REVALIDATE_SECRET` | No | Secret for cache revalidation. Used when triggering on-demand revalidation. |
+| `NEXT_PUBLIC_TEMPLATE_API_URL` | No | URL for the template marketplace API. Leave unset to use the default. |
+
+## Supabase Setup
+
+### Create a project
+
+1. Go to [supabase.com](https://supabase.com) and sign in.
+2. Click **New Project** and choose an organization.
+3. Enter a name, database password, and region.
+4. Wait for the project to finish provisioning.
+
+### Get API keys
+
+1. In your project, go to **Settings > API**.
+2. Copy the **Project URL** (you may need it for the connection string).
+3. Copy the **anon public** key. This is your `SUPABASE_PUBLISHABLE_KEY`.
+4. Copy the **service_role** key. This is your `SUPABASE_SECRET_KEY`. Never expose it in client-side code.
+
+### Get the connection string
+
+1. Go to **Settings > Database**.
+2. Scroll to **Connection string**.
+3. Select **URI** and **Transaction Pooler** (port 6543).
+4. Copy the connection string. It looks like:
+
+```
+postgresql://postgres.[PROJECT-ID]:[PASSWORD]@aws-x-xx-xxxx-x.pooler.supabase.com:6543/postgres
+```
+
+5. Replace `[PASSWORD]` with your database password if it is not already filled in.
+6. Use this as `SUPABASE_CONNECTION_URL`.
+
+### Transaction Pooler
+
+Use the **Transaction Pooler** connection method, not the direct connection. The pooler runs on port 6543 and is required for serverless environments like Vercel.
+
+## Database Migrations
+
+Ycode uses migrations to create and update database tables. You can run them in two ways.
+
+### Via setup wizard (recommended)
+
+1. Visit `/ycode/welcome` on your site.
+2. Complete the setup wizard. It creates your admin account and runs migrations automatically.
+
+### Via CLI
+
+If you prefer to run migrations manually:
+
+```bash
+# Run all pending migrations
+npm run migrate:latest
+
+# Check migration status
+npm run migrate:status
+
+# Rollback the last migration
+npm run migrate:rollback
+```
+
+## Next Steps
+
+- [Your First Project](/docs/getting-started/first-project) – Create a page and use the editor

@@ -1,0 +1,27 @@
+---
+title: Forms
+asIndexPage: true
+---
+
+# Forms
+
+Ycode includes a visual form builder and a submissions system for collecting data from your website visitors. You add form elements to your pages, configure validation and behavior, and manage submissions in the dashboard.
+
+## Form Builder
+
+You build forms by adding form elements as layer templates. The form container wraps inputs, textareas, selects, checkboxes, radios, and labels. Each element has configurable settings, and you control what happens after submission (success message, redirect, email notifications).
+
+See [Form Builder](/docs/forms/builder) for adding elements, input types, form settings, and validation.
+
+## Submissions
+
+Submissions are stored in the `form_submissions` table. Each submission includes the form ID, payload (field values), and metadata such as IP, user agent, referrer, and page URL. You view, filter, and manage submissions by status (new, read, archived, spam).
+
+On submit, Ycode can trigger webhooks, send email notifications, and run app integrations such as MailerLite.
+
+See [Submissions](/docs/forms/submissions) for viewing, statuses, metadata, and integrations.
+
+## Next Steps
+
+- [Form Builder](/docs/forms/builder) — Build forms with the visual editor
+- [Submissions](/docs/forms/submissions) — View and manage form responses

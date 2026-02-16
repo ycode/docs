@@ -1,0 +1,94 @@
+---
+description: Guidelines for writing Ycode documentation pages in MDX
+globs: content/**/*.mdx
+alwaysApply: false
+---
+
+# Ycode Documentation Writing Guidelines
+
+## Source of Truth
+
+The Ycode product source code is at `/Users/ignas/Sites/opensource/`. When writing documentation, read the relevant source files to ensure accuracy. Key directories:
+
+- `app/ycode/` - Editor routes and components
+- `app/ycode/api/` - API routes
+- `lib/repositories/` - Data access layer
+- `lib/services/` - Business logic
+- `stores/` - Zustand state stores
+- `types/index.ts` - TypeScript type definitions
+- `database/migrations/` - Database schema
+
+## Writing Style
+
+- Write in second person ("you"), present tense
+- Be clear and concise, avoid filler words
+- Do not use emojis
+- Use active voice ("Click Save" not "The Save button should be clicked")
+- Keep paragraphs short (2-4 sentences)
+
+## MDX Page Structure
+
+Every page follows this pattern:
+
+```mdx
+---
+title: Page Title
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Page Title
+
+Brief intro paragraph (1-2 sentences).
+
+## Section
+
+Content...
+
+<Callout type="info">
+  Helpful tip or important note.
+</Callout>
+```
+
+## Available Components
+
+- `<Callout type="info|warning|error">` - Tips, warnings, errors
+- `<Steps>` - Step-by-step instructions (wrap ### headings)
+- `<Screenshot src="filename.png" alt="..." caption="..." />` - Screenshots from `public/screenshots/`
+- `<Video src="filename.mp4" caption="..." />` - Screen recordings from `public/videos/`
+- `<KeyboardShortcut keys="Cmd+S" />` - Keyboard shortcut badges
+- `<FeatureCard>` / `<FeatureGrid>` - Feature overview cards
+- `<Tabs>` / `<Tab>` from `nextra/components` - Tabbed content
+
+## Folder Index Pages
+
+For folders with child pages, use `asIndexPage: true`:
+
+```mdx
+---
+title: Section Name
+asIndexPage: true
+---
+```
+
+Do NOT add the folder's `index` key in its `_meta.ts` when using `asIndexPage: true`.
+
+## Code Blocks
+
+Use fenced code blocks with language tags:
+
+````mdx
+```bash
+npm run dev
+```
+
+```env
+SUPABASE_PUBLISHABLE_KEY=your-key
+```
+````
+
+## Links
+
+- Internal: `[Configuration](/docs/getting-started/configuration)`
+- External: `[supabase.com](https://supabase.com)` (opens in new tab automatically)

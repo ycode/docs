@@ -1,0 +1,47 @@
+---
+title: Layers
+---
+
+import { Callout } from 'nextra/components'
+
+# Layers
+
+The Layers panel displays the hierarchical structure of your page. Every element appears as a node in a tree. You select, reorder, nest, and manage elements from this panel.
+
+## Tree Structure
+
+The layers tree mirrors the DOM structure of your page. Parent elements contain children. Containers (such as sections, divs, or flex layouts) can hold multiple nested elements. The order in the tree matches the order in the layout.
+
+## Adding Elements
+
+Add elements from the **Element Library**. Open the library from the toolbar or via the Layers panel, then drag an element onto the canvas or into the tree. The element is inserted at the drop position.
+
+## Drag and Drop
+
+Reorder and nest layers by dragging. The editor uses drop zones (25%, 50%, 25% of the target) to distinguish between:
+
+- **Insert before** — Drop in the top zone to place the element above the target
+- **Insert inside** — Drop in the middle zone to nest the element as a child
+- **Insert after** — Drop in the bottom zone to place the element below the target
+
+You can reorder siblings and move elements between containers. The tree updates to reflect the new structure.
+
+## Selection
+
+**Single select** — Click an element in the Layers panel or on the canvas to select it. The Design and Settings panels show controls for the selected element.
+
+**Multi-select** — Hold **Shift** and click to add or remove elements from the selection. Use this to move or style multiple elements at once. Sibling reordering works with multi-select.
+
+## Renaming
+
+Double-click a layer name in the tree to rename it. Renaming helps you identify elements when the tree is large. Names are for your reference only and do not affect the rendered output.
+
+## Visibility and Lock
+
+**Visibility** — Toggle the eye icon next to a layer to show or hide it. Hidden elements do not render on the page. Use this to compare layouts or temporarily remove elements without deleting them.
+
+**Lock** — Toggle the lock icon to prevent accidental edits. Locked elements remain visible but cannot be selected or modified until you unlock them.
+
+<Callout type="info" title="Tip">
+Use folders in the Layers panel to group related elements. Folders do not affect the DOM; they only organize the tree for easier navigation.
+</Callout>

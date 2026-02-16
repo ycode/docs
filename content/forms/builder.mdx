@@ -1,0 +1,88 @@
+---
+title: Form Builder
+---
+
+import { Callout } from 'nextra/components'
+
+# Form Builder
+
+You create forms visually by adding form elements as layer templates. The form acts as a container with a unique ID; inputs, textareas, selects, and other fields go inside it.
+
+## Adding a Form
+
+1. Drag a **Form** element onto your canvas
+2. Add form fields inside the form container (input, textarea, select, checkbox, radio, label)
+3. Configure each field's properties in the right panel
+
+The form element has `settings.id` that identifies it for submissions and integrations. Ensure each form on a page has a unique ID.
+
+## Form Elements
+
+Form elements are layer templates you nest inside the form container:
+
+| Element | Description |
+|---------|-------------|
+| **form** | Container with `settings.id`; wraps all form fields |
+| **input** | Single-line input; type is configurable |
+| **textarea** | Multi-line text input |
+| **select** | Dropdown selection |
+| **checkbox** | Boolean toggle |
+| **radio** | Single choice from options |
+| **label** | Label text for a field |
+
+## Input Types
+
+The input element supports these types via its settings:
+
+| Type | Description |
+|------|-------------|
+| **text** | Single-line text |
+| **number** | Numeric input |
+| **password** | Masked input for passwords |
+| **email** | Email address |
+| **tel** | Phone number |
+| **url** | URL |
+| **date** | Date picker |
+| **datetime-local** | Date and time picker |
+| **range** | Slider with min/max values |
+
+## Form Settings
+
+Configure form behavior in the form element settings:
+
+| Setting | Description |
+|---------|-------------|
+| **success_action** | `message` or `redirect` — what happens after a successful submission |
+| **success_message** | Text shown when `success_action` is `message` |
+| **error_message** | Text shown when submission fails |
+| **redirect_url** | URL to redirect to when `success_action` is `redirect` |
+| **email_notification** | Object with `enabled`, `to`, `subject` for sending emails on submit |
+
+### Success Action
+
+- **message** — Display `success_message` to the user; form stays on the page
+- **redirect** — Navigate to `redirect_url` after submission
+
+### Email Notifications
+
+When `email_notification.enabled` is true, Ycode sends an email on each submission:
+
+- **to** — Recipient email address
+- **subject** — Email subject line
+
+The email typically includes the submitted field values.
+
+<Callout type="info" title="Tip">
+Use the redirect option to send users to a thank-you page or a confirmation URL. Use the message option for quick feedback without leaving the page.
+</Callout>
+
+## Validation
+
+Each field can have validation rules:
+
+- **Required** — Field must have a value before submit
+- **Minimum/maximum length** — For text and textarea
+- **Pattern matching** — Regex for custom formats
+- **Custom error messages** — Shown when validation fails
+
+Configure validation in the field's settings. Invalid submissions are blocked and the error message is shown to the user.

@@ -1,0 +1,116 @@
+---
+title: Collections
+---
+
+import { Callout } from 'nextra/components'
+
+# Collections
+
+Collections are structured data tables that define the schema for your dynamic content. You create a collection, add fields, and then add items that store values in those fields.
+
+## Creating a Collection
+
+1. Navigate to the **CMS** section in the editor sidebar
+2. Click **Add Collection**
+3. Name your collection (e.g., "Blog Posts", "Team Members", "Products")
+
+## Built-in Fields
+
+Every collection includes these built-in fields:
+
+| Field | Description |
+|-------|-------------|
+| `id` | Unique identifier for each item |
+| `name` | Display name for the item |
+| `slug` | URL-friendly identifier; often used for dynamic page URLs |
+| `created_at` | Timestamp when the item was created |
+| `updated_at` | Timestamp when the item was last updated |
+
+You use these fields without defining them. The slug field is commonly used as the source for dynamic page URLs.
+
+## Field Types
+
+You add custom fields to define the structure of your content. Field types are grouped by category:
+
+### Basic
+
+| Type | Description |
+|------|-------------|
+| **text** | Single-line text |
+| **rich_text** | Formatted content with the rich text editor |
+| **number** | Numeric values |
+| **boolean** | True/false toggle |
+| **date** | Date and time values |
+| **color** | Color picker value |
+
+### Contact
+
+| Type | Description |
+|------|-------------|
+| **email** | Email address |
+| **phone** | Phone number |
+| **link** | URL or link |
+
+### Assets
+
+| Type | Description |
+|------|-------------|
+| **image** | Image upload; supports multiple files when `data.multiple: true` |
+| **audio** | Audio file upload; supports multiple files when `data.multiple: true` |
+| **video** | Video file upload; supports multiple files when `data.multiple: true` |
+| **document** | Document upload; supports multiple files when `data.multiple: true` |
+
+### Relations
+
+| Type | Description |
+|------|-------------|
+| **reference** | Link to a single item in another collection |
+| **multi_reference** | Link to multiple items in another collection |
+
+## Field Properties
+
+Each field has configurable properties:
+
+| Property | Description |
+|----------|-------------|
+| **Name** | Display label shown in the editor |
+| **Slug** | API identifier used when binding data or querying; must be unique within the collection |
+| **Required** | When enabled, the field must have a value before saving |
+| **Help text** | Optional description shown to content editors |
+
+## Managing Fields
+
+### Adding Fields
+
+1. Open the collection settings
+2. Go to the **Fields** section
+3. Click **Add Field**
+4. Select the field type and configure name, slug, required, and help text
+
+### Reordering Fields
+
+Drag fields in the Fields section to change their order. The order affects how fields appear when editing items.
+
+### Removing Fields
+
+Remove a field from the collection settings. Removing a field does not delete existing values; it only removes the field from the schema. Historical data may remain in the database.
+
+<Callout type="warning" title="Data loss">
+Removing a field can make existing values inaccessible. Export or back up important data before removing fields.
+</Callout>
+
+## CSV Import
+
+You can import items from a CSV file:
+
+1. Open the collection
+2. Click **Import**
+3. Upload your CSV file
+4. Map CSV columns to collection fields
+5. Start the import
+
+Import runs asynchronously. Column mapping lets you match CSV headers to your field slugs. The system processes rows in the background and updates the collection when done.
+
+<Callout type="info" title="Tip">
+Ensure your CSV headers match or can be mapped to your field slugs. Use the preview to verify the mapping before importing.
+</Callout>

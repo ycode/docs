@@ -1,0 +1,110 @@
+---
+title: Design Controls
+---
+
+import { Callout } from 'nextra/components'
+
+# Design Controls
+
+The Design tab in the right sidebar provides breakpoint-aware styling controls. All properties apply to the selected element and can vary by viewport size.
+
+## Layout
+
+Control how the element arranges its children:
+
+- **display** — block, flex, grid, inline, inline-block, none
+- **flexDirection** — row, column, row-reverse, column-reverse
+- **flexWrap** — nowrap, wrap, wrap-reverse
+- **justifyContent** — start, center, end, space-between, space-around, space-evenly
+- **alignItems** — start, center, end, stretch, baseline
+- **gap** — Spacing between flex or grid children
+- **gridTemplateColumns** / **gridTemplateRows** — Grid column and row definitions
+- **divideX** / **divideY** — Dividers between children
+
+## Typography
+
+Control text appearance:
+
+- **fontFamily** — Font stack
+- **fontWeight** — Normal, bold, or numeric weight
+- **fontSize** — Text size
+- **textAlign** — left, center, right, justify
+- **letterSpacing** — Character spacing
+- **lineHeight** — Line height
+- **color** — Text color
+- **textTransform** — none, uppercase, lowercase, capitalize
+- **textDecoration** — none, underline, line-through
+
+## Spacing
+
+Set margin and padding:
+
+- **margin** — All sides or individual top, right, bottom, left
+- **padding** — All sides or individual sides
+
+Values support px, rem, em, and percentage units.
+
+## Sizing
+
+Control element dimensions:
+
+- **width** / **height** — Explicit dimensions (px, %, auto)
+- **minWidth** / **minHeight** — Minimum constraints
+- **maxWidth** / **maxHeight** — Maximum constraints
+- **aspectRatio** — Maintain aspect ratio
+- **objectFit** — cover, contain, fill, none (for images)
+- **gridColumnSpan** / **gridRowSpan** — Grid cell spanning
+
+## Borders
+
+Add and customize borders:
+
+- **borderWidth** — All sides or individual sides
+- **borderStyle** — solid, dashed, dotted, none
+- **borderColor** — Border color
+- **borderRadius** — Corner radius (all or per corner)
+- **divideX** / **divideY** — Dividers between children with border styling
+
+## Backgrounds
+
+Set element backgrounds:
+
+- **backgroundColor** — Solid color
+- **backgroundImage** — URL or gradient
+- **backgroundSize** — cover, contain, auto, or explicit dimensions
+- **backgroundPosition** — top, center, bottom, or coordinates
+- **backgroundRepeat** — repeat, no-repeat, repeat-x, repeat-y
+
+## Effects
+
+Apply visual effects:
+
+- **opacity** — 0 to 1
+- **boxShadow** — Single or multiple shadows
+- **blur** — Blur filter
+- **backdropBlur** — Blur behind the element
+- **filter** — CSS filter values
+
+## Position
+
+Control positioning and stacking:
+
+- **position** — static, relative, absolute, fixed, sticky
+- **top** / **right** / **bottom** / **left** — Offset values
+- **zIndex** — Stacking order
+
+## Layer Styles
+
+Layer Styles are reusable saved style sets. You apply them to elements to keep design consistent across the site.
+
+**Create** — Style an element, then use the context menu or Design panel to save the current styles as a Layer Style. Give it a name.
+
+**Apply** — Select an element and choose a Layer Style from the panel. The element receives all properties from that style.
+
+**Detach** — Remove the Layer Style link from an element. The element keeps its current appearance but no longer updates when the style changes.
+
+**Edit** — Edit a Layer Style to update all elements that use it. Changes propagate to every instance.
+
+<Callout type="info" title="Breakpoint-aware">
+Every design control is breakpoint-aware. Set values for desktop (base), tablet (max-lg), and mobile (max-md). Smaller breakpoints inherit from larger ones unless you override.
+</Callout>

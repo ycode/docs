@@ -1,0 +1,38 @@
+---
+title: CMS
+asIndexPage: true
+---
+
+# CMS
+
+The Ycode CMS is a built-in Content Management System that powers dynamic content on your website. You create collections, define fields, add items, and bind data to pages for a fully data-driven experience.
+
+## How It Works
+
+The CMS uses an Entity-Attribute-Value (EAV) model. Each **collection** defines a schema through its **fields**. **Items** are individual records that store values in those fields. When you connect a page to a collection, Ycode resolves the current item and passes it to the page renderer for data binding.
+
+## Collections
+
+Collections are structured data tables. You define custom fields (text, rich text, numbers, dates, images, references, and more) and optionally use built-in fields such as `id`, `name`, `slug`, `created_at`, and `updated_at`. Each field has a slug that serves as the API identifier when you bind data.
+
+See [Collections](/docs/cms/collections) for creating collections, field types, and managing schema.
+
+## Items
+
+Items are the content records within a collection. You add, edit, search, filter, sort, and reorder items. The CMS supports a draft/publish system: items have a composite primary key (`id`, `is_published`), so you can work on drafts before publishing.
+
+See [Items](/docs/cms/items) for managing content.
+
+## Dynamic Pages
+
+Dynamic pages display content from a single collection item. You set `is_dynamic: true` on a page and connect it to a collection and a slug field. The URL slug (e.g. `/blog/my-post`) resolves to the matching item, and you bind collection fields to text, images, links, and other elements.
+
+For listing multiple items on one page, you use **Collection Lists** with sort, filter, and pagination options.
+
+See [Dynamic Pages](/docs/cms/dynamic-pages) for setup and data binding.
+
+## Next Steps
+
+- [Collections](/docs/cms/collections) — Create collections and define fields
+- [Items](/docs/cms/items) — Add and manage content
+- [Dynamic Pages](/docs/cms/dynamic-pages) — Connect pages to collections and bind data

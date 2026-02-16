@@ -1,0 +1,64 @@
+---
+title: Pages
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Pages
+
+Pages are the top-level routes of your site. You create and manage them from the **Pages** tab in the left sidebar. Each page has its own URL, settings, and content.
+
+## Creating a Page
+
+<Steps>
+
+### Open the Pages tab
+
+Click the **Pages** tab in the left sidebar to view the page tree.
+
+### Add a new page
+
+Click **Add Page** and choose the page type. Enter a name and configure the slug and other settings in the dialog.
+
+### Configure settings
+
+After creation, you configure the page in the right sidebar under **Settings** when the page is selected, or via the page context menu.
+
+</Steps>
+
+## Page Types
+
+**Regular** — A standard page with a static URL slug. Use this for most content pages such as About, Contact, or landing pages.
+
+**Dynamic** — A template page driven by CMS collection data. The slug uses placeholders (for example, `/blog/{{slug}}`) that resolve to collection item fields. One dynamic page generates many URLs, one per collection item.
+
+**Error** — Special pages for HTTP error responses: 401 (Unauthorized), 404 (Not Found), and 500 (Server Error). You customize the content and design of these error screens.
+
+## Page Settings
+
+Access page settings by selecting the page in the Layers panel or from the Pages tab context menu. Settings are grouped into:
+
+**General** — Page name, URL slug, folder assignment, and whether the page is an index page for its folder.
+
+**SEO** — Meta title, meta description, social sharing image, and noindex option for search engines.
+
+**Custom Code** — Head and body code injection. Use this for page-specific scripts, styles, or meta tags.
+
+**Auth** — Password protection. When enabled, visitors must enter a password to view the page.
+
+## Folders and Page Tree
+
+Organize pages in folders. Folders create URL segments and help you structure the page tree. You can nest folders and move pages between them by dragging in the Pages tab.
+
+The page tree reflects your site structure. Use it to see relationships between pages and to reorder or reorganize routes.
+
+## Duplicating and Deleting
+
+**Duplicate** — Right-click a page in the Pages tab and choose **Duplicate**. The new page copies all content, settings, and structure. You can then rename it and adjust the slug.
+
+**Delete** — Right-click a page and choose **Delete**.
+
+<Callout type="warning" title="Permanent action">
+Deleting a page is permanent. All content and settings are removed. Duplicate the page first if you want to preserve a backup.
+</Callout>

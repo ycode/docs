@@ -1,0 +1,69 @@
+---
+title: SEO Settings
+---
+
+import { Callout } from 'nextra/components'
+
+# SEO Settings
+
+Control how your site appears in search results and when shared on social media. Ycode provides per-page and global SEO settings.
+
+## Per-Page SEO
+
+Each page has its own SEO configuration:
+
+| Setting | Description |
+|---------|-------------|
+| Title | Page title shown in search results and browser tabs. Supports field variables for dynamic pages |
+| Description | Meta description for search snippets. Supports field variables |
+| Image | Social sharing image. Use an asset or a field variable for dynamic pages |
+| Noindex | When enabled, instructs search engines not to index the page |
+
+Use field variables (e.g. `{{title}}`, `{{description}}`) in title and description for collection item pages so each item gets unique metadata.
+
+## Global SEO Settings
+
+Configure site-wide defaults in project settings:
+
+| Setting | Description |
+|---------|-------------|
+| Google Site Verification | Meta tag value for Google Search Console |
+| Global Canonical URL | Base URL for canonical links |
+| GA Measurement ID | Google Analytics 4 measurement ID |
+| Favicon Asset | Favicon for browser tabs |
+| Web Clip Asset | Apple touch icon for home screen |
+
+## Open Graph and Twitter Cards
+
+Ycode generates Open Graph and Twitter Card metadata from your page settings. When you share a link, social platforms use:
+
+- Title
+- Description
+- Image
+
+Canonical URLs are included to avoid duplicate content issues.
+
+## Sitemap and Robots
+
+Ycode automatically generates:
+
+- **sitemap.xml** — Lists all published pages for search engines
+- **robots.txt** — Instructs crawlers which paths to index or exclude
+
+These files update when you publish or unpublish pages. No manual configuration is required for basic setups.
+
+## Custom Code for Structured Data
+
+Inject custom code in the head or body for structured data (JSON-LD). Use this for:
+
+- Organization schema
+- Article schema
+- Product schema
+- Breadcrumb lists
+- Other schema.org types
+
+Add your JSON-LD script in the custom code section. Field variables work in custom code so you can output item-specific structured data on dynamic pages.
+
+<Callout type="info" title="Tip">
+Use unique titles and descriptions for each page. Avoid duplicate content by varying meta descriptions and using canonical URLs.
+</Callout>

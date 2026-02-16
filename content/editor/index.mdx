@@ -1,0 +1,52 @@
+---
+title: Editor
+asIndexPage: true
+---
+
+import { Callout } from 'nextra/components'
+import { KeyboardShortcut } from '@/components/keyboard-shortcut'
+
+# Editor
+
+The Ycode editor is a visual drag-and-drop interface for building web pages. You work in a three-panel layout with live preview, layer-based editing, and comprehensive design controls.
+
+## Three-Panel Layout
+
+The editor divides the workspace into three main areas:
+
+**Left sidebar** — Contains two tabs: **Layers** and **Pages**. The Layers tab shows the hierarchical tree of all elements on the current page. The Pages tab lists all pages in your project and lets you create, organize, and manage them.
+
+**Center canvas** — Displays a live iframe preview of your page. You interact with elements directly on the canvas and see changes in real time. The toolbar above the canvas provides viewport controls for responsive testing, plus quick access to preview and publish.
+
+**Right sidebar** — Contains three tabs: **Design**, **Settings**, and **Interactions**. The Design tab shows breakpoint-aware styling controls for the selected element. The Settings tab exposes element-specific configuration. The Interactions tab lets you add click handlers and other behaviors.
+
+## Header Bar
+
+The top header bar includes:
+
+- **Page dropdown** — Switch between pages without leaving the editor
+- **Navigation** — Toggle between Design, CMS, and Forms modes
+- **Save status** — Indicates whether changes are saved or pending
+- **Publish** — Deploy your changes to production
+- **Preview** — Open the site in a new tab
+- **Theme toggle** — Switch between light and dark editor themes
+
+## Key Capabilities
+
+- **Layer-based editing** — Build pages from a hierarchical tree of elements with drag-and-drop reordering and nesting
+- **Breakpoint-aware design** — Apply different styles for desktop, tablet, and mobile
+- **Reusable components** — Create components once and reuse them across pages; updates propagate to all instances
+- **Custom code injection** — Add head and body code per page or globally
+- **Dynamic pages** — Build CMS-driven pages with collection data and template placeholders
+
+## Keyboard Shortcuts
+
+| Action | Shortcut |
+|--------|----------|
+| Save | <KeyboardShortcut keys="Cmd+S" /> |
+| Create component | <KeyboardShortcut keys="Opt+Cmd+K" /> |
+| Detach component | <KeyboardShortcut keys="Opt+Cmd+B" /> |
+
+<Callout type="info" title="Tip">
+Use the Layers tab to understand and manipulate the structure of your page. The tree reflects the DOM hierarchy, so nesting and order directly affect layout and rendering.
+</Callout>

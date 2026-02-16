@@ -1,0 +1,27 @@
+{
+  "name": "ycode-docs",
+  "version": "1.0.0",
+  "description": "Documentation site for Ycode - Open Source Visual Website Builder",
+  "private": true,
+  "scripts": {
+    "dev": "next --turbopack",
+    "build": "next build",
+    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
+    "start": "next start",
+    "screenshots": "npx playwright test --config scripts/screenshots/playwright.config.ts"
+  },
+  "dependencies": {
+    "next": "^15.3.0",
+    "nextra": "^4.0.0",
+    "nextra-theme-docs": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "pagefind": "^1.3.0",
+    "typescript": "^5.7.0"
+  }
+}

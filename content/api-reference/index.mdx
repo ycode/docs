@@ -1,0 +1,172 @@
+---
+title: REST API Reference
+---
+
+import { Callout } from 'nextra/components'
+
+# REST API Reference
+
+The Ycode public v1 API provides programmatic access to collections, items, forms, and submissions. Use it to build custom integrations, sync data, or power external applications.
+
+## Base URL
+
+```
+https://your-project.ycode.dev/ycode/api/v1
+```
+
+Replace `your-project` with your project subdomain or custom domain.
+
+## Authentication
+
+All requests require a Bearer token (API key) in the `Authorization` header:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+Create API keys in project settings under **Integrations** > **API Keys**. Invalid or missing keys return 401 Unauthorized.
+
+## Request Format
+
+- **Content-Type**: `application/json` for request bodies
+- **Accept**: `application/json` for responses
+
+## Response Format
+
+Successful responses return JSON. List endpoints include pagination metadata:
+
+```json
+{
+  "data": [...],
+  "meta": {
+    "total": 42,
+    "page": 1,
+    "per_page": 20
+  }
+}
+```
+
+Single-resource endpoints return the resource directly or wrapped in a `data` key depending on the endpoint.
+
+## Error Handling
+
+Errors return appropriate HTTP status codes with a JSON body:
+
+```json
+{
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "The requested resource was not found."
+  }
+}
+```
+
+| Status | Meaning |
+|--------|---------|
+| 400 | Bad Request — Invalid parameters or body |
+| 401 | Unauthorized — Missing or invalid API key |
+| 403 | Forbidden — Valid key but insufficient permissions |
+| 404 | Not Found — Resource does not exist |
+| 422 | Unprocessable Entity — Validation failed |
+| 500 | Server Error — Internal error |
+
+## Collections Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/collections` | List all collections |
+| GET | `/collections/:id` | Get a single collection |
+| GET | `/collections/:id/items` | List items in a collection (supports pagination and filtering) |
+| GET | `/collections/:id/items/:itemId` | Get a single item |
+
+### List Collections
+
+```
+GET /ycode/api/v1/collections
+```
+
+Returns all collections in the project.
+
+### Get Collection
+
+```
+GET /ycode/api/v1/collections/:id
+```
+
+Returns a single collection by ID, including field definitions.
+
+### List Items
+
+```
+GET /ycode/api/v1/collections/:id/items
+```
+
+Query parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| page | number | Page number (default: 1) |
+| per_page | number | Items per page |
+| filter | object | Field filters (format depends on implementation) |
+
+### Get Item
+
+```
+GET /ycode/api/v1/collections/:id/items/:itemId
+```
+
+Returns a single collection item by ID.
+
+## Forms Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/forms` | List all forms |
+| GET | `/forms/:id` | Get a single form |
+| GET | `/forms/:id/submissions` | List form submissions |
+| POST | `/forms/:id/submissions` | Create a new submission |
+| GET | `/forms/:id/submissions/:submissionId` | Get a single submission |
+
+### List Forms
+
+```
+GET /ycode/api/v1/forms
+```
+
+Returns all forms in the project.
+
+### Get Form
+
+```
+GET /ycode/api/v1/forms/:id
+```
+
+Returns a single form by ID, including field definitions.
+
+### List Submissions
+
+```
+GET /ycode/api/v1/forms/:id/submissions
+```
+
+Returns submissions for the form. Supports pagination.
+
+### Create Submission
+
+```
+POST /ycode/api/v1/forms/:id/submissions
+```
+
+Body: JSON object with form field names as keys and submitted values. Creates a new submission.
+
+### Get Submission
+
+```
+GET /ycode/api/v1/forms/:id/submissions/:submissionId
+```
+
+Returns a single submission by ID.
+
+<Callout type="info" title="Tip">
+Use the POST submissions endpoint to submit forms from external applications or custom frontends. Ensure field names match the form configuration.
+</Callout>

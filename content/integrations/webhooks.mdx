@@ -1,0 +1,85 @@
+---
+title: Webhooks
+---
+
+import { Callout } from 'nextra/components'
+
+# Webhooks
+
+Send event data to external URLs when actions occur in your Ycode project. Webhooks use HMAC-SHA256 signing so you can verify requests are authentic.
+
+## Setting Up Webhooks
+
+1. Go to project settings
+2. Navigate to **Integrations** > **Webhooks**
+3. Click **Add Webhook**
+4. Enter the target URL
+5. Select event types and optional filters
+6. Optionally configure a signing secret for HMAC verification
+
+## Event Types
+
+| Event | Description |
+|-------|-------------|
+| form.submitted | Triggered when a form is submitted |
+| collection.item.created | Triggered when a new collection item is created |
+| collection.item.updated | Triggered when a collection item is updated |
+| collection.item.deleted | Triggered when a collection item is deleted |
+
+## Filters
+
+Narrow webhook delivery to specific resources:
+
+| Filter | Applies To | Description |
+|--------|------------|-------------|
+| form_id | form.submitted | Only receive submissions for this form |
+| collection_id | collection.item.* | Only receive events for this collection |
+
+## Payload Format
+
+Each webhook sends a JSON payload in the request body. The payload includes:
+
+- **event** — Event type (e.g. `form.submitted`)
+- **timestamp** — ISO 8601 timestamp
+- **data** — Event-specific data (form fields, item fields, etc.)
+
+Example for `form.submitted`:
+
+```json
+{
+  "event": "form.submitted",
+  "timestamp": "2025-02-16T12:00:00.000Z",
+  "data": {
+    "form_id": "abc123",
+    "submission_id": "xyz789",
+    "fields": {
+      "email": "user@example.com",
+      "name": "Jane Doe"
+    }
+  }
+}
+```
+
+## HMAC-SHA256 Signing
+
+When you set a signing secret, Ycode signs each request with HMAC-SHA256. The signature is sent in a header (typically `X-Webhook-Signature` or `X-Signature`). Verify it on your server:
+
+1. Compute HMAC-SHA256 of the raw request body using your secret
+2. Compare the result with the signature header
+3. Reject the request if they do not match
+
+<Callout type="warning" title="Verification">
+Always verify the HMAC signature before processing webhook payloads. Unverified requests could be forged by attackers.
+</Callout>
+
+## Delivery and Retries
+
+Webhook delivery is logged. Failed deliveries are retried according to the configured policy. Check delivery logs in the webhook settings to debug issues.
+
+## Testing
+
+Use the **Test** button in webhook settings to send a test payload to your URL. The test uses the same payload format and signing as real events so you can verify your endpoint works correctly.
+
+<Callout type="info" title="Tip">
+Return a 2xx status code quickly to acknowledge receipt. Process the payload asynchronously to avoid timeouts.
+</Callout>

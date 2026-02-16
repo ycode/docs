@@ -1,0 +1,55 @@
+---
+title: Custom Code
+---
+
+import { Callout } from 'nextra/components'
+
+# Custom Code
+
+You can inject custom HTML, CSS, and JavaScript into your pages. Use this for analytics, meta tags, third-party embeds, or custom styling that is not available through the design controls.
+
+## Per-Page Code
+
+Each page has its own code injection settings. Open **Page Settings** and go to the **Custom Code** section. You configure:
+
+**Head** — Code injected into the `<head>` of the page. Use this for meta tags, external stylesheets, preload hints, or scripts that must run before the body.
+
+**Body** — Code injected at the end of the `<body>`, before the closing tag. Use this for tracking scripts, chat widgets, or other scripts that run after the page loads.
+
+Per-page code applies only to that page. Other pages are unaffected.
+
+## Global Code
+
+For code that appears on every page, use **Settings** (in the project or site configuration) and go to **General**. The global head and body fields inject code into all pages.
+
+Global code runs on every page. Use it for site-wide analytics, fonts, or common scripts. Page-specific code runs in addition to global code.
+
+## Dynamic Page Placeholders
+
+On **dynamic pages** (CMS-driven pages), you can use placeholders in your custom code. Placeholders use the format `{{fieldName}}` and resolve to the current collection item's field value.
+
+For example, in the head section:
+
+```html
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{excerpt}}" />
+<meta property="og:image" content="{{featuredImage}}" />
+```
+
+When the page renders for a collection item, `{{title}}`, `{{excerpt}}`, and `{{featuredImage}}` are replaced with that item's field values.
+
+<Callout type="warning" title="Field names">
+Placeholder field names must match your collection schema exactly. Invalid or missing fields render as empty strings.
+</Callout>
+
+## Use Cases
+
+- **Analytics** — Add Google Analytics, Plausible, or other tracking scripts in the head or body
+- **Meta tags** — Custom Open Graph, Twitter Card, or other meta tags
+- **Fonts** — Link to Google Fonts or other font providers
+- **Third-party embeds** — Add scripts for chat widgets, live chat, or other services
+- **Custom CSS** — Override or extend styles when design controls are insufficient
+
+<Callout type="info" title="Tip">
+Prefer per-page code when only specific pages need a script. Use global code for site-wide requirements to avoid duplication.
+</Callout>

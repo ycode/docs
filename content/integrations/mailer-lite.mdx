@@ -1,0 +1,47 @@
+---
+title: MailerLite
+---
+
+import { Callout } from 'nextra/components'
+
+# MailerLite Integration
+
+Connect Ycode forms to MailerLite to add subscribers to your email lists when forms are submitted.
+
+## Setup
+
+1. Log in to your MailerLite dashboard
+2. Generate an API key (Account > Integrations > API)
+3. In Ycode, go to project settings > **Integrations**
+4. Find MailerLite and enter your API key
+5. Save the configuration
+
+<Callout type="warning" title="API key security">
+Store your API key securely. Do not expose it in client-side code or public repositories.
+</Callout>
+
+## Connecting Forms to Subscriber Groups
+
+After setup, connect each form to a MailerLite subscriber group:
+
+1. Open the form in the form builder or form settings
+2. Go to the **Integrations** or **Actions** section
+3. Select MailerLite as the integration
+4. Choose the subscriber group to add new signups to
+5. Map form fields to MailerLite fields
+
+## Field Mapping
+
+Map form fields to MailerLite subscriber data:
+
+| MailerLite Field | Required | Description |
+|------------------|----------|-------------|
+| Email | Yes | Subscriber email address |
+| Name | No | Full name or first/last |
+| Custom fields | No | Any custom fields in your MailerLite account |
+
+Select the form field that provides each value. Ensure the email field is mapped so subscribers can be added correctly.
+
+<Callout type="info" title="Tip">
+Create matching custom fields in MailerLite before mapping. Unmapped form fields are ignored.
+</Callout>

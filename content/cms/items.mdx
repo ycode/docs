@@ -1,0 +1,71 @@
+---
+title: Items
+---
+
+import { Callout } from 'nextra/components'
+
+# Items
+
+Items are individual records within a collection. You add, edit, search, filter, sort, and manage them through the CMS interface.
+
+## Adding Items
+
+1. Open a collection from the CMS section
+2. Click **Add Item**
+3. Fill in the field values
+4. Click **Save**
+
+Required fields must have values before you can save. The item is stored with the draft/publish status you select.
+
+## Editing Items
+
+Click any item in the collection list to open it for editing. Changes are saved when you click **Save**. You can switch between draft and published versions; edits to drafts do not affect the published item until you publish.
+
+## Search
+
+Use the search bar above the items list to find items by their content. Search runs across text fields and helps you locate specific items quickly.
+
+## Filtering
+
+Filter items by field values using the toolbar. You set filters per field; available operators depend on the field type. For example, you can filter by text (contains, equals), numbers (greater than, less than), dates (before, after), or booleans (true, false).
+
+## Sorting
+
+Sort items by any field in ascending or descending order. The sort control is in the toolbar above the items list. You can also use `manual_order` for custom ordering when you want to control the sequence yourself.
+
+## Pagination
+
+When a collection has many items, the list is paginated. You control how many items appear per page and navigate between pages. Pagination settings can also be configured on Collection List layers for dynamic pages.
+
+## Reordering
+
+For manual ordering, enable reorder mode and drag items to the desired position. The `manual_order` value is updated automatically. This is useful for featured items, menus, or any content where order matters.
+
+## Duplicating
+
+Duplicate an item to create a copy with the same field values. The duplicate gets a new `id` and `created_at` timestamp. You can then edit the copy before saving.
+
+## Bulk Operations
+
+Select multiple items using the checkboxes to perform bulk operations:
+
+- **Delete** — Remove selected items
+- **Publish** — Publish selected drafts
+- **Unpublish** — Revert selected items to draft
+
+<Callout type="warning" title="Bulk delete">
+Bulk delete is permanent. Deleted items cannot be recovered.
+</Callout>
+
+## Draft and Publish System
+
+Items use a composite primary key (`id`, `is_published`). You can have both a draft and a published version of the same item:
+
+- **Draft** — Work-in-progress; not visible on the live site
+- **Published** — Live version shown to visitors
+
+Edits apply to the draft. When you publish, the draft becomes the new published version. Dynamic pages and Collection Lists show only published items by default.
+
+<Callout type="info" title="Tip">
+Use drafts to prepare content before going live. Publish when you are ready for visitors to see the changes.
+</Callout>

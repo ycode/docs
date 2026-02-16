@@ -1,0 +1,75 @@
+---
+title: Asset Management
+---
+
+import { Callout } from 'nextra/components'
+
+# Asset Management
+
+Upload and manage images, videos, audio, documents, and icons for your Ycode project. Assets are stored in a Supabase Storage bucket and served via CDN for fast delivery.
+
+## Uploading Assets
+
+Upload assets through the asset manager in the editor sidebar. Drag and drop files or use the upload button to add new assets. Each asset is stored with metadata including filename, storage path, public URL, file size, and MIME type.
+
+## Supported Formats
+
+| Category | Formats |
+|----------|---------|
+| Images | jpeg, jpg, png, gif, webp, avif, bmp, tiff |
+| Videos | mp4, mpeg, webm, ogg, quicktime, x-msvideo |
+| Audio | mpeg, mp3, wav, ogg, webm, aac |
+| Documents | pdf, doc, docx, xls, xlsx, ppt, pptx, plain, csv |
+| Icons | svg+xml |
+
+<Callout type="warning" title="SVG security">
+SVG files are validated and sanitized before storage to prevent malicious content. Only trusted SVG sources are recommended.
+</Callout>
+
+## Asset Model
+
+Each asset includes the following properties:
+
+- **id** — Unique identifier
+- **filename** — Original file name
+- **storage_path** — Path in Supabase Storage
+- **public_url** — Public URL for serving the asset
+- **file_size** — Size in bytes
+- **mime_type** — MIME type of the file
+- **width** / **height** — Dimensions (for images)
+- **source** — Origin of the asset
+- **asset_folder_id** — Parent folder for organization
+
+## Folders
+
+Organize assets in folders for easier management. Create folders in the asset manager and move assets between them. Folders help you keep related assets together when working with large libraries.
+
+## Image Optimization
+
+Optimize images on the fly using Supabase URL parameters. Append query parameters to the asset URL to control dimensions and quality:
+
+| Parameter | Description |
+|-----------|-------------|
+| `width` | Target width in pixels |
+| `height` | Target height in pixels |
+| `resize` | Resize mode (cover, contain, fill) |
+| `quality` | Image quality (1–100) |
+
+Example: `https://your-project.supabase.co/storage/v1/object/public/assets/image.jpg?width=800&quality=80`
+
+<Callout type="info" title="Tip">
+Use image optimization parameters for responsive images and faster page loads. Smaller dimensions and lower quality reduce bandwidth and improve performance.
+</Callout>
+
+## Using Assets in the Editor
+
+In the visual editor, you can:
+
+- Drag assets onto the canvas as image elements
+- Set any asset as a background image for elements
+- Use the asset picker when configuring image fields on components
+- Reference assets in custom code via their public URL
+
+## Using Assets in the CMS
+
+Collection fields of type image or asset store an asset reference (asset_id). When you add an image field to a collection, you select assets from the asset manager when editing items. Dynamic pages display the selected asset using its public URL.
