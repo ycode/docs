@@ -44,13 +44,7 @@ const navbar = (
 
 const footer = (
   <Footer>
-    <span>
-      MIT {new Date().getFullYear()} © Ycode. Built with{' '}
-      <a href="https://nextra.site" target="_blank" rel="noreferrer">
-        Nextra
-      </a>
-      .
-    </span>
+    <span style={{ fontSize: '0.75rem' }}>© {new Date().getFullYear()} Ycode</span>
   </Footer>
 )
 
