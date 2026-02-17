@@ -1,0 +1,148 @@
+---
+title: Fonts
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Fonts
+
+Ycode supports three types of fonts: built-in system fonts, Google Fonts, and custom uploaded fonts. You manage fonts through the Font Picker in the typography design controls. Fonts you add are available across your entire project and render in the editor canvas and on published pages.
+
+## Font Types
+
+### Built-in Fonts
+
+Three system font stacks are available by default and require no configuration:
+
+| Font | CSS Stack |
+|------|-----------|
+| Sans Serif | `ui-sans-serif, system-ui, sans-serif` |
+| Serif | `ui-serif, Georgia, serif` |
+| Monospace | `ui-monospace, monospace` |
+
+Built-in fonts support all standard weights and are always available. They cannot be removed.
+
+### Google Fonts
+
+Add any font from the Google Fonts catalog directly within the editor. Google Fonts are loaded via the Google Fonts CSS API and cached with `font-display: swap` for optimal performance.
+
+### Custom Fonts
+
+Upload your own font files for brand-specific or licensed typefaces. Uploaded fonts are stored in Supabase Storage and served via `@font-face` rules.
+
+Supported file formats:
+
+| Format | Extension |
+|--------|-----------|
+| TrueType | `.ttf` |
+| OpenType | `.otf` |
+| Web Open Font Format | `.woff` |
+| Web Open Font Format 2 | `.woff2` |
+
+<Callout type="info" title="Recommended format">
+Use `.woff2` when possible. It provides the best compression and is supported by all modern browsers.
+</Callout>
+
+## Adding Google Fonts
+
+<Steps>
+
+### Open the Font Picker
+
+Select a text element on the canvas. In the Design tab, find the **fontFamily** control under Typography and click the font dropdown.
+
+### Switch to the Google tab
+
+The Font Picker has two tabs: **Installed** and **Google**. Click the **Google** tab to browse the full catalog.
+
+### Search and select a font
+
+Type a font name in the search field to filter the catalog. The list shows a live preview of each font. Click a font to add it to your project and apply it to the selected element.
+
+</Steps>
+
+Fonts you have already added show an **Installed** badge in the Google tab. Clicking an installed font selects it without creating a duplicate.
+
+## Uploading Custom Fonts
+
+<Steps>
+
+### Open the Font Picker
+
+Select a text element and open the font dropdown from the Typography section of the Design tab.
+
+### Click Upload font
+
+At the bottom of the **Installed** tab, click the **Upload font** button.
+
+### Select font files
+
+Choose one or more font files from your computer. Each file is uploaded to storage, and a font record is created automatically. The font name is derived from the filename unless you specify one.
+
+</Steps>
+
+<Callout type="warning" title="File size limit">
+Each font file must be under 10 MB.
+</Callout>
+
+## Using Fonts
+
+Once a font is added, you can apply it to any text element through the font dropdown. The Font Picker groups installed fonts into three sections:
+
+- **Custom** — Fonts you uploaded
+- **Google** — Google Fonts you added
+- **Default** — Built-in system fonts
+
+Select **Inherit** to remove a font override and let the element inherit the font from its parent.
+
+### Font Weights
+
+Available font weights adjust based on the selected font. If a font supports only Regular and Bold, those are the weights shown in the weight selector. Built-in fonts support all nine standard weights (Thin through Black).
+
+| Weight | Value | Label |
+|--------|-------|-------|
+| 100 | Thin | Thin |
+| 200 | Extra Light | Extra Light |
+| 300 | Light | Light |
+| 400 | Regular | Regular |
+| 500 | Medium | Medium |
+| 600 | Semi Bold | Semi Bold |
+| 700 | Bold | Bold |
+| 800 | Extra Bold | Extra Bold |
+| 900 | Black | Black |
+
+## Deleting Fonts
+
+You can delete custom and Google fonts from the **Installed** tab. Hover over a font to reveal the delete button. A confirmation dialog appears before the font is removed.
+
+<Callout type="warning" title="Impact on existing elements">
+Deleting a font affects all elements that use it. Those elements fall back to the browser default font until you assign a new one.
+</Callout>
+
+## How Fonts Render
+
+### In the Editor
+
+Fonts are injected into the canvas iframe as a combination of `<style>` and `<link>` elements. Google Fonts load via `<link>` tags pointing to the Google Fonts CSS API. Custom fonts load via `@font-face` rules referencing the uploaded file URL. The editor rebuilds and re-injects font CSS whenever you add or remove a font.
+
+### On Published Pages
+
+Published pages include font CSS directly in the HTML. Google Fonts render through `<link>` tags in the page head. Custom fonts render through inline `@font-face` rules. Only published fonts appear on the live site — draft fonts that have not been published are not included.
+
+<Callout type="info" title="Publishing fonts">
+Fonts follow the same draft/published workflow as pages and components. After adding or removing fonts, publish your project to make the changes live.
+</Callout>
+
+## CSS Class Generation
+
+Ycode generates Tailwind-compatible CSS classes for each font. Built-in fonts use standard Tailwind classes (`font-sans`, `font-serif`, `font-mono`). Custom and Google fonts use arbitrary value syntax:
+
+```css
+/* Example: Open Sans generates */
+.font-\[Open_Sans\] {
+  font-family: "Open Sans", sans-serif;
+}
+```
+
+These classes are generated automatically and include pseudo-state variants (`hover`, `focus`, `active`, `disabled`) so fonts work with interactive states.
