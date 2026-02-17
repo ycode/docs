@@ -11,12 +11,12 @@ export function FeatureCard({ title, children, href }: FeatureCardProps) {
   return (
     <Link
       href={href}
-      className="x:group x:focus-visible:nextra-focus nextra-card x:flex x:flex-col x:justify-start x:overflow-hidden x:rounded-lg x:border x:border-gray-200 x:text-current x:no-underline x:dark:shadow-none x:hover:shadow-gray-100 x:dark:hover:shadow-none x:shadow-gray-100 x:active:shadow-sm x:active:shadow-gray-200 x:transition-all x:duration-200 x:hover:border-gray-300 x:bg-gray-100 x:shadow x:dark:border-neutral-700 x:dark:bg-neutral-800 x:dark:text-gray-50 x:hover:shadow-lg x:dark:hover:border-neutral-500 x:dark:hover:bg-neutral-700"
+      className="group nextra-card x:focus-visible:nextra-focus flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 hover:border-gray-300 bg-gray-100 shadow dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-50 hover:shadow-lg dark:hover:border-neutral-500 dark:hover:bg-neutral-700"
     >
-      <span className="x:flex x:font-semibold x:items-center x:gap-2 x:px-4 x:pt-4 x:pb-0 x:text-gray-700 x:hover:text-gray-900 x:dark:text-gray-300 x:dark:hover:text-gray-100">
+      <span className="flex font-semibold items-center gap-2 px-4 pt-4 pb-0 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
         <span className="_truncate">{title}</span>
       </span>
-      <div className="x:px-4 x:pt-1 x:pb-4 x:text-sm x:text-gray-600 x:dark:text-gray-400">
+      <div className="px-4 pt-1 pb-4 text-sm leading-snug text-gray-600 dark:text-gray-400">
         {children}
       </div>
     </Link>
@@ -31,7 +31,7 @@ interface FeatureGridProps {
 export function FeatureGrid({ children, cols = 3 }: FeatureGridProps) {
   return (
     <div
-      className="nextra-cards x:mt-4 x:gap-4 x:grid not-prose"
+      className="nextra-cards mt-4 gap-4 grid not-prose"
       style={{ '--rows': cols } as React.CSSProperties}
     >
       {children}
