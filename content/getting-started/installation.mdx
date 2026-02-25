@@ -42,6 +42,7 @@ Fork the [Ycode repository](https://github.com/ycode/ycode) on GitHub. This crea
    - `anon` public key
    - `service_role` secret key
 4. Go to **Settings > Database** and copy the connection string. Use the **Transaction Pooler** connection method (port 6543).
+5. Go to **Authentication > Sign In / Providers** and disable the **Confirm email** toggle. The setup wizard verifies this setting before allowing you to create an admin account.
 
 ### Step 4: Add environment variables in Vercel
 
@@ -60,8 +61,10 @@ Trigger a new deployment so Vercel picks up the environment variables. Use **Dep
 
 1. Visit your deployed site.
 2. Go to `/ycode/welcome` (e.g. `https://your-project.vercel.app/ycode/welcome`).
-3. Follow the setup wizard to create your admin account and run database migrations.
-4. When done, you can open the editor at `/ycode`.
+3. Follow the setup wizard to connect Supabase and run database migrations.
+4. Confirm that the **Confirm email** setting is disabled when prompted. The wizard checks this automatically.
+5. Create your admin account.
+6. When done, you can open the editor at `/ycode`.
 
 </Steps>
 
@@ -101,8 +104,10 @@ npm run dev
 ### Step 6: Run the setup wizard
 
 1. Open `http://localhost:3002/ycode/welcome` in your browser.
-2. Follow the setup wizard to create your admin account and run migrations.
-3. When done, open the editor at `http://localhost:3002/ycode`.
+2. Follow the setup wizard to connect Supabase and run migrations.
+3. Confirm that the **Confirm email** setting is disabled when prompted.
+4. Create your admin account.
+5. When done, open the editor at `http://localhost:3002/ycode`.
 
 </Steps>
 

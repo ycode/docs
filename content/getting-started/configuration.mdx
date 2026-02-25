@@ -59,6 +59,15 @@ postgresql://postgres.[PROJECT-ID]:[PASSWORD]@aws-x-xx-xxxx-x.pooler.supabase.co
 
 Use the **Transaction Pooler** connection method, not the direct connection. The pooler runs on port 6543 and is required for serverless environments like Vercel.
 
+### Disable email confirmation
+
+Ycode manages its own authentication flow and does not use Supabase's email confirmation. You need to disable it before running the setup wizard.
+
+1. In your Supabase project, go to **Authentication > Sign In / Providers**.
+2. Find the **Confirm email** toggle and disable it.
+
+The setup wizard verifies this setting automatically. If email confirmation is still enabled, the wizard prompts you to disable it before you can create an admin account.
+
 ## Database Migrations
 
 Ycode uses migrations to create and update database tables. You can run them in two ways.
@@ -66,7 +75,7 @@ Ycode uses migrations to create and update database tables. You can run them in 
 ### Via setup wizard (recommended)
 
 1. Visit `/ycode/welcome` on your site.
-2. Complete the setup wizard. It creates your admin account and runs migrations automatically.
+2. Complete the setup wizard. It connects to Supabase, runs migrations, verifies the email confirmation setting, and creates your admin account.
 
 ### Via CLI
 
