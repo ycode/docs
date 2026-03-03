@@ -2,6 +2,7 @@
 title: Components
 ---
 
+import { Callout } from 'nextra/components'
 import { Steps } from 'nextra/components'
 import { KeyboardShortcut } from '@/components/keyboard-shortcut'
 
@@ -29,13 +30,33 @@ Enter a name in the Create Component dialog. The component is added to your comp
 
 ## Component Variables
 
-Components support variables for content that varies per instance:
+Components support variables for content that varies per instance. You define variables when creating or editing the component, then link them to layers inside the component. Each instance can override these values without affecting the master or other instances.
 
-- **Text** — Overridable text content
-- **Image** — Overridable image source
-- **Link** — Overridable link URL
+### Variable Types
 
-You define variables when creating or editing the component. Each instance can override these values without affecting the master or other instances.
+| Type | Description |
+|------|-------------|
+| **Text** | Overridable text content, supports rich text formatting (bold, italic, links, inline CMS variables) |
+| **Image** | Overridable image source |
+| **Link** | Overridable link URL and settings |
+| **Audio** | Overridable audio file source |
+| **Video** | Overridable video file source |
+| **Icon** | Overridable SVG icon |
+
+### Linking Variables to Layers
+
+After creating a variable, link it to a layer inside the component:
+
+1. Enter component edit mode
+2. Select the target layer (e.g., a text element, image, or button)
+3. In the right panel, find the **Link to variable** option
+4. Choose the variable to link
+
+The linked layer displays the variable's default value. Each instance can then override that value.
+
+### Rich Text Variables
+
+Text variables support rich text content. When you override a text variable on an instance, you get the full rich text editor with formatting controls, inline CMS field references, and structured content. This is useful for components like cards, testimonials, or content blocks where the text needs formatting beyond plain strings.
 
 ## Editing Components
 
@@ -55,6 +76,22 @@ Detaching is irreversible. The detached layers are independent copies. You canno
 
 Every placement of a component is an instance. Instances share the same structure and styles as the master. You can override component variables per instance. All instances update when you edit the master.
 
+When components are nested (a component instance inside another component), each level maintains its own overrides independently. The inner component's overrides are scoped to that instance within the parent component's layer tree.
+
+## Components in Rich Text
+
+You can insert component instances inside CMS rich text fields. This lets you create structured, reusable blocks within long-form content — callouts, embeds, feature highlights, pricing cards, and more.
+
+When editing a rich text field in the CMS, use the component inserter to place a component instance inline with your content. The component renders with its full design and structure, and you can override its variables per insertion.
+
 <Callout type="info" title="Tip">
-Use components for repeated patterns: headers, footers, cards, buttons, and navigation. Component variables let you customize content while keeping structure and styling consistent.
+Components in rich text are ideal for content teams who need consistent design patterns inside blog posts, documentation, or marketing pages without touching the page editor.
 </Callout>
+
+## Best Practices
+
+- Use components for repeated patterns: headers, footers, cards, buttons, and navigation
+- Define variables for any content that changes between instances
+- Use rich text variables when instance content needs formatting
+- Nest components to build complex, reusable structures (e.g., a card grid component containing card components)
+- Use components in CMS rich text to maintain design consistency across dynamic content

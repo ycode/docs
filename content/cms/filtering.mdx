@@ -1,0 +1,142 @@
+---
+title: Filtering & Sorting
+---
+
+import { Callout } from 'nextra/components'
+
+# Filtering & Sorting
+
+You can filter and sort collection items on your pages to build directories, listings, blogs, marketplaces, and other data-driven experiences. Filters reduce the dataset before items render, and sorting controls the display order.
+
+## Adding Filters to a Collection List
+
+Filters are configured on collection layers (Collection List elements). Each filter targets a collection field and applies a condition to include or exclude items.
+
+1. Select a **Collection List** layer on the canvas
+2. In the right panel, open the **Filters** section
+3. Click **+** to add a filter condition
+4. Choose a collection field to filter by
+5. Select an operator and enter a value
+
+Filtered items update immediately in the editor preview.
+
+## Filter Operators
+
+Available operators depend on the field type:
+
+### Text Fields
+
+Text, rich text, email, phone, and color fields support:
+
+| Operator | Description |
+|----------|-------------|
+| **is** | Exact match |
+| **is not** | Does not match |
+| **contains** | Value includes the text |
+| **does not contain** | Value does not include the text |
+| **is present** | Field has a value |
+| **is empty** | Field has no value |
+
+### Number Fields
+
+| Operator | Description |
+|----------|-------------|
+| **is** | Equals the number |
+| **is not** | Does not equal the number |
+| **less than** | Value is below the number |
+| **less than or equal** | Value is at or below the number |
+| **greater than** | Value is above the number |
+| **greater than or equal** | Value is at or above the number |
+
+### Date Fields
+
+| Operator | Description |
+|----------|-------------|
+| **is** | Matches the date |
+| **is before** | Earlier than the date |
+| **is after** | Later than the date |
+| **is between** | Falls within a date range (requires two values) |
+| **is empty** | No date set |
+| **is not empty** | Has a date |
+
+### Boolean Fields
+
+| Operator | Description |
+|----------|-------------|
+| **is** | True or false |
+
+### Reference Fields
+
+Reference and single-asset fields support:
+
+| Operator | Description |
+|----------|-------------|
+| **is one of** | Matches any of the selected items |
+| **is not one of** | Does not match any of the selected items |
+| **exists** | Has a linked item |
+| **does not exist** | No linked item |
+
+When you use **is one of** or **is not one of**, a multi-select dropdown loads items from the referenced collection so you can pick values directly.
+
+### Multi-Reference Fields
+
+| Operator | Description |
+|----------|-------------|
+| **is one of** | Contains at least one of the selected items |
+| **is not one of** | Contains none of the selected items |
+| **contains all of** | Contains every selected item |
+| **contains exactly** | Contains only the selected items, no more |
+| **item count** | Number of linked items matches a comparison (equals, less than, greater than, etc.) |
+| **has items** | At least one linked item |
+| **has no items** | No linked items |
+
+## Filter Logic
+
+Filters use a group-based logic system:
+
+- **Conditions within a group** use **OR** logic — an item passes if it matches any condition in the group
+- **Groups** use **AND** logic — an item must pass all groups to appear
+
+This lets you build expressive filters. For example, to show products that are "Electronics" or "Books" AND cost less than $50, create two groups: one with category conditions (OR) and one with a price condition.
+
+### Adding Multiple Conditions
+
+To add an **OR** condition within a group, click the **+** button next to "Or" inside the group.
+
+To add an **AND** group, click the **+** button at the top of the Filters panel.
+
+## Sorting
+
+Control the display order of collection items using the sort settings on the collection layer:
+
+| Sort Option | Description |
+|-------------|-------------|
+| **None** | Default database order |
+| **Manual** | Custom order set by drag-and-drop reordering in the CMS |
+| **Random** | Randomized order on each page load |
+| **Field** | Sort by any collection field in ascending or descending order |
+
+When sorting by a field, you choose the field and the direction (ascending or descending). Common sort fields include date (newest first), name (alphabetical), or price (low to high).
+
+## Pagination
+
+When a collection has many items, enable pagination to split them across pages:
+
+1. Select a Collection List layer
+2. In the right panel, find **Pagination**
+3. Enable pagination and choose a mode:
+
+| Mode | Description |
+|------|-------------|
+| **Pages** | Traditional page navigation with previous/next buttons and page info |
+| **Load More** | A button that appends the next batch of items |
+
+Set the **items per page** count to control how many items appear at once. Pagination works with filters — only items that pass the filters are counted and paginated.
+
+### Styling Pagination Controls
+
+When pagination is enabled, Ycode generates pagination controls (previous/next buttons, page info text). You can style these controls through the pagination layer settings in the design panel.
+
+<Callout type="info" title="Tip">
+Combine filters, sorting, and pagination to build complete listing experiences. For example, a product directory with category filters, price sorting, and 12 items per page.
+</Callout>

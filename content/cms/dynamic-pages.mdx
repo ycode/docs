@@ -2,6 +2,8 @@
 title: Dynamic Pages
 ---
 
+import { Callout } from 'nextra/components'
+
 # Dynamic Pages
 
 Bind collection data to your pages for dynamic, data-driven content.
@@ -26,10 +28,43 @@ Once a page is connected to a collection, you can bind collection fields to elem
 
 Text elements, images, links, and other elements can all be bound to collection data.
 
-## Dynamic Lists
+## Collection Lists
 
-To show multiple items on a single page (e.g., a blog listing), use a **Collection List** element. Configure:
+To show multiple items on a single page (e.g., a blog listing), use a **Collection List** element. The collection list repeats its child layers for each item in the connected collection.
 
-- Which collection to display
-- How many items to show
-- Sort order and filters
+### Setup
+
+1. Add a **Collection** element to your page
+2. Choose which collection to display
+3. Design the layout for a single item — the design repeats for each item
+4. Bind collection fields to elements inside the list
+
+### Sorting
+
+Control the display order of items:
+
+- **None** — Default database order
+- **Manual** — Custom order set by drag-and-drop in the CMS
+- **Random** — Shuffled on each page load
+- **By field** — Sort by any field (e.g., date, name, price) in ascending or descending order
+
+### Filtering
+
+Add filter conditions to show only items matching specific criteria. You can filter by any collection field using operators appropriate to the field type (text contains, number greater than, date is after, reference is one of, and more).
+
+Filters use group-based logic: conditions within a group are combined with OR, and groups are combined with AND.
+
+See [Filtering & Sorting](/docs/cms/filtering) for the full list of operators and examples.
+
+### Pagination
+
+For large collections, enable pagination to split items across pages:
+
+- **Pages** mode shows previous/next navigation and page info
+- **Load More** mode adds a button that appends the next batch
+
+Set the items per page count to control batch size. Pagination respects filters — only matching items are counted.
+
+<Callout type="info" title="Tip">
+Combine collection lists with filters, sorting, and pagination to build complete listing pages like blogs, product catalogs, team directories, and event calendars.
+</Callout>
