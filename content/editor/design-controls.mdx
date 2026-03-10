@@ -29,16 +29,20 @@ Control text appearance:
 - **textAlign** — left, center, right, justify
 - **letterSpacing** — Character spacing
 - **lineHeight** — Line height
-- **color** — Text color
+- **color** — Text color (solid, linear gradient, radial gradient, or image background clipped to text)
 - **textTransform** — none, uppercase, lowercase, capitalize
-- **textDecoration** — none, underline, line-through
+- **textDecoration** — Add via the "+" menu: underline with configurable color, thickness, and offset
+
+For text layers, the color picker includes an **Image** tab where you can set a background image that clips to the text shape. Choose an image from the file manager, enter a custom URL, or bind to a CMS field. Configure size, position, and repeat settings for the image.
 
 ## Spacing
 
-Set margin and padding:
+Set margin and padding using the visual box-model editor. The diagram shows margin (outer ring) and padding (inner ring), with inline inputs for each side.
 
 - **margin** — All sides or individual top, right, bottom, left
 - **padding** — All sides or individual sides
+- **Shift + drag** — Update all sides at once
+- **Alt + drag** — Update opposite sides together (top/bottom or left/right)
 
 Values support px, rem, em, and percentage units.
 
@@ -49,7 +53,7 @@ Control element dimensions:
 - **width** / **height** — Explicit dimensions (px, %, auto)
 - **minWidth** / **minHeight** — Minimum constraints
 - **maxWidth** / **maxHeight** — Maximum constraints
-- **aspectRatio** — Maintain aspect ratio
+- **aspectRatio** — Add via the "+" menu with presets (Square, Video 16:9, 4:3, 3:4) or a custom ratio
 - **objectFit** — cover, contain, fill, none (for images)
 - **gridColumnSpan** / **gridRowSpan** — Grid cell spanning
 
@@ -61,7 +65,8 @@ Add and customize borders:
 - **borderStyle** — solid, dashed, dotted, none
 - **borderColor** — Border color
 - **borderRadius** — Corner radius (all or per corner)
-- **divideX** / **divideY** — Dividers between children with border styling
+
+**Dividers** — Add via the "+" menu in the Borders section. Dividers create lines between child elements. Configure direction (vertical or horizontal), style (solid, dashed, dotted, double), and color. Remove dividers with the X button.
 
 ## Backgrounds
 
@@ -75,12 +80,12 @@ Set element backgrounds:
 
 ## Effects
 
-Apply visual effects:
+Effects are addable and removable. Use the "+" menu in the Effects section header to add individual effects, and the X button to remove them.
 
 - **opacity** — 0 to 1
-- **boxShadow** — Single or multiple shadows
-- **blur** — Blur filter
-- **backdropBlur** — Blur behind the element
+- **boxShadow** — Add via "+" menu; configure shadow offset, blur, spread, and color
+- **blur** — Add via "+" menu; blur filter on the element
+- **backdropBlur** — Add via "+" menu; blur behind the element
 - **filter** — CSS filter values
 
 ## Position

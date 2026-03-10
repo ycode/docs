@@ -7,6 +7,8 @@ const meta: MetaRecord = {
   fonts: 'Fonts',
   responsive: 'Responsive Design',
   components: 'Components',
+  slider: 'Slider',
+  lightbox: 'Lightbox',
   'custom-code': 'Custom Code'
 }
 

@@ -65,6 +65,20 @@ For large collections, enable pagination to split items across pages:
 
 Set the items per page count to control batch size. Pagination respects filters — only matching items are counted.
 
+### Inverse References
+
+Inverse references let you show related items from the opposite direction of a reference field. For example, if a "Books" collection has an `author` reference field pointing to "Authors", you can place a collection list on an Author's dynamic page that automatically shows all books by that author.
+
+To set up an inverse reference:
+
+1. Add a **Collection** element inside a dynamic page or within another collection list
+2. In the **Source** dropdown, look for options labeled with the pattern: `Collection Name (via field name)`
+3. Select the inverse reference source
+
+Ycode automatically discovers these relationships based on existing reference and multi-reference fields in your collections. You do not need to create any additional fields.
+
+Inverse references work with both single reference and multi-reference fields. They also support nesting — a collection list using an inverse reference can itself contain nested collection lists.
+
 <Callout type="info" title="Tip">
-Combine collection lists with filters, sorting, and pagination to build complete listing pages like blogs, product catalogs, team directories, and event calendars.
+Combine collection lists with filters, sorting, pagination, and inverse references to build complete listing pages like blogs, product catalogs, team directories, and event calendars.
 </Callout>

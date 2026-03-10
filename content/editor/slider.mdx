@@ -1,0 +1,95 @@
+---
+title: Slider
+---
+
+import { Callout } from 'nextra/components'
+
+# Slider
+
+The slider element creates carousels and slideshows powered by [Swiper](https://swiperjs.com). You can build image carousels, hero sliders, testimonial rotators, and other sliding content.
+
+## Adding a Slider
+
+1. Open the **Element Library** in the editor
+2. Under **Utilities**, drag the **Slider** element onto the canvas
+3. The slider is created with default slides, navigation arrows, and pagination
+
+## Structure
+
+A slider has a fixed internal structure:
+
+- **Slider** — The outer container
+  - **Slides** — The wrapper that holds all slides
+    - **Slide** — Individual slide (add as many as you need)
+  - **Navigation** — Previous/next arrow buttons (optional)
+  - **Pagination** — Bullet or fraction indicators (optional)
+
+You design each slide's content by adding elements inside it (text, images, buttons, etc.). The slide content repeats the same layout structure but you can customize each slide individually.
+
+## Slider Settings
+
+Select the slider element and open the **Settings** tab in the right panel to configure behavior:
+
+### Animation
+
+| Setting | Description |
+|---------|-------------|
+| **Effect** | Transition animation: Slide, Fade, Cube, Flip, Coverflow, or Cards |
+| **Easing** | Animation curve: Linear, Ease in, Ease in out, or Ease out |
+| **Duration** | Transition speed in seconds |
+
+### Slides
+
+| Setting | Description |
+|---------|-------------|
+| **Per view** | Number of slides visible at once (1-10; only for Slide and Coverflow effects) |
+| **Per group** | How many slides advance at once (when Per view is greater than 1) |
+| **Centered** | Center the active slide (when Per view is greater than 1) |
+
+### Autoplay
+
+| Setting | Description |
+|---------|-------------|
+| **Autoplay** | Enable automatic slide advancement with a configurable delay in seconds |
+| **Pause on hover** | Pause autoplay when the mouse hovers over the slider |
+
+### Loop
+
+| Setting | Description |
+|---------|-------------|
+| **None** | Slides stop at the first and last slide |
+| **Loop** | Continuous infinite loop |
+| **Rewind** | Returns to the first slide after the last |
+
+### Navigation and Pagination
+
+| Setting | Description |
+|---------|-------------|
+| **Show navigation** | Display previous/next arrow buttons |
+| **Pagination** | Hidden, Passive bullets, Clickable bullets, or Fraction (e.g. 1/5) |
+
+### Interaction
+
+| Setting | Description |
+|---------|-------------|
+| **Touch events** | Allow swiping on touch devices |
+| **Slide on click** | Navigate to clicked slide (when touch enabled) |
+| **Mousewheel** | Navigate slides with the scroll wheel |
+
+## Managing Slides
+
+- **Add a slide** — Use the "Add slide" action in the slider settings or duplicate an existing slide in the Layers panel
+- **Reorder slides** — Drag slides in the Layers panel
+- **Delete a slide** — Select a slide and delete it from the Layers panel
+
+## Styling
+
+You can style every part of the slider independently:
+
+- **Slide content** — Add any elements inside slides and style them with design controls
+- **Navigation arrows** — Select the prev/next buttons and customize their appearance
+- **Pagination bullets** — Style the bullet indicators; the active bullet receives a `current` state that you can style separately
+
+<Callout type="info" title="Tip">
+Use the Fade effect for hero image sliders and the Coverflow effect for product showcases. The Cards effect works well for stacked card presentations.
+</Callout>

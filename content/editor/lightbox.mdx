@@ -1,0 +1,78 @@
+---
+title: Lightbox
+---
+
+import { Callout } from 'nextra/components'
+
+# Lightbox
+
+The lightbox element opens images in a fullscreen gallery overlay. Visitors click a trigger (typically an image or thumbnail) and view images in an immersive, navigable gallery powered by [Swiper](https://swiperjs.com).
+
+## Adding a Lightbox
+
+1. Open the **Element Library** in the editor
+2. Under **Utilities**, drag the **Lightbox** element onto the canvas
+3. The lightbox is created with a default image as the trigger
+
+The visible element on the page acts as the click trigger. When clicked, it opens the fullscreen gallery with the configured images.
+
+## Image Sources
+
+You can populate the lightbox gallery from two sources:
+
+### File Manager
+
+Select images from your project's asset library. Add, remove, and reorder images using the file manager in the lightbox settings. This is ideal for static galleries, portfolios, and image showcases.
+
+### CMS Field
+
+Bind the lightbox to a CMS image field (including multi-image fields). The gallery dynamically populates with images from the current collection item. This is useful for product galleries, property listings, and other data-driven image sets.
+
+## Lightbox Settings
+
+Select the lightbox element and open the **Settings** tab:
+
+### Display
+
+| Setting | Description |
+|---------|-------------|
+| **Overlay** | Light or Dark background for the fullscreen modal |
+| **Show thumbnails** | Display a thumbnail strip below the main image for quick navigation |
+| **Show navigation** | Display previous/next arrow buttons |
+| **Show pagination** | Display a fraction indicator (e.g. 1/5) |
+
+### Animation
+
+| Setting | Description |
+|---------|-------------|
+| **Effect** | Transition between images: Slide, Fade, Cube, Flip, Coverflow, or Cards |
+| **Easing** | Animation curve: Linear, Ease in, Ease in out, or Ease out |
+| **Duration** | Transition speed in seconds |
+
+### Interaction
+
+| Setting | Description |
+|---------|-------------|
+| **Pinch to zoom** | Allow pinch-to-zoom on touch devices |
+| **Double-tap zoom** | Zoom in/out by double-tapping or double-clicking (up to 3x) |
+| **Mousewheel** | Navigate between images with the scroll wheel |
+
+## Grouped Galleries
+
+You can link multiple lightbox elements into a single shared gallery by setting the same **Group ID** on each lightbox. When a visitor clicks any lightbox in the group, all images from every lightbox in that group are merged into one gallery.
+
+This is useful for:
+
+- Grid layouts where each cell is a separate lightbox but all images should be browsable together
+- Product pages with multiple image sections that should form one continuous gallery
+
+<Callout type="info" title="Tip">
+Combine grouped lightboxes with CMS collection lists to create dynamic image galleries. Each collection item's lightbox contributes its images to a shared browsable gallery.
+</Callout>
+
+## Keyboard Navigation
+
+The lightbox gallery supports keyboard navigation:
+
+- **Left/Right arrows** — Navigate between images
+- **Escape** — Close the lightbox

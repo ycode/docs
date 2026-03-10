@@ -65,6 +65,14 @@ You add custom fields to define the structure of your content. Field types are g
 | **reference** | Link to a single item in another collection |
 | **multi_reference** | Link to multiple items in another collection |
 
+#### Inverse References
+
+Inverse references let you display related items from the opposite direction of an existing reference field. Instead of following a reference forward (e.g., a Book's author field pointing to an Author), inverse references look backward to find all items whose reference field points to the current item (e.g., showing all Books that reference the current Author).
+
+You do not create a separate field for inverse references. They are configured as a data source on collection list layers. When a collection has reference fields pointing to another collection, those relationships automatically appear as inverse reference options in the source dropdown.
+
+See [Dynamic Pages](/docs/cms/dynamic-pages#inverse-references) for how to use inverse references in collection lists.
+
 ## Field Properties
 
 Each field has configurable properties:
