@@ -1,0 +1,67 @@
+---
+title: Backup & Restore
+---
+
+import { Callout } from 'nextra/components'
+
+# Backup & Restore
+
+You can create a full backup of your Ycode project and restore it later or on a different instance. This is useful for migrating between environments, creating snapshots before major changes, or transferring projects between Ycode Cloud and Open Source.
+
+## Creating a Backup
+
+1. Open the **user menu** in the header bar
+2. Select **Backup & Restore**
+3. Optionally enter a backup name (defaults to your project name)
+4. Optionally set a password to encrypt the backup
+5. Click **Create backup**
+
+The browser downloads a `.ycode` file containing your entire project.
+
+### What Is Included
+
+A backup contains all project data:
+
+- Pages and page layers
+- Components and layer styles
+- CMS collections, fields, items, and values
+- Assets (images, videos, documents) with their files
+- Forms and form submissions
+- Fonts
+- Locales and translations
+- Webhooks and API keys
+- App settings, SEO settings, and color variables
+- Redirects
+
+<Callout type="info" title="Complete snapshot">
+The backup includes everything needed to fully recreate your project on a fresh Ycode instance. Asset files are embedded in the backup so nothing is lost.
+</Callout>
+
+## Restoring from a Backup
+
+1. Open the **user menu** in the header bar
+2. Select **Backup & Restore**
+3. Switch to the **Restore** tab
+4. Select a `.ycode` file
+5. If the backup is encrypted, enter the password
+6. Click **Restore project**
+
+After a successful restore, the editor reloads with the imported project data.
+
+<Callout type="warning" title="Restore replaces all data">
+Restoring from a backup replaces all current project data. Pages, collections, assets, and all other content are overwritten. Create a backup of your current project first if you need to preserve it.
+</Callout>
+
+## Encryption
+
+Backups can be encrypted with a password using AES-256-GCM encryption. When you set a password during backup creation, the file is encrypted and cannot be restored without the same password. Use encryption when sharing backups or storing them in untrusted locations.
+
+## Migration Between Environments
+
+Backup and restore works across Ycode Cloud and Open Source instances. You can:
+
+- **Export from Cloud, import to Open Source** — Move your project to a self-hosted instance
+- **Export from Open Source, import to Cloud** — Migrate to the managed service
+- **Transfer between Open Source instances** — Move projects between servers
+
+After restoring, any pending database migrations run automatically to ensure compatibility with the target environment.
