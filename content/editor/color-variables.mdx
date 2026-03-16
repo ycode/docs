@@ -1,0 +1,56 @@
+---
+title: Color Variables
+---
+
+import { Callout } from 'nextra/components'
+
+# Color Variables
+
+Color variables are global design tokens that let you define colors once and reuse them across your entire site. When you update a color variable, every element using it updates automatically.
+
+## Creating a Color Variable
+
+1. Select any element and open the **Design** tab
+2. Click any color swatch (text color, background, border, etc.) to open the color picker
+3. In the color picker, find the **Color Variables** section
+4. Click **+** to create a new variable
+5. Enter a name and pick a color
+6. Click **Save**
+
+The variable is now available in every color picker throughout the editor.
+
+## Using Color Variables
+
+When a color picker is open, your color variables appear as swatches. Click one to apply it. Color variables can be used in:
+
+- **Text color** — Typography section
+- **Background color** — Backgrounds section
+- **Border color** — Borders section
+- **Divide color** — Dividers in the Borders section
+- **Text decoration color** — Underline color in Typography
+- **Box shadow color** — Shadow effects
+- **Gradient stops** — As color stops in linear and radial gradients
+
+When an element uses a color variable, changing the variable's value updates that element automatically.
+
+## Opacity
+
+Color variables support opacity. When creating or editing a variable, adjust the opacity slider to create semi-transparent colors. The opacity is stored as part of the variable value and renders correctly everywhere the variable is used.
+
+## Managing Variables
+
+### Editing
+
+Click an existing variable in the color picker to edit its name or color. Changes propagate to all elements using the variable.
+
+### Reordering
+
+Drag and drop color variables in the list to reorder them. The order is reflected in every color picker.
+
+### Deleting
+
+Right-click a color variable and select **Delete**. Elements that were using the deleted variable retain their last applied color but lose the link to the variable.
+
+<Callout type="info" title="Tip">
+Define your brand colors, neutrals, and accent colors as color variables at the start of a project. This keeps your design consistent and makes global color changes effortless.
+</Callout>

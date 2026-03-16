@@ -1,0 +1,110 @@
+---
+title: MCP Server
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# MCP Server
+
+Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI coding tools build and edit your site. Connect tools like Cursor, Claude Desktop, or Windsurf to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
+
+## Setup
+
+<Steps>
+
+### Generate an MCP URL
+
+1. In the Ycode editor, go to **Integrations** in the header
+2. Open the **MCP** section
+3. Click **Generate MCP URL**
+4. Copy the generated URL (format: `https://your-site.com/ycode/mcp/ymc_...`)
+
+### Connect your AI tool
+
+**Cursor** — Go to Settings, find MCP, click "Add server", select SSE type, and paste your MCP URL.
+
+**Claude Desktop** — Go to Settings, find Connectors, click "Add custom connector", and paste your MCP URL.
+
+### Start building
+
+Ask the AI to create pages, add elements, style them, manage CMS content, and publish. Changes appear in the editor in real time.
+
+</Steps>
+
+<Callout type="info" title="Live sync">
+Changes made through the MCP server appear in the browser editor in real time via Supabase Realtime. You can watch the AI build your site as it works.
+</Callout>
+
+## What AI Agents Can Do
+
+The MCP server exposes a comprehensive set of tools organized by area:
+
+### Pages
+
+Create, update, duplicate, and delete pages. Manage page settings including SEO metadata, custom code injection, and password protection. Organize pages into folders.
+
+### Layers and Elements
+
+Add any element type (div, section, text, heading, rich text, image, button, video, slider, lightbox, form elements, and more). Update design properties (layout, typography, spacing, sizing, backgrounds, borders, effects, position), text content, images, links, videos, and background images. Move, reorder, and delete layers.
+
+### Layouts
+
+Insert pre-built layout templates — hero sections, headers, feature grids, footers, and more. Layouts provide a quick starting point that the AI can then customize.
+
+### CMS
+
+Create and manage collections, fields, items, and item values. Full CRUD operations on collections and their schema.
+
+### Components
+
+Create reusable components with variables, edit component layer trees, and manage the component library.
+
+### Styles
+
+Create, apply, update, and delete reusable layer styles for consistent design across the site.
+
+### Assets
+
+Upload images and files (from URL or base64), list and organize assets in folders.
+
+### Color Variables
+
+Create, update, delete, and reorder global color variables.
+
+### Fonts
+
+List installed fonts, search Google Fonts, and add new fonts to the project.
+
+### Localization
+
+Manage locales and translations for multilingual sites.
+
+### Forms
+
+View form submissions, update statuses, and manage form data.
+
+### Settings
+
+Read and update project settings (site name, description, custom CSS, and more).
+
+### Publishing
+
+Check for unpublished changes and publish all drafts to make the site live.
+
+## MCP Resources
+
+The MCP server also provides read-only resources that give AI agents context about your project:
+
+| Resource | Description |
+|----------|-------------|
+| **Elements Reference** | Available element types and nesting rules |
+| **Design Reference** | All design properties and valid values |
+| **Prompts Reference** | Example prompts and recommended workflows |
+| **Site Pages** | Current pages and folder structure |
+| **Site Collections** | CMS schema (collections, fields) |
+| **Site Design Tokens** | Color variables, fonts, and locales |
+
+## Managing Tokens
+
+Each MCP URL contains a unique token. You can create multiple tokens (e.g., one per team member or AI tool) and revoke them individually from the Integrations page. Tokens authenticate all MCP requests — treat them like API keys and do not share them publicly.

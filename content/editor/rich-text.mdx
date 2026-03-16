@@ -1,0 +1,81 @@
+---
+title: Rich Text
+---
+
+import { Callout } from 'nextra/components'
+
+# Rich Text
+
+The Rich Text element is a block-level content element for structured, multi-block text. Unlike the Text and Heading elements (which are single-paragraph or single-heading elements), Rich Text can contain multiple headings, paragraphs, lists, blockquotes, images, and components in one element.
+
+## Adding a Rich Text Element
+
+1. Open the **Element Library** in the editor
+2. Under **Content**, drag the **Rich Text** element onto the canvas
+3. The element is created with sample content showing headings, paragraphs, lists, and other block types
+
+## Editing Content
+
+Double-click a Rich Text element on the canvas to open the sheet editor. The editor provides a full toolbar for:
+
+- **Headings** — H1 through H6
+- **Paragraphs** — Body text
+- **Bold, Italic, Underline, Strikethrough** — Inline formatting
+- **Bullet lists** and **Ordered lists** — List blocks with individual item selection
+- **Blockquotes** — Quoted text blocks
+- **Links** — Inline links with full URL, page, email, phone, and asset options
+- **Images** — Image blocks within the content
+- **CMS variables** — Insert dynamic field values inline
+
+You can also edit Rich Text from the right sidebar by clicking the expand button.
+
+## Content Blocks as Sublayers
+
+Each block inside a Rich Text element (heading, paragraph, list, blockquote, image) appears as a sublayer in the Layers panel. You can expand the Rich Text layer to see and select individual blocks.
+
+Selecting a sublayer lets you:
+
+- **Style individual blocks** — Apply different text styles to each heading level, paragraph, list, or blockquote
+- **Select list items** — Click individual list items on the canvas to style them independently
+- **Delete blocks** — Remove a specific block without affecting the rest
+
+Inline marks (bold, italic, underline, etc.) appear as nested sublayers under their parent block.
+
+## Text Styles
+
+Rich Text elements use a text style system that lets you define the appearance of each block type. When you select a sublayer (e.g., an H1 heading or a paragraph), the Design panel shows typography and spacing controls specific to that block type.
+
+Default text styles are provided for:
+
+- Paragraph, H1–H6, Blockquote
+- Bullet list, Ordered list, List item
+- Bold, Italic, Underline, Strikethrough, Link
+- Image blocks
+
+Changes to a text style apply to all blocks of that type within the Rich Text element.
+
+## CMS Data Binding
+
+You can bind a Rich Text element to a CMS `rich_text` field. When bound, the element displays the content from the current collection item's rich text field, including all formatting, headings, lists, and embedded images.
+
+To bind to a CMS field:
+
+1. Select the Rich Text element
+2. In the right sidebar, click the CMS field binding button
+3. Choose a `rich_text` field from the connected collection
+
+## Rich Text vs Text and Heading
+
+| Feature | Text / Heading | Rich Text |
+|---------|----------------|-----------|
+| Content model | Single paragraph or heading | Multiple blocks (headings, paragraphs, lists, images, etc.) |
+| Editing | Inline on canvas | Sheet editor with full toolbar |
+| Block types | One | Many |
+| Sublayers | No | Yes — each block is a selectable sublayer |
+| Text styles | Single style | Per-block-type styles |
+| CMS binding | Any text field | `rich_text` fields |
+| Link settings | Available | Not available (links are inline in content) |
+
+<Callout type="info" title="Tip">
+Use Rich Text for long-form content like blog posts, articles, documentation, and landing page sections. Use Text and Heading elements for isolated labels, titles, and short copy where you need direct canvas editing.
+</Callout>
