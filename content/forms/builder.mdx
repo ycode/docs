@@ -30,6 +30,8 @@ Form elements are layer templates you nest inside the form container:
 
 When you add an input, textarea, select, checkbox, or radio element, Ycode wraps it in a group container with a label. The label uses the semantic `<label>` HTML tag with a `for` attribute that links it to the input, ensuring proper accessibility and allowing users to click the label to focus the field.
 
+Ycode resets native browser appearance on form elements (`appearance: none`), giving you full control over styling through the design controls. Checkboxes and radio buttons use custom visual indicators, and select elements display a styled dropdown chevron. This ensures form elements look consistent across browsers while remaining accessible.
+
 ## Input Types
 
 The input element supports these types via its settings:
