@@ -24,7 +24,7 @@ Form elements are layer templates you nest inside the form container:
 | **input** | Single-line input; type is configurable |
 | **textarea** | Multi-line text input |
 | **select** | Dropdown selection |
-| **checkbox** | Boolean toggle |
+| **checkbox** | Boolean toggle or multi-option group (with collection binding) |
 | **radio** | Single choice from options |
 | **label** | Label text for a field |
 
@@ -47,6 +47,20 @@ The input element supports these types via its settings:
 | **date** | Date picker |
 | **datetime-local** | Date and time picker |
 | **range** | Slider with min/max values |
+
+## Collection-Bound Options
+
+Select, radio, and checkbox elements can pull their options from a CMS collection instead of manually defined lists. This is useful for dynamic forms where choices come from your content — categories, tags, locations, products, and similar.
+
+To connect a collection:
+
+1. Select the checkbox, radio, or select wrapper in the Layers panel
+2. In the **Options** panel on the right, choose a collection as the source
+3. Ycode automatically binds the label text to the collection's display field (title or name)
+
+Each collection item becomes an option. You can configure sorting (by field and order) and set default selections. For checkboxes, multiple defaults can be pre-checked.
+
+On the published page, the single template element expands into one option per collection item. Submitted values use the collection item IDs.
 
 ## Form Settings
 
