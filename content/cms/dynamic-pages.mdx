@@ -28,6 +28,10 @@ Once a page is connected to a collection, you can bind collection fields to elem
 
 Text elements, images, links, and other elements can all be bound to collection data.
 
+### Reference Field Links
+
+When linking to a dynamic page, you can use a reference field to determine which item the link points to. For example, if a blog post has an `author` reference field, you can create a link that goes to that author's dynamic page. Ycode resolves the reference at render time and generates the correct URL with the referenced item's slug.
+
 ## Collection Lists
 
 To show multiple items on a single page (e.g., a blog listing), use a **Collection List** element. The collection list repeats its child layers for each item in the connected collection.
