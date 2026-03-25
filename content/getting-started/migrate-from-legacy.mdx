@@ -1,0 +1,93 @@
+---
+title: Migrate from Legacy
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Migrate from Ycode Legacy
+
+You can transfer your entire Ycode Legacy project to the new Ycode — including design, pages, CMS content, assets, and your subscription. The migration pulls your project data using your Legacy API key and recreates everything in the new platform.
+
+## What Gets Transferred
+
+The migration brings over your full project:
+
+- **Pages and layouts** — All pages with their layer structure, styles, and settings
+- **Components** — Reusable components and their configurations
+- **CMS data** — Collections, fields, items, and all content
+- **Assets** — Images, files, and other uploaded media
+- **Forms** — Form configurations and submission data
+- **Fonts** — Custom and Google Fonts settings
+- **Site settings** — Global configuration, SEO settings, and custom code
+- **Subscription** — Your current billing plan transfers to the new Ycode
+
+## Before You Start
+
+<Callout type="warning" title="Important">
+Make sure your Ycode Legacy project is on a **paid plan**. API tokens are only available on paid project plans, and you need a token to authorize the migration.
+</Callout>
+
+## Migration Steps
+
+<Steps>
+
+### Get your API key from Ycode Legacy
+
+1. Open your project in the **Ycode Legacy** builder
+2. Go to **Settings** in the sidebar
+3. Click **API Tokens** (under the "API access" heading)
+4. Click **Add API token**
+5. Enter a name for the token (e.g., "Migration")
+6. Click **Create token**
+7. **Copy the token immediately** — it is only shown once and cannot be retrieved after closing the dialog
+
+You can also click **Download** to save the token as a text file.
+
+<Callout type="info" title="Token visibility">
+The API token secret is displayed only at creation time. If you lose it, you will need to create a new token.
+</Callout>
+
+### Create a new project in Ycode
+
+1. Go to the new Ycode and click **New project**
+2. In the project creation dialog, you will see two options:
+   - **Start from scratch** — Begin with a blank project or template
+   - **Import from Legacy** — Migrate an existing Ycode Legacy project
+3. Select **Import from Legacy**
+
+### Enter your Legacy API key
+
+1. Paste the API token you copied from Ycode Legacy
+2. Click **Import** to start the migration
+
+Ycode connects to your Legacy project, reads all project data through the API, and recreates it in the new platform. This includes pages, layers, components, CMS collections and items, assets, settings, and your subscription.
+
+### Wait for the migration to complete
+
+The migration may take a few moments depending on the size of your project (number of pages, CMS items, and assets). You will see a progress indicator while the transfer is in progress.
+
+Once complete, your project opens in the new Ycode editor with all your content and design intact.
+
+</Steps>
+
+## After Migration
+
+- **Review your pages** — Open each page to verify the layout and content transferred correctly
+- **Check CMS data** — Browse your collections to confirm items and field values are present
+- **Test forms** — Verify form configurations and any connected integrations
+- **Verify assets** — Confirm images and files are displaying correctly
+- **Publish** — When everything looks good, publish your site from the new Ycode
+
+<Callout type="info" title="Subscription">
+Your subscription plan from Ycode Legacy carries over to the new Ycode automatically. You do not need to set up billing again.
+</Callout>
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| "Tokens are available on paid project plans" | Upgrade your Legacy project to a paid plan before creating an API token |
+| Token not working | Ensure you copied the full token. If lost, create a new one in Legacy under Settings → API Tokens |
+| Migration seems stuck | Large projects with many assets may take longer. Wait for the process to complete before refreshing |
+| Missing content after migration | Check that the content existed in the Legacy project before migration. Some draft or deleted items may not transfer |
