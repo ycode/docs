@@ -38,7 +38,8 @@ You add custom fields to define the structure of your content. Field types are g
 | **rich_text** | Formatted content with the rich text editor; supports bold, italic, links, lists, headings, and embedded [components](/docs/editor/components) |
 | **number** | Numeric values |
 | **boolean** | True/false toggle |
-| **date** | Date and time values |
+| **date** | Date and time values (stored with timezone) |
+| **date_only** | Date without time (e.g., birthdays, deadlines) |
 | **color** | Color picker value |
 
 ### Contact
@@ -112,11 +113,13 @@ You can import items from a CSV file:
 1. Open the collection
 2. Click **Import**
 3. Upload your CSV file
-4. Map CSV columns to collection fields
-5. Start the import
+4. Map CSV columns to collection fields — Ycode auto-matches headers to field names or slugs (case-insensitive). Unmatched columns default to "Skip"
+5. Review the mapping and start the import
 
-Import runs asynchronously. Column mapping lets you match CSV headers to your field slugs. The system processes rows in the background and updates the collection when done.
+The import processes rows in batches with per-row error reporting. If a cell value cannot be converted to the target field type, that value is skipped with a warning while the rest of the row imports normally.
+
+Supported value conversions include plain text, numbers, dates, booleans, HTML to rich text, and image URLs (downloaded and added to the asset manager automatically).
 
 <Callout type="info" title="Tip">
-Ensure your CSV headers match or can be mapped to your field slugs. Use the preview to verify the mapping before importing.
+Ensure your CSV headers match your field names or slugs for automatic mapping. Check the preview to verify column assignments before starting the import.
 </Callout>
