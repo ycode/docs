@@ -35,16 +35,16 @@ Successful responses return JSON. List endpoints include pagination metadata:
 
 ```json
 {
-  "data": [...],
-  "meta": {
+  "items": [...],
+  "pagination": {
     "total": 42,
     "page": 1,
-    "per_page": 20
+    "per_page": 100
   }
 }
 ```
 
-Single-resource endpoints return the resource directly or wrapped in a `data` key depending on the endpoint.
+Single-resource endpoints return the resource directly as a JSON object.
 
 ## Error Handling
 
@@ -74,8 +74,12 @@ Errors return appropriate HTTP status codes with a JSON body:
 |--------|----------|-------------|
 | GET | `/collections` | List all collections |
 | GET | `/collections/:id` | Get a single collection |
-| GET | `/collections/:id/items` | List items in a collection (supports pagination and filtering) |
+| GET | `/collections/:id/items` | List items in a collection |
 | GET | `/collections/:id/items/:itemId` | Get a single item |
+| POST | `/collections/:id/items` | Create a new item |
+| PUT | `/collections/:id/items/:itemId` | Full update of an item |
+| PATCH | `/collections/:id/items/:itemId` | Partial update of an item |
+| DELETE | `/collections/:id/items/:itemId` | Delete an item |
 
 ### List Collections
 
@@ -104,8 +108,33 @@ Query parameters:
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | page | number | Page number (default: 1) |
-| per_page | number | Items per page |
-| filter | object | Field filters (format depends on implementation) |
+| per_page | number | Items per page (default: 100, max: 1000) |
+| limit | number | Limit total records returned (max: 1000). Alternative to page-based pagination |
+| sort_by | string | Field slug to sort results by |
+| order_by | string | Sort direction: `asc` (default) or `desc`. Used with `sort_by` |
+| filter[field_slug] | string | Filter by exact field value. Replace `field_slug` with the slug of the field to filter on |
+
+Example request with filtering and sorting:
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items?sort_by=name&order_by=desc&filter[status]=active&per_page=50"
+```
+
+Response:
+
+```json
+{
+  "items": [
+    { "id": "...", "name": "...", "slug": "...", ... }
+  ],
+  "pagination": {
+    "page": 1,
+    "per_page": 50,
+    "total": 12
+  }
+}
+```
 
 ### Get Item
 
@@ -114,6 +143,89 @@ GET /ycode/api/v1/collections/:id/items/:itemId
 ```
 
 Returns a single collection item by ID.
+
+### Create Item
+
+```
+POST /ycode/api/v1/collections/:id/items
+```
+
+Creates a new item in the collection. The item is created as published immediately.
+
+Send a JSON body with field slugs as keys and their values:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "New Blog Post", "slug": "new-blog-post", "content": "Hello world"}' \
+  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items"
+```
+
+The `id`, `created_at`, and `updated_at` fields are generated automatically and cannot be set manually.
+
+Returns the created item with status `201`.
+
+### Update Item (Full)
+
+```
+PUT /ycode/api/v1/collections/:id/items/:itemId
+```
+
+Replaces all field values on an item. Fields not included in the request body are cleared to `null`. Use this when you want to overwrite the entire item.
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Updated Title", "slug": "updated-title", "content": "New content"}' \
+  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items/:itemId"
+```
+
+The `id`, `created_at`, and `updated_at` fields are protected and cannot be overwritten. The `updated_at` timestamp is set automatically.
+
+Returns the updated item.
+
+### Update Item (Partial)
+
+```
+PATCH /ycode/api/v1/collections/:id/items/:itemId
+```
+
+Updates only the fields included in the request body. All other fields remain unchanged. Use this when you want to modify specific fields without affecting the rest.
+
+```bash
+curl -X PATCH \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Updated Title"}' \
+  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items/:itemId"
+```
+
+Returns the updated item.
+
+### Delete Item
+
+```
+DELETE /ycode/api/v1/collections/:id/items/:itemId
+```
+
+Permanently deletes an item and its associated data.
+
+```bash
+curl -X DELETE \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items/:itemId"
+```
+
+Returns a confirmation:
+
+```json
+{
+  "deleted": true,
+  "_id": "item-uuid"
+}
+```
 
 ## Forms Endpoints
 
