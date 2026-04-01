@@ -59,6 +59,20 @@ Text, rich text, email, phone, and color fields support:
 | **is empty** | No date set |
 | **is not empty** | Has a date |
 
+Date filters support relative presets in addition to custom dates. When configuring a date filter, select a preset from the dropdown or choose "Custom date" to enter a specific date.
+
+| Preset | Description |
+|--------|-------------|
+| **Today** | The current day |
+| **This week** | Monday through Sunday of the current week |
+| **This month** | First through last day of the current month |
+| **This year** | January 1 through December 31 of the current year |
+| **In the past week** | The last 7 days |
+| **In the past month** | The last 30 days (relative to today) |
+| **In the past year** | The last 365 days (relative to today) |
+
+Presets are resolved dynamically at render time, so a filter set to "Today" always shows items matching the current date without needing manual updates.
+
 ### Boolean Fields
 
 | Operator | Description |

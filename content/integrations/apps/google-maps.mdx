@@ -1,0 +1,45 @@
+---
+title: Google Maps
+---
+
+import { Callout } from 'nextra/components'
+
+# Google Maps Integration
+
+Connect Google Maps to your Ycode project to use the Google Map provider in [Map elements](/docs/editor/map). This integration requires a Google Maps API key with the Maps Embed API and Places API enabled.
+
+## Setup
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/apis/credentials) and create or select a project
+2. Enable the [Maps Embed API](https://console.cloud.google.com/apis/library/maps-embed-backend.googleapis.com) and [Places API](https://console.cloud.google.com/apis/library/places.googleapis.com) for your project
+3. Create an API key under **APIs & Services** > **Credentials**
+4. In Ycode, go to **Integrations** > **Apps**
+5. Find **Google Map** and enter your API key
+6. Save the configuration
+
+<Callout type="warning" title="Required APIs">
+You must enable both the **Maps Embed API** (for rendering maps) and the **Places API** (for address search) on your Google Cloud project. The map element will not work without both APIs enabled.
+</Callout>
+
+## Environment Variable
+
+You can also provide the API key via the `GOOGLE_MAPS_EMBED_API_KEY` environment variable. When set, the integration shows a "Connected" status on the Apps page and the key cannot be changed through the UI.
+
+```env
+GOOGLE_MAPS_EMBED_API_KEY=AIzaSy...
+```
+
+This is useful for self-hosted deployments where you manage secrets through environment configuration.
+
+## Usage
+
+Once connected, select **Google Map** as the provider in any Map element's settings. Google Maps supports two map styles:
+
+| Style | Description |
+|-------|-------------|
+| **Roadmap** | Standard road map view |
+| **Satellite** | Aerial satellite imagery |
+
+<Callout type="info" title="Tip">
+Restrict your API key to your domain in the Google Cloud Console to prevent unauthorized usage. Under **Application restrictions**, add your site's URL.
+</Callout>

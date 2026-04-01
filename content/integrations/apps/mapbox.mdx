@@ -1,0 +1,44 @@
+---
+title: Mapbox
+---
+
+import { Callout } from 'nextra/components'
+
+# Mapbox Integration
+
+Connect Mapbox to your Ycode project to use the Mapbox provider in [Map elements](/docs/editor/map). Mapbox offers more map styles and controls compared to Google Maps, including custom marker colors and navigation overlays.
+
+## Setup
+
+1. Go to the [Mapbox dashboard](https://account.mapbox.com/access-tokens/) and create or copy an access token
+2. In Ycode, go to **Integrations** > **Apps**
+3. Find **Mapbox** and enter your access token
+4. Save the configuration
+
+## Environment Variable
+
+You can also provide the access token via the `MAPBOX_ACCESS_TOKEN` environment variable. When set, the integration shows a "Connected" status on the Apps page and the token cannot be changed through the UI.
+
+```env
+MAPBOX_ACCESS_TOKEN=pk.eyJ1Ijo...
+```
+
+This is useful for self-hosted deployments where you manage secrets through environment configuration.
+
+## Usage
+
+Once connected, select **Mapbox** as the provider in any Map element's settings. Mapbox supports five map styles:
+
+| Style | Description |
+|-------|-------------|
+| **Streets** | Detailed street map (default) |
+| **Satellite** | Aerial satellite imagery with street labels |
+| **Light** | Minimal light-themed map |
+| **Dark** | Minimal dark-themed map |
+| **Outdoors** | Terrain and trail-focused map |
+
+Mapbox also supports configurable marker colors and additional map controls (navigation, scale bar). See the [Map element documentation](/docs/editor/map) for all available settings.
+
+<Callout type="info" title="Tip">
+Mapbox offers a generous free tier. Check the [Mapbox pricing page](https://www.mapbox.com/pricing) for current limits.
+</Callout>

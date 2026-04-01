@@ -1,0 +1,84 @@
+---
+title: Map
+---
+
+import { Callout } from 'nextra/components'
+
+# Map
+
+The Map element embeds an interactive map on your page. It supports two providers — **Google Map** and **Mapbox** — each with configurable styles, zoom levels, markers, and address search.
+
+## Adding a Map
+
+1. Open the **Element Library** from the toolbar
+2. Under **Utilities**, drag a **Map** element onto the canvas
+3. The map renders with a default location (New York) and a 400px height
+
+Resize the map by adjusting its height in the design controls.
+
+## Map Settings
+
+Select the map element and open the **Settings** tab in the right panel.
+
+### Provider
+
+Choose between **Google Map** and **Mapbox**. Each provider requires its own API key configured in **Integrations** > **Apps**.
+
+| Provider | Styles | Marker Color | Interactive Controls |
+|----------|--------|-------------|---------------------|
+| Google Map | Roadmap, Satellite | Not configurable | Zoom, pan |
+| Mapbox | Streets, Satellite, Light, Dark, Outdoors | Configurable | Zoom, pan, navigation control, scale bar |
+
+### Address
+
+Search for a location by typing an address or place name. Results appear in a dropdown — select one to update the map coordinates. The search uses the active provider's geocoding API (Mapbox Geocoding or Google Places).
+
+### Coordinates
+
+Set the latitude and longitude manually for precise positioning:
+
+- **Latitude** — Value between -90 and 90
+- **Longitude** — Value between -180 and 180
+
+### Zoom
+
+Control the zoom level with the slider or by entering a value directly.
+
+- **Mapbox** — Zoom range 1 to 22, supports decimal values
+- **Google Map** — Zoom range 1 to 21, integer values only
+
+### Style
+
+Select a map style from the dropdown. Available styles depend on the provider:
+
+**Mapbox styles:** Streets, Satellite, Light, Dark, Outdoors
+
+**Google Map styles:** Roadmap, Satellite
+
+### Marker Color
+
+Set the color of the map pin marker (Mapbox only). You can use a hex color value or select from your project's color variables.
+
+### Mapbox Controls
+
+When using Mapbox, you can toggle additional map controls:
+
+| Setting | Description |
+|---------|-------------|
+| **Interactive** | Allow users to pan and zoom the map. Disable for a static display |
+| **Scroll zoom** | Allow zooming with the mouse scroll wheel |
+| **Navigation control** | Show zoom in/out and compass buttons |
+| **Scale bar** | Show a distance scale indicator |
+
+## API Key Setup
+
+Maps require an API key from the chosen provider. Configure keys in **Integrations** > **Apps**:
+
+- [Google Maps setup](/docs/integrations/apps/google-maps)
+- [Mapbox setup](/docs/integrations/apps/mapbox)
+
+You can also set API keys via environment variables. When a key is provided through an environment variable, the app shows a "Connected" status on the integrations page.
+
+<Callout type="info" title="Tip">
+If no API key is configured for the selected provider, the map displays a placeholder. Configure your key in the integrations page to see the live map.
+</Callout>

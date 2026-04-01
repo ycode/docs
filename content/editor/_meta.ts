@@ -9,6 +9,7 @@ const meta: MetaRecord = {
   responsive: 'Responsive Design',
   'rich-text': 'Rich Text',
   components: 'Components',
+  map: 'Map',
   slider: 'Slider',
   lightbox: 'Lightbox',
   'custom-code': 'Custom Code'
