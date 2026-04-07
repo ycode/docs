@@ -1,0 +1,103 @@
+---
+title: Airtable
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Airtable Integration
+
+Sync data from Airtable tables to your Ycode CMS collections. The integration supports one-way sync (Airtable to Ycode), manual field mapping, and automatic updates via webhooks.
+
+## Setup
+
+<Steps>
+
+### Connect your Airtable account
+
+1. In Ycode, go to **Integrations** > **Apps**
+2. Find **Airtable** and click to open settings
+3. Enter your Airtable [personal access token](https://airtable.com/create/tokens)
+4. Click **Save** to connect
+
+Your token needs the following scopes: `data.records:read`, `schema.bases:read`, and `webhook:manage` (for auto-sync).
+
+### Create a connection
+
+1. In the Airtable settings panel, click **New connection**
+2. Select the **Base** and **Table** you want to sync from
+3. Select the **CMS collection** to sync into
+4. Map Airtable fields to CMS fields using the field mapping grid
+
+### Run a sync
+
+Click **Sync** on the connection to pull all records from Airtable into the CMS collection. You can also trigger a sync directly from the CMS view using the Airtable sync button in the toolbar.
+
+</Steps>
+
+## Field Mapping
+
+Each connection has a field mapping that determines how Airtable fields translate to CMS fields. When creating a connection, Ycode shows all fields from both the Airtable table and the CMS collection side by side.
+
+For each CMS field, select the corresponding Airtable field from the dropdown. Only compatible field types are shown as options. Unmapped fields are skipped during sync.
+
+### Supported Airtable Field Types
+
+| Airtable Type | CMS Type |
+|---------------|----------|
+| Single line text, Formula, AI text | Text |
+| Long text / Multiline | Text |
+| Rich text | Rich text |
+| Number, Percent, Currency, Rating, Auto number, Count | Number |
+| Duration | Number |
+| Date | Date |
+| Date & time, Created time, Modified time | Date |
+| Checkbox | Boolean |
+| Email | Email |
+| Phone number | Phone |
+| URL, Button | Link |
+| Attachments | Image |
+| Single select, Multiple select | Text |
+| Collaborator(s), Lookup, Rollup, Barcode | Text |
+
+Rich text fields from Airtable (Markdown format) are automatically converted to the CMS rich text format.
+
+## Sync Behavior
+
+Each sync compares Airtable records to existing CMS items using a hidden `airtable_id` field that tracks record identity. This means:
+
+- **New records** in Airtable are created as new CMS items
+- **Updated records** have their mapped field values updated in the CMS
+- **Deleted records** in Airtable are not automatically deleted from the CMS
+
+Synced items are created as published and visible on your site immediately.
+
+## Auto-Sync with Webhooks
+
+Enable automatic sync so changes in Airtable propagate to your CMS without manual intervention.
+
+1. Open the connection settings
+2. Click **Enable auto-sync**
+3. Ycode registers a webhook with Airtable that listens for record changes
+
+When a record is created, updated, or deleted in Airtable, the webhook triggers an incremental sync that updates only the affected items.
+
+<Callout type="warning" title="HTTPS required">
+Auto-sync requires your site to be accessible over HTTPS. The webhook URL must be publicly reachable for Airtable to deliver change notifications.
+</Callout>
+
+### Webhook Renewal
+
+Airtable webhooks expire periodically. Ycode includes a daily cron job that automatically renews webhooks before they expire. For Vercel deployments, this cron is configured in `vercel.json` and runs automatically. For other hosting providers, set up a daily call to `/api/cron/airtable-webhooks`.
+
+To disable auto-sync, click **Disable auto-sync** on the connection. This deregisters the webhook with Airtable.
+
+## Managing Connections
+
+You can create multiple connections to sync different Airtable tables to different CMS collections. Each connection is independent with its own field mapping and sync schedule.
+
+To delete a connection, open its settings menu and select **Delete**. This removes the connection and its webhook but does not delete the synced CMS items.
+
+<Callout type="info" title="Tip">
+Use the Airtable sync button in the CMS toolbar for quick manual syncs without navigating to the integrations page.
+</Callout>
