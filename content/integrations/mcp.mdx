@@ -7,7 +7,7 @@ import { Steps } from 'nextra/components'
 
 # MCP Server
 
-Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI coding tools build and edit your site. Connect tools like Cursor, Claude Desktop, or Windsurf to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
+Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI coding tools build and edit your site. Connect tools like Cursor, Claude Desktop, ChatGPT, or Windsurf to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
 
 ## Setup
 
@@ -26,9 +26,38 @@ Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextpr
 
 **Claude Desktop** — Go to Settings, find Connectors, click "Add custom connector", and paste your MCP URL.
 
+**ChatGPT** — Enable developer mode, create a connector with your MCP URL, then attach it in a new chat. See [ChatGPT](#chatgpt) for the full steps.
+
 ### Start building
 
 Ask the AI to create pages, add elements, style them, manage CMS content, and publish. Changes appear in the editor in real time.
+
+</Steps>
+
+## ChatGPT
+
+ChatGPT can use your Ycode project over MCP as a remote **app** (OpenAI's UI may still say **connector** in places). You need [developer mode](https://platform.openai.com/docs/guides/developer-mode) turned on for your account, and your workspace must allow it.
+
+<Steps>
+
+### Turn on developer mode
+
+In ChatGPT, open **Settings** → **Apps & Connectors** → **Advanced settings** (at the bottom) and enable **Developer mode**.
+
+### Register your MCP URL
+
+1. Open **Settings** → **Connectors** → **Create** (or **Apps** → **Create**, depending on your ChatGPT version).
+2. Set **Connector name** to something you will recognize (for example, your site or “Ycode”).
+3. Set **Description** to what the integration does (for example, that it edits your Ycode site). The model uses this text to decide when to use the tools.
+4. Paste your Ycode **MCP URL** (the same HTTPS URL from **Integrations → MCP** in the editor) as the **Connector URL** / server URL.
+5. Save. If the connection succeeds, you should see the tools your project exposes. If you change tools later, open the connector in Settings and use **Refresh** to reload metadata.
+
+### Use it in a chat
+
+1. Start a **new** conversation.
+2. Click the **+** button next to the message box, then **More**.
+3. Choose your Ycode connector so its tools are available in that thread.
+4. Prompt in plain language (for example, “Add a hero section to the home page”). ChatGPT may show tool calls and ask you to **confirm** before write actions run; you can approve each time or remember approvals for the conversation, depending on your settings.
 
 </Steps>
 
