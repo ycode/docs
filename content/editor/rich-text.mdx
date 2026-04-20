@@ -25,14 +25,16 @@ Double-click a Rich Text element on the canvas to open the sheet editor. The edi
 - **Blockquotes** — Quoted text blocks
 - **Links** — Inline links with full URL, page, email, phone, and asset options
 - **Images** — Image blocks within the content
+- **Tables** — Structured data with rows and columns; right-click for row/column actions (insert, delete, toggle header)
 - **Horizontal rules** — Visual dividers between content sections
+- **HTML embeds** — Custom HTML blocks within rich text content (scripts are executed on the published page)
 - **CMS variables** — Insert dynamic field values inline
 
 You can also edit Rich Text from the right sidebar by clicking the expand button.
 
 ## Content Blocks as Sublayers
 
-Each block inside a Rich Text element (heading, paragraph, list, blockquote, image, horizontal rule) appears as a sublayer in the Layers panel. You can expand the Rich Text layer to see and select individual blocks.
+Each block inside a Rich Text element (heading, paragraph, list, blockquote, image, table, horizontal rule, HTML embed) appears as a sublayer in the Layers panel. Tables show a nested hierarchy: Table → Row → Header/Cell. You can expand the Rich Text layer to see and select individual blocks.
 
 Selecting a sublayer lets you:
 
@@ -51,7 +53,7 @@ Default text styles are provided for:
 - Paragraph, H1–H6, Blockquote
 - Bullet list, Ordered list, List item
 - Bold, Italic, Underline, Strikethrough, Link
-- Image blocks
+- Image blocks, Table cells
 
 Changes to a text style apply to all blocks of that type within the Rich Text element.
 
