@@ -42,6 +42,12 @@ When you insert a date or number CMS variable into a text element, you can choos
 
 When linking to a dynamic page, you can use a reference field to determine which item the link points to. For example, if a blog post has an `author` reference field, you can create a link that goes to that author's dynamic page. Ycode resolves the reference at render time and generates the correct URL with the referenced item's slug.
 
+### Next / Previous Item Links
+
+On dynamic collection pages, you can add links that navigate to the next or previous item. When configuring a link to the same dynamic page, the item selector shows **Next item** and **Previous item** options. Ycode resolves these at render time based on the item order.
+
+You can configure the sort order for next/previous navigation in the page settings under the CMS section (sort by field and direction).
+
 ## Collection Lists
 
 To show multiple items on a single page (e.g., a blog listing), use a **Collection List** element. The collection list repeats its child layers for each item in the connected collection.
