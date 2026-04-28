@@ -1,0 +1,48 @@
+---
+title: Webflow
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Webflow CMS Migration
+
+Import your Webflow CMS collections, items, and assets into Ycode. The migration reads your Webflow data through its API and recreates everything as Ycode collections.
+
+## What Gets Imported
+
+- **Collections** — Webflow CMS collections become Ycode collections
+- **Fields** — Field types are mapped to their Ycode equivalents
+- **Items** — All collection items with their field values
+- **References** — Relationships between collections are preserved
+- **Assets** — Images and files are downloaded and added to the Ycode asset manager
+- **Publish status** — Items that are live in Webflow are published in Ycode
+
+## Setup
+
+<Steps>
+
+### Create a Webflow API token
+
+1. In your Webflow project, go to **Site Settings → Apps & Integrations**
+2. Generate an API token with the following scopes:
+   - `sites:read`
+   - `cms:read`
+
+### Connect to Ycode
+
+1. In Ycode, go to **Integrations → Apps → Webflow**
+2. Paste your Webflow API token
+3. Click **Test** to verify the connection, then **Save**
+
+### Select your site and migrate
+
+1. Choose the Webflow site to import from
+2. Click **Migrate** to start the import
+3. Ycode creates collections, maps fields, imports items, and downloads assets
+
+</Steps>
+
+<Callout type="info" title="Re-sync">
+You can run the migration again to re-sync data from Webflow. This is useful if you've added new items or collections in Webflow after the initial import.
+</Callout>
