@@ -12,6 +12,7 @@ const meta: MetaRecord = {
   map: 'Map',
   slider: 'Slider',
   lightbox: 'Lightbox',
+  interactions: 'Interactions',
   'custom-code': 'Custom Code'
 }
 

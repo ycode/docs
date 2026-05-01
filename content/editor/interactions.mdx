@@ -1,0 +1,124 @@
+---
+title: Interactions
+---
+
+import { Callout } from 'nextra/components'
+
+# Interactions
+
+Interactions let you add animations and motion to elements without writing code. Select an element, choose a trigger event, and define what properties animate — Ycode handles the rest using GSAP under the hood.
+
+## Adding an Interaction
+
+1. Select an element on the canvas
+2. Open the **Interactions** tab in the right sidebar
+3. Click **+** and choose a trigger event
+
+Each element can have one interaction per trigger type.
+
+## Triggers
+
+| Trigger | Description |
+|---------|-------------|
+| **Click** | Runs when the element is clicked |
+| **Hover** | Runs on mouse enter; reverses on mouse leave |
+| **Scroll into view** | Runs when the element enters the viewport |
+| **While scrolling** | Links the animation progress to scroll position |
+| **Page load** | Runs when the page finishes loading |
+
+## Timeline and Tweens
+
+Each interaction contains a **timeline** with one or more **tweens** (animation steps). A tween targets a specific layer and animates its properties over a duration.
+
+### Tween Positioning
+
+Control when each tween starts relative to others:
+
+| Position | Description |
+|----------|-------------|
+| **After previous** | Starts after the previous tween finishes |
+| **With previous** | Starts at the same time as the previous tween |
+| **At** | Starts at a specific time in seconds |
+
+### Adding Tweens
+
+Click **Add animation** to create a tween for the currently selected layer. You can add multiple tweens targeting different layers to build complex sequences. Drag tweens in the list to reorder them.
+
+## Animated Properties
+
+Click **+** on a tween to add properties to animate. Each property has a **From** and **To** value — set either to "Current" to use the element's existing value, or specify an explicit value.
+
+| Property | Description |
+|----------|-------------|
+| **Position X** | Horizontal movement (px, %, rem, em, vw, vh) |
+| **Position Y** | Vertical movement (same units) |
+| **Scale** | Size multiplier |
+| **Rotation** | Rotate in degrees, radians, or turns |
+| **Skew X / Y** | Skew along an axis |
+| **Opacity** | Fade from 0% to 100% |
+| **Width** | Animate width (px, %, rem, em, vh) |
+| **Height** | Animate height (same units) |
+| **Display** | Toggle between visible and hidden |
+
+### Apply Timing
+
+Each property can be set to apply its initial state **on page load** or **on trigger**. Use "on load" when you want elements to start in their animated-from state (e.g., hidden or off-screen) before the interaction fires.
+
+## Easing
+
+Control the animation curve with easing presets:
+
+| Easing | Description |
+|--------|-------------|
+| **Linear** | Constant speed |
+| **Power 1 In** | Starts slow, accelerates |
+| **Power 1 Out** | Starts fast, decelerates |
+| **Power 1 In Out** | Slow start and end |
+| **Back In** | Pulls back before moving forward |
+| **Back Out** | Overshoots then settles |
+| **Back In Out** | Pulls back and overshoots |
+
+## Text Animations (SplitText)
+
+Animate text character by character, word by word, or line by line. When editing a tween, switch from **Layer element** to **Text elements** to enable SplitText.
+
+- **Split by** — Characters, Words, or Lines
+- **Stagger** — Total time spread across all split elements (e.g., 0.5s means all characters animate within a 0.5 second window)
+
+This is ideal for headline reveals, typewriter effects, and staggered text entrances.
+
+## Effect Modes (Click and Hover)
+
+For click and hover triggers, choose how the animation behaves:
+
+| Effect | Description |
+|--------|-------------|
+| **Reset and run once** | Plays once, resets to start |
+| **Toggle and run once** | Plays forward, then reverses on next trigger |
+| **Loop — Reset and restart** | Repeats indefinitely |
+| **Loop — Toggle and restart** | Plays forward and backward indefinitely |
+
+## Scroll Settings
+
+### Scroll Into View
+
+Configure when the animation triggers as the element enters the viewport:
+
+- **Start** — Element edge (top, center, bottom) and viewport position (top, center, bottom, or percentage)
+- **Toggle actions** — What happens at each scroll phase: on enter, on leave, on re-enter, on re-trigger. Options include play, pause, resume, reverse, restart, reset, complete, and none
+
+### While Scrolling
+
+Link animation progress directly to scroll position:
+
+- **Start** — When the animation begins (element edge + viewport position)
+- **End** — When the animation completes
+- **Smoothing** — Scrub smoothing in seconds (0 = direct link to scroll, higher values = smoother)
+
+## Breakpoints
+
+Each interaction can target specific viewport sizes. Toggle **Desktop**, **Tablet**, and **Mobile** to control where the animation runs. At least one breakpoint must be enabled.
+
+<Callout type="info" title="Tip">
+Use scroll-into-view for reveal animations as users scroll down the page. Use while-scrolling for parallax effects and progress-linked animations. Combine SplitText with page-load triggers for eye-catching headline animations.
+</Callout>
