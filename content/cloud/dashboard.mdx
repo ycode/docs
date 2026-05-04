@@ -1,0 +1,54 @@
+---
+title: Dashboard
+---
+
+import { Callout } from 'nextra/components'
+
+# Dashboard
+
+The dashboard is the home screen of Ycode Cloud. It displays all your projects and provides quick access to project creation, the editor, and billing.
+
+## Project Cards
+
+Each project appears as a card showing:
+
+- **Thumbnail** — A preview image of the project (or a placeholder)
+- **Project name** — The name you gave the project
+- **URL** — Your custom domain if configured, otherwise your Ycode subdomain (`yoursite.ycode.website`)
+- **Role badge** — If you're a collaborator (not the owner), your role is shown (Admin or Editor)
+
+Click a project card to open it in the Ycode editor.
+
+## Creating a Project
+
+Click **New project** on the dashboard to open the project creation dialog. You have three options:
+
+### Start from Scratch
+
+Enter a project name and click **Create**. You'll get a blank project ready for building.
+
+### Use a Template
+
+Browse available templates in the gallery. Hover over a template to see options:
+
+- **Use template** — Creates a new project with the template's design and content pre-applied
+- **Preview** — Opens a live preview of the template in a new tab
+
+### Import from Legacy
+
+Transfer an existing Ycode Legacy project. See [Migrate from Legacy](/docs/getting-started/migrate-from-legacy) for the full process.
+
+## Project Actions
+
+Click the **⋮** menu on a project card for additional options:
+
+- **Billing details** — Opens the Stripe customer portal where you can manage your subscription, update payment methods, and view invoices
+- **Delete** — Permanently removes the project and all its data
+
+<Callout type="warning" title="Deleting projects">
+Only the project owner can delete a project. Projects with an active paid subscription must have their subscription cancelled before deletion. Legacy imported projects can be deleted at any time.
+</Callout>
+
+## Project URLs
+
+Each project gets a subdomain on `ycode.website` by default (e.g., `mysite.ycode.website`). You can connect a custom domain in the project's deployment settings. When a custom domain is configured, it appears on the dashboard card instead of the subdomain.
