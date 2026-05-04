@@ -20,6 +20,7 @@ Set these in your `.env` file for local development, or in your Vercel project u
 | `SUPABASE_SECRET_KEY` | Yes | Supabase service role key. Used for server-side operations. Keep this secret. |
 | `SUPABASE_CONNECTION_URL` | Yes | PostgreSQL connection string. Use the Transaction Pooler connection method. |
 | `SUPABASE_DB_PASSWORD` | Yes | Database password for your Supabase project. |
+| `SUPABASE_URL` | No | Supabase API gateway URL. Required for self-hosted Supabase (e.g. `https://supabase.my-company.com`). Leave empty for Supabase Cloud. |
 | `NEXT_PUBLIC_SITE_URL` | No | Base URL for sitemap and robots.txt (e.g. `https://yoursite.com`). |
 | `PAGE_AUTH_SECRET` | No | Secret for page auth cookies. Generate a random string if you use page-level auth. |
 | `REVALIDATE_SECRET` | No | Secret for cache revalidation. Used when triggering on-demand revalidation. |
@@ -61,12 +62,22 @@ Use the **Transaction Pooler** connection method, not the direct connection. The
 
 ### Disable email confirmation
 
-Ycode manages its own authentication flow and does not use Supabase's email confirmation. You need to disable it before running the setup wizard.
+Ycode manages its own authentication flow and does not use Supabase's email confirmation. You need to disable it before creating your admin account. The setup wizard verifies this setting automatically and prompts you if it is still enabled.
+
+**Supabase Cloud:**
 
 1. In your Supabase project, go to **Authentication > Sign In / Providers**.
 2. Find the **Confirm email** toggle and disable it.
 
-The setup wizard verifies this setting automatically. If email confirmation is still enabled, the wizard prompts you to disable it before you can create an admin account.
+**Self-hosted Supabase:**
+
+1. Open the `.env` file next to your `docker-compose.yml`.
+2. Set `ENABLE_EMAIL_AUTOCONFIRM=true`.
+3. Restart your Docker containers:
+
+```bash
+docker compose down && docker compose up -d
+```
 
 ## Database Migrations
 
@@ -75,7 +86,7 @@ Ycode uses migrations to create and update database tables. You can run them in 
 ### Via setup wizard (recommended)
 
 1. Visit `/ycode/welcome` on your site.
-2. Complete the setup wizard. It connects to Supabase, runs migrations, verifies the email confirmation setting, and creates your admin account.
+2. Complete the setup wizard. It connects to Supabase, runs migrations, verifies the email confirmation setting, creates your admin account, and lets you choose a starter template.
 
 ### Via CLI
 

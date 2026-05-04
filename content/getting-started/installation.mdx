@@ -15,7 +15,7 @@ This guide covers the Open Source self-hosted setup. You can deploy Ycode to Ver
 ## Prerequisites
 
 - Node.js 18 or later
-- A Supabase project (free tier works)
+- A Supabase project — either [Supabase Cloud](https://supabase.com) (free tier works) or a self-hosted Supabase instance
 - Git
 - npm
 
@@ -34,15 +34,24 @@ Fork the [Ycode repository](https://github.com/ycode/ycode) on GitHub. This crea
 3. Accept the default build settings and deploy.
 4. Wait for the deployment to finish. You will get a URL like `your-project.vercel.app`.
 
-### Step 3: Create a Supabase project
+### Step 3: Set up Supabase
+
+You can use either Supabase Cloud or a self-hosted Supabase instance.
+
+**Supabase Cloud:**
 
 1. Go to [supabase.com](https://supabase.com) and create a new project.
 2. Wait for the project to finish provisioning.
-3. Go to **Settings > API** and copy:
-   - `anon` public key
-   - `service_role` secret key
+3. Go to **Settings > API** and copy the `anon` public key and `service_role` secret key.
 4. Go to **Settings > Database** and copy the connection string. Use the **Transaction Pooler** connection method (port 6543).
-5. Go to **Authentication > Sign In / Providers** and disable the **Confirm email** toggle. The setup wizard verifies this setting before allowing you to create an admin account.
+5. Go to **Authentication > Sign In / Providers** and disable the **Confirm email** toggle.
+
+**Self-hosted Supabase:**
+
+1. Make sure your Supabase instance is running and accessible.
+2. Get your `anon` key, `service_role` key, and database connection URL from the `.env` file next to your `docker-compose.yml`.
+3. Set `ENABLE_EMAIL_AUTOCONFIRM=true` in that `.env` file and restart your Docker containers.
+4. Note your Supabase API gateway URL (e.g. `https://supabase.my-company.com` or `http://localhost:8000` for local Docker setups).
 
 ### Step 4: Add environment variables in Vercel
 
@@ -50,8 +59,9 @@ Fork the [Ycode repository](https://github.com/ycode/ycode) on GitHub. This crea
 2. Add the required variables (see [Configuration](/docs/getting-started/configuration) for the full list):
    - `SUPABASE_PUBLISHABLE_KEY` -- your Supabase anon/public key
    - `SUPABASE_SECRET_KEY` -- your Supabase service role key
-   - `SUPABASE_CONNECTION_URL` -- PostgreSQL connection string (Transaction Pooler)
+   - `SUPABASE_CONNECTION_URL` -- PostgreSQL connection string (Transaction Pooler for Cloud, direct connection for self-hosted)
    - `SUPABASE_DB_PASSWORD` -- your database password
+   - `SUPABASE_URL` -- your Supabase API gateway URL (only required for self-hosted Supabase)
 
 ### Step 5: Redeploy
 
@@ -61,10 +71,11 @@ Trigger a new deployment so Vercel picks up the environment variables. Use **Dep
 
 1. Visit your deployed site.
 2. Go to `/ycode/welcome` (e.g. `https://your-project.vercel.app/ycode/welcome`).
-3. Follow the setup wizard to connect Supabase and run database migrations.
+3. Follow the setup wizard to connect Supabase and run database migrations. The wizard detects whether you are on Vercel and adjusts the flow accordingly.
 4. Confirm that the **Confirm email** setting is disabled when prompted. The wizard checks this automatically.
 5. Create your admin account.
-6. When done, you can open the editor at `/ycode`.
+6. Choose a starter template or start from scratch.
+7. The editor opens at `/ycode`.
 
 </Steps>
 
@@ -104,10 +115,11 @@ npm run dev
 ### Step 6: Run the setup wizard
 
 1. Open `http://localhost:3002/ycode/welcome` in your browser.
-2. Follow the setup wizard to connect Supabase and run migrations.
+2. Follow the setup wizard to connect Supabase and run migrations. Choose **Supabase Cloud** or **Self-hosted Supabase** depending on your setup.
 3. Confirm that the **Confirm email** setting is disabled when prompted.
 4. Create your admin account.
-5. When done, open the editor at `http://localhost:3002/ycode`.
+5. Choose a starter template or start from scratch.
+6. The editor opens at `http://localhost:3002/ycode`.
 
 </Steps>
 
