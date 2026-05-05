@@ -82,19 +82,32 @@ Select the slider element and open the **Settings** tab in the right panel to co
 - **Reorder slides** — Drag slides in the Layers panel
 - **Delete a slide** — Select a slide and delete it from the Layers panel
 
-## Collection-Powered Slides
+## Slide Source
 
-You can use CMS collection items as slides to create dynamic, data-driven sliders. Instead of manually creating each slide, connect a collection and design a single slide template that repeats for each item.
+The slider supports three content source modes, configured in the slider settings:
 
-1. Select the **Slides** block in the Layers panel
-2. Right-click and choose **Convert to collection**, then select the collection
-3. Design a single **Slide** inside and bind collection fields to its elements (images, text, links, etc.)
+### Slides (Static)
 
-Each collection item generates a slide automatically. This is ideal for testimonial sliders, product carousels, team member spotlights, and any content managed through the CMS.
+The default mode. You manually add, remove, and design individual slides. Each slide can have different content.
 
-### Multi-Image Field Binding
+### Collection
 
-You can also bind a slider directly to a multi-image CMS field. In the slider settings, switch the content source to **CMS** and select a multi-image field — each image in the field becomes a slide automatically. This is useful for product galleries, portfolio images, or any item with multiple photos.
+Bind the slider to a CMS collection so each collection item generates a slide automatically. This is ideal for testimonial sliders, product carousels, team member spotlights, and any content managed through the CMS.
+
+1. In the slider settings, switch the **Source** to **Collection**
+2. Select the slide in the Layers panel and use the CMS panel to pick a collection
+3. Design the slide template and bind collection fields to its elements (images, text, links, etc.)
+
+Each collection item generates a slide from the template. When items are added or removed in the CMS, the slides update automatically.
+
+### Multi-Image Field
+
+Bind the slider to a multi-image CMS field so each image becomes a slide automatically. This is useful for product galleries, portfolio images, or any item with multiple photos.
+
+1. In the slider settings, switch the **Source** to **Multi-image field**
+2. Select the multi-image field to bind to
+
+This option is only available when a multi-image field is reachable from the slider's context (e.g., inside a collection list or on a dynamic page).
 
 ## Styling
 
