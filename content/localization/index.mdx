@@ -2,9 +2,11 @@
 title: Multi-Language Support
 ---
 
+import { Callout } from 'nextra/components'
+
 # Multi-Language Support
 
-Build multilingual websites with Ycode's localization system. You add languages, translate content, and publish translations independently.
+Build multilingual websites with Ycode's localization system. You add languages, translate content directly on the builder canvas, and publish translations independently.
 
 ## Adding Languages
 
@@ -18,20 +20,50 @@ Each locale has a code (e.g. `en`, `fr`, `de`), a label, and flags for default a
 
 ## Draft and Publish
 
-Locales and translations use a draft/publish workflow. You edit translations in draft mode and publish when ready. Visitors see only published content until you publish updates.
+Locales and translations use a draft/publish workflow. You edit translations in draft mode and publish when ready. Visitors see only completed, published translations until you publish updates. The builder canvas and preview show in-progress drafts so you can review work before it ships.
 
-## Translating Content
+## Translating on the Canvas
 
-Translations are stored per source type and source ID. Supported sources:
+Switch the locale picker in the builder header from the default to any other locale to enter translation mode. The canvas re-renders with the active locale's translations applied to text, rich text, images, and CMS content — including incomplete drafts so you can see work in progress.
 
-| Source Type | Description |
-|-------------|-------------|
-| page | Static page content |
-| folder | Folder-level content |
-| component | Reusable component content |
-| cms | Collection and CMS content |
+While translating, the builder locks structural editing so you stay focused on content:
 
-Each translation has a `content_key`, `content_type` (text, richtext, or asset_id), and `content_value`. Mark translations as completed to track progress.
+- Inline text editing on the canvas, drag and drop, and the element library are disabled
+- The Design and Interactions tabs are disabled; the Settings tab is forced active
+- The on-canvas locale selector element reflects the locale you are editing in
+
+To return to structural editing, switch the locale picker back to the default locale.
+
+### Sidebar Translation Panel
+
+When a non-default locale is active, the right sidebar replaces the standard inspector with a translation panel for the selected layer. Translatable values are grouped under language headers: the default-locale source value appears on top as read-only context, and the active-locale value appears below as an editable field.
+
+Multi-property layers show sub-labels such as `IMAGE`, `IMAGE ALT`, or `VIDEO` so each property is easy to scan. Layers with no translatable content show an empty state.
+
+### Translating Rich Text
+
+Rich Text element layers show a read-only preview of the current translation in the sidebar, with block-level line breaks preserved. Click **Expand to edit** to open the rich text editor in a sheet. The editor is pre-loaded with the existing translation (never the source), so you write directly in the target language.
+
+The header reads **Content editor** with a **Translate to {locale}** subtitle so it is clear which language you are editing. Saves are debounced and locale-aware — switching locales mid-edit will not write to the wrong row.
+
+### CMS-Bound Text
+
+When a layer's text is bound to a CMS variable (for example, `[Content]`), the sidebar shows a read-only `Content → variable` row instead of editable textareas. To translate the value, edit the CMS item itself.
+
+## Translating CMS Items
+
+On a CMS-bound page in a non-default locale, double-click a CMS-bound layer (or open the collection item from the sidebar) to launch the collection item sheet in translation mode:
+
+- Only `text` and `rich text` fields are editable; other field types are disabled with a **Not translatable** hint
+- Editable fields are pre-filled with existing translations
+- The Save button becomes **Save translation** and writes to translation storage instead of the canonical item
+- Status pills, the more-options menu, and the staged/draft/publish dropdown are hidden — translations don't have separate publish states
+
+Translations require a canonical item to anchor to, so the sheet is disabled when invoked without an existing item.
+
+<Callout type="info" title="Tip">
+Open a CMS item in the default locale first to create the canonical content, then switch locales to translate.
+</Callout>
 
 ## URL Structure
 
@@ -45,18 +77,18 @@ The locale code appears in the path for all non-default languages. This structur
 
 ## Locale Selector Element
 
-Add a locale selector element to your pages so visitors can switch languages. The element displays available locales and links to the same page in each language. Configure which locales appear and how the selector is styled.
+Add a locale selector element to your pages so visitors can switch languages. The element displays available locales and links to the same page in each language. Configure which locales appear and how the selector is styled. While translating in the builder, the selector reflects the active locale in real time.
 
 ## Publishing Translations
 
 When you finish translating:
 
-1. Review draft translations
+1. Review draft translations in the builder canvas and preview
 2. Publish the locale if it is new
-3. Publish translations from draft to published
+3. Publish the page or item to ship the completed translations
 
-Published translations appear on the live site. Unpublishing reverts to the previous published version or the default language.
+Only translations marked as completed appear on the published site. Sidebar and CMS-sheet edits save as completed by default, so the canonical "completed" flag drives published output. Unpublishing reverts to the previous published version or the default language.
 
 <Callout type="info" title="Tip">
-Translate high-traffic pages first. Use the completion status to track which content still needs translation.
+Translate high-traffic pages first. Use the builder canvas to spot any layouts that break with longer translated strings before you publish.
 </Callout>

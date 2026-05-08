@@ -16,6 +16,8 @@ Set up URL redirects for moved pages, legacy URLs, and vanity links. Redirects a
 6. Select the redirect type (301 or 302)
 7. Save
 
+The source path can be an exact path or a regex pattern, and the destination can be an internal path or an external URL.
+
 ## Redirect Types
 
 | Type | Use Case |
@@ -23,13 +25,37 @@ Set up URL redirects for moved pages, legacy URLs, and vanity links. Redirects a
 | 301 Permanent | The page has permanently moved. Search engines transfer ranking signals to the new URL |
 | 302 Temporary | The page is temporarily at a different location. Use for maintenance or A/B tests |
 
+## Pattern Matching
+
+Source paths support both exact matches and regex patterns:
+
+| Pattern | Matches |
+|---------|---------|
+| `/about` | Only the exact path `/about` |
+| `/old-blog/.*` | `/old-blog/` and any path beneath it (zero or more characters) |
+| `/articles/.+` | Any path under `/articles/` with at least one character after the slash |
+
+Exact matches always take priority. If both `/special/page` and `/special/.*` are configured, a request to `/special/page` follows the exact rule.
+
+## Homepage Redirects
+
+The homepage (`/`) is a valid source path. Use it to redirect the root URL to another page — for example, sending `/` to `/home` or `/landing` while you migrate.
+
+## Trailing Slashes
+
+Ycode canonicalizes trailing slashes automatically. A request to `/about/` is redirected to `/about` with a 308 response, so you do not need a redirect entry for each variant.
+
 ## Use Cases
 
 - **Renamed pages** — Redirect old URLs to new ones after restructuring
 - **Legacy links** — Preserve links from old marketing campaigns or external sites
 - **Vanity URLs** — Short or memorable paths that redirect to longer destinations
-- **Trailing slashes** — Normalize URLs with or without trailing slashes
+- **Bulk migrations** — Use a regex pattern to move an entire URL prefix in a single rule
 
 <Callout type="info" title="Tip">
 Prefer 301 for permanent moves. Use 302 when the move is temporary so search engines keep indexing the original URL.
+</Callout>
+
+<Callout type="info" title="Tip">
+Test regex redirects in incognito mode — browsers cache redirects aggressively, which can mask configuration changes during testing.
 </Callout>

@@ -49,7 +49,7 @@ You add custom fields to define the structure of your content. Field types are g
 |------|-------------|
 | **email** | Email address |
 | **phone** | Phone number |
-| **link** | URL or link |
+| **link** | Link to an external URL, an internal page, or a downloadable file from the asset manager. Buttons and wrapped elements bound to the field resolve to whichever type each item uses |
 
 ### Assets
 
@@ -74,6 +74,14 @@ Inverse references let you display related items from the opposite direction of 
 You do not create a separate field for inverse references. They are configured as a data source on collection list layers. When a collection has reference fields pointing to another collection, those relationships automatically appear as inverse reference options in the source dropdown.
 
 See [Dynamic Pages](/docs/cms/dynamic-pages#inverse-references) for how to use inverse references in collection lists.
+
+### Computed
+
+| Type | Description |
+|------|-------------|
+| **count** | Counts how many items in another collection reference the current item via a chosen `reference` or `multi_reference` field. The value updates live as related items are added, removed, or staged for publish. Read-only — counts are not editable on items, and the field is bindable to text layers like a regular number |
+
+To configure a count field, pick the source collection and the reference field that points back to the current collection. Only valid combinations appear in the dropdown.
 
 ## Field Properties
 
