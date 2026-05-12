@@ -72,6 +72,7 @@ export default async function RootLayout({
         >
           {children}
         </Layout>
+        <script async src="https://chat.ycode.com/embed.js" />
       </body>
     </html>
   )
