@@ -22,6 +22,16 @@ For code that appears on every page, use **Settings** (in the project or site co
 
 Global code runs on every page. Use it for site-wide analytics, fonts, or common scripts. Page-specific code runs in addition to global code.
 
+## CSS Preview in the Builder
+
+CSS you place in `<style>` blocks inside the head — global or per-page — is also injected into the builder canvas, so it previews live while you design. This is most useful for declaring CSS variables in `:root` and then consuming them through Tailwind arbitrary values like `text-[var(--brand)]` or `bg-[var(--surface)]`.
+
+When editing a **page**, the canvas applies global head CSS plus that page's head CSS. When editing a **component**, only global head CSS is applied — components are not bound to a specific page.
+
+<Callout type="info" title="What runs in the canvas">
+Only CSS inside `<style>` blocks previews in the builder. `<script>` tags and other head HTML (meta tags, preload hints, external stylesheets) only run on the published site and in preview mode, not inside the builder canvas.
+</Callout>
+
 ## Dynamic Page Placeholders
 
 On **dynamic pages** (CMS-driven pages), you can use placeholders in your custom code. Placeholders use the format `{{fieldName}}` and resolve to the current collection item's field value.
