@@ -43,6 +43,7 @@ Components support variables for content that varies per instance. You define va
 | **Audio** | Overridable audio file source |
 | **Video** | Overridable video file source |
 | **Icon** | Overridable SVG icon |
+| **Variant** | Drives the variant of a nested component instance from the parent's overrides panel (see [Variants](#variants)) |
 
 ### Linking Variables to Layers
 
@@ -64,6 +65,40 @@ Text variables support rich text content. When you override a text variable on a
 Double-click any component instance to enter **edit mode**. The canvas shows only the component content. Changes you make apply to the master component and propagate to all instances.
 
 Exit edit mode by clicking outside the component or using the breadcrumb navigation to return to the page.
+
+## Variants
+
+A component can hold multiple named **variants** — different layer trees that share the same component variables. Use variants for things like `Default`, `Small`, `Large` button sizes, light and dark card styles, or any structural variation that belongs to the same component.
+
+### Managing Variants
+
+In component edit mode, the left sidebar shows a **Variants** section. Every component starts with a single `Default` variant. From there you can:
+
+- **Add** a new variant — it's seeded from the currently active variant
+- **Rename**, **duplicate**, or **delete** variants from the right-click menu
+- **Reorder** variants by dragging — the first variant is the fallback when an instance points at a missing variant
+- **Switch** the active variant by clicking it; the canvas re-renders into that variant
+
+Variant changes propagate to all instances on publish, including styles that exist only inside non-default variants.
+
+<Callout type="info" title="Same variables, different trees">
+Variants share the component's variable definitions, so a `Title` text variable links to a layer in each variant independently. Instances keep their variable overrides when you switch variants.
+</Callout>
+
+### Switching an Instance's Variant
+
+Select a component instance on a page. In the instance sidebar, the **Variant** picker lists every variant the component defines. Pick one and the canvas, preview, and published page all render that variant.
+
+### Linking a Variant to a Parent Variable
+
+To let a parent component drive the variant of a nested instance, expose it as a **Variant** variable:
+
+1. Open the parent component in edit mode
+2. Select the nested instance whose variant you want to control
+3. Next to the **Variant** picker, choose **Link to variable**, then pick or create a `Variant` variable on the parent component
+4. On any page using the parent, the overrides panel now shows that variable and switches the inner instance's variant when you change it
+
+For example, a `Card` component can expose a `Style` variable (`Variant` type) that swaps a nested `Button`'s variant between `Primary` and `Ghost` from the page-level overrides.
 
 ## Detaching Components
 

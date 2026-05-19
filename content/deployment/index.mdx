@@ -35,7 +35,18 @@ Draft changes are not visible to visitors until you publish. You can unpublish t
 
 ## Cache Revalidation
 
-For Open Source deployments, configure a `REVALIDATE_SECRET` environment variable in Vercel. When content is published, Ycode triggers revalidation so the live site reflects updates quickly.
+When you publish, Ycode invalidates only the routes whose content actually changed. A text tweak on a single page purges that page; editing a component or layer style purges every page that uses it; editing a CMS item purges the matching dynamic page plus any collection-list pages that include it. Invalidated routes are then warmed in the background, so the first visitor lands on a cached response instead of a cold render.
+
+Some changes still trigger a full purge because they can affect every page on the site:
+
+- Color variables
+- Locales and translation publishes
+- Redirects
+- Custom code (head and body)
+- Site-wide settings (favicon, analytics, etc.)
+- Template apply and project reset
+
+For Open Source deployments, configure a `REVALIDATE_SECRET` environment variable in Vercel so revalidation requests are authenticated. The same selective-vs-full logic applies on both Vercel and self-hosted runtimes.
 
 ## Custom Domains
 
