@@ -37,6 +37,12 @@ Source paths support both exact matches and regex patterns:
 
 Exact matches always take priority. If both `/special/page` and `/special/.*` are configured, a request to `/special/page` follows the exact rule.
 
+## Exporting Redirects
+
+Click **Export as CSV** on the redirects settings page to download every redirect as a `redirects-YYYY-MM-DD.csv` file with `Old URL` and `New URL` columns. Useful for sharing rules with stakeholders, diffing against another environment, or feeding into another tool. The button is disabled while the list is empty or saving.
+
+URL values in the redirect list are also selectable, so you can copy individual old/new URLs straight from the table without opening the editor.
+
 ## Homepage Redirects
 
 The homepage (`/`) is a valid source path. Use it to redirect the root URL to another page — for example, sending `/` to `/home` or `/landing` while you migrate.
