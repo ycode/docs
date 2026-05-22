@@ -1,0 +1,112 @@
+---
+title: Pricing
+---
+
+import { Callout } from 'nextra/components'
+
+# Pricing
+
+Ycode is available three ways: free forever as **Self-host** open source, paid per-project on **Ycode Cloud**, or under a flat workspace subscription on the **Agency Workspace** plan. All three share the same editor, CMS, forms, localization, and integrations — they differ only in hosting, billing, and white-label features.
+
+## At a Glance
+
+| Plan | Price | Hosting | Best For |
+|------|-------|---------|----------|
+| **Self-host** | Free forever | You own the infrastructure | Developers and teams who want full control |
+| **Cloud** | $25/month annual, $30/month monthly — **per project** | Managed by Ycode | Individuals and teams that want a managed site |
+| **Agency Workspace** | $70/month annual, $85/month monthly — **per workspace** | Managed by Ycode | Studios and freelancers managing multiple client sites |
+
+Annual billing saves ~18% on both Cloud and Agency Workspace plans.
+
+## Self-host
+
+Ycode Open Source is free forever. Fork the [repository](https://github.com/ycode/ycode), deploy on Vercel, connect Supabase, and you own the entire stack.
+
+**Included**
+
+- Full source code access and the right to modify it
+- Custom domains
+- Unlimited users, pages, CMS items, form entries, and languages
+- Community support on [Discord](https://discord.gg/ycode) and GitHub
+
+**What you provide**
+
+- A Vercel deployment (or any compatible host)
+- A Supabase project for the database, authentication, and storage
+- Any optional services you wire in (email, analytics, custom integrations)
+
+See [Deployment](/docs/deployment) for the full self-hosting guide.
+
+## Cloud
+
+Ycode Cloud is the managed offering: hosting, updates, SSL, and a global CDN are all handled for you. Each Cloud project carries its own subscription.
+
+| Interval | Price per project |
+|----------|-------------------|
+| **Annual** | $25/month (billed yearly) |
+| **Monthly** | $30/month |
+
+**Included on every Cloud project**
+
+- Fully managed Ycode hosting with automatic updates and maintenance
+- Global CDN and fast edge delivery
+- Custom domains
+- Unlimited users, pages, form entries, and languages
+- Up to **20,000 CMS items** per project
+- Community and email support
+
+Projects start on **Free** with the full editor and CMS. Upgrade per project when you need a paid feature (most commonly a [custom domain](/docs/deployment/custom-domains)). See [Billing](/docs/cloud/billing) for how to subscribe and manage a project subscription through the Stripe Customer Portal.
+
+<Callout type="info" title="Free Cloud projects live forever">
+You can keep an unlimited number of free Cloud projects. They retain the full editor and CMS — only paid features like custom domains are gated until you subscribe.
+</Callout>
+
+## Agency Workspace
+
+Agency Workspaces are designed for studios and freelancers running multiple client sites under one brand. One subscription covers every project inside the workspace, and the dashboard is fully white-labelled.
+
+| Interval | Price per workspace |
+|----------|---------------------|
+| **Annual** | $70/month (billed yearly) |
+| **Monthly** | $85/month |
+
+**Included**
+
+- **Unlimited Cloud projects** under a single subscription — no per-project Stripe charges
+- **White-label dashboard and builder** with your own light/dark logos and agency name in the browser tab
+- **Custom agency domain** for the dashboard so clients and team members log in at your URL
+- **Multi-user workspace** with `Owner`, `Admin`, and `Editor` roles spanning every project
+- All the Cloud feature set: managed hosting, automatic updates, CDN, SSL, custom domains, unlimited users, pages, form entries, and languages
+
+See [Workspaces](/docs/cloud/workspaces) for the full agency workflow — creating a workspace, configuring branding and domains, inviting the team, and transferring projects between personal and agency workspaces.
+
+## Billing Intervals
+
+Both Cloud and Agency Workspace subscriptions offer monthly and annual billing. Annual saves roughly 18% versus paying month-to-month.
+
+- **Cloud project**: $30/mo monthly → $25/mo annual
+- **Agency Workspace**: $85/mo monthly → $70/mo annual
+
+You pick the interval at checkout. To switch later, open the **Stripe Customer Portal** from the project's **Billing details** menu (Cloud) or the workspace **Billing** page (Agency) — the portal lets you change interval, update payment methods, download invoices, and cancel.
+
+## Switching Between Plans
+
+Plans aren't locked. You can move between them at any time:
+
+- **Cloud Free → Cloud Paid** — Subscribe per project from the project menu's **Billing details**.
+- **Cloud Paid → Cloud Free** — Cancel the project's subscription in the Stripe Customer Portal. The project keeps editing access on free; paid features lock until you resubscribe.
+- **Cloud (personal workspace) → Agency Workspace** — Create an agency workspace, then move projects in from the dashboard. Each project's per-project subscription is cancelled automatically and replaced by the workspace plan. See [Transferring Projects](/docs/cloud/workspaces#transferring-projects).
+- **Agency Workspace → Cloud (personal workspace)** — Move projects back to a personal workspace. Each one reverts to free; subscribe per project to keep paid features. Custom domains block this transfer until removed.
+- **Cloud → Self-host** — Use [Backup & Restore](/docs/deployment/backup) to export a project from Cloud and import it into a self-hosted Ycode instance.
+- **Self-host → Cloud** — The same backup/restore flow works the other way.
+
+## Limits and Notes
+
+- **CMS items** — Self-host is unlimited. Cloud projects (free or paid) are capped at 20,000 items per project. Agency Workspace projects inherit the Cloud per-project limit.
+- **Custom domains** — Available on Self-host, paid Cloud projects, and every Agency Workspace project. Free Cloud projects use the `*.ycode.website` subdomain.
+- **Users** — Every plan is unlimited. Personal workspaces use per-project teams ([Teams](/docs/cloud/teams)); Agency Workspaces use a single workspace-wide team.
+- **Pages, form entries, and languages** — Unlimited on every plan.
+- **Support** — Community on all plans; email support on Cloud and Agency Workspace.
+- **Legacy customers** — If you migrated from Ycode Legacy, your existing subscription and price carry over automatically. See the legacy note in [Billing](/docs/cloud/billing).
+
+For the current pricing and an interactive comparison, see the [Ycode pricing page](https://www.ycode.com/#pricing).
