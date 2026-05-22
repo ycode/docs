@@ -1,0 +1,105 @@
+---
+title: Workspaces
+---
+
+import { Callout } from 'nextra/components'
+
+# Workspaces
+
+Workspaces are containers that group your Ycode Cloud projects. Every account gets a personal workspace by default, and you can create additional workspaces to organise client work, separate teams, or run an agency under your own brand.
+
+## Personal vs Agency
+
+| Type | Best for | Billing | Branding | Team |
+|------|----------|---------|----------|------|
+| **Personal** | Solo users, hobby projects, individual sites | Each project pays its own subscription (free or paid) | Ycode-branded dashboard | Per-project teams |
+| **Agency** | Studios, freelancers, anyone managing multiple client sites | One flat workspace subscription covers every project inside | White-label dashboard with your own name, logo, and domain | Workspace-wide team across every project |
+
+Every user automatically gets one personal workspace. Agency workspaces are optional and require an active subscription.
+
+## Creating a Workspace
+
+Click your workspace name in the dashboard header to open the workspace switcher, then choose **New workspace**.
+
+In the dialog, pick a workspace type:
+
+- **Personal** — Free to create. You can spin up additional personal workspaces to group projects by client, topic, or stage.
+- **Agency** — Opens the agency plan picker with a **Monthly** / **Annual** toggle. Confirm your billing interval and continue to Stripe checkout. The workspace is created up front so you return to a real workspace after checkout — even if you abandon the flow.
+
+After checkout (for agency) or save (for personal), the new workspace appears in the switcher and becomes the active context for new projects.
+
+## Switching Workspaces
+
+The workspace switcher in the dashboard header shows every workspace you belong to — owned and joined. Selecting one filters the dashboard to that workspace's projects and scopes **New project** to it. The switcher also exposes the **New workspace** action.
+
+<Callout type="info" title="No workspaces yet">
+If you don't have a workspace (for example after deleting your last one), Ycode redirects you to an onboarding screen to create one before you can continue.
+</Callout>
+
+## Transferring Projects
+
+You can move a project between workspaces from the project menu on the dashboard. The transfer dialog explains what changes:
+
+- **Personal → Agency** — The project's per-project Stripe subscription is cancelled and the project starts running under the agency plan. No more per-project invoice.
+- **Agency → Personal** — The project leaves the agency plan and reverts to the free per-project tier. Add a per-project subscription later if you want paid features back.
+- **Personal → Personal** — Pure reorganisation. Billing and team membership stay the same.
+
+<Callout type="warning" title="Custom domains block agency → personal moves">
+A project with one or more custom domains cannot be moved out of an agency workspace. Remove the custom domains first, or move the workspace itself instead of the project.
+</Callout>
+
+## Agency Workspace Plan
+
+Agency workspaces unlock the white-label features and bundle every project's hosting into one subscription.
+
+### Pricing
+
+| Interval | Price |
+|----------|-------|
+| **Monthly** | $85/month |
+| **Annual** | $70/month (billed yearly) |
+
+Pick your interval when you create the workspace. You can switch between monthly and annual later from the Stripe Customer Portal — the **Manage billing** button on the workspace billing page opens it directly.
+
+### What's Included
+
+- Unlimited projects under one subscription — no per-project Stripe charges for tenants inside the workspace
+- Custom dashboard domain for your clients and team
+- Light and dark dashboard logos plus a custom agency name in the browser tab
+- Workspace-wide team with admin and editor roles
+- Custom domains on every project
+
+### Workspace Settings
+
+Open **Settings** from the workspace navigation to manage:
+
+**Branding** — Set the **Agency name** that drives the browser tab title across the dashboard. Upload separate **Light** and **Dark** logos so the dashboard adapts to your client's display preference. Logos can be replaced or removed independently.
+
+**Domains** — Connect a **Dashboard domain** so your team and clients log in at your URL instead of the Ycode default. Project-level custom domains are configured on each individual project.
+
+### Workspace Team
+
+Agency workspaces have a single team that spans every project inside. Manage members from the **Team** page in the workspace navigation.
+
+| Role | Capabilities |
+|------|-------------|
+| **Owner** | Full control — billing, settings, team, all projects |
+| **Admin** | Manage team, settings, and every project in the workspace |
+| **Editor** | Open and edit every project in the workspace; no settings or billing access |
+
+Invite collaborators by email. They receive an invitation link and accept it through the standard sign-in flow — new users sign up during acceptance. Once accepted, members see every workspace project on their dashboard automatically.
+
+<Callout type="info" title="Project teams still apply on personal workspaces">
+Per-project team membership (see [Teams](/docs/cloud/teams)) is the model for projects in personal workspaces. Inside an agency workspace, workspace-level membership replaces per-project teams — anyone in the workspace team has access to every project under the agency plan.
+</Callout>
+
+### Cancelling an Agency Workspace
+
+Cancellation happens **immediately** rather than at the end of the billing period — the workspace plan ends right away and the projects inside it pause until you transfer them out or resubscribe.
+
+Before you cancel:
+
+- **Remove or move custom domains** — Cancellation is blocked while any project in the workspace has a custom domain. Detach the domains or move them somewhere else first.
+- **Plan where the projects go** — Transfer them to a personal workspace (they'll revert to free) or to another agency workspace before cancelling.
+
+When cancellation succeeds, the workspace-level dashboard domain is removed automatically and the workspace navigation is disabled for inactive subscriptions. Resubscribing from the billing page restores access.

@@ -6,7 +6,15 @@ import { Callout } from 'nextra/components'
 
 # Dashboard
 
-The dashboard is the home screen of Ycode Cloud. It displays all your projects and provides quick access to project creation, the editor, and billing.
+The dashboard is the home screen of Ycode Cloud. It displays the projects in the active workspace and provides quick access to project creation, the editor, and billing.
+
+## Workspace Switcher
+
+The dashboard header shows the active workspace. Click it to open the workspace switcher and move between every workspace you belong to — personal or agency, owned or joined. The switcher also exposes a **New workspace** action that opens the workspace creation dialog (personal is free; agency requires a subscription).
+
+When you change workspaces, the project list, **New project** action, and any workspace-specific navigation re-scope to the new context.
+
+See [Workspaces](/docs/cloud/workspaces) for the full breakdown of personal vs agency workspaces.
 
 ## Project Cards
 
@@ -42,7 +50,8 @@ Transfer an existing Ycode Legacy project. See [Migrate from Legacy](/docs/getti
 
 Click the **⋮** menu on a project card for additional options:
 
-- **Billing details** — Opens the Stripe customer portal where you can manage your subscription, update payment methods, and view invoices
+- **Billing details** — Opens the Stripe customer portal for the project's subscription (personal workspaces only; agency workspace projects are billed at the workspace level)
+- **Move to workspace** — Transfer the project to another workspace you own. See [Transferring Projects](/docs/cloud/workspaces#transferring-projects) for the billing impact
 - **Delete** — Permanently removes the project and all its data
 
 <Callout type="warning" title="Deleting projects">

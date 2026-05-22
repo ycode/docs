@@ -6,7 +6,12 @@ import { Callout } from 'nextra/components'
 
 # Teams
 
-Collaborate on projects by inviting team members with role-based access. Each project manages its own team independently.
+Collaborate on projects by inviting team members with role-based access. The team model depends on the [workspace](/docs/cloud/workspaces) the project belongs to:
+
+- **Personal workspace** — Each project manages its own team. Invitations and roles are scoped to a single project.
+- **Agency workspace** — A single workspace-wide team spans every project inside. See [Workspace Team](/docs/cloud/workspaces#workspace-team) for the workflow specific to agency workspaces.
+
+The rest of this page covers per-project teams (the model used in personal workspaces).
 
 ## Roles
 
@@ -39,5 +44,5 @@ When you receive a team invitation:
 Admins and owners can view team members and pending invitations from the project settings. You can change roles or remove members at any time.
 
 <Callout type="info" title="Multiple projects">
-You can be a member of multiple projects with different roles. Your dashboard shows all projects you have access to — both projects you own and projects you've been invited to.
+You can be a member of multiple projects with different roles. Your dashboard shows all projects you have access to — both projects you own and projects you've been invited to, across every workspace you belong to.
 </Callout>
