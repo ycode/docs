@@ -5,7 +5,8 @@ const meta: MetaRecord = {
   webflow: 'Webflow',
   'mailer-lite': 'MailerLite',
   'google-maps': 'Google Maps',
-  mapbox: 'Mapbox'
+  mapbox: 'Mapbox',
+  'static-export': 'Static HTML Export'
 }
 
 export default meta

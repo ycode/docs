@@ -1,0 +1,105 @@
+---
+title: Static HTML Export
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Static HTML Export
+
+Export every published page of your site as standalone HTML files, ready to deploy to any static host — Amazon S3, Cloudflare Pages, Netlify, Amplify, GitHub Pages, or your own server.
+
+The exporter reuses the same render pipeline your live site uses, so output matches the live render exactly: link types, sliders, lightboxes, responsive images (`srcset`), forms, SEO meta tags, color variables, fonts, and Tailwind CSS.
+
+<Callout type="info" title="Self-hosted">
+The Static HTML Export integration is available on self-hosted Ycode. Cloud support is on the way.
+</Callout>
+
+## What Gets Exported
+
+- Every published page, including dynamic CMS pages (one HTML file per published item)
+- Tailwind CSS, color variables, and Google / custom fonts inlined
+- SEO meta tags (title, description, Open Graph, Twitter, robots)
+- Sliders (Swiper) with pagination, easing, and `aria` state
+- Lightboxes with grouping and CMS-bound files
+- Images with `srcset` / `sizes`
+- Forms with all field types
+- Link types: URL, page, email, phone, anchor, asset
+- Interactions for the click→display pattern (mobile menu toggles work out of the box)
+- Error pages (`401`, `404`, `500`) emitted at the root of the output directory
+
+## Setup
+
+<Steps>
+
+### Open the integration
+
+1. In the Ycode editor, open **Integrations** → **Apps**
+2. Select **Static HTML Export**
+
+### Choose an output target
+
+Pick where exported files should be written:
+
+- **Local filesystem** — writes to a directory on the machine running Ycode (great for previewing locally or piping into your own deploy)
+- **Amazon S3** — uploads each file to a bucket with the correct `Content-Type` and `Cache-Control` headers
+- **GitHub** — commits the output to a branch in a repository (works well with GitHub Pages or Pages-style hosts that auto-deploy on push)
+
+### Configure target-specific options
+
+**Local filesystem** — set the output directory (e.g. `./out`).
+
+**Amazon S3** — provide the bucket name, region, access key, and secret. Optionally set a key prefix.
+
+**GitHub** — provide a fine-grained personal access token, the repository (`owner/repo`), the branch, and an optional commit message template.
+
+### Export
+
+Click **Export Now**. The UI shows live progress and a completion toast when the run finishes. Each export is logged with its status so you can confirm the last run from the integration panel.
+
+</Steps>
+
+## Output Layout
+
+Output paths are designed to be served as-is by any static host:
+
+| Page | Output |
+|------|--------|
+| Homepage | `index.html` |
+| Static page | `<slug>/index.html` |
+| Folder index | `<folder>/index.html` |
+| Dynamic CMS page | `<page>/<item-slug>/index.html` |
+| Error page | `<code>.html` (e.g. `404.html`) |
+
+Asset references in the exported HTML are document-relative, so the same export works at the root of a domain, in a subdirectory, or opened locally from the filesystem.
+
+## S3 Deployment Notes
+
+When using Amazon S3 as the target:
+
+- HTML files are uploaded with `Cache-Control: max-age=0, must-revalidate` so updates appear immediately
+- Assets are uploaded with long-lived caching
+- Error pages (`404.html`, `500.html`) work directly as the bucket's "Error document" setting
+
+The S3 SDK is loaded on demand. If you only use the local or GitHub target, no AWS dependencies are pulled into your install.
+
+## GitHub Deployment Notes
+
+The GitHub target commits the exported output to a branch you choose — typically `gh-pages` for GitHub Pages, or a `production` branch wired to a host like Cloudflare Pages, Netlify, or Amplify. Each export is a single commit, so deploys are atomic and easy to roll back.
+
+Use a **fine-grained personal access token** scoped to the target repository with write access to **Contents**.
+
+## Running from the Command Line
+
+A standalone CLI is included for headless or CI usage:
+
+```bash
+npx tsx --env-file=.env scripts/export.ts
+```
+
+The CLI reads the same configuration you set in the integration panel and runs the export without a Ycode server process. Useful for scheduled exports, CI pipelines, or scripted deployments.
+
+## Limitations
+
+- **Multi-locale output** — exports currently emit the default locale only. Translated locales are on the roadmap.
+- **Animations** — the exporter ships a minimal interactions runtime that handles the click→display pattern (mobile menus, simple toggles). Hover, scroll, and load-trigger animations are not yet emitted; pages still render correctly, but those interactions will not fire on the static output.

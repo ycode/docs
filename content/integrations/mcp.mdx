@@ -67,15 +67,21 @@ Changes made through the MCP server appear in the browser editor in real time vi
 
 ## What AI Agents Can Do
 
-The MCP server exposes a comprehensive set of tools organized by area:
+The MCP server is at version **1.0**, with full feature parity with the Ycode editor. Tools are organized by area:
 
 ### Pages
 
-Create, update, duplicate, and delete pages. Manage page settings including SEO metadata, custom code injection, and password protection. Organize pages into folders.
+Create, update, duplicate, and delete pages. Manage page settings including SEO metadata, custom code injection, and password protection. Organize pages into folders. Mark pages as the homepage (`is_index`), as a dynamic page (`is_dynamic`), or as an error page (`401`, `404`, `500`). Bind dynamic pages to a CMS collection with a slug field and control how `next-item` / `previous-item` link keywords traverse the collection.
 
 ### Layers and Elements
 
-Add any element type (div, section, text, heading, rich text, image, button, video, slider, lightbox, form elements, and more). Update design properties (layout, typography, spacing, sizing, backgrounds, borders, effects, position), text content, images, links, videos, and background images. Move, reorder, and delete layers.
+Add any element type — including tables (`table`, `thead`, `tbody`, `tr`, `td`, `th`). Update design properties (layout, typography, spacing, sizing, backgrounds, borders, effects, position, transforms, transitions), text content, images, links, videos, and background images.
+
+Layer settings cover the full surface: sliders (pagination, easing, touch events, slides per group), CMS-bound lightboxes (multi-image fields, groups), maps (Mapbox / Google Maps with coordinates, zoom, marker color, navigation controls), CMS-bound select/radio/checkbox options, plus per-layer `hidden`, `filter_on_change`, and placeholder flags.
+
+Links support URLs, internal pages, email, phone, anchors (`anchor_layer_id`), specific dynamic items (`collection_item_id`), assets, plus `rel` and `download` attributes.
+
+Move, reorder, and delete layers.
 
 ### Layouts
 
@@ -83,11 +89,37 @@ Insert pre-built layout templates — hero sections, headers, feature grids, foo
 
 ### CMS
 
-Create and manage collections, fields, items, and item values. Full CRUD operations on collections and their schema.
+Create and manage collections, fields, items, and item values. Field types include text, rich text, number, boolean, date, asset (image / audio / video / document, with optional `multiple`), reference, `option` (with custom choices), and `count` (computed from a referenced collection).
+
+Add per-field metadata (`default`, `fillable`, `hidden`, `is_computed`), set a default `sorting` on each collection (`field`, `direction`), reorder fields with `reorder_collection_fields`, and reposition manually-sorted items with `set_collection_item_order`.
 
 ### Components
 
-Create reusable components with variables, edit component layer trees, and manage the component library.
+Create reusable components with variables, edit component layer trees, and manage the component library. Variables now include `rich_text` and `variant` types, plus `placeholder` and `default_value` fallbacks.
+
+Variants have full CRUD: `list_component_variants`, `create_component_variant` (optionally cloning an existing variant), `update_component_variant`, and `delete_component_variant`. `update_component_layers` accepts an optional `variant_id` so edits target a specific variant without clobbering the others.
+
+### Animations and Interactions
+
+Add animations from 18 curated presets — reveal, hover, click, parallax, stagger, and loop families — in a single tool call:
+
+- `add_animation` — apply a preset to one or more `targets`
+- `list_layer_animations`, `remove_layer_animation`, `clear_layer_animations`
+- `set_layer_interactions` — raw escape hatch for custom GSAP timelines
+
+A dedicated **Animation Presets Reference** resource documents every preset, trigger semantics, and the raw interaction shape.
+
+### Site Settings
+
+Read and update project settings (site name, description, custom CSS, and more). Manage URL redirects with `list_redirects`, `add_redirect`, `update_redirect`, and `delete_redirect` — including regex patterns and `301` / `302` types.
+
+### Forms
+
+View form submissions, update statuses, and manage form data. `update_form_settings` configures success behaviour (`message` or `redirect` to a URL) and email notifications (`to`, `subject`).
+
+### Localization
+
+Manage locales and translations for multilingual sites. `set_rich_text_translation` accepts structured rich-text blocks and writes a properly-formed translation — no need to hand-assemble the underlying document JSON.
 
 ### Styles
 
@@ -105,17 +137,9 @@ Create, update, delete, and reorder global color variables.
 
 List installed fonts, search Google Fonts, and add new fonts to the project.
 
-### Localization
+### Export
 
-Manage locales and translations for multilingual sites.
-
-### Forms
-
-View form submissions, update statuses, and manage form data.
-
-### Settings
-
-Read and update project settings (site name, description, custom CSS, and more).
+`export_layer_html` renders any layer subtree to a self-contained HTML string with Tailwind classes preserved — useful for handing a finished section off to another tool or saving it as a snippet.
 
 ### Publishing
 
@@ -127,8 +151,9 @@ The MCP server also provides read-only resources that give AI agents context abo
 
 | Resource | Description |
 |----------|-------------|
-| **Elements Reference** | Available element types and nesting rules |
-| **Design Reference** | All design properties and valid values |
+| **Elements Reference** | Available element types (including tables) and nesting rules |
+| **Design Reference** | All design properties and valid values, across every category (including transforms and transitions) |
+| **Animation Presets Reference** | The full preset catalog with trigger semantics, tween value formats, and a worked raw-interaction example |
 | **Prompts Reference** | Example prompts and recommended workflows |
 | **Site Pages** | Current pages and folder structure |
 | **Site Collections** | CMS schema (collections, fields) |
