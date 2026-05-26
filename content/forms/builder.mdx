@@ -100,6 +100,12 @@ The email typically includes the submitted field values.
 Use the redirect option to send users to a thank-you page or a confirmation URL. Use the message option for quick feedback without leaving the page.
 </Callout>
 
+### Password-Protected Forms
+
+The form on the 401 error page is a special password-protection form. It submits to Ycode's built-in `/api/page-auth/verify` endpoint instead of the regular form pipeline, so the standard form settings (success action, redirect URL, email notifications) are hidden when one of these forms is selected — there is nothing to configure. The password input itself has its `name` and `type` locked.
+
+Restyle the form, input, button, error alert, and surrounding copy like any other layer. See [Pages](/docs/editor/pages#page-types) for details on the 401 page layout.
+
 ## Validation
 
 Each field can have validation rules:

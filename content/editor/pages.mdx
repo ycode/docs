@@ -34,6 +34,8 @@ After creation, you configure the page in the right sidebar under **Settings** w
 
 **Error** — Special pages for HTTP error responses: 401 (Unauthorized), 404 (Not Found), and 500 (Server Error). You customize the content and design of these error screens.
 
+The 401 page ships with an editable password form by default — a lock icon, heading, subtitle, password input, submit button, and error alert. Every layer is restylable, but the form, input, button, and alert layers can't be deleted so the page always has a working prompt. Existing projects are migrated automatically the first time they're opened.
+
 ## Page Settings
 
 Access page settings by selecting the page in the Layers panel or from the Pages tab context menu. Settings are grouped into:
@@ -44,7 +46,7 @@ Access page settings by selecting the page in the Layers panel or from the Pages
 
 **Custom Code** — Head and body code injection. Use this for page-specific scripts, styles, or meta tags.
 
-**Auth** — Password protection. When enabled, visitors must enter a password to view the page.
+**Auth** — Password protection. When enabled, visitors entering the page see your 401 page with the inline password form; submitting the correct password unlocks the original URL. Restyle the form, copy, icon, and error alert directly on the 401 page in the builder.
 
 ## Folders and Page Tree
 
