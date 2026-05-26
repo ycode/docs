@@ -10,11 +10,23 @@ The dashboard is the home screen of Ycode Cloud. It displays the projects in the
 
 ## Workspace Switcher
 
-The dashboard header shows the active workspace. Click it to open the workspace switcher and move between every workspace you belong to — personal or agency, owned or joined. The switcher also exposes a **New workspace** action that opens the workspace creation dialog (personal is free; agency requires a subscription).
+The dashboard header shows the active workspace. Click it to open the workspace switcher and move between every workspace you belong to — personal, agency, or guest. The switcher also exposes a **New workspace** action that opens the workspace creation dialog (personal is free; agency requires a subscription).
 
-When you change workspaces, the project list, **New project** action, and any workspace-specific navigation re-scope to the new context.
+When you change workspaces, the project list, **New project** action, and any workspace-specific navigation re-scope to the new context. Your last active workspace is remembered, so returning to the dashboard from the editor lands you back in the same one.
 
-See [Workspaces](/docs/cloud/workspaces) for the full breakdown of personal vs agency workspaces.
+Workspaces you only have project-level access to appear in the switcher with a **Guest** badge. Inside a guest workspace you see only the projects you were specifically invited to, and the **New project** action is hidden.
+
+See [Workspaces](/docs/cloud/workspaces) for the full breakdown of personal, agency, and guest workspaces.
+
+## Project Sorting
+
+Use the sort dropdown next to **New project** to reorder the dashboard:
+
+- **Last viewed by me** (default) — projects you've opened recently float to the top; projects you've never opened keep their creation order
+- **Last edited** — sorted by the most recent change to the project record (settings, billing, transfers, admin actions)
+- **Alphabetically** — case-insensitive A → Z by project name
+
+Your choice is remembered across reloads. The dropdown is hidden when the workspace has no projects yet.
 
 ## Project Cards
 
@@ -61,3 +73,13 @@ Only the project owner can delete a project. Projects with an active paid subscr
 ## Project URLs
 
 Each project gets a subdomain on `ycode.website` by default (e.g., `mysite.ycode.website`). You can connect a custom domain in the project's deployment settings. When a custom domain is configured, it appears on the dashboard card instead of the subdomain.
+
+## Theme
+
+Click the Ycode logo in the top-left of the dashboard header to open the theme menu and pick **System**, **Light**, or **Dark**. The preference is stored per-browser and applies to every dashboard page — login, onboarding, account, workspace settings, and the project grid. Choosing **System** follows your operating system's appearance preference live.
+
+The dashboard theme is independent from the builder theme — switching one does not affect the other.
+
+## Help and Support
+
+The Ask Ycode chat bubble sits in the bottom-right of every authenticated dashboard page. It carries your conversation history across browsers and devices, and the current page context is sent with each message so answers can reference the screen you're on. Click the bubble to open the panel or close it when you're done.

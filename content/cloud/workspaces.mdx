@@ -17,6 +17,8 @@ Workspaces are containers that group your Ycode Cloud projects. Every account ge
 
 Every user automatically gets one personal workspace. Agency workspaces are optional and require an active subscription.
 
+In addition to workspaces you own or are a member of, you may see **Guest** workspaces — see [Switching Workspaces](#switching-workspaces) below.
+
 ## Creating a Workspace
 
 Click your workspace name in the dashboard header to open the workspace switcher, then choose **New workspace**.
@@ -30,7 +32,19 @@ After checkout (for agency) or save (for personal), the new workspace appears in
 
 ## Switching Workspaces
 
-The workspace switcher in the dashboard header shows every workspace you belong to — owned and joined. Selecting one filters the dashboard to that workspace's projects and scopes **New project** to it. The switcher also exposes the **New workspace** action.
+The workspace switcher in the dashboard header shows every workspace you belong to — owned, joined, and guest. Selecting one filters the dashboard to that workspace's projects and scopes **New project** to it. The switcher also exposes the **New workspace** action.
+
+Your last active workspace is remembered locally, so returning to the dashboard from the editor lands you back where you left off. A `?workspace=` URL parameter or a workspace bound to a custom dashboard domain still wins over the stored choice.
+
+### Guest workspaces
+
+If someone invites you to a project inside a workspace you're not a member of, that workspace shows up in the switcher with a **Guest** badge. Inside a guest workspace:
+
+- You only see the specific projects you were invited to — not every project in the workspace
+- The **New project** button is hidden — only workspace owners and admins can create projects
+- Agency editors who haven't been added at the workspace level behave the same way
+
+Guest access is automatic and follows project-level invites. There is nothing to set up — accepting a project invite is enough for the host workspace to appear in your switcher.
 
 <Callout type="info" title="No workspaces yet">
 If you don't have a workspace (for example after deleting your last one), Ycode redirects you to an onboarding screen to create one before you can continue.
