@@ -59,11 +59,18 @@ Click **+** on a tween to add properties to animate. Each property has a **From*
 | **Width** | Animate width (px, %, rem, em, vh) |
 | **Height** | Animate height (same units) |
 | **Background color** | Animate between two background colors (supports hex values and color variables) |
+| **Blur** | Animate a Gaussian blur in pixels (defaults 0 → 5 px) |
+| **Brightness** | Animate brightness — `1` is the original image, `0.5` is half as bright, `2` is twice as bright (defaults 1 → 1.15) |
+| **Grayscale** | Animate desaturation from 0% (full color) to 100% (fully grayscale) |
 | **Display** | Toggle between visible and hidden |
+
+Blur, brightness, and grayscale are filter properties — adding more than one on the same tween composes them (e.g. blur 5px combined with brightness 1.15 plays as a single `filter` declaration), so you can layer effects without one overwriting the next.
 
 ### Apply Timing
 
 Each property can be set to apply its initial state **on page load** or **on trigger**. Use "on load" when you want elements to start in their animated-from state (e.g., hidden or off-screen) before the interaction fires.
+
+For **Page load** and **Scroll into view** triggers, the initial state is always applied on page load — Ycode emits the starting CSS in the server-rendered HTML so the element paints in its from-state with no flash. The per-property toggle is shown as locked for these triggers because there is nothing to switch.
 
 ## Easing
 

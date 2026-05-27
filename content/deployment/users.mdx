@@ -1,0 +1,91 @@
+---
+title: Users & Roles
+---
+
+import { Callout } from 'nextra/components'
+
+# Users & Roles
+
+Self-hosted Ycode supports four roles with different levels of access. Manage users and roles from **Settings → Users** in the builder.
+
+<Callout type="info">
+This page covers the self-hosted role model. On [Ycode Cloud](/docs/cloud/teams), team membership is scoped per project (personal workspaces) or workspace-wide (agency workspaces) instead.
+</Callout>
+
+## Roles
+
+| Role | Best for | What they can do |
+|------|----------|------------------|
+| **Owner** | Person responsible for the instance | Everything — full control over users, roles, settings, integrations, backups, billing, and every project surface |
+| **Admin** | Trusted operators | Everything an owner can do except removing the owner. Manages users, settings, integrations, and content |
+| **Designer** | Designers and developers building the site | Full builder access — pages, layers, design, CMS schema, components, interactions, publishing |
+| **Editor** | Content updaters and clients | Edit page content (text, images, CMS items) without changing structure, design, or settings |
+
+The first user created on a new instance is automatically assigned the **Owner** role by the bootstrap migration. Subsequent invited users default to **Designer** unless you pick a different role when sending the invitation.
+
+## Editor Mode
+
+The **Editor** role is designed for content updates — clients, marketers, or anyone who needs to keep copy and CMS content fresh without touching layout, design, or settings.
+
+What an editor sees:
+
+- A simplified header with **Content editor** and **Pages** as the only navigation
+- The right design sidebar is hidden — design and structural panels are not exposed
+- The layers and pages trees are read-only — layers cannot be added, deleted, reordered, or renamed
+- Forms and settings are not reachable from the navigation
+
+What an editor can still do:
+
+- Double-click any text on the canvas to edit it inline
+- Replace image content (swap the asset bound to a layer)
+- Open any CMS collection and edit, add, or remove **items** — collection schema (fields, sorting, settings) stays read-only
+- Open and edit translations for the locales already configured
+- Publish
+
+Structural keyboard shortcuts (copy / paste / delete layer, undo of structural ops, etc.) are blocked, and the shortcuts dialog only lists what's actually available in the role. Settings, integrations, backups, invitations, and locale management redirect back to the canvas if accessed directly.
+
+## Inviting Users
+
+From **Settings → Users**:
+
+1. Click **Invite user**
+2. Enter the email address
+3. Pick a role (defaults to **Designer**)
+4. Send the invitation
+
+The invitee receives an email with a sign-up link. Once they complete sign-up, the assigned role is active.
+
+<Callout type="info" title="Confirm email">
+Make sure Supabase's **Confirm email** setting is disabled (see [Configuration](/docs/getting-started/configuration#disable-email-confirmation)). Ycode handles user verification itself, and the invite flow relies on this being off.
+</Callout>
+
+## Changing a User's Role
+
+Owners and admins can change a user's role at any time:
+
+1. Open **Settings → Users**
+2. Pick the user
+3. Choose a new role from the role dropdown
+
+The change takes effect on the user's next request. Their session refreshes from the server so the UI re-renders with the new permissions automatically — the user does not need to sign out and back in.
+
+## Removing a User
+
+From **Settings → Users**, open the user's row and click **Remove**. The account is deleted and any active sessions are revoked.
+
+The **Owner** account cannot be removed by an admin — only the owner can step down by transferring ownership to another account first (set another user to **Owner**, then remove the original owner from the new owner account).
+
+## Permission Reference
+
+| Capability | Owner | Admin | Designer | Editor |
+|------------|:-----:|:-----:|:--------:|:------:|
+| Manage users and roles | ✓ | ✓ | — | — |
+| Project settings, integrations, backups, locales | ✓ | ✓ | — | — |
+| Add / delete / reorder pages | ✓ | ✓ | ✓ | — |
+| Add / delete / reorder layers | ✓ | ✓ | ✓ | — |
+| Edit design, components, styles, interactions | ✓ | ✓ | ✓ | — |
+| Edit CMS schema (collections, fields) | ✓ | ✓ | ✓ | — |
+| Edit CMS items | ✓ | ✓ | ✓ | ✓ |
+| Edit page text and images inline | ✓ | ✓ | ✓ | ✓ |
+| Edit translations | ✓ | ✓ | ✓ | ✓ |
+| Publish | ✓ | ✓ | ✓ | ✓ |
