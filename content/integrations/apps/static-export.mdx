@@ -25,7 +25,8 @@ The Static HTML Export integration is available on self-hosted Ycode. Cloud supp
 - Images with `srcset` / `sizes`
 - Forms with all field types
 - Link types: URL, page, email, phone, anchor, asset
-- Interactions for the click→display pattern (mobile menu toggles work out of the box)
+- Code Embed (htmlEmbed) layers — your HTML, CSS, and JS render inline at their natural height; pasted `<script>` tags run as authored
+- Interactions for the click→display and page-load→display patterns (mobile menu toggles work out of the box)
 - Error pages (`401`, `404`, `500`) emitted at the root of the output directory
 
 ## Setup
@@ -102,4 +103,4 @@ The CLI reads the same configuration you set in the integration panel and runs t
 ## Limitations
 
 - **Multi-locale output** — exports currently emit the default locale only. Translated locales are on the roadmap.
-- **Animations** — the exporter ships a minimal interactions runtime that handles the click→display pattern (mobile menus, simple toggles). Hover, scroll, and load-trigger animations are not yet emitted; pages still render correctly, but those interactions will not fire on the static output.
+- **Animations** — the exporter ships a minimal interactions runtime that handles display toggles on click and page-load triggers (mobile menus, hide-on-load, simple show/hide patterns). Hover, scroll-into-view, while-scrolling, and GSAP-driven property animations (opacity, scale, blur, etc.) are not yet emitted; pages still render correctly, but those interactions will not fire on the static output.

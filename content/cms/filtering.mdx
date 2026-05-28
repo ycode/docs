@@ -104,6 +104,19 @@ When you use **is one of** or **is not one of**, a multi-select dropdown loads i
 | **has items** | At least one linked item |
 | **has no items** | No linked items |
 
+## Item ID
+
+In addition to field-based conditions, you can filter by an item's own identity. Choose **Item ID** in the add-condition dropdown to match against a specific set of items.
+
+| Operator | Description |
+|----------|-------------|
+| **is one of** | Item matches one of the selected items |
+| **is not one of** | Item is excluded from the selected items |
+
+The picker lets you tick specific items from the collection **and** a special **Current page item** option. Tick **Current page item** on a [dynamic page](/docs/cms/dynamic-pages) to match the item the page is rendering against — useful for filtering a related-items list to *only* the current item, or for excluding it from a "related posts" list with **is not one of**.
+
+The same **Item ID** condition is available when you set up conditional visibility on a layer, so you can show or hide a layer based on which item the surrounding collection is rendering.
+
 ## Filter Logic
 
 Filters use a group-based logic system:

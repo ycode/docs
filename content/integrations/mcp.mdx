@@ -7,18 +7,50 @@ import { Steps } from 'nextra/components'
 
 # MCP Server
 
-Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI coding tools build and edit your site. Connect tools like Cursor, Claude Desktop, ChatGPT, or Windsurf to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
+Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI coding tools build and edit your site. Connect tools like Cursor, Claude (Desktop or web), ChatGPT, or Windsurf to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
 
-## Setup
+## How to Connect
+
+The MCP server supports two ways to authenticate:
+
+- **OAuth** — The connecting tool walks the user through a sign-in + consent screen and Ycode issues a scoped access token. Required for **Claude.ai (web)** and **ChatGPT**, which only support OAuth-based remote MCP servers. Recommended whenever the tool supports it.
+- **URL token** — A long-lived bearer token embedded directly in the MCP URL. Useful for tools that don't yet implement OAuth, for headless setups, and for self-hosted instances where you want to wire up an MCP endpoint without a sign-in UI. Cursor, Claude Desktop, and Windsurf all work this way.
+
+Manage both flows from the **Integrations → MCP** page in the builder. Issued tokens are listed there with an **OAuth** or **URL token** badge and an expiry date where relevant; revoke any token from the same page.
+
+## Connect via OAuth (Claude.ai web, ChatGPT)
+
+For tools that support remote MCP over OAuth, point them at the bearer endpoint and they'll redirect to Ycode to sign in.
+
+<Steps>
+
+### Copy the bearer MCP URL
+
+In the editor, go to **Integrations** → **MCP** and copy the **OAuth endpoint** — it looks like `https://your-site.com/ycode/mcp` (no token suffix). The endpoint advertises the OAuth metadata, so the connecting tool can discover the sign-in and token endpoints automatically.
+
+### Add the connector
+
+**Claude.ai (web)** — Open **Settings** → **Connectors** → **Add custom connector**, paste the OAuth endpoint, and complete the redirect-based sign-in.
+
+**ChatGPT** — Enable [developer mode](https://platform.openai.com/docs/guides/developer-mode) for your account, then go to **Settings** → **Connectors** → **Create**. Set a recognisable **Connector name** and a clear **Description** (the model uses it to decide when to call the tools), paste the OAuth endpoint as the **Connector URL**, and save. ChatGPT walks you through the OAuth flow on first use.
+
+### Approve consent
+
+Ycode shows a consent page listing the client requesting access. Approve to issue the tokens. Access tokens last 1 hour; refresh tokens last 30 days and rotate on every use, so a connected client stays signed in indefinitely until you revoke it.
+
+</Steps>
+
+## Connect via URL Token (Cursor, Claude Desktop, Windsurf)
+
+For tools that don't support OAuth — or where you want a simple paste-in URL — use a URL token.
 
 <Steps>
 
 ### Generate an MCP URL
 
-1. In the Ycode editor, go to **Integrations** in the header
-2. Open the **MCP** section
-3. Click **Generate MCP URL**
-4. Copy the generated URL (format: `https://your-site.com/ycode/mcp/ymc_...`)
+1. In the Ycode editor, go to **Integrations** → **MCP**
+2. Click **Generate MCP URL**
+3. Copy the generated URL (format: `https://your-site.com/ycode/mcp/ymc_...`)
 
 ### Connect your AI tool
 
@@ -26,44 +58,17 @@ Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextpr
 
 **Claude Desktop** — Go to Settings, find Connectors, click "Add custom connector", and paste your MCP URL.
 
-**ChatGPT** — Enable developer mode, create a connector with your MCP URL, then attach it in a new chat. See [ChatGPT](#chatgpt) for the full steps.
-
-### Start building
-
-Ask the AI to create pages, add elements, style them, manage CMS content, and publish. Changes appear in the editor in real time.
-
-</Steps>
-
-## ChatGPT
-
-ChatGPT can use your Ycode project over MCP as a remote **app** (OpenAI's UI may still say **connector** in places). You need [developer mode](https://platform.openai.com/docs/guides/developer-mode) turned on for your account, and your workspace must allow it.
-
-<Steps>
-
-### Turn on developer mode
-
-In ChatGPT, open **Settings** → **Apps & Connectors** → **Advanced settings** (at the bottom) and enable **Developer mode**.
-
-### Register your MCP URL
-
-1. Open **Settings** → **Connectors** → **Create** (or **Apps** → **Create**, depending on your ChatGPT version).
-2. Set **Connector name** to something you will recognize (for example, your site or “Ycode”).
-3. Set **Description** to what the integration does (for example, that it edits your Ycode site). The model uses this text to decide when to use the tools.
-4. Paste your Ycode **MCP URL** (the same HTTPS URL from **Integrations → MCP** in the editor) as the **Connector URL** / server URL.
-5. Save. If the connection succeeds, you should see the tools your project exposes. If you change tools later, open the connector in Settings and use **Refresh** to reload metadata.
-
-### Use it in a chat
-
-1. Start a **new** conversation.
-2. Click the **+** button next to the message box, then **More**.
-3. Choose your Ycode connector so its tools are available in that thread.
-4. Prompt in plain language (for example, “Add a hero section to the home page”). ChatGPT may show tool calls and ask you to **confirm** before write actions run; you can approve each time or remember approvals for the conversation, depending on your settings.
+**Windsurf** — Add a custom server with the MCP URL in the Windsurf settings.
 
 </Steps>
 
 <Callout type="info" title="Live sync">
 Changes made through the MCP server appear in the browser editor in real time via Supabase Realtime. You can watch the AI build your site as it works.
 </Callout>
+
+## Start Building
+
+However you connected, ask the AI to create pages, add elements, style them, manage CMS content, and publish. Tool calls happen in your project; changes appear in the editor live.
 
 ## What AI Agents Can Do
 
@@ -161,4 +166,10 @@ The MCP server also provides read-only resources that give AI agents context abo
 
 ## Managing Tokens
 
-Each MCP URL contains a unique token. You can create multiple tokens (e.g., one per team member or AI tool) and revoke them individually from the Integrations page. Tokens authenticate all MCP requests — treat them like API keys and do not share them publicly.
+The **Integrations → MCP** page lists every token issued for your project — both URL tokens you generated manually and OAuth tokens issued through a sign-in flow:
+
+- Each row is badged **URL token** or **OAuth** so you can see at a glance how each connection authenticates
+- OAuth tokens show their expiry date; URL tokens don't expire until you revoke them
+- Revoke any token to immediately cut off the corresponding client
+
+You can issue as many URL tokens as you need (e.g. one per AI tool or team member) and as many OAuth connections as you want. Treat URL tokens like API keys — do not share them publicly. OAuth tokens never leave the connecting client, so they're safer to use in shared environments.
