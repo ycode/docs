@@ -50,6 +50,12 @@ The header reads **Content editor** with a **Translate to `{locale}`** subtitle 
 
 When a layer's text is bound to a CMS variable (for example, `[Content]`), the sidebar shows a read-only `Content → variable` row instead of editable textareas. To translate the value, edit the CMS item itself.
 
+### Component Override Translations
+
+When a [component](/docs/editor/components) instance overrides a master value (text, rich text, image source, or image alt) on a specific page, those overrides are translatable independently from the master component. The translation panel surfaces each one labelled `component › variable` with a matching icon, so you can tell at a glance which instance variable you're translating. Translations are stored per page, so the same component can carry different translated overrides on different pages of your site.
+
+The localization page (Pages and CMS tabs) groups translatable items into accordion sections. Only the first section opens by default and expanding another collapses it, keeping long pages manageable. Search expands matches automatically as you type.
+
 ## Translating CMS Items
 
 On a CMS-bound page in a non-default locale, double-click a CMS-bound layer (or open the collection item from the sidebar) to launch the collection item sheet in translation mode:

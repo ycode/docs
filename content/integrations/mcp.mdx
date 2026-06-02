@@ -124,7 +124,9 @@ View form submissions, update statuses, and manage form data. `update_form_setti
 
 ### Localization
 
-Manage locales and translations for multilingual sites. `set_rich_text_translation` accepts structured rich-text blocks and writes a properly-formed translation — no need to hand-assemble the underlying document JSON.
+Manage locales and translations for multilingual sites. Start with `list_translatable_content` to discover exactly what can be translated for a page, component, or CMS item — the response returns the precise `source_type`, `source_id`, `content_key`, and `content_type` for every translatable string, plus the current source value (and any existing translation when a locale is passed). Use `set_translation` for plain-text values, `set_rich_text_translation` for rich-text fields (it accepts structured blocks and writes a properly-formed translation — no need to hand-assemble the underlying document JSON), or `batch_set_translations` for bulk updates.
+
+Translations default to **completed** so they appear on the live site after publishing — pass `is_completed: false` only for work-in-progress drafts. Rich-text payloads are validated against their declared `content_type` and rejected with an actionable error rather than silently stored as unrenderable data. `get_unpublished_changes` reports pending translation and locale counts alongside other unpublished changes, so agents know when there's something to publish.
 
 ### Styles
 

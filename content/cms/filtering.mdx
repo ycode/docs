@@ -73,6 +73,10 @@ Date filters support relative presets in addition to custom dates. When configur
 
 Presets are resolved dynamically at render time, so a filter set to "Today" always shows items matching the current date without needing manual updates.
 
+Date filters for `date` (datetime) fields evaluate in your project's configured timezone, so day boundaries — including presets like `Today` — match the calendar day visitors actually see. `Date only` fields stay timezone-neutral. This applies consistently across the builder canvas, preview, published pages, and static-exported sites.
+
+The same presets and operators are also available in conditional visibility rules for date fields, so you can show or hide layers based on relative dates without picking a fixed value. On static-exported sites, layers gated on dynamic date presets (`Today`, `This week`, etc.) re-evaluate in the browser at page load, so they flip correctly when the day boundary passes — no re-export required.
+
 ### Boolean Fields
 
 | Operator | Description |

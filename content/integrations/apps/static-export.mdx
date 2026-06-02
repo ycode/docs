@@ -100,6 +100,16 @@ npx tsx --env-file=.env scripts/export.ts
 
 The CLI reads the same configuration you set in the integration panel and runs the export without a Ycode server process. Useful for scheduled exports, CI pipelines, or scripted deployments.
 
+## Dynamic Behaviour on Static Output
+
+Static exports render once, so anything that depends on "now" would normally freeze at export time. To avoid that for the most common case, the exporter ships a small client-side runtime for conditional visibility rules that reference date presets:
+
+- Pages whose visibility rules use `Today`, `This week`, `This month`, or `This year` carry an inline boot script that re-evaluates those rules on page load.
+- Field values are baked in at export time — only the date reference is resolved in the browser — so layers gated on relative dates flip correctly when the day boundary passes, without re-exporting.
+- The runtime is injected only on pages that actually contain a dynamic-date rule. Pages without one ship exactly the same bytes as before.
+
+This means a `Pre-save` button gated on `release_date is after Today` can be exported once and continue to disappear automatically the day after a release.
+
 ## Limitations
 
 - **Multi-locale output** — exports currently emit the default locale only. Translated locales are on the roadmap.
