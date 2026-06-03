@@ -92,6 +92,32 @@ After the migration, update your domain's DNS settings to point to the new Ycode
 Your subscription plan from Ycode Legacy carries over to the new Ycode automatically. You do not need to set up billing again.
 </Callout>
 
+## Re-import from Legacy
+
+If you need to refresh an already-imported project with the latest content from Ycode Legacy — for example, after fixing something in Legacy or making more edits there before the shutdown — you can re-import in place without recreating the project.
+
+<Callout type="warning" title="Destructive content refresh">
+Re-import **replaces** pages, components, collections, items, assets, fonts, styles, and site settings with a fresh dump from the Legacy app. Any edits you made in the new builder since the last import will be lost. Custom domains, subdomain, project owner, and your subscription are preserved.
+</Callout>
+
+<Steps>
+
+### Open the project menu
+
+On the [Ycode Cloud dashboard](/docs/cloud/dashboard), find the legacy-imported project and click the **⋯** menu on its card.
+
+### Choose "Re-import from Legacy"
+
+The option only appears for projects that were originally imported from Legacy. A confirmation dialog explains the destructive nature of the refresh.
+
+### Paste your Legacy API key and confirm
+
+Enter the API token for the same Legacy app the project was originally imported from. Re-import is restricted to the project owner — if you're trying to refresh a project that belongs to someone else, ask them to run it.
+
+</Steps>
+
+The re-import runs the same idempotent migration as the original import. The subdomain, any connected custom domains, and the Stripe subscription are all left untouched.
+
 ## Troubleshooting
 
 | Issue | Solution |
@@ -99,3 +125,4 @@ Your subscription plan from Ycode Legacy carries over to the new Ycode automatic
 | Token not working | Ensure you copied the full token. If lost, create a new one in Legacy under Settings → API Tokens |
 | Migration seems stuck | Large projects with many assets may take longer. Wait for the process to complete before refreshing |
 | Missing content after migration | Check that the content existed in the Legacy project before migration. Some draft or deleted items may not transfer |
+| Re-import rejected with a 409 | The API key belongs to a different Legacy app than the one this project was originally imported from. Use the API key from the original Legacy app. |
