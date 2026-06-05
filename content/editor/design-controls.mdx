@@ -120,15 +120,24 @@ Control positioning and stacking:
 
 ## Layer Styles
 
-Layer Styles are reusable saved style sets. You apply them to elements to keep design consistent across the site.
+Layer Styles are reusable saved style sets. You apply them to elements to keep design consistent across the site. A layer can hold an **ordered stack** of Layer Styles — useful for building base + modifier patterns (`button` + `button-primary`, `card` + `card-featured`) and for high-fidelity Webflow paste, where combo classes import as stacked styles.
 
-**Create** — Style an element, then use the context menu or Design panel to save the current styles as a Layer Style. Give it a name.
+### The Stack Model
 
-**Apply** — Select an element and choose a Layer Style from the panel. The element receives all properties from that style.
+The Layer Styles panel shows the stack as an ordered row of chips, low priority on the left and high priority on the right. Each chip represents one applied style. Later chips win when properties conflict, exactly like CSS class order.
 
-**Detach** — Remove the Layer Style link from an element. The element keeps its current appearance but no longer updates when the style changes.
+- **Active chip** — click a chip to make it active. The Design panel reflects that chip's values, and edits go to that style (or to a per-chip override).
+- **Drag to reorder** — drag chips to change cascade order. Reordering re-flattens the stack into the rendered class string immediately.
+- **Per-chip overrides** — when you tweak a property on a chip that's used elsewhere, Ycode marks it as a **Customized** override on this layer only, leaving the original style untouched.
 
-**Edit** — Edit a Layer Style to update all elements that use it. Changes propagate to every instance.
+### Working with Styles
+
+- **Create** — style an element, then save the current styles as a Layer Style from the context menu or Design panel. Give it a name. Names don't need to be unique across the site — two unrelated styles can both be called `Card` if they belong to different sections.
+- **Apply** — pick an existing Layer Style from the panel to stack it onto the active layer. Apply multiple styles to build combinations.
+- **Customize / Update / Reset** — per chip: **Customize** turns the chip's current values into per-layer overrides, **Update** writes the chip's values back into the underlying Layer Style (affecting every layer that uses it), and **Reset** discards per-chip overrides and returns the chip to its saved values.
+- **New** — forks the active chip in place: creates a new Layer Style from the current values and swaps the chip over to it, so you can branch a variant without breaking the original.
+- **Detach** — unlinks the active chip from its Layer Style while keeping its visual properties as a local override on the layer. The other chips in the stack are unaffected.
+- **Edit** — edit a Layer Style to update every layer that uses it. Changes propagate to every instance and every stack the style appears in.
 
 <Callout type="info" title="Breakpoint-aware">
 Every design control is breakpoint-aware. Set values for desktop (base), tablet (max-lg), and mobile (max-md). Smaller breakpoints inherit from larger ones unless you override.

@@ -81,6 +81,8 @@ Each language uses its own URL prefix based on the locale code:
 
 The locale code appears in the path for all non-default languages. This structure is SEO-friendly and lets search engines index each language version.
 
+Ycode also emits `<link rel="alternate" hreflang="...">` tags in every page's `<head>` covering each published locale plus an `x-default` for the default language, so search engines cluster the variants of each page correctly and serve the right one in each region. See [hreflang for Multilingual Sites](/docs/seo#hreflang-for-multilingual-sites) for details.
+
 ## Locale Selector Element
 
 Add a locale selector element to your pages so visitors can switch languages. The element displays available locales and links to the same page in each language. Configure which locales appear and how the selector is styled. While translating in the builder, the selector reflects the active locale in real time.

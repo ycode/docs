@@ -1,0 +1,55 @@
+---
+title: Figma
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# Figma
+
+Copy frames or layers in Figma and paste them straight into the Ycode canvas. Layout, typography, images, rotation, aspect ratio, and text alignment all transfer in one step, so you can move from a Figma design to a working Ycode layer tree without rebuilding from screenshots.
+
+The integration is built on a small Figma plugin that serializes the selected nodes (and their image fills) into a Ycode-readable payload, plus an importer inside Ycode that converts that payload into layers, styles, and assets.
+
+## Setup
+
+<Steps>
+
+### Install the Ycode Figma plugin
+
+Install the plugin from the Figma Community page linked in **Integrations → Apps → Figma**. It runs entirely inside Figma — no extra Ycode credentials needed.
+
+### Wrap your design in auto-layout
+
+The importer maps Figma auto-layout to Ycode flex containers. Frames without auto-layout can't be reliably converted to a responsive structure, so the plugin requires auto-layout on the copied selection. Add auto-layout to the root frame (and any child container you want to behave as a flex parent) before copying.
+
+### Copy in Figma
+
+Select one or more frames, run the **Ycode** plugin from the Figma menu, and use its **Copy to Ycode** action. The plugin serializes the selection — including exported image assets — and writes the payload to your clipboard.
+
+### Paste into Ycode
+
+Switch to the Ycode builder and paste (`⌘V` / `Ctrl V`) into the canvas, or right-click a layer and choose **Paste inside** or **Paste after** to drop the design into a specific spot in the tree. A "Pasting from Figma…" indicator shows progress while the import runs.
+
+</Steps>
+
+## What Transfers
+
+- **Layout** — frames and auto-layout converted to flex containers, with direction, gap, padding, and alignment preserved
+- **Sizing** — fixed sizes, `Fill container` (mapped to `flex-1`), and `Hug contents`
+- **Typography** — font family, size, weight, line height, letter spacing, alignment, color
+- **Images** — exported from Figma, uploaded to the Ycode asset library, and referenced by the new layers
+- **Fills** — solid backgrounds (skipped on text nodes, which use color instead)
+- **Rotation and aspect ratio** — applied via the corresponding Ycode design controls
+- **Nesting** — frame hierarchy preserved as a parent/child layer tree
+
+## Notes and Limitations
+
+- **Auto-layout is required** for the copied selection. Static frames are rejected to avoid producing absolutely-positioned, non-responsive output.
+- **Images are uploaded on paste** — large selections with many image fills can take longer to complete; the progress indicator reports per-layer status.
+- **Effects, vectors, and components** are not converted today. Vector shapes and complex effects fall back to image exports where possible.
+- **Variables and styles** from Figma are flattened into per-layer design values — they don't currently create reusable Ycode Layer Styles. For reusable styles, copy from a Webflow design or build the style in Ycode after pasting.
+
+<Callout type="info" title="Webflow paste">
+If your designs already live in Webflow, see [Webflow → Design Paste](/docs/integrations/apps/webflow#design-paste) — the Webflow importer preserves combo classes and global styles as reusable Layer Style stacks, which Figma paste does not.
+</Callout>

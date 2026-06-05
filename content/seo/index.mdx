@@ -50,6 +50,12 @@ Ycode automatically generates:
 
 These files update when you publish or unpublish pages. No manual configuration is required for basic setups.
 
+## hreflang for Multilingual Sites
+
+On sites with more than one published [locale](/docs/localization), Ycode emits `<link rel="alternate" hreflang="...">` tags in every page's `<head>`, so search engines can cluster the locale variants of each page and serve the right one in each region. Tags cover every published locale plus an `x-default` pointing at the default-locale URL.
+
+Both static pages and dynamic CMS pages get the right URLs — dynamic pages use the translated item slug per locale where one exists, and fall back to the default slug otherwise. Preview, error, and `noindex` pages are excluded. The same alternates are reused by `sitemap.xml`, so the two surfaces can't drift.
+
 ## Custom Code for Structured Data
 
 Inject custom code in the head or body for structured data (JSON-LD). Use this for:

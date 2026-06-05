@@ -5,11 +5,62 @@ title: Webflow
 import { Callout } from 'nextra/components'
 import { Steps } from 'nextra/components'
 
-# Webflow CMS Migration
+# Webflow
 
-Import your Webflow CMS collections, items, and assets into Ycode. The migration reads your Webflow data through its API and recreates everything as Ycode collections.
+The Webflow integration covers two workflows:
 
-## What Gets Imported
+- **Design paste** — copy layers from the Webflow Designer and paste them straight into the Ycode canvas, with combo classes and global styles preserved.
+- **CMS migration** — import Webflow CMS collections, items, and assets into Ycode collections.
+
+Both are configured from **Integrations → Apps → Webflow**, in their respective Design and CMS settings sections.
+
+## Design Paste
+
+Copy elements in the Webflow Designer with the standard copy shortcut, then paste them into Ycode (canvas, layer menu, or right-click "Paste after / inside"). Ycode reads the Webflow XSCP clipboard format and recreates the layers — including images, text, links, and structural nesting — with the same styling the source page has.
+
+Combo classes and global styles are preserved as an ordered stack of [Layer Styles](/docs/editor/design-controls#layer-styles) per layer, so a button using `button` + `button.is-primary` in Webflow becomes a layer with two stacked styles in Ycode and renders identically. Reusable global classes deduplicate across pastes — pasting two cards that share `card-title` only creates one `card-title` Layer Style.
+
+### Connect a Webflow site
+
+The first paste needs the **Design URL** of a published Webflow site connected so Ycode can fetch the global stylesheet. Without it, pasted layers would land with bare, unstyled local styles that a later re-paste can't upgrade in place — pasting is gated until a Design URL is set.
+
+<Steps>
+
+### Open Webflow settings in Ycode
+
+Go to **Integrations → Apps → Webflow** and open the **Design** section.
+
+### Paste the URL of any published page
+
+Enter a URL from your live Webflow site (for example, `https://your-site.webflow.io/` or your custom domain). Ycode auto-discovers the global stylesheet from that page and caches it for the session.
+
+### Paste from Webflow
+
+Select layers in the Webflow Designer, copy them, and paste into the Ycode canvas. A "Pasting from Webflow…" indicator shows live per-layer progress while the import runs.
+
+</Steps>
+
+<Callout type="info" title="Stylesheet updates">
+If you publish changes in Webflow and want the next paste to pick them up, edit the Design URL (or disconnect and reconnect) to invalidate the cached stylesheet. Ycode refetches it on the next paste.
+</Callout>
+
+### What Transfers
+
+- **Layout** — div blocks, sections, containers, grids, columns, flex children, with auto-layout converted to flexbox
+- **Typography** — fonts, sizes, weights, line height, letter spacing, alignment, color
+- **Images** — uploaded to the Ycode asset library and referenced by the new layers
+- **Links** — internal page links, external URLs, anchors
+- **Combo classes and global styles** — modeled as an ordered stack of Layer Styles per layer
+- **State and media variants** — hover, focus, active, and breakpoint variants from the global stylesheet
+- **Rotation, aspect ratio, fills** — preserved where they map to Ycode design controls
+
+If a paste lands while a Design URL is connected but the stylesheet fetch fails (transient network issue, host blocked, etc.), the paste still goes through using just the inline class information — without the global stylesheet backfill — so a temporary error doesn't block your work.
+
+## CMS Migration
+
+Import your Webflow CMS collections, items, and assets into Ycode. The migration reads your Webflow data through the API and recreates everything as Ycode collections.
+
+### What Gets Imported
 
 - **Collections** — Webflow CMS collections become Ycode collections
 - **Fields** — Field types are mapped to their Ycode equivalents
@@ -18,7 +69,7 @@ Import your Webflow CMS collections, items, and assets into Ycode. The migration
 - **Assets** — Images and files are downloaded and added to the Ycode asset manager
 - **Publish status** — Items that are live in Webflow are published in Ycode
 
-## Setup
+### Setup
 
 <Steps>
 
@@ -31,7 +82,7 @@ Import your Webflow CMS collections, items, and assets into Ycode. The migration
 
 ### Connect to Ycode
 
-1. In Ycode, go to **Integrations → Apps → Webflow**
+1. In Ycode, go to **Integrations → Apps → Webflow** and open the **CMS** section
 2. Paste your Webflow API token
 3. Click **Test** to verify the connection, then **Save**
 
