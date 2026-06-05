@@ -2,6 +2,7 @@
 title: Pages
 ---
 
+import { Callout } from 'nextra/components'
 import { Steps } from 'nextra/components'
 
 # Pages
@@ -47,6 +48,31 @@ Access page settings by selecting the page in the Layers panel or from the Pages
 **Custom Code** — Head and body code injection. Use this for page-specific scripts, styles, or meta tags.
 
 **Auth** — Password protection. When enabled, visitors entering the page see your 401 page with the inline password form; submitting the correct password unlocks the original URL. Restyle the form, copy, icon, and error alert directly on the 401 page in the builder.
+
+**Status** — Draft / Staged. Controls whether the page is included in the live site (see [Publish Status](#publish-status)).
+
+## Publish Status
+
+Every page has a publish status that tells you where it stands relative to the live site:
+
+| Status | Meaning |
+|--------|---------|
+| **Draft** | Hidden from visitors. The page exists in the builder but isn't on the live site; an `eye-off` icon appears next to it in the Pages tab and page selectors. |
+| **Staged** | Ready to go live on the next full publish. The page isn't on the live site yet but will be included the next time you publish. |
+| **Published** | Live on the site and in sync with the builder. |
+| **Published (edited)** | Live on the site, but the builder has unpublished edits beyond what's live. |
+
+### Set as Draft
+
+Right-click a page in the Pages tab (or open the **Status** section of the page settings panel) and choose **Set as draft**. The page is removed from the live site immediately — its routes are cache-invalidated — but stays in your builder so you can keep working on it. Use this to hide a live page without deleting it, or to take a page out of rotation while you redesign it.
+
+### Stage for Publish
+
+The opposite action takes a draft page and stages it for the next publish (**Stage for publish**). Staging doesn't push the page live by itself — it just opts the page into the next full site publish. Pages go live through the full publish so all their dependencies (components, layer styles, color variables, fonts, assets, CMS data) are resolved together.
+
+<Callout type="info" title="Homepage and error pages stay live">
+The homepage and error pages (401, 404, 500) must always be available, so they can't be set as draft. The Status toggle is hidden for those pages.
+</Callout>
 
 ## Folders and Page Tree
 
