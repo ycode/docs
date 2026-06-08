@@ -118,6 +118,21 @@ Control positioning and stacking:
 - **top** / **right** / **bottom** / **left** — Offset values
 - **zIndex** — Stacking order
 
+## UI States
+
+Most design controls accept different values per **UI state** so the same element can look one way at rest, another on hover, focus, or while active. Open the **State selector** at the top of the Design panel and switch to the state you want to style — the rest of the panel keeps the same controls, but every change you make now writes to that state only.
+
+| State | Activates when |
+|-------|----------------|
+| **Default** | Always (the base look) |
+| **Hover** | The pointer is over the element |
+| **Focus** | The element has keyboard or programmatic focus (inputs, buttons, links) |
+| **Active** | The element is being pressed |
+| **Disabled** | The element has the `disabled` attribute |
+| **Current** | The element is a link or nav link that points to the page currently being viewed (`aria-current="page"`) — used for highlighting the active page in a navigation menu, the current pagination item, or the active slider bullet |
+
+States stack with breakpoints, so a hover style set on desktop inherits down to tablet and mobile unless you override them per breakpoint. The **Current** state is available on any element that has a link configured, not just dedicated nav-link elements.
+
 ## Layer Styles
 
 Layer Styles are reusable saved style sets. You apply them to elements to keep design consistent across the site. A layer can hold an **ordered stack** of Layer Styles — useful for building base + modifier patterns (`button` + `button-primary`, `card` + `card-featured`) and for high-fidelity Webflow paste, where combo classes import as stacked styles.

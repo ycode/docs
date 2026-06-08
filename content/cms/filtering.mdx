@@ -108,6 +108,15 @@ When you use **is one of** or **is not one of**, a multi-select dropdown loads i
 | **has items** | At least one linked item |
 | **has no items** | No linked items |
 
+## Current Page Filter
+
+On a [dynamic page](/docs/cms/dynamic-pages), any field-based condition can compare against the **current page's CMS item** instead of a fixed value. This is the classic "Current Tag", "Current Category", or "Related Posts by Author" pattern.
+
+- **Reference / multi-reference fields** — pick the field, choose the operator (`is one of`, `contains all of`, etc.), then tick **Current page item** in the value picker. The filter resolves to the item the page is rendering against at render time. For example, on a Tags dynamic page, a Posts collection list can show only posts whose `tags` field references the current tag.
+- **Scalar fields** (text, number, boolean, date) — choose **Current X** in the value dropdown to compare against a matching field on the current page's item. For example, on an Author dynamic page, list only posts whose `author_name` equals the current page's author name.
+
+The picker marks current-page options with a lightning icon and labels them with the singular form of the source collection (Tags → **Current Tag**, Categories → **Current Category**). The "contains exactly" operator is hidden while bound to the current item (it would behave the same as "contains the current item"). Editor preview reflects the item picked in the dynamic-page item picker, so you can switch items and see the filtered list update in place.
+
 ## Item ID
 
 In addition to field-based conditions, you can filter by an item's own identity. Choose **Item ID** in the add-condition dropdown to match against a specific set of items.

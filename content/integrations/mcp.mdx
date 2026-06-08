@@ -78,9 +78,13 @@ The MCP server is at version **1.0**, with full feature parity with the Ycode ed
 
 Create, update, duplicate, and delete pages. Manage page settings including SEO metadata, custom code injection, and password protection. Organize pages into folders. Mark pages as the homepage (`is_index`), as a dynamic page (`is_dynamic`), or as an error page (`401`, `404`, `500`). Bind dynamic pages to a CMS collection with a slug field and control how `next-item` / `previous-item` link keywords traverse the collection.
 
+Pages also support draft state via `is_publishable` — set `false` on `create_page` / `update_page` to keep a page out of the live site while leaving it editable in the builder. Pages with `is_publishable: false` are skipped on publish.
+
 ### Layers and Elements
 
 Add any element type — including tables (`table`, `thead`, `tbody`, `tr`, `td`, `th`). Update design properties (layout, typography, spacing, sizing, backgrounds, borders, effects, position, transforms, transitions), text content, images, links, videos, and background images.
+
+Design tools accept a `ui_state` argument (`hover`, `focus`, `active`, `disabled`, `current`) so the same property can take different values per state. The `current` state activates when a link points to the page being viewed, which is how you style the active item in a navigation menu.
 
 Layer settings cover the full surface: sliders (pagination, easing, touch events, slides per group), CMS-bound lightboxes (multi-image fields, groups), maps (Mapbox / Google Maps with coordinates, zoom, marker color, navigation controls), CMS-bound select/radio/checkbox options, plus per-layer `hidden`, `filter_on_change`, and placeholder flags.
 
@@ -97,6 +101,16 @@ Insert pre-built layout templates — hero sections, headers, feature grids, foo
 Create and manage collections, fields, items, and item values. Field types include text, rich text, number, boolean, date, asset (image / audio / video / document, with optional `multiple`), reference, `option` (with custom choices), and `count` (computed from a referenced collection).
 
 Add per-field metadata (`default`, `fillable`, `hidden`, `is_computed`), set a default `sorting` on each collection (`field`, `direction`), reorder fields with `reorder_collection_fields`, and reposition manually-sorted items with `set_collection_item_order`.
+
+### Dynamic Content (Collection Lists, Bindings, Visibility)
+
+Bind layers to CMS data without leaving the agent:
+
+- `bind_collection_layer` turns a layer into a Collection List bound to a collection, with sorting, limit, pagination (Pages or Load More), and **nested-collection sourcing** from a reference, multi-reference, multi-asset, or inverse-reference field — useful for "show this category's products" or "show this post's tags" patterns.
+- `set_collection_filters` writes filter rules as AND-of-OR condition groups. Conditions can compare a field to a static value, to a **visitor-facing filter input** (`input_layer_id`), or to the **current page's item** on dynamic pages (the "Current Tag" / "Current Category" pattern). Item ID conditions support both selected items and the current page item.
+- `set_layer_visibility` writes show/hide rules for any layer with the same condition model (`field`, `item_id`, and `page_collection` count sources).
+- `bind_layer_field` binds dynamic content onto a layer: text and rich-text values, image `src` / `alt`, video `src` / `poster`, audio `src`, and background images. Pass an optional `prefix` / `suffix` for inline formatting.
+- `set_dynamic_text` composes one text node from an ordered list of literal strings and field references — useful for "Posted on `{Date}` by `{Author}`" patterns.
 
 ### Components
 
@@ -130,7 +144,7 @@ Translations default to **completed** so they appear on the live site after publ
 
 ### Styles
 
-Create, apply, update, and delete reusable layer styles for consistent design across the site.
+Create, apply, update, and delete reusable layer styles for consistent design across the site. Use `set_layer_styles` to stack multiple styles on a single layer in priority order — the same combo-class model the editor uses, where later styles in the stack win on conflicting properties.
 
 ### Assets
 

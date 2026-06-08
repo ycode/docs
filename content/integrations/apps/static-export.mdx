@@ -100,6 +100,16 @@ npx tsx --env-file=.env scripts/export.ts
 
 The CLI reads the same configuration you set in the integration panel and runs the export without a Ycode server process. Useful for scheduled exports, CI pipelines, or scripted deployments.
 
+## Custom Code
+
+Custom code added in Ycode is emitted into the static export the same way it is on a live SSR site:
+
+- **Global custom code** (Settings → General → Custom Code) is injected into every page's `<head>` and pre-`</body>`.
+- **Per-page custom code** (Page Settings → Custom Code) is injected only into that page's HTML.
+- **Dynamic-page placeholders** like `{{Title}}` resolve per item, so each generated CMS item page carries its own resolved snippet.
+
+This covers analytics (GA / GTM / Plausible / PostHog), Google Search Console verification, custom font loaders, structured-data JSON-LD, and any third-party widget tag — all included in the exported HTML, in the same order as on the live site (global first, then per-page). Pages with no custom code ship byte-identical output to previous exports.
+
 ## Dynamic Behaviour on Static Output
 
 Static exports render once, so anything that depends on "now" would normally freeze at export time. To avoid that for the most common case, the exporter ships a small client-side runtime for conditional visibility rules that reference date presets:
