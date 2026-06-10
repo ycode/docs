@@ -26,7 +26,7 @@ Click your workspace name in the dashboard header to open the workspace switcher
 In the dialog, pick a workspace type:
 
 - **Personal** — Free to create. You can spin up additional personal workspaces to group projects by client, topic, or stage.
-- **Agency** — Opens the agency plan picker with a **Monthly** / **Annual** toggle. Confirm your billing interval and continue to Stripe checkout. The workspace is created up front so you return to a real workspace after checkout — even if you abandon the flow.
+- **Agency** — Opens the agency plan picker with a **Monthly** / **Annual** toggle and a **30-day free trial** badge. Confirm your billing interval and continue to Stripe checkout. A payment method is collected up front so the workspace stays live without interruption, but Stripe doesn't charge until the trial ends. The workspace is created up front so you return to a real workspace after checkout — even if you abandon the flow.
 
 After checkout (for agency) or save (for personal), the new workspace appears in the switcher and becomes the active context for new projects.
 
@@ -75,6 +75,15 @@ Agency workspaces unlock the white-label features and bundle every project's hos
 
 Pick your interval when you create the workspace. You can switch between monthly and annual later from the Stripe Customer Portal — the **Manage billing** button on the workspace billing page opens it directly.
 
+### 30-Day Free Trial
+
+Every new Agency Workspace starts with a 30-day free trial:
+
+- A payment method is collected up front through Stripe Checkout. Stripe doesn't charge during the trial; the first invoice runs automatically on the trial end date.
+- The workspace is fully functional during the trial — white-label branding, custom dashboard domain, unlimited projects, and the workspace team are all unlocked from day one.
+- The workspace **Billing** page shows a green "Free trial active — X days left. Your card will be charged $XX/mo on Month Day, Year." banner, so you always know exactly when the first charge will hit.
+- Cancel any time during the trial and your card is never billed (see [Cancelling an Agency Workspace](#cancelling-an-agency-workspace) below).
+
 ### What's Included
 
 - Unlimited projects under one subscription — no per-project Stripe charges for tenants inside the workspace
@@ -112,11 +121,13 @@ Per-project team membership (see [Teams](/docs/cloud/teams)) is the model for pr
 
 ### Cancelling an Agency Workspace
 
-Cancellation happens **immediately** rather than at the end of the billing period — the workspace plan ends right away and the projects inside it pause until you transfer them out or resubscribe.
+Cancellation is **immediate and permanent**: the subscription ends right away, the workspace is deleted, and the white-label branding is removed. There is no resubscribe path back to the same workspace — recreate one if you change your mind.
+
+During the **free trial** the wording on the billing page switches to **Cancel trial** and the confirmation reads "Yes, end trial". The mechanics are the same as a paid cancellation (workspace permanently deleted), but Stripe never charges your card.
 
 Before you cancel:
 
-- **Remove or move custom domains** — Cancellation is blocked while any project in the workspace has a custom domain. Detach the domains or move them somewhere else first.
-- **Plan where the projects go** — Transfer them to a personal workspace (they'll revert to free) or to another agency workspace before cancelling.
+- **Transfer or delete every project in the workspace** — Cancellation (and trial cancellation) are blocked while any project still lives inside the workspace. Move projects to a personal workspace (they'll revert to free) or to another agency workspace first, or delete them.
+- **Remove or move custom domains** — Project-level custom domains block transfer out of an agency workspace, so detach them before moving the project.
 
-When cancellation succeeds, the workspace-level dashboard domain is removed automatically and the workspace navigation is disabled for inactive subscriptions. Resubscribing from the billing page restores access.
+A workspace can't be deleted directly while an Agency subscription (paid or trialing) is active — cancellation is the unified delete path. This keeps Stripe subscriptions and Ycode workspaces in lockstep, so you never end up paying for something that no longer exists.

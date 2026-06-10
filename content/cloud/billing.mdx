@@ -41,11 +41,15 @@ Agency workspaces use a single flat subscription that covers unlimited projects 
 
 Pick the billing interval when you create the workspace. The workspace billing page surfaces the current interval and price, and the Stripe Customer Portal lets you switch between monthly and annual at any time.
 
+### Free Trial
+
+Every new Agency Workspace starts with a **30-day free trial**. Stripe collects a payment method up front but doesn't charge until the trial ends. While the trial is active, the workspace **Billing** page shows a `Free trial active — X days left. Your card will be charged $XX/mo on Month Day, Year.` banner so the first-charge date is always visible. Cancelling during the trial ends it immediately without billing your card; see [Cancelling an Agency Workspace](/docs/cloud/workspaces#cancelling-an-agency-workspace) for the cancellation rules.
+
 ### Managing the Workspace Subscription
 
 Open the **Billing** page in the workspace navigation, then **Manage billing** to launch the Stripe Customer Portal. From there you can update payment methods, switch intervals, download invoices, and cancel.
 
-See [Cancelling an Agency Workspace](/docs/cloud/workspaces#cancelling-an-agency-workspace) for the cancellation rules — cancellation is immediate, pauses every project in the workspace, and is blocked while any project has a custom domain.
+See [Cancelling an Agency Workspace](/docs/cloud/workspaces#cancelling-an-agency-workspace) for the cancellation rules — cancellation is immediate and permanently deletes the workspace, and is blocked while any project still lives inside it.
 
 <Callout type="info" title="Migrating from Legacy">
 If you migrated from Ycode Legacy, your existing subscription and pricing carry over automatically. You keep your current price and get all features of the new Ycode.
