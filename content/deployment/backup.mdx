@@ -52,6 +52,10 @@ After a successful restore, the editor reloads with the imported project data.
 Restoring from a backup replaces all current project data. Pages, collections, assets, and all other content are overwritten. Create a backup of your current project first if you need to preserve it.
 </Callout>
 
+<Callout type="info" title="Backup size on Ycode Cloud">
+On Ycode Cloud, restores up to **50 MB** are supported. The browser uploads the backup directly to storage and the import runs by reference, so large projects with many embedded assets restore without hitting request-size limits. Self-hosted Ycode has no fixed cap beyond your own infrastructure.
+</Callout>
+
 ## Encryption
 
 Backups can be encrypted with a password using AES-256-GCM encryption. When you set a password during backup creation, the file is encrypted and cannot be restored without the same password. Use encryption when sharing backups or storing them in untrusted locations.

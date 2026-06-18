@@ -51,6 +51,25 @@ Double-click a layer name in the tree to rename it. Renaming helps you identify 
 
 **Lock** — Toggle the lock icon to prevent accidental edits. Locked elements remain visible but cannot be selected or modified until you unlock them.
 
+## Copy and Paste
+
+Copy any layer or selection and paste it back into the same project, into another tab, or into a different Ycode project entirely. Right-click a layer and choose **Copy**, then right-click the destination and choose **Paste after** or **Paste inside** — or use the standard keyboard shortcuts.
+
+**Same tab** — Pastes the original layer tree from memory.
+
+**Across tabs and projects** — Ycode bundles the copied layers together with every project-scoped dependency they rely on: layer styles, components (and their variants), assets, fonts, and color variables. The destination project hydrates anything that's missing — color-variable tokens are recreated, `var(--id)` references in classes are rewritten, components are added, and assets are imported — so pasted elements look the same as they did in the source.
+
+### What Doesn't Transfer
+
+A few things can't travel across projects and are stripped or neutralized on paste:
+
+- **CMS bindings** — Collection-bound text, images, and lists lose their bindings, because the destination project doesn't have the same collections and items.
+- **Page links** — Internal links to pages that don't exist in the destination are neutralized; external URLs are preserved.
+- **Non-Google fonts** — Custom-uploaded fonts won't auto-install in the destination; you'll see a warning and need to upload them manually.
+- **Circular component pastes** — You can't paste a component into itself or a descendant of itself.
+
+The clipboard bundle has a size cap. Very large copies (e.g. an entire long page with hundreds of assets) may exceed it; in that case, copy in smaller chunks.
+
 ## HTML Import and Export
 
 You can import HTML into the layer tree or export layers as HTML.

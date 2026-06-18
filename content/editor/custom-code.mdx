@@ -50,6 +50,18 @@ When the page renders for a collection item, `{{title}}`, `{{excerpt}}`, and `{{
 Placeholder field names must match your collection schema exactly. Invalid or missing fields render as empty strings.
 </Callout>
 
+## Custom Attributes
+
+Add arbitrary HTML attributes to any layer without writing custom code. Select a layer, open the **Settings** panel, and use the **Custom Attributes** section to add a name/value pair (for example `rel="nofollow"`, `data-tracking-id="hero-cta"`, `fetchpriority="high"`, `aria-controls="menu"`).
+
+Each attribute is rendered verbatim on the element on both the canvas and the published site. Attribute keys are stored case-insensitively and mapped to their correct casing automatically, so `fetchpriority`, `crossorigin`, `referrerpolicy`, and similar lowercase forms work without DOM warnings.
+
+To change an existing attribute, click the **…** menu next to it and choose **Edit** — the inline popover is prefilled with the current name and value, and you can rename the key or update the value in place. The same menu has a **Delete** action.
+
+<Callout type="info" title="When to use custom attributes vs custom code">
+Use custom attributes for per-element HTML hooks (analytics IDs, ARIA attributes, link `rel` values, image loading hints). Use Custom Code for `<script>` tags, meta tags, or CSS that applies at the page or site level.
+</Callout>
+
 ## Use Cases
 
 - **Analytics** — Add Google Analytics, Plausible, or other tracking scripts in the head or body

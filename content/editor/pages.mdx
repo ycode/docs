@@ -64,7 +64,7 @@ Every page has a publish status that tells you where it stands relative to the l
 
 ### Set as Draft
 
-Right-click a page in the Pages tab (or open the **Status** section of the page settings panel) and choose **Set as draft**. The page is removed from the live site immediately — its routes are cache-invalidated — but stays in your builder so you can keep working on it. Use this to hide a live page without deleting it, or to take a page out of rotation while you redesign it.
+Right-click a page in the Pages tab (or open the **Status** section of the page settings panel) and choose **Set as draft**. The page is removed from the live site immediately — its routes are cache-invalidated, including any localized URLs — and the URLs respond with a real `404` so search engines deindex them. The page stays in your builder so you can keep working on it. Use this to hide a live page without deleting it, or to take a page out of rotation while you redesign it.
 
 ### Stage for Publish
 
