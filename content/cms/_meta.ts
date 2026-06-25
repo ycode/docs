@@ -4,7 +4,8 @@ const meta: MetaRecord = {
   collections: 'Collections',
   items: 'Items',
   'dynamic-pages': 'Dynamic Pages',
-  filtering: 'Filtering & Sorting'
+  filtering: 'Filtering & Sorting',
+  globals: 'Globals'
 }
 
 export default meta

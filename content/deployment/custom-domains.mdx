@@ -2,32 +2,70 @@
 title: Custom Domains
 ---
 
+import { Callout } from 'nextra/components'
+
 # Custom Domains
 
-Connect your own domain name to your Ycode website. Custom domains are configured in the Vercel dashboard.
+Connect one or more of your own domains to your Ycode site. On **Ycode Cloud**, custom domains are managed inside the dashboard — DNS records, SSL provisioning, ownership challenges and the **Connected** state are all surfaced in the same place.
 
 ## Adding a Custom Domain
 
-1. Open your project in the Vercel dashboard
-2. Go to **Settings** > **Domains**
-3. Enter your domain (e.g. `www.example.com` or `example.com`)
-4. Follow the DNS configuration instructions
+1. Open the project dashboard and go to **Settings** → **Domains**
+2. Click **Add domain**
+3. Enter your domain — either an apex (`example.com`) or a subdomain (`www.example.com`, `app.example.com`)
+4. Click **Add**
 
-Vercel validates domain ownership and provisions an SSL certificate automatically.
+The new domain appears in the domains list with a **Pending DNS** badge and the exact DNS records you need to add.
 
 ## DNS Configuration
 
-Point your domain to Vercel by adding the DNS records shown in the dashboard. Typical setup:
+The DNS records you need are shown inline next to the domain as soon as you add it — no extra click required. The panel stays visible until the domain verifies, so you can come back and copy the values at any time.
 
-- **A record** — Points the root domain to Vercel's IP
-- **CNAME record** — Points `www` (or another subdomain) to your Vercel project
+Typical records:
 
-Exact records depend on your DNS provider. Copy the values from the Vercel domain settings.
+- **Apex domain** (`example.com`) — an **A record** pointing to Ycode's IP
+- **Subdomain** (`www.example.com`) — a **CNAME record** pointing to Ycode
 
-## SSL Certificates
+Multi-part TLDs like `co.uk`, `com.br` or `co.jp` are detected automatically and the correct apex/subdomain record is shown.
 
-Vercel provisions and renews SSL certificates automatically. All traffic is served over HTTPS. No manual certificate management is required.
+Add the record at your DNS provider, then click **Check now** (in the inline panel) or **Check status** (on the domain row) to re-check verification. DNS propagation can take anywhere from a few minutes to 48 hours depending on your provider.
 
-<Callout type="info" title="Tip">
-DNS propagation can take up to 48 hours. Use the Vercel dashboard to check domain status and troubleshoot issues.
+## SSL Provisioning
+
+Once DNS resolves, Ycode automatically provisions an SSL certificate for the domain. The domain moves through three states:
+
+| State | Meaning |
+|-------|---------|
+| **Pending DNS** | Waiting for your DNS records to resolve to Ycode |
+| **Issuing SSL** | DNS is good; the certificate is being issued |
+| **Connected** | DNS resolves and the certificate is live — the domain serves traffic over HTTPS |
+
+SSL provisioning happens **without anyone keeping the Domains page open** — a background sweep advances pending domains every few minutes. A domain only flips to **Connected** once HTTPS is actually live, so you can't accidentally route visitors to a host that can't serve TLS yet.
+
+<Callout type="info" title="No certificate management needed">
+You don't generate, install or renew certificates manually. Once a domain is Connected, the certificate is renewed automatically on Ycode's end.
 </Callout>
+
+## Ownership Challenge
+
+If you add a domain that is already registered against another account on Ycode's hosting provider, the domain row shows a **TXT ownership challenge** instead of (or alongside) the regular DNS records.
+
+The panel gives you a `_vercel` TXT record to add and a **Verify ownership** action. Add the TXT record at your DNS provider, click **Verify ownership**, and the domain proceeds through **Issuing SSL** → **Connected** as usual.
+
+## Re-adding a Domain You Already Own
+
+If you try to add a domain that's already in your own account, Ycode highlights the existing entry with an info notice and scrolls you to it — instead of returning a dead-end "domain in use" error. Use the existing entry rather than creating a duplicate.
+
+## Setting a Primary Domain
+
+When a project has multiple custom domains, mark one as **Primary**. The primary domain is the canonical URL Ycode uses for:
+
+- The published-site link in the builder header
+- Generated sitemaps and `hreflang` alternates
+- 301 redirects from non-primary domains
+
+**Set as primary** is only available once the domain is **Connected**, so the canonical URL is always a host that can actually serve HTTPS.
+
+## Self-Hosted Ycode
+
+On self-hosted Ycode, custom domains are configured in your own infrastructure (Vercel project, reverse proxy, or whatever serves the published site). Set the `NEXT_PUBLIC_APP_URL` environment variable to the primary public URL so sitemaps and redirects use the correct host.

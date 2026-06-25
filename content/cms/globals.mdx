@@ -1,0 +1,72 @@
+---
+title: Globals
+---
+
+import { Callout } from 'nextra/components'
+
+# Globals
+
+**Globals** are site-wide, typed, single-value variables you can inject anywhere in your project. Use them for values that appear on many pages — a company phone number, a current promo headline, an opening-hours block, a Calendly URL — without binding to a CMS collection.
+
+Unlike CMS collections (which hold many items), each global holds one value. Unlike a hand-typed string repeated on twenty pages, a global is the single source of truth: change it once and every page that injects it updates on the next publish.
+
+## Creating a Global
+
+1. Open the **CMS** tab in the left sidebar
+2. Switch to the **Globals** section
+3. Click **Add global** and configure:
+   - **Name** — How you'll find it in binding menus (e.g. "Support email")
+   - **Type** — The data shape (text, number, link, image, rich text, etc.)
+   - **Value** — The current value, edited with the right control for the type
+
+Save the global to add it to your project's draft.
+
+### Supported Types
+
+Globals support the same value types as CMS fields:
+
+- **Text** and **Rich Text** — Inline content, supports formatting on rich text
+- **Number** — Numeric values, optionally formatted
+- **Boolean** — True/false flags (useful in conditional visibility)
+- **Date** — Dates and date-times
+- **Link**, **Email**, **Phone** — URL-style values
+- **Image**, **Audio**, **Video**, **Document** — Asset references
+- **Color** — Pickable color value
+
+## Injecting a Global
+
+Globals appear wherever a CMS field would, under a dedicated **Globals** section in the binding menu:
+
+- **Text and rich-text content** — In the inline data-injection dropdown (the database icon) in the canvas, sidebar text editor, and localization editor. Pick a global to insert it as a chip in the text flow.
+- **Images, videos, and backgrounds** — As a source option on image, video, and background-image bindings.
+- **Links** — As a target on button and link bindings.
+- **Conditional visibility** — As the value being compared in show/hide conditions.
+
+Globals also resolve inside collection loops and dynamic pages, so a header with `{Support email}` works the same whether the page is static or driven by a CMS item.
+
+## Type, Format and Renames Are Live
+
+The label, type, and number/date format of a global are resolved at **render time** on the canvas, the published site, and static HTML exports. That means:
+
+- **Renaming** a global updates every binding instantly — no layer republish required
+- **Changing the type** (e.g. text → rich text) re-renders all bindings with the new shape
+- **Formatting** (e.g. number format, date format) is applied live wherever the global is injected
+
+## Draft / Publish Lifecycle
+
+Globals follow the same draft and publish model as the rest of your project. New globals and edits live in your draft until you publish. The **Publish** popover lists pending global changes alongside page, component, style and collection changes, and reverting a project reverts global drafts back to the last published value.
+
+Deleting a global marks it for deletion; the deletion takes effect at publish, and any bindings that pointed at the deleted global fall back to nothing (or a placeholder for assets).
+
+<Callout type="info" title="Globals vs CMS collections">
+Use a **global** for a single value that appears across the site (a phone number, a hero headline, a logo). Use a **collection** for repeating, structured content with many items (blog posts, team members, products).
+</Callout>
+
+## Common Uses
+
+- **Contact details** — Company phone, email, address, support hours
+- **Marketing copy** — Current promo banner, hero headline, CTA label
+- **Brand assets** — Primary logo, OG image, favicon source
+- **External links** — Calendly, App Store, social profiles
+- **Settings & flags** — Booleans driving conditional visibility (e.g. `Show banner`)
+- **Localization scaffolding** — Translate the global once and every page picks up the localized value

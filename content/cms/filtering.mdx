@@ -181,6 +181,16 @@ Set the **items per page** count to control how many items appear at once. Pagin
 
 When pagination is enabled, Ycode generates pagination controls (previous/next buttons, page info text). You can style these controls through the pagination layer settings in the design panel.
 
+### Translatable Count and Info Text
+
+The pagination **count** ("Showing X of Y") and **info** ("Page X of Y") layers are made of editable text and pagination variable chips, not a fixed string. Click into the text on canvas (or open the localization editor) and:
+
+- Rewrite the surrounding words ("Showing", "of", "Page") to anything you like
+- Translate the wording per locale — translations apply automatically
+- Insert pagination variables from the **database icon** dropdown: `Shown`, `Total`, `Current`, `Pages`
+
+The numeric chips resolve at render time, so reordering, rewording, or translating the surrounding text doesn't break the live counts. The shown count is automatically capped at the total when load-more or filtering is active.
+
 <Callout type="info" title="Tip">
 Combine filters, sorting, and pagination to build complete listing experiences. For example, a product directory with category filters, price sorting, and 12 items per page.
 </Callout>
