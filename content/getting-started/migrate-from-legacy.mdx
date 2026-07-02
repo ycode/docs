@@ -1,27 +1,24 @@
 ---
-title: Migrate from Legacy
+title: Ycode Legacy Shutdown
 ---
 
 import { Callout } from 'nextra/components'
-import { Steps } from 'nextra/components'
 
-# Migrate from Ycode Legacy
+# Ycode Legacy Shutdown
 
-<Callout type="warning" title="Ycode Legacy is shutting down on July 1, 2026">
-Legacy Ycode is being replaced with the new **open source** and **Ycode Cloud** platform. After July 1, Legacy Ycode will no longer be accessible and any projects still hosted on the legacy platform will go offline. We recommend migrating sooner rather than later so you have plenty of time to review everything before the shutdown. If you run into any issues, reach out to us on [Discord](https://discord.gg/nuGC2JDWqW) or email us at [info@ycode.com](mailto:info@ycode.com) — we're happy to help.
+<Callout type="warning" title="Ycode Legacy has been shut down">
+Ycode Legacy was retired on **July 1, 2026**. The legacy builder and API are no longer accessible, and legacy-hosted sites are offline. All active projects were migrated to the new Ycode ahead of the shutdown.
 </Callout>
 
-You can transfer your entire Ycode Legacy project to the new Ycode — including design, pages, CMS content, assets, and your subscription. The migration pulls your project data using your Legacy API key and recreates everything in the new platform.
+## What Happened
 
-If you migrate to Ycode Cloud, you keep your current pricing. The Ycode Cloud plan includes unlimited pages, 20,000 CMS items, unlimited form entries, unlimited languages, and more. See [Ycode Cloud pricing](https://www.ycode.com/#pricing) for details.
+The old Ycode Legacy platform has been replaced by the new **open source** Ycode and **Ycode Cloud** — a rebuilt visual builder with a modern editor, CMS, localization, animations, static export, and much more.
 
-<Callout type="info" title="Refund option">
-If you are on an **annual plan** and prefer not to migrate, you are entitled to a **pro-rated refund** of your remaining subscription. To request a refund, email [info@ycode.com](mailto:info@ycode.com) with the subject line "Refund Request" before June 30, 2026.
-</Callout>
+Every active Legacy project was migrated to the new platform before July 1, 2026. Your project should already be available in your [Ycode Cloud dashboard](/docs/cloud/dashboard), signed in with the email address you used on Ycode Legacy.
 
-## What Gets Transferred
+## What Was Transferred
 
-The migration brings over your full project:
+Migration brought over the full project:
 
 - **Pages and layouts** — All pages with their layer structure, styles, and settings
 - **Components** — Reusable components and their configurations
@@ -30,99 +27,25 @@ The migration brings over your full project:
 - **Forms** — Form configurations and submission data
 - **Fonts** — Custom and Google Fonts settings
 - **Site settings** — Global configuration, SEO settings, and custom code
-- **Subscription** — Your current billing plan transfers to the new Ycode
+- **Subscription** — Your existing plan and pricing carried over automatically
 
-## Migration Steps
+## Your Subscription
 
-<Steps>
+If you had a paid subscription on Ycode Legacy, it carries over to the new Ycode at your existing price. You do not need to set up billing again. See the migration note in [Billing](/docs/cloud/billing) for details.
 
-### Get your API key from Ycode Legacy
+## Can't Find Your Project?
 
-1. Open your project in the **Ycode Legacy** builder
-2. Go to **Settings** in the sidebar
-3. Click **API Tokens** (under the "API access" heading)
-4. Click **Add API token**
-5. Enter a name for the token (e.g., "Migration")
-6. Click **Create token**
-7. **Copy the token immediately** — it is only shown once and cannot be retrieved after closing the dialog
+If you can't find a project you had on Ycode Legacy, or something looks wrong after the migration:
 
-You can also click **Download** to save the token as a text file.
+1. Make sure you're signed in to Ycode Cloud with the **same email address** you used on Ycode Legacy
+2. Check every workspace in the [workspace switcher](/docs/cloud/dashboard#workspace-switcher)
+3. If it's still missing, contact us on [Discord](https://discord.gg/nuGC2JDWqW) or email [info@ycode.com](mailto:info@ycode.com) — we'll help you locate it
 
-<Callout type="info" title="Token visibility">
-The API token secret is displayed only at creation time. If you lose it, you will need to create a new token.
-</Callout>
+## Next Steps
 
-### Create a new project in Ycode
+Now that you're on the new Ycode:
 
-1. Go to your [Ycode Cloud dashboard](/docs/cloud/dashboard) and click **New project**
-2. In the project creation dialog, you will see two options:
-   - **Start from scratch** — Begin with a blank project or template
-   - **Import from Legacy** — Migrate an existing Ycode Legacy project
-3. Select **Import from Legacy**
-
-### Enter your Legacy API key
-
-1. Paste the API token you copied from Ycode Legacy
-2. Click **Import** to start the migration
-
-Ycode connects to your Legacy project, reads all project data through the API, and recreates it in the new platform. This includes pages, layers, components, CMS collections and items, assets, settings, and your subscription.
-
-### Wait for the migration to complete
-
-The migration may take a few moments depending on the size of your project (number of pages, CMS items, and assets). You will see a progress indicator while the transfer is in progress.
-
-Once complete, your project opens in the new Ycode editor with all your content and design intact.
-
-### Connect your domain
-
-After the migration, update your domain's DNS settings to point to the new Ycode. Go to your domain registrar and update the DNS records as described in the [Custom Domains](/docs/deployment/custom-domains) documentation. Once the DNS changes propagate, your site will be served from the new Ycode.
-
-</Steps>
-
-## After Migration
-
-- **Review your pages** — Open each page to verify the layout and content transferred correctly
-- **Check CMS data** — Browse your collections to confirm items and field values are present
-- **Test forms** — Verify form configurations and any connected integrations
-- **Verify assets** — Confirm images and files are displaying correctly
-- **Connect your domain** — Update your DNS settings to point to the new Ycode (see [Custom Domains](/docs/deployment/custom-domains))
-- **Publish** — When everything looks good, publish your site from the new Ycode
-
-<Callout type="info" title="Subscription">
-Your subscription plan from Ycode Legacy carries over to the new Ycode automatically. You do not need to set up billing again.
-</Callout>
-
-## Re-import from Legacy
-
-If you need to refresh an already-imported project with the latest content from Ycode Legacy — for example, after fixing something in Legacy or making more edits there before the shutdown — you can re-import in place without recreating the project.
-
-<Callout type="warning" title="Destructive content refresh">
-Re-import **replaces** pages, components, collections, items, assets, fonts, styles, and site settings with a fresh dump from the Legacy app. Any edits you made in the new builder since the last import will be lost. Custom domains, subdomain, project owner, and your subscription are preserved.
-</Callout>
-
-<Steps>
-
-### Open the project menu
-
-On the [Ycode Cloud dashboard](/docs/cloud/dashboard), find the legacy-imported project and click the **⋯** menu on its card.
-
-### Choose "Re-import from Legacy"
-
-The option only appears for projects that were originally imported from Legacy. A confirmation dialog explains the destructive nature of the refresh.
-
-### Paste your Legacy API key and confirm
-
-Enter the API token for the same Legacy app the project was originally imported from. Re-import is restricted to the project owner — if you're trying to refresh a project that belongs to someone else, ask them to run it.
-
-</Steps>
-
-The re-import runs the same idempotent migration as the original import. The subdomain, any connected custom domains, and the Stripe subscription are all left untouched.
-
-## Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| Token not working | Ensure you copied the full token. If lost, create a new one in Legacy under Settings → API Tokens |
-| Migration seems stuck | Large projects with many assets may take longer. Wait for the process to complete before refreshing |
-| Missing content after migration | Check that the content existed in the Legacy project before migration. Some draft or deleted items may not transfer |
-| Re-import rejected with a 409 | The API key belongs to a different Legacy app than the one this project was originally imported from. Use the API key from the original Legacy app. |
+- Open your migrated project from the [Ycode Cloud dashboard](/docs/cloud/dashboard)
+- Review each page and CMS collection to confirm content transferred correctly
+- Point your custom domain at the new Ycode following the [Custom Domains](/docs/deployment/custom-domains) guide
+- Publish when you're ready
