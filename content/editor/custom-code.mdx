@@ -22,6 +22,10 @@ For code that appears on every page, use **Settings** (in the project or site co
 
 Global code runs on every page. Use it for site-wide analytics, fonts, or common scripts. Page-specific code runs in addition to global code.
 
+## Syntax Highlighting
+
+Every custom code input in Ycode — page settings head/body, global settings head/body, the HTML embed element, and the rich-text HTML embed dialog — uses a syntax-highlighted code editor. HTML tags, attributes, and text are colored, and embedded JavaScript inside `<script>` blocks and CSS inside `<style>` blocks are highlighted in their own languages (keywords, strings, selectors, properties, functions, and so on). Leading indentation renders as subtle middle dots so nested markup is easy to scan.
+
 ## CSS Preview in the Builder
 
 CSS you place in `<style>` blocks inside the head — global or per-page — is also injected into the builder canvas, so it previews live while you design. This is most useful for declaring CSS variables in `:root` and then consuming them through Tailwind arbitrary values like `text-[var(--brand)]` or `bg-[var(--surface)]`.

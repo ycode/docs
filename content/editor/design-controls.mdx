@@ -19,6 +19,12 @@ Control how the element arranges its children:
 - **gridTemplateColumns** / **gridTemplateRows** — Grid column and row definitions
 - **divideX** / **divideY** — Dividers between children
 
+### Self Layout
+
+When the selected layer is a **child** of a flex or grid container, a **Self layout** section appears with an `alignSelf` control that overrides the parent's `alignItems` for this one child. Options are Auto (no override), Start, Center, End, and Stretch — useful for un-stretching a single badge, pill, or button in an otherwise stretched flex column.
+
+The icons rotate to match the parent's axis, and the parent type (e.g. Flex row) is shown in muted text so you can see what you're overriding. Self layout is available on text layers too, even though they don't show the main Layout panel.
+
 ## Typography
 
 Control text appearance:

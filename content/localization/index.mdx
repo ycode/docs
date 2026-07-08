@@ -18,6 +18,17 @@ Build multilingual websites with Ycode's localization system. You add languages,
 
 Each locale has a code (e.g. `en`, `fr`, `de`), a label, and flags for default and published status.
 
+### Regional Locale Codes
+
+To target a specific region (for example, Belgian Dutch or Swiss Italian), the Add/Edit locale dialog splits into two fields:
+
+- **Locale code** — picked from the language list (`nl`, `it`, `en`, …)
+- **Regional code** — an editable field for the country subtag (`BE`, `CH`, `GB`, …)
+
+The two are combined into the stored code (`nl` + `BE` → `nl-be`) and shown live next to the custom name as a code pill (`NL-BE`). The dialog inline-validates the shape and rejects duplicates so you never end up with two locales for the same region.
+
+Regional codes flow through everywhere the locale code is used — the URL path (`/nl-be/…`), the `hreflang` alternates, the sitemap, the on-canvas locale selector, and the preview URL.
+
 ## Draft and Publish
 
 Locales and translations use a draft/publish workflow. You edit translations in draft mode and publish when ready. Visitors see only completed, published translations until you publish updates. The builder canvas and preview show in-progress drafts so you can review work before it ships.
