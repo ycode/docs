@@ -6,43 +6,32 @@ import { Callout } from 'nextra/components'
 
 # Workspaces
 
-Workspaces are containers that group your Ycode Cloud projects. Every account gets a personal workspace by default, and you can create additional workspaces to organise client work, separate teams, or run an agency under your own brand.
+Workspaces are containers that group your Ycode Cloud projects. Every account gets a personal workspace by default, and you can create additional workspaces to organise work by client, topic, or stage.
 
-## Personal vs Agency
+In addition to workspaces you own, you may see **Guest** workspaces — see [Switching Workspaces](#switching-workspaces) below.
 
-| Type | Best for | Billing | Branding | Team |
-|------|----------|---------|----------|------|
-| **Personal** | Solo users, hobby projects, individual sites | Each project pays its own subscription (free or paid) | Ycode-branded dashboard | Per-project teams |
-| **Agency** | Studios, freelancers, anyone managing multiple client sites | One flat workspace subscription covers every project inside | White-label dashboard with your own name, logo, and domain | Workspace-wide team across every project |
-
-Every user automatically gets one personal workspace. Agency workspaces are optional and require an active subscription.
-
-In addition to workspaces you own or are a member of, you may see **Guest** workspaces — see [Switching Workspaces](#switching-workspaces) below.
+<Callout type="info" title="Agency Workspaces are no longer offered">
+Ycode previously offered a paid **Agency Workspace** tier with white-label branding, a custom dashboard domain, and a workspace-wide team. That plan is no longer available. If you had an active Agency Workspace, contact us on [Discord](https://discord.gg/nuGC2JDWqW) or email [info@ycode.com](mailto:info@ycode.com).
+</Callout>
 
 ## Creating a Workspace
 
-Click your workspace name in the dashboard header to open the workspace switcher, then choose **New workspace**.
+Click your workspace name in the dashboard header to open the workspace switcher, then choose **New workspace**. Give it a name and save — the new workspace appears in the switcher and becomes the active context for new projects.
 
-In the dialog, pick a workspace type:
-
-- **Personal** — Free to create. You can spin up additional personal workspaces to group projects by client, topic, or stage.
-- **Agency** — Opens the agency plan picker with a **Monthly** / **Annual** toggle and a **30-day free trial** badge. Confirm your billing interval and continue to Stripe checkout. A payment method is collected up front so the workspace stays live without interruption, but Stripe doesn't charge until the trial ends. The workspace is created up front so you return to a real workspace after checkout — even if you abandon the flow.
-
-After checkout (for agency) or save (for personal), the new workspace appears in the switcher and becomes the active context for new projects.
+Additional workspaces are free to create. They're useful for keeping client work separate, staging experiments, or splitting projects by topic.
 
 ## Switching Workspaces
 
-The workspace switcher in the dashboard header shows every workspace you belong to — owned, joined, and guest. Selecting one filters the dashboard to that workspace's projects and scopes **New project** to it. The switcher also exposes the **New workspace** action.
+The workspace switcher in the dashboard header shows every workspace you belong to — owned and guest. Selecting one filters the dashboard to that workspace's projects and scopes **New project** to it. The switcher also exposes the **New workspace** action.
 
-Your last active workspace is remembered locally, so returning to the dashboard from the editor lands you back where you left off. A `?workspace=` URL parameter or a workspace bound to a custom dashboard domain still wins over the stored choice.
+Your last active workspace is remembered locally, so returning to the dashboard from the editor lands you back where you left off. A `?workspace=` URL parameter still wins over the stored choice.
 
 ### Guest workspaces
 
 If someone invites you to a project inside a workspace you're not a member of, that workspace shows up in the switcher with a **Guest** badge. Inside a guest workspace:
 
 - You only see the specific projects you were invited to — not every project in the workspace
-- The **New project** button is hidden — only workspace owners and admins can create projects
-- Agency editors who haven't been added at the workspace level behave the same way
+- The **New project** button is hidden — only the workspace owner can create projects
 
 Guest access is automatic and follows project-level invites. There is nothing to set up — accepting a project invite is enough for the host workspace to appear in your switcher.
 
@@ -52,82 +41,10 @@ If you don't have a workspace (for example after deleting your last one), Ycode 
 
 ## Transferring Projects
 
-You can move a project between workspaces from the project menu on the dashboard. The transfer dialog explains what changes:
+You can move a project between workspaces you own from the project menu on the dashboard. Transfers are pure reorganisation — the project's team, per-project subscription, custom domains, and every other setting stay the same. Only the workspace it appears under changes.
 
-- **Personal → Agency** — The project's per-project Stripe subscription is cancelled and the project starts running under the agency plan. No more per-project invoice.
-- **Agency → Personal** — The project leaves the agency plan and reverts to the free per-project tier. Add a per-project subscription later if you want paid features back.
-- **Personal → Personal** — Pure reorganisation. Billing and team membership stay the same.
+## Deleting a Workspace
 
-<Callout type="warning" title="Custom domains block agency → personal moves">
-A project with one or more custom domains cannot be moved out of an agency workspace. Remove the custom domains first, or move the workspace itself instead of the project.
-</Callout>
+Open the workspace's settings and choose **Delete workspace**. Deletion is blocked while any project still lives inside — move projects to another workspace you own, or delete them first.
 
-## Agency Workspace Plan
-
-Agency workspaces unlock the white-label features and bundle every project's hosting into one subscription.
-
-### Pricing
-
-| Interval | Price |
-|----------|-------|
-| **Monthly** | $85/month |
-| **Annual** | $70/month (billed yearly) |
-
-Pick your interval when you create the workspace. You can switch between monthly and annual later from the Stripe Customer Portal — the **Manage billing** button on the workspace billing page opens it directly.
-
-### 30-Day Free Trial
-
-Every new Agency Workspace starts with a 30-day free trial:
-
-- A payment method is collected up front through Stripe Checkout. Stripe doesn't charge during the trial; the first invoice runs automatically on the trial end date.
-- The workspace is fully functional during the trial — white-label branding, custom dashboard domain, unlimited projects, and the workspace team are all unlocked from day one.
-- The workspace **Billing** page shows a green "Free trial active — X days left. Your card will be charged $XX/mo on Month Day, Year." banner, so you always know exactly when the first charge will hit.
-- Cancel any time during the trial and your card is never billed (see [Cancelling an Agency Workspace](#cancelling-an-agency-workspace) below).
-
-### What's Included
-
-- Unlimited projects under one subscription — no per-project Stripe charges for tenants inside the workspace
-- Custom dashboard domain for your clients and team
-- Light and dark dashboard logos plus a custom agency name in the browser tab
-- Workspace-wide team with admin and editor roles
-- Custom domains on every project
-
-### Workspace Settings
-
-Open **Settings** from the workspace navigation to manage:
-
-**Branding** — Set the **Agency name** that drives the browser tab title across the dashboard. Upload separate **Light** and **Dark** logos so the dashboard adapts to your client's display preference. Logos can be replaced or removed independently.
-
-**Domains** — Connect a **Dashboard domain** so your team and clients log in at your URL instead of the Ycode default. Project-level custom domains are configured on each individual project.
-
-### Workspace Team
-
-Agency workspaces have a single team that spans every project inside. Manage members from the **Team** page in the workspace navigation.
-
-| Role | Capabilities |
-|------|-------------|
-| **Owner** | Full control — billing, settings, team, all projects |
-| **Admin** | Manage team, settings, and every project in the workspace |
-| **Designer** | Full builder access across every workspace project; no team, settings, or billing access |
-| **Editor** | Edit page content (text, images, CMS items, translations) across every workspace project, without changing structure, design, or settings |
-
-See [Teams → Editor Mode](/docs/cloud/teams#editor-mode) for the stripped-down content surface that the Editor role uses.
-
-Invite collaborators by email. They receive an invitation link and accept it through the standard sign-in flow — new users sign up during acceptance. Once accepted, members see every workspace project on their dashboard automatically.
-
-<Callout type="info" title="Project teams still apply on personal workspaces">
-Per-project team membership (see [Teams](/docs/cloud/teams)) is the model for projects in personal workspaces. Inside an agency workspace, workspace-level membership replaces per-project teams — anyone in the workspace team has access to every project under the agency plan.
-</Callout>
-
-### Cancelling an Agency Workspace
-
-Cancellation is **immediate and permanent**: the subscription ends right away, the workspace is deleted, and the white-label branding is removed. There is no resubscribe path back to the same workspace — recreate one if you change your mind.
-
-During the **free trial** the wording on the billing page switches to **Cancel trial** and the confirmation reads "Yes, end trial". The mechanics are the same as a paid cancellation (workspace permanently deleted), but Stripe never charges your card.
-
-Before you cancel:
-
-- **Transfer or delete every project in the workspace** — Cancellation (and trial cancellation) are blocked while any project still lives inside the workspace. Move projects to a personal workspace (they'll revert to free) or to another agency workspace first, or delete them.
-- **Remove or move custom domains** — Project-level custom domains block transfer out of an agency workspace, so detach them before moving the project.
-
-A workspace can't be deleted directly while an Agency subscription (paid or trialing) is active — cancellation is the unified delete path. This keeps Stripe subscriptions and Ycode workspaces in lockstep, so you never end up paying for something that no longer exists.
+If deleting a workspace leaves your account with none, Ycode routes you to the onboarding screen so you can create a new one before continuing.

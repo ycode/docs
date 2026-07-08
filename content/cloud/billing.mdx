@@ -6,20 +6,13 @@ import { Callout } from 'nextra/components'
 
 # Billing
 
-Ycode Cloud uses Stripe for subscription management and payments. Billing depends on the [workspace](/docs/cloud/workspaces) the project lives in:
+Ycode Cloud uses Stripe for subscription management and payments. Each project has its own subscription — free projects live forever with the full editor, and you upgrade per project to unlock paid features like custom domains.
 
-- **Personal workspace** — Each project has its own subscription. Free projects live forever; upgrade per project to unlock paid features like custom domains.
-- **Agency workspace** — One workspace-level subscription covers every project inside. Individual projects don't carry their own subscription.
-
-## Personal Workspace Billing
-
-Projects in a personal workspace start on **Free** with full editor features. Custom domains and other paid features unlock when you subscribe per project.
-
-### Subscribing
+## Subscribing
 
 Subscribe to a project from its settings. Once subscribed, the project gets access to all paid features including custom domains, publishing, and priority support.
 
-### Managing the Subscription
+## Managing a Subscription
 
 Click the **⋮** menu on a project card and select **Billing details** to open the Stripe Customer Portal, where you can:
 
@@ -27,29 +20,6 @@ Click the **⋮** menu on a project card and select **Billing details** to open 
 - **Update payment methods** — Change your credit card or payment details
 - **Change plan** — Switch between monthly and annual billing
 - **Cancel subscription** — End the subscription at the end of the current billing period
-
-## Agency Workspace Billing
-
-Agency workspaces use a single flat subscription that covers unlimited projects inside the workspace. Per-project billing is disabled on agency tenants — the per-card **Billing details** action only applies to personal-workspace projects.
-
-### Pricing
-
-| Interval | Price |
-|----------|-------|
-| **Monthly** | $85/month |
-| **Annual** | $70/month (billed yearly) |
-
-Pick the billing interval when you create the workspace. The workspace billing page surfaces the current interval and price, and the Stripe Customer Portal lets you switch between monthly and annual at any time.
-
-### Free Trial
-
-Every new Agency Workspace starts with a **30-day free trial**. Stripe collects a payment method up front but doesn't charge until the trial ends. While the trial is active, the workspace **Billing** page shows a `Free trial active — X days left. Your card will be charged $XX/mo on Month Day, Year.` banner so the first-charge date is always visible. Cancelling during the trial ends it immediately without billing your card; see [Cancelling an Agency Workspace](/docs/cloud/workspaces#cancelling-an-agency-workspace) for the cancellation rules.
-
-### Managing the Workspace Subscription
-
-Open the **Billing** page in the workspace navigation, then **Manage billing** to launch the Stripe Customer Portal. From there you can update payment methods, switch intervals, download invoices, and cancel.
-
-See [Cancelling an Agency Workspace](/docs/cloud/workspaces#cancelling-an-agency-workspace) for the cancellation rules — cancellation is immediate and permanently deletes the workspace, and is blocked while any project still lives inside it.
 
 <Callout type="info" title="Migrated from Legacy">
 Ycode Legacy was shut down on July 1, 2026 and all active projects were migrated to the new Ycode. If you had a paid subscription on Legacy, it carried over automatically at your existing price with all features of the new Ycode unlocked.
@@ -62,10 +32,7 @@ Each project on the dashboard shows a category badge that reflects its billing s
 | Category | Description |
 |----------|-------------|
 | **Free** | The project is on the free tier with full editor features; custom domains are locked |
-| **Paid** | The project has an active per-project subscription with custom domains and other paid features unlocked |
+| **Paid** | The project has an active subscription with custom domains and other paid features unlocked |
 | **Lifetime** | A lifetime entitlement granted by Ycode (e.g. legacy migration with a permanent grant) |
 | **Past due** | Payment failed; update the payment method to avoid interruption |
 | **Cancelled** | The subscription ended; some features may be limited |
-| **Suspended** | The project is paused — typical for paused agency workspaces or admin actions |
-
-Projects inside an active agency workspace inherit the workspace's plan and don't show a per-project paid badge.
