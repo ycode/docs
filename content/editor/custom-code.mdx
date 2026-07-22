@@ -50,8 +50,16 @@ For example, in the head section:
 
 When the page renders for a collection item, `{{title}}`, `{{excerpt}}`, and `{{featuredImage}}` are replaced with that item's field values.
 
+### Asset Fields Resolve to Absolute URLs
+
+Image, video, and file field placeholders resolve to **absolute** public URLs (with the project's primary domain), so custom code such as JSON-LD, `og:image`, and Twitter Card tags reference fully-qualified, crawlable URLs. Static HTML exports emit the same resolved URLs.
+
+### Nested References with Dot Notation
+
+Reference fields can be traversed with dot notation: `{{Reference.Field}}` resolves to the named field on the referenced item, and chains work to arbitrary depth (`{{Author.Company.Name}}`). The variable picker in the code editor exposes reference fields as submenus so you can browse into a chain and insert the correct token without typing it by hand.
+
 <Callout type="warning" title="Field names">
-Placeholder field names must match your collection schema exactly. Invalid or missing fields render as empty strings.
+Placeholder field names must match your collection schema exactly. Invalid or missing fields are left as-is (they aren't replaced), so a typo is easy to spot on the rendered page.
 </Callout>
 
 ## Custom Attributes

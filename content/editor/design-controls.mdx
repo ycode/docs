@@ -158,7 +158,8 @@ The Layer Styles panel shows the stack as an ordered row of chips, low priority 
 - **Create** — style an element, then save the current styles as a Layer Style from the context menu or Design panel. Give it a name. Names don't need to be unique across the site — two unrelated styles can both be called `Card` if they belong to different sections.
 - **Apply** — pick an existing Layer Style from the panel to stack it onto the active layer. Apply multiple styles to build combinations.
 - **Customize / Update / Reset** — per chip: **Customize** turns the chip's current values into per-layer overrides, **Update** writes the chip's values back into the underlying Layer Style (affecting every layer that uses it), and **Reset** discards per-chip overrides and returns the chip to its saved values.
-- **New** — forks the active chip in place: creates a new Layer Style from the current values and swaps the chip over to it, so you can branch a variant without breaking the original.
+- **New** — appends a fresh Layer Style to the stack (Webflow-style combo class). Existing chips are kept as-is; the new style is added on top and becomes the active chip. On a style-less layer, **New** captures the current inline styling into the new style.
+- **Duplicate** — forks the active chip into a new Layer Style with the same values, and swaps the chip over to it. Use this to branch a variant without breaking the original style.
 - **Detach** — unlinks the active chip from its Layer Style while keeping its visual properties as a local override on the layer. The other chips in the stack are unaffected.
 - **Edit** — edit a Layer Style to update every layer that uses it. Changes propagate to every instance and every stack the style appears in.
 
