@@ -13,7 +13,8 @@ const meta: MetaRecord = {
   slider: 'Slider',
   lightbox: 'Lightbox',
   interactions: 'Interactions',
-  'custom-code': 'Custom Code'
+  'custom-code': 'Custom Code',
+  ai: 'AI Agent'
 }
 
 export default meta

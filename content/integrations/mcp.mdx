@@ -9,6 +9,10 @@ import { Steps } from 'nextra/components'
 
 Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI coding tools build and edit your site. Connect tools like Cursor, Claude (Desktop or web), ChatGPT, or Windsurf to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
 
+<Callout type="info" title="Built-in alternative">
+For an AI that lives inside the Ycode editor — no external client to install — see the [AI Agent](/docs/editor/ai). It uses the same tool registry as MCP (~130 tools), just wired into the builder's Agent tab instead of an external client. The one difference: the in-app agent can't publish (only you can), while MCP tools can.
+</Callout>
+
 ## How to Connect
 
 The MCP server supports two ways to authenticate:

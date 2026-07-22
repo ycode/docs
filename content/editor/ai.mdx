@@ -1,0 +1,152 @@
+---
+title: AI Agent
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# AI Agent
+
+The **AI Agent** is a chat panel built into the Ycode editor. Describe what you want in plain English and the agent builds and edits pages, components, and CMS content directly on the canvas — using your site's real color variables, fonts, components, and shared styles instead of generic defaults.
+
+Everything the agent does stays a draft until you hit **Publish**, and every turn has one-click Undo.
+
+<Callout type="info" title="Bring your own key">
+The agent runs on your own API key from Anthropic, OpenAI, or Google Gemini. Pick the provider you already pay for, add the key once, and Ycode routes chat requests through it. Ycode doesn't charge for AI usage — you pay your provider directly.
+</Callout>
+
+## Setup
+
+Before the agent can chat, connect at least one provider key.
+
+<Steps>
+
+### Open AI settings
+
+Go to **Settings → AI** in the builder.
+
+### Add a provider key
+
+Pick a provider — **Anthropic**, **OpenAI**, or **Google Gemini** — and paste your API key. Click **Test** to verify it, then **Save**.
+
+### Choose a key scope
+
+Each key can be saved as one of:
+
+- **Shared with project** — Everyone on the project uses this key. Best for a solo builder or a small team sharing usage.
+- **Only me** — The key belongs to your user and takes priority over the shared key when you send messages. Other users on the project fall back to the shared key. Useful when contributors want to bill their own account.
+
+### Pick default and allowed models
+
+Enable the specific models you want available in the model picker, and mark one as the **Default**. Disabled models don't appear in the chat.
+
+### Open the Agent tab
+
+Back in the editor, the right sidebar shows an **Agent / Human** tab switch at the top. Switch to **Agent** and start chatting.
+
+</Steps>
+
+<Callout type="info" title="Turning the agent off">
+The AI settings page has a master toggle to disable the agent entirely. When off, the Agent tab is hidden and the chat API refuses requests — useful for locking down a project or freezing changes during a review.
+</Callout>
+
+## Chatting with the Agent
+
+Type a message and the agent takes it from there. It streams a markdown reply back as it works, with each tool call rendered inline in the order it happened so you can watch the agent plan and execute.
+
+### @-mentions
+
+Type `@` in the composer to reference something concrete:
+
+- **Pages** — target a specific page ("update the pricing page…")
+- **Collections** — point at a CMS collection ("add a new field to @Posts…")
+- **Layers** — refer to a specific element on the current page
+- **Components** — edit a component master
+
+Mentions render as inline pills, so the agent (and you) know exactly what's being targeted.
+
+### Pick a layer from the canvas
+
+Instead of hunting for a layer name, enter **pick mode** in the composer and click the layer directly on the canvas. It's added to the message as a mention.
+
+### Attach images and URLs
+
+Drop images or paste URLs into the composer to give the agent extra context — a design reference, a screenshot to replicate, a link to inspiration. Attachments travel with your message.
+
+### Model picker
+
+Switch models on the fly from the composer. The default is whatever you set in Settings → AI; changing it in the chat only affects that turn onwards.
+
+### Usage badge
+
+The composer shows a running badge for the current session: token count in and out, plus an approximate cost. Your provider is the source of truth for billing.
+
+### Session history
+
+Conversations persist per project. Open a past session from the history dropdown to keep going, or start a new one for a separate line of work.
+
+## Per-Turn Undo and Redo
+
+Every message the agent sends back has a **Changes** card summarising what it touched. Hit **Undo** to revert everything from that turn in one click — pages, layers, styles, CMS items, the lot — and **Redo** to re-apply it. Undo is a single unit per turn, so you don't have to reverse a dozen small operations by hand.
+
+Because the agent works on drafts, undo never touches the published site.
+
+## What the Agent Can Build
+
+The AI Agent shares its tool registry with the [MCP Server](/docs/integrations/mcp) — the same ~130 tools that external AI clients (Cursor, Claude Desktop, ChatGPT, Windsurf) use over MCP, minus one: **the agent cannot publish**. Only you can.
+
+That covers:
+
+- **Pages** — create, update, duplicate, and design pages; SEO settings; custom code; folders; dynamic pages bound to CMS collections
+- **Layers** — add, move, style, and delete any layer; batch operations across large trees; import from HTML
+- **Layouts** — use the built-in Ycode layout templates as starting points for sections
+- **CMS** — create collections and fields; add, edit, and reorder items; bind fields to layers; filter and sort collection lists
+- **Components** — create, edit, and nest components; variants; variable overrides; components inside rich text
+- **Styles** — create and apply Layer Styles; combo-class stacks
+- **Assets** — upload and manage images, videos, and files
+- **Fonts** — search and add Google Fonts
+- **Localization** — locales, translations, translatable pagination text
+- **Animations** — add animation presets or build custom GSAP timelines
+- **Forms** — form settings and submission handling
+- **Settings** — project settings, color variables, redirects
+- **Globals** — site-wide typed variables
+
+See [MCP Server](/docs/integrations/mcp) for the full tool reference — the same catalog powers the in-app agent.
+
+## Design Quality
+
+The agent is trained on Ycode's design conventions and uses your site's real design system by default:
+
+- **Design system awareness** — Before every turn, the agent gets the project's color variables, fonts, components, and shared Layer Styles injected as context, so new sections match what's already there instead of inventing new tokens.
+- **Structural rules** — Sections follow the mandated `section → container → content` pattern with sensible spacing, typographic hierarchy, and responsive behaviour.
+- **Visual self-review** — After building, the agent captures a screenshot of the result, has a cheaper model critique it against a design brief, and applies small fixes automatically. You see the final, refined version.
+
+## Canvas Experience
+
+While the agent works, the canvas gives you live feedback:
+
+- **Shimmer overlay** — Touched layers glow so you can see what the agent is editing right now
+- **Streaming sections** — New sections stream onto the canvas one by one behind a build skeleton
+- **Live asset sync** — Fonts the agent adds and images it uploads sync into the editor immediately
+- **Auto-navigation** — The canvas auto-opens the page or component the agent is working on
+- **CMS activity shimmer** — Collection edits show an activity shimmer in the CMS view
+
+The final state of every turn is served as an authoritative snapshot with server-compiled Tailwind CSS, so the canvas reflects exactly what will render on the published site.
+
+## Draft-First: Nothing Ships Automatically
+
+The agent never publishes. Every page, component, collection change, style, and asset stays in your project draft until you explicitly hit **Publish** in the builder. The publish popover lists agent-authored changes alongside your own, so you always see what's about to go live and can undo before it does.
+
+## Rate Limiting
+
+Each user is limited to about 30 chat requests per minute per project. Above that the API returns a friendly error and asks you to slow down. This is a project-side cap; your provider may have its own rate limits.
+
+## Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| **Agent tab missing** | The AI feature is disabled in Settings → AI. Turn it back on. |
+| **"No usable key" empty state** | Add a provider key in Settings → AI and click **Test** to verify. |
+| **Model not appearing in picker** | Enable it in Settings → AI → Models. Only enabled models show up in chat. |
+| **Personal key ignored** | Personal keys are per-user. Confirm you're signed in as the user who saved the key. |
+| **Rate-limited error** | Wait ~60 seconds and retry, or split large tasks across separate turns. |
