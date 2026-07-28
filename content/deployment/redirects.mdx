@@ -32,10 +32,21 @@ Source paths support both exact matches and regex patterns:
 | Pattern | Matches |
 |---------|---------|
 | `/about` | Only the exact path `/about` |
-| `/old-blog/.*` | `/old-blog/` and any path beneath it (zero or more characters) |
-| `/articles/.+` | Any path under `/articles/` with at least one character after the slash |
+| `/old-blog/(.*)` | `/old-blog/` and any path beneath it (zero or more characters), capturing the rest of the path into `$1` |
+| `/articles/(.+)` | Any path under `/articles/` with at least one character after the slash, captured into `$1` |
 
-Exact matches always take priority. If both `/special/page` and `/special/.*` are configured, a request to `/special/page` follows the exact rule.
+Exact matches always take priority. If both `/special/page` and `/special/(.*)` are configured, a request to `/special/page` follows the exact rule.
+
+## Capture Groups
+
+To carry the matched part of the URL into the destination, wrap it in a capture group `(...)` and reference it in the destination with `$1`, `$2`, etc.
+
+| Source | Destination | `/old-path/foo` becomes |
+|--------|-------------|-------------------------|
+| `/old-path/(.*)` | `/new-path/$1` | `/new-path/foo` |
+| `/blog/(\d{4})/(.+)` | `/posts/$2` | `/posts/my-post` (year captured but not used) |
+
+The legacy `$0` token (whole match) is still honored for backward compatibility, but new redirects should prefer numbered capture groups — they're clearer and match how the Add and Edit dialogs describe the feature.
 
 ## Exporting Redirects
 

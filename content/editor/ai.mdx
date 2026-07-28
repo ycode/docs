@@ -12,7 +12,7 @@ The **AI Agent** is a chat panel built into the Ycode editor. Describe what you 
 Everything the agent does stays a draft until you hit **Publish**, and every turn has one-click Undo.
 
 <Callout type="info" title="Bring your own key">
-The agent runs on your own API key from Anthropic, OpenAI, or Google Gemini. Pick the provider you already pay for, add the key once, and Ycode routes chat requests through it. Ycode doesn't charge for AI usage — you pay your provider directly.
+The agent runs on your own API key from **Anthropic**, **OpenAI**, **Google Gemini**, or **xAI (Grok)**. Pick the provider you already pay for, add the key once, and Ycode routes chat requests through it. Ycode doesn't charge for AI usage — you pay your provider directly.
 </Callout>
 
 ## Setup
@@ -27,7 +27,7 @@ Go to **Settings → AI** in the builder.
 
 ### Add a provider key
 
-Pick a provider — **Anthropic**, **OpenAI**, or **Google Gemini** — and paste your API key. Click **Test** to verify it, then **Save**.
+Pick a provider — **Anthropic**, **OpenAI**, **Google Gemini**, or **xAI (Grok)** — and paste your API key. Click **Test** to verify it, then **Save**. Ycode validates the key against the provider's own endpoint and shows a specific error when a key is blocked or the account is disabled.
 
 ### Choose a key scope
 
@@ -39,6 +39,8 @@ Each key can be saved as one of:
 ### Pick default and allowed models
 
 Enable the specific models you want available in the model picker, and mark one as the **Default**. Disabled models don't appear in the chat.
+
+Ycode ships with a curated list per provider — currently **Claude Opus 5** (the default), **Claude Fable 5**, and **Claude Sonnet 5** on Anthropic; **GPT-5.5** and **GPT-5 Mini** on OpenAI; the latest **Gemini 2.x** models on Google; and **Grok 4.5** and **Grok 4.3** on xAI. Older models like **Claude Opus 4.8** are hidden from settings on new projects but stay visible where they were already enabled, so existing workflows don't break.
 
 ### Open the Agent tab
 
@@ -53,6 +55,8 @@ The AI settings page has a master toggle to disable the agent entirely. When off
 ## Chatting with the Agent
 
 Type a message and the agent takes it from there. It streams a markdown reply back as it works, with each tool call rendered inline in the order it happened so you can watch the agent plan and execute.
+
+While the agent is thinking, the chat shows a **live status indicator** with elapsed time and a rotating description of what it's doing — no more static "Working…" spinner.
 
 ### @-mentions
 
@@ -83,7 +87,7 @@ The composer shows a running badge for the current session: token count in and o
 
 ### Session history
 
-Conversations persist per project. Open a past session from the history dropdown to keep going, or start a new one for a separate line of work.
+Conversations persist per project. Open a past session from the history dropdown to keep going, or start a new one for a separate line of work. Every turn records the exact model that produced it, so revisiting a chat shows which model wrote which reply. If a turn failed, the error is persisted too — reloading a transcript no longer hides why a run stopped.
 
 ## Per-Turn Undo and Redo
 
@@ -119,7 +123,7 @@ The agent is trained on Ycode's design conventions and uses your site's real des
 
 - **Design system awareness** — Before every turn, the agent gets the project's color variables, fonts, components, and shared Layer Styles injected as context, so new sections match what's already there instead of inventing new tokens.
 - **Structural rules** — Sections follow the mandated `section → container → content` pattern with sensible spacing, typographic hierarchy, and responsive behaviour.
-- **Visual self-review** — After building, the agent captures a screenshot of the result, has a cheaper model critique it against a design brief, and applies small fixes automatically. You see the final, refined version.
+- **Design lint** — A design-lint pass and a dedicated `design_brief` tool push the agent toward consistent typography, spacing, and reuse of existing tokens before it finishes.
 
 ## Canvas Experience
 
@@ -136,6 +140,10 @@ The final state of every turn is served as an authoritative snapshot with server
 ## Draft-First: Nothing Ships Automatically
 
 The agent never publishes. Every page, component, collection change, style, and asset stays in your project draft until you explicitly hit **Publish** in the builder. The publish popover lists agent-authored changes alongside your own, so you always see what's about to go live and can undo before it does.
+
+## Long Runs and Graceful Timeouts
+
+Very long builds can bump against your hosting platform's per-request time budget (for example, Vercel's serverless function limit). Instead of being cut off silently, the agent ends the current turn cleanly before the timeout hits, saves whatever changes it has already made, and shows a resumable "ran out of time" message in the chat. Ask it to keep going in a follow-up message.
 
 ## Rate Limiting
 
