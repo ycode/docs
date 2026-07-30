@@ -22,6 +22,20 @@ For code that appears on every page, use **Settings** (in the project or site co
 
 Global code runs on every page. Use it for site-wide analytics, fonts, or common scripts. Page-specific code runs in addition to global code.
 
+## HTML Embed Element
+
+The **HTML Embed** element places a block of custom HTML/CSS/JS inside your layer tree. On the published site it renders inside a **sandboxed, auto-resizing iframe**. That isolation keeps embed code from breaking the rest of the page, but it also means:
+
+- `position: absolute` and `position: fixed` are relative to the embed's own box — an embed cannot overlay the page, pin itself to the viewport, or stretch across a parent section
+- CSS inside the embed never cascades to the rest of the page
+- Scripts inside the embed cannot read or modify the parent page's DOM
+
+Choose the right tool for the job:
+
+- **Decorative overlays, scrims, gradients, textures** — build them as native layers instead. The design controls cover absolute positioning, z-index, gradients, background images (including inline SVG data URIs), filters, and blend modes.
+- **Scripts that need to touch the page** (scroll effects, modals, DOM injection) — put them in per-page or global **custom code**, which is injected directly into the document rather than sandboxed.
+- **Self-contained widgets** (video embeds, third-party forms, calendars, maps) — these are what the HTML Embed element is for.
+
 ## Syntax Highlighting
 
 Every custom code input in Ycode — page settings head/body, global settings head/body, the HTML embed element, and the rich-text HTML embed dialog — uses a syntax-highlighted code editor. HTML tags, attributes, and text are colored, and embedded JavaScript inside `<script>` blocks and CSS inside `<style>` blocks are highlighted in their own languages (keywords, strings, selectors, properties, functions, and so on). Leading indentation renders as subtle middle dots so nested markup is easy to scan.

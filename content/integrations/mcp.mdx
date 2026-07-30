@@ -92,6 +92,8 @@ Design tools accept a `ui_state` argument (`hover`, `focus`, `active`, `disabled
 
 Layer settings cover the full surface: sliders (pagination, easing, touch events, slides per group), CMS-bound lightboxes (multi-image fields, groups), maps (Mapbox / Google Maps with coordinates, zoom, marker color, navigation controls), CMS-bound select/radio/checkbox options, plus per-layer `hidden`, `filter_on_change`, and placeholder flags.
 
+The design schema reaches further than the visual controls in the editor sidebar. Agents can also set `mixBlendMode` (multiply, screen, overlay, and the rest), raw `filter` and `backdropFilter` values, and any CSS `backgroundImage` — including inline SVG data URIs for noise and texture overlays. For the rare property with no design field at all (such as `pointer-events`), agents can set a `style` custom attribute on the layer via `update_layer_settings`. Combined with absolute positioning and z-index, this is enough to build tinted scrims, film-grain overlays, and similar effects as native layers instead of HTML embeds.
+
 Links support URLs, internal pages, email, phone, anchors (`anchor_layer_id`), specific dynamic items (`collection_item_id`), assets, plus `rel` and `download` attributes.
 
 Move, reorder, and delete layers.
