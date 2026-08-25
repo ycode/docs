@@ -39,6 +39,7 @@ Control text appearance:
 - **textTransform** — Add via the "+" menu: uppercase (default), lowercase, capitalize, or normal-case. Remove with the X button to clear the transform
 - **textDecoration** — Add via the "+" menu: underline with configurable color, thickness, and offset
 - **lineClamp** — Add via the "+" menu: limit text to a number of visible lines with overflow hidden (e.g., clamp to 2 lines for card excerpts)
+- **textShadow** — Add via the "+" menu: native text shadow with configurable offset, blur, and color. Applying a shadow leaves the text's color and size untouched
 
 For text layers, the color picker includes an **Image** tab where you can set a background image that clips to the text shape. Choose an image from the file manager, enter a custom URL, or bind to a CMS field. Configure size, position, and repeat settings for the image.
 
@@ -65,6 +66,14 @@ Control element dimensions:
 - **objectPosition** — Pick a focal point for cropped images. The crosshair button next to Object fit opens a 3×3 grid; click any cell to align the image to that corner, edge, or center so the important part of the frame stays visible when the layer is cropped. Per-breakpoint overrides are supported.
 - **overflow** — visible, hidden, scroll, auto, or **ellipsis**. Ellipsis truncates a single line of text with a trailing `…` (maps to Tailwind's `truncate`). Inside a flex container the text element may also need `min-w-0` to shrink and trigger the ellipsis.
 - **gridColumnSpan** / **gridRowSpan** — Grid cell spanning
+
+## Position
+
+Control positioning and stacking:
+
+- **position** — static, relative, absolute, fixed, sticky
+- **top** / **right** / **bottom** / **left** — Offset values
+- **zIndex** — Stacking order
 
 ## Borders
 
@@ -99,6 +108,10 @@ Effects are addable and removable. Use the "+" menu in the Effects section heade
 - **backdropBlur** — Add via "+" menu; blur behind the element
 - **filter** — CSS filter values
 
+## Cursor
+
+Set the mouse cursor shown when hovering the element — pointer for clickable cards, grab for draggable surfaces, or any other CSS cursor value. The Cursor section sits right after Effects in the Design panel.
+
 ## Transform
 
 Transform properties are addable via the "+" menu. Use them to visually adjust elements without changing layout flow.
@@ -117,14 +130,6 @@ Animate property changes with CSS transitions:
 - **Duration** — Transition speed in milliseconds
 - **Easing** — Add via "+" menu: Linear, Ease In, Ease Out, or Ease In Out
 - **Delay** — Add via "+" menu: delay before the transition starts (ms)
-
-## Position
-
-Control positioning and stacking:
-
-- **position** — static, relative, absolute, fixed, sticky
-- **top** / **right** / **bottom** / **left** — Offset values
-- **zIndex** — Stacking order
 
 ## UI States
 

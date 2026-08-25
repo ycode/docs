@@ -67,6 +67,12 @@ When a [component](/docs/editor/components) instance overrides a master value (t
 
 The localization page (Pages and CMS tabs) groups translatable items into accordion sections. Only the first section opens by default and expanding another collapses it, keeping long pages manageable. Search expands matches automatically as you type.
 
+### Translating Page SEO
+
+A page's SEO metadata is translatable per locale: the **SEO title**, **description**, and the **social preview image**. The social preview image appears in the localization panel with the standard asset picker — pick a locale-specific image and localized URLs emit it as the `og:image` / `twitter:image`, falling back to the original wherever no completed translation exists.
+
+Social previews bound to a CMS field are not translatable — they keep resolving from the collection item's image field per locale.
+
 ## Translating CMS Items
 
 On a CMS-bound page in a non-default locale, double-click a CMS-bound layer (or open the collection item from the sidebar) to launch the collection item sheet in translation mode:

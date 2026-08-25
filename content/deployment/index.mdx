@@ -33,6 +33,10 @@ Content uses a draft-to-published workflow. This works the same in both Cloud an
 
 Draft changes are not visible to visitors until you publish. You can unpublish to revert to the previous published state.
 
+### The Publish Popover
+
+Opening **Publish** shows a breakdown of everything pending. **Pages** and **Components** expand to named items so you can see exactly which ones will go live — pages with an unpublished delete appear struck through, and you can click through to open a changed page directly. Collections, collection items, assets, and layer styles show as counts. When nothing is pending, the popover says everything is up to date.
+
 ## Cache Revalidation
 
 When you publish, Ycode invalidates only the routes whose content actually changed. A text tweak on a single page purges that page; editing a component or layer style purges every page that uses it; editing a CMS item purges the matching dynamic page plus any collection-list pages that include it. Invalidated routes are then warmed in the background, so the first visitor lands on a cached response instead of a cold render.
@@ -48,6 +52,10 @@ Some changes still trigger a full purge because they can affect every page on th
 
 For Open Source deployments, configure a `REVALIDATE_SECRET` environment variable in Vercel so revalidation requests are authenticated. The same selective-vs-full logic applies on both Vercel and self-hosted runtimes.
 
+### Clear Cache
+
+Once a site is published, a **Clear cache** button appears beside the Publish/Update button in the publish popover. It forces a full cache purge of the published site, behind a confirmation dialog. Clearing is normally unnecessary — publishing already refreshes changed pages — but it's useful on sites with many pages when you want to guarantee every route re-renders. The first visit to each page is slower until it's cached again.
+
 ## Custom Domains
 
 Connect your own domain to your Ycode site.
@@ -59,6 +67,12 @@ Connect your own domain to your Ycode site.
 Manage URL redirects for moved pages, vanity URLs, and legacy paths.
 
 [Redirects documentation](/docs/deployment/redirects)
+
+## Security Headers
+
+Configure HTTP security headers (CSP, X-Frame-Options, Referrer-Policy, HSTS, and more) for your published pages from Settings → Security.
+
+[Security Headers documentation](/docs/deployment/security-headers)
 
 ## Users & Roles
 

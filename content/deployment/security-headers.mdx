@@ -1,0 +1,44 @@
+---
+title: Security Headers
+---
+
+import { Callout } from 'nextra/components'
+
+# Security Headers
+
+Configure HTTP security headers for your published pages from **Settings → Security**. The feature is fully opt-in: no headers are sent until you save a configuration, so existing sites never change behavior without your action.
+
+## Available Headers
+
+| Header | What it does |
+|--------|--------------|
+| **Content-Security-Policy** | Controls which sources the browser may load scripts, styles, images, and frames from |
+| **X-Frame-Options** | Controls whether other sites can embed your pages in an iframe (clickjacking protection) |
+| **X-Content-Type-Options** | `nosniff` stops browsers from MIME-sniffing responses into a different content type |
+| **Referrer-Policy** | Controls how much referrer information is sent with outgoing requests |
+| **Permissions-Policy** | Restricts which browser features (camera, microphone, geolocation, …) pages may use |
+| **Strict-Transport-Security** | Tells browsers to only ever connect over HTTPS (HSTS) |
+
+## Configuring
+
+1. In the editor, go to **Settings** → **Security**
+2. Turn on the master toggle — individual header controls stay disabled until it's on
+3. Enable the headers you want; recommended values are pre-filled but never auto-applied
+4. Save
+
+Headers apply to your published pages only — the builder itself never receives them. Leaving a header's value empty omits that header entirely, and switching the master toggle off omits all of them.
+
+## Defaults
+
+The defaults are deliberately conservative so enabling the feature can't break your site:
+
+- Only **X-Content-Type-Options: nosniff** is pre-enabled
+- **X-Frame-Options** and **Referrer-Policy** default to off, so framing and referrer behavior only change when you opt in
+
+<Callout type="info" title="HSTS on Ycode Cloud">
+The **Strict-Transport-Security** control is hidden on Ycode Cloud because the platform already manages HTTPS enforcement. It's available on self-hosted installs.
+</Callout>
+
+<Callout type="warning" title="Test your CSP">
+A too-strict Content-Security-Policy can block your own custom code, analytics snippets, or embeds. After enabling CSP, load your published site with the browser console open and check for blocked-resource errors before rolling it out.
+</Callout>
