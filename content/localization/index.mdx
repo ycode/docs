@@ -37,6 +37,8 @@ Locales and translations use a draft/publish workflow. You edit translations in 
 
 Switch the locale picker in the builder header from the default to any other locale to enter translation mode. The canvas re-renders with the active locale's translations applied to text, rich text, images, and CMS content — including incomplete drafts so you can see work in progress.
 
+Static text inside a [Collection List](/docs/cms/dynamic-pages#collection-lists) — labels, headings, or other layers that are not bound to a CMS field — translates the same way as text elsewhere on the page. The translation applies to every item in the list on the canvas, in preview, and on the published site.
+
 While translating, the builder locks structural editing so you stay focused on content:
 
 - Inline text editing on the canvas, drag and drop, and the element library are disabled
@@ -49,11 +51,11 @@ To return to structural editing, switch the locale picker back to the default lo
 
 When a non-default locale is active, the right sidebar replaces the standard inspector with a translation panel for the selected layer. Translatable values are grouped under language headers: the default-locale source value appears on top as read-only context, and the active-locale value appears below as an editable field.
 
-Multi-property layers show sub-labels such as `IMAGE`, `IMAGE ALT`, or `VIDEO` so each property is easy to scan. Layers with no translatable content show an empty state.
+Plain text and assets stay on a textarea or picker. Text that carries line breaks or inline marks uses the shared rich text editor in the sidebar, so formatting survives save. Clearing a translation stores an empty value and reverts the layer to the source. Multi-property layers show sub-labels such as `IMAGE`, `IMAGE ALT`, or `VIDEO` so each property is easy to scan. Layers with no translatable content show an empty state.
 
 ### Translating Rich Text
 
-Rich Text element layers show a read-only preview of the current translation in the sidebar, with block-level line breaks preserved. Click **Expand to edit** to open the rich text editor in a sheet. The editor is pre-loaded with the existing translation (never the source), so you write directly in the target language.
+Rich Text element layers show a formatted, read-only preview of the current translation in the sidebar. Click **Expand to edit** to open the rich text editor in a sheet. The editor is pre-loaded with the existing translation (never the source), so you write directly in the target language.
 
 The header reads **Content editor** with a **Translate to `{locale}`** subtitle so it is clear which language you are editing. Saves are debounced and locale-aware — switching locales mid-edit will not write to the wrong row.
 
@@ -97,6 +99,8 @@ Each language uses its own URL prefix based on the locale code:
 - German: `/de/about`
 
 The locale code appears in the path for all non-default languages. This structure is SEO-friendly and lets search engines index each language version.
+
+On dynamic CMS pages, a translated item slug becomes the canonical URL for that locale. Requesting the default-locale slug under a non-default prefix — for example `/de/my-english-slug` when a German slug exists — permanently redirects (308) to the translated URL. Locales without a translated slug keep serving the default slug with no redirect.
 
 Ycode also emits `<link rel="alternate" hreflang="...">` tags in every page's `<head>` covering each published locale plus an `x-default` for the default language, so search engines cluster the variants of each page correctly and serve the right one in each region. See [hreflang for Multilingual Sites](/docs/seo#hreflang-for-multilingual-sites) for details.
 

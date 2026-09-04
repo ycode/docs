@@ -58,6 +58,8 @@ On sites with more than one published [locale](/docs/localization), Ycode emits 
 
 Both static pages and dynamic CMS pages get the right URLs — dynamic pages use the translated item slug per locale where one exists, and fall back to the default slug otherwise. Preview, error, and `noindex` pages are excluded. The same alternates are reused by `sitemap.xml`, so the two surfaces can't drift.
 
+If a CMS item has a translated slug, the default-locale slug under that locale prefix is not a second live URL. A request such as `/de/my-english-slug` permanently redirects (308) to `/de/my-german-slug`, matching the `hreflang` and canonical tags. Locales without a translated slug keep serving the default slug with no redirect.
+
 ## Custom Code for Structured Data
 
 Inject custom code in the head or body for structured data (JSON-LD). Use this for:
