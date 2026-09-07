@@ -28,6 +28,8 @@ The Static HTML Export integration is available on self-hosted Ycode. Cloud supp
 - Code Embed (htmlEmbed) layers — your HTML, CSS, and JS render inline at their natural height; pasted `<script>` tags run as authored
 - Interactions for the click→display and page-load→display patterns (mobile menu toggles work out of the box)
 - Error pages (`401`, `404`, `500`) emitted at the root of the output directory
+- HTML comments `Made in Ycode · ycode.com` and `Published … UTC` after the doctype (same stamps as the live site)
+- `<meta name="generator" content="Ycode" />`
 
 ## Setup
 
@@ -105,7 +107,7 @@ The CLI reads the same configuration you set in the integration panel and runs t
 Custom code added in Ycode is emitted into the static export the same way it is on a live SSR site:
 
 - **Global custom code** (Settings → General → Custom Code) is injected into every page's `<head>` and pre-`</body>`.
-- **Per-page custom code** (Page Settings → Custom Code) is injected only into that page's HTML.
+- **Per-page custom code** (Page Settings → Custom Code) — `Header` lands in the real document `<head>`, `Body` before `</body>`.
 - **Dynamic-page placeholders** like `{{Title}}` resolve per item, so each generated CMS item page carries its own resolved snippet.
 
 This covers analytics (GA / GTM / Plausible / PostHog), Google Search Console verification, custom font loaders, structured-data JSON-LD, and any third-party widget tag — all included in the exported HTML, in the same order as on the live site (global first, then per-page). Pages with no custom code ship byte-identical output to previous exports.

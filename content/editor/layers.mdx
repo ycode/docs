@@ -25,6 +25,18 @@ The Element Library organizes elements into categories:
 - **Form** — Form, Input, Textarea, Select, Checkbox, Radio, Label
 - **Utilities** — [Map](/docs/editor/map), [Slider](/docs/editor/slider), [Lightbox](/docs/editor/lightbox), Locale Selector, HTML Embed
 
+## Published Markup
+
+Published and exported HTML drops editor-only flags such as `data-is-empty`.
+
+**Images** — An image with no authored alt emits `alt=""`, so assistive tech treats it as decorative instead of announcing a generic "Image".
+
+**Icons** — Decorative icons are hidden from assistive tech (`aria-hidden`) unless they already have a name.
+
+**YouTube videos** — Published YouTube iframes get a `title` (the layer name, or `YouTube video`) and `loading="lazy"`.
+
+**Navigation layouts** — New inserts of Navigation 001 and Navigation 002 emit a `header` wrapping a `nav`. Existing pages keep their previous markup until you re-insert the layout.
+
 ## Drag and Drop
 
 Reorder and nest layers by dragging. The editor uses drop zones (25%, 50%, 25% of the target) to distinguish between:

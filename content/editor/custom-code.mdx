@@ -10,21 +10,21 @@ You can inject custom HTML, CSS, and JavaScript into your pages. Use this for an
 
 Each page has its own code injection settings. Open **Page Settings** and go to the **Custom Code** section. You configure:
 
-**Head** — Code injected into the `<head>` of the page. Use this for meta tags, external stylesheets, preload hints, or scripts that must run before the body.
+**Header** — Code injected into the real document `<head>`. Scripts, `<meta>` tags, and `<style>` blocks land there — not in the body. Use this for meta tags, external stylesheets, preload hints, or scripts that must run before the body.
 
 **Body** — Code injected at the end of the `<body>`, before the closing tag. Use this for tracking scripts, chat widgets, or other scripts that run after the page loads.
 
-Per-page code applies only to that page. Other pages are unaffected.
+Per-page code applies only to that page. Other pages are unaffected. Each snippet appears once — Header is not duplicated in the body.
 
 ## Global Code
 
-For code that appears on every page, use **Settings** (in the project or site configuration) and go to **General**. The global head and body fields inject code into all pages.
+For code that appears on every page, use **Settings** (in the project or site configuration) and go to **General**. The global `Header` and `Body` fields inject code into all pages.
 
 Global code runs on every page. Use it for site-wide analytics, fonts, or common scripts. Page-specific code runs in addition to global code.
 
 ## HTML Embed Element
 
-The **HTML Embed** element places a block of custom HTML/CSS/JS inside your layer tree. On the published site it renders inside a **sandboxed, auto-resizing iframe**. That isolation keeps embed code from breaking the rest of the page, but it also means:
+The **HTML Embed** element places a block of custom HTML/CSS/JS inside your layer tree. On the published site it renders inside a **sandboxed, auto-resizing iframe** with `title` set to the layer name (or `Code embed`) and `loading="lazy"`. That isolation keeps embed code from breaking the rest of the page, but it also means:
 
 - `position: absolute` and `position: fixed` are relative to the embed's own box — an embed cannot overlay the page, pin itself to the viewport, or stretch across a parent section
 - CSS inside the embed never cascades to the rest of the page
@@ -38,7 +38,7 @@ Choose the right tool for the job:
 
 ## Syntax Highlighting
 
-Every custom code input in Ycode — page settings head/body, global settings head/body, the HTML embed element, and the rich-text HTML embed dialog — uses a syntax-highlighted code editor. HTML tags, attributes, and text are colored, and embedded JavaScript inside `<script>` blocks and CSS inside `<style>` blocks are highlighted in their own languages (keywords, strings, selectors, properties, functions, and so on). Leading indentation renders as subtle middle dots so nested markup is easy to scan.
+Every custom code input in Ycode — page settings `Header`/`Body`, global settings `Header`/`Body`, the HTML embed element, and the rich-text HTML embed dialog — uses a syntax-highlighted code editor. HTML tags, attributes, and text are colored, and embedded JavaScript inside `<script>` blocks and CSS inside `<style>` blocks are highlighted in their own languages (keywords, strings, selectors, properties, functions, and so on). Leading indentation renders as subtle middle dots so nested markup is easy to scan.
 
 ## CSS Preview in the Builder
 

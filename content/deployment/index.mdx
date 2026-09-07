@@ -56,6 +56,19 @@ For Open Source deployments, configure a `REVALIDATE_SECRET` environment variabl
 
 Once a site is published, a **Clear cache** button appears beside the Publish/Update button in the publish popover. It forces a full cache purge of the published site, behind a confirmation dialog. Clearing is normally unnecessary — publishing already refreshes changed pages — but it's useful on sites with many pages when you want to guarantee every route re-renders. The first visit to each page is slower until it's cached again.
 
+## Made in Ycode
+
+Published and statically exported pages identify themselves in View Source with HTML comments after `<!DOCTYPE html>` and before `<html>`:
+
+```html
+<!-- Made in Ycode · ycode.com -->
+<!-- Published Sep 4, 2026, 10:49 AM UTC -->
+```
+
+The `Published` line uses the last publish time in UTC (`Sep 4, 2026, 10:49 AM UTC`). The builder at `/ycode` is not stamped.
+
+This is separate from the on-page badge. In **Settings** → **General**, `Display the "Made in Ycode" badge` shows a badge on the live site. On Cloud, disable it after you upgrade to a project plan (`Upgrade to a project plan in order to disable the badge.`). On self-hosted Ycode the description reads `Help support Ycode by displaying this badge on your website.`
+
 ## Custom Domains
 
 Connect your own domain to your Ycode site.
