@@ -41,7 +41,7 @@ Ycode generates Open Graph and Twitter Card metadata from your page settings. Wh
 - Description
 - Image
 
-Canonical URLs are included to avoid duplicate content issues.
+Canonical URLs and `og:url` are included when a site base URL is set, so social platforms and crawlers share the same absolute page URL.
 
 ## Sitemap and Robots
 
@@ -54,9 +54,11 @@ These files update when you publish or unpublish pages. No manual configuration 
 
 ## hreflang for Multilingual Sites
 
-On sites with more than one published [locale](/docs/localization), Ycode emits `<link rel="alternate" hreflang="...">` tags in every page's `<head>`, so search engines can cluster the locale variants of each page and serve the right one in each region. Tags cover every published locale plus an `x-default` pointing at the default-locale URL.
+On sites with more than one published [locale](/docs/localization), Ycode emits `<link rel="alternate" hreflang="...">` tags in the document `<head>` from the first HTML byte, so crawlers see language alternates without waiting for client scripts. Tags cover every published locale plus an `x-default` pointing at the default-locale URL.
 
-Both static pages and dynamic CMS pages get the right URLs — dynamic pages use the translated item slug per locale where one exists, and fall back to the default slug otherwise. Preview, error, and `noindex` pages are excluded. The same alternates are reused by `sitemap.xml`, so the two surfaces can't drift.
+Published pages also set `<html lang>` from the URL (`/` uses the default locale, `/fr/...` uses `fr`) and `<html dir="rtl">` or `dir="ltr"` from the language. These attributes are in the initial HTML, not applied after paint.
+
+Both static pages and dynamic CMS pages get the right URLs — dynamic pages use the translated item slug per locale where one exists, and fall back to the default slug otherwise. Preview, error, and `noindex` pages are excluded. Hreflang, canonical, and `og:url` are omitted when no site base URL is set (`Global Canonical URL` or a primary domain). The same alternates are reused by `sitemap.xml`, so the two surfaces can't drift.
 
 If a CMS item has a translated slug, the default-locale slug under that locale prefix is not a second live URL. A request such as `/de/my-english-slug` permanently redirects (308) to `/de/my-german-slug`, matching the `hreflang` and canonical tags. Locales without a translated slug keep serving the default slug with no redirect.
 
