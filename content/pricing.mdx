@@ -54,10 +54,10 @@ Ycode Cloud is the managed offering: hosting, updates, SSL, and a global CDN are
 - Up to **20,000 CMS items** per project
 - Community and email support
 
-Projects start on **Free** with the full editor and CMS. Upgrade per project when you need a paid feature (most commonly a [custom domain](/docs/deployment/custom-domains)). See [Billing](/docs/cloud/billing) for how to subscribe and manage a project subscription through the Stripe Customer Portal.
+Projects start on **Free** with the full editor and CMS so you can build. Free is not a hosting plan — keep the project active, then upgrade when you want the site to stay online. Paid features such as a [custom domain](/docs/deployment/custom-domains) unlock on subscribe. See [Billing](/docs/cloud/billing) for how to subscribe and manage a project subscription through the Stripe Customer Portal.
 
-<Callout type="info" title="Free Cloud projects live forever">
-You can keep an unlimited number of free Cloud projects. They retain the full editor and CMS — only paid features like custom domains are gated until you subscribe.
+<Callout type="warning" title="Free projects are for building">
+A never-subscribed Free project is deleted after **7 days of inactivity**. Opening the editor, editing, or publishing resets that clock. A published `*.ycode.website` site sitting idle still counts as inactive. There is no use case for running a website forever on the free plan — [upgrade to paid](/docs/cloud/billing) to host it.
 </Callout>
 
 ## Billing Intervals
@@ -71,7 +71,7 @@ You pick the interval at checkout. To switch later, open the **Stripe Customer P
 Plans aren't locked. You can move between them at any time:
 
 - **Cloud Free → Cloud Paid** — Subscribe per project from the project menu's **Billing details**.
-- **Cloud Paid → Cloud Free** — Cancel the project's subscription in the Stripe Customer Portal. The project keeps editing access on free; paid features lock until you resubscribe.
+- **Cloud Paid → Cloud Free** — Cancel the project's subscription in the Stripe Customer Portal. The project keeps editing access on free; paid features lock until you resubscribe. Previously paid projects are not deleted for inactivity.
 - **Cloud → Self-host** — Use [Backup & Restore](/docs/deployment/backup) to export a project from Cloud and import it into a self-hosted Ycode instance.
 - **Self-host → Cloud** — The same backup/restore flow works the other way.
 
@@ -79,6 +79,7 @@ Plans aren't locked. You can move between them at any time:
 
 - **CMS items** — Self-host is unlimited. Cloud projects (free or paid) are capped at 20,000 items per project.
 - **Custom domains** — Available on Self-host and paid Cloud projects. Free Cloud projects use the `*.ycode.website` subdomain.
+- **Free project retention** — Never-subscribed Free Cloud projects are deleted after 7 days of inactivity. Paid Cloud and Self-host are not.
 - **Users** — Every plan is unlimited. Cloud projects use per-project teams (see [Teams](/docs/cloud/teams)).
 - **Pages, form entries, and languages** — Unlimited on every plan.
 - **Support** — Community on all plans; email support on Cloud.
