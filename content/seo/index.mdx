@@ -50,7 +50,9 @@ Ycode automatically generates:
 - **sitemap.xml** — Lists all published pages for search engines
 - **robots.txt** — Instructs crawlers which paths to index or exclude
 
-These files update when you publish or unpublish pages. No manual configuration is required for basic setups.
+These files update when you publish or unpublish pages. Configure the sitemap in project settings under **SEO** → **Sitemap**: `No sitemap`, `Ycode generated`, or `Custom XML`.
+
+A `Ycode generated` sitemap lists each localized URL as its own `<url>` entry, with that locale's URL as `<loc>` and the full reciprocal `hreflang` set (including `x-default` as a child link, not a duplicate `<loc>`). Single-locale sites emit one entry per page with no alternates. Preview, error, and `noindex` pages are excluded. Dynamic CMS pages produce one entry per locale per collection item.
 
 ## hreflang for Multilingual Sites
 
@@ -58,7 +60,7 @@ On sites with more than one published [locale](/docs/localization), Ycode emits 
 
 Published pages also set `<html lang>` from the URL (`/` uses the default locale, `/fr/...` uses `fr`) and `<html dir="rtl">` or `dir="ltr"` from the language. These attributes are in the initial HTML, not applied after paint.
 
-Both static pages and dynamic CMS pages get the right URLs — dynamic pages use the translated item slug per locale where one exists, and fall back to the default slug otherwise. Preview, error, and `noindex` pages are excluded. Hreflang, canonical, and `og:url` are omitted when no site base URL is set (`Global Canonical URL` or a primary domain). The same alternates are reused by `sitemap.xml`, so the two surfaces can't drift.
+Both static pages and dynamic CMS pages get the right URLs — dynamic pages use the translated item slug per locale where one exists, and fall back to the default slug otherwise. Preview, error, and `noindex` pages are excluded. Hreflang, canonical, and `og:url` are omitted when no site base URL is set (`Global Canonical URL` or a primary domain). The same reciprocal cluster is reused by `sitemap.xml`, where each locale is also listed as its own `<url>` entry, so the two surfaces can't drift.
 
 If a CMS item has a translated slug, the default-locale slug under that locale prefix is not a second live URL. A request such as `/de/my-english-slug` permanently redirects (308) to `/de/my-german-slug`, matching the `hreflang` and canonical tags. Locales without a translated slug keep serving the default slug with no redirect.
 

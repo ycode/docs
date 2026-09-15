@@ -102,7 +102,7 @@ The locale code appears in the path for all non-default languages. This structur
 
 On dynamic CMS pages, a translated item slug becomes the canonical URL for that locale. Requesting the default-locale slug under a non-default prefix — for example `/de/my-english-slug` when a German slug exists — permanently redirects (308) to the translated URL. Locales without a translated slug keep serving the default slug with no redirect.
 
-Published HTML sets `<html lang>` from the URL (`/` uses the default locale, `/fr/...` uses `fr`) and `<html dir="rtl">` or `dir="ltr"` from the language. Ycode also emits `<link rel="alternate" hreflang="...">` tags in the document `<head>` from the first HTML byte, covering each published locale plus an `x-default` for the default language. See [hreflang for Multilingual Sites](/docs/seo#hreflang-for-multilingual-sites) for details.
+Published HTML sets `<html lang>` from the URL (`/` uses the default locale, `/fr/...` uses `fr`) and `<html dir="rtl">` or `dir="ltr"` from the language. Ycode also emits `<link rel="alternate" hreflang="...">` tags in the document `<head>` from the first HTML byte, covering each published locale plus an `x-default` for the default language. The generated `sitemap.xml` lists each enabled locale as its own `<url>` entry with the same reciprocal cluster. See [hreflang for Multilingual Sites](/docs/seo#hreflang-for-multilingual-sites) for details.
 
 ## Locale Selector Element
 

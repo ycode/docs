@@ -8,22 +8,30 @@ The Design tab in the right sidebar provides breakpoint-aware styling controls. 
 
 ## Layout
 
-Control how the element arranges its children:
+The Layout panel is available on every element, including headings and images. **Type** sets how the layer displays:
 
-- **display** — block, flex, grid, inline, inline-block, none
-- **flexDirection** — row, column, row-reverse, column-reverse
-- **flexWrap** — nowrap, wrap, wrap-reverse
-- **justifyContent** — start, center, end, space-between, space-around, space-evenly
-- **alignItems** — start, center, end, stretch, baseline
-- **gap** — Spacing between flex or grid children
-- **gridTemplateColumns** / **gridTemplateRows** — Grid column and row definitions
-- **divideX** / **divideY** — Dividers between children
+- Containers — `Block`, `Flex`, `Grid`, `None`
+- Text elements — those four plus `Inline` and `Inline block`
+- Other leaf elements (icons, videos, inputs) — `Block`, `Inline block`, `None`
+- Images and maps — `Block`, `None`
 
-### Self Layout
+`None` (dashed-square icon) removes the layer from layout (`display: none`). That is a Design-tab display value, not the Settings-tab [`Visibility`](/docs/editor/layers#visibility-and-lock) flag.
 
-When the selected layer is a **child** of a flex or grid container, a **Self layout** section appears with an `alignSelf` control that overrides the parent's `alignItems` for this one child. Options are Auto (no override), Start, Center, End, and Stretch — useful for un-stretching a single badge, pill, or button in an otherwise stretched flex column.
+When `Flex` is selected, a **Direction** row appears with `Horizontal` / `Vertical` arrows, plus `Reverse` and `Wrap` icon toggles.
 
-The icons rotate to match the parent's axis, and the parent type (e.g. Flex row) is shown in muted text so you can see what you're overriding. Self layout is available on text layers too, even though they don't show the main Layout panel.
+**Align** and **Justify** appear for Flex and Grid. Grid also shows **Columns** and **Rows** count inputs.
+
+**Gap** uses a padlock: locked is one linked value for both axes; unlock it (`Unlink gaps`) to set separate `X` / `Y` (column and row) gaps. Lock again (`Link gaps`) to apply a single value to both.
+
+### Flex child
+
+When the selected layer sits inside a flex container, a **Flex child** section appears:
+
+- **Align** is always visible and shows the parent's value when there is no override (for example `Start (from parent)`). Picking a different value overrides the parent; picking the parent's value again clears the override.
+- **Sizing** and **Order** are added via `+` and start unselected.
+  - Sizing — `Shrink if needed`, `Grow equally`, `Don't shrink or grow`
+  - Order — `First`, `Last`, `Custom` (Custom shows a **Position** number)
+- New buttons default to Align `Start` so they keep their natural width in flex columns.
 
 ## Typography
 
@@ -65,7 +73,7 @@ Control element dimensions:
 - **objectFit** — cover, contain, fill, none (for images and videos)
 - **objectPosition** — Pick a focal point for cropped images. The crosshair button next to Object fit opens a 3×3 grid; click any cell to align the image to that corner, edge, or center so the important part of the frame stays visible when the layer is cropped. Per-breakpoint overrides are supported.
 - **overflow** — visible, hidden, scroll, auto, or **ellipsis**. Ellipsis truncates a single line of text with a trailing `…` (maps to Tailwind's `truncate`). Inside a flex container the text element may also need `min-w-0` to shrink and trigger the ellipsis.
-- **gridColumnSpan** / **gridRowSpan** — Grid cell spanning
+- **Columns** / **Rows** — When the layer sits inside a grid parent, pick `Span 1` … `Span 12` or `Span all`. `Span 1` is the default and does not write a class unless a wider breakpoint spans more.
 
 ## Position
 

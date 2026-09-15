@@ -90,7 +90,7 @@ Add any element type — including tables (`table`, `thead`, `tbody`, `tr`, `td`
 
 Design tools accept a `ui_state` argument (`hover`, `focus`, `active`, `disabled`, `current`) so the same property can take different values per state. The `current` state activates when a link points to the page being viewed, which is how you style the active item in a navigation menu.
 
-Layer settings cover the full surface: sliders (pagination, easing, touch events, slides per group), CMS-bound lightboxes (multi-image fields, groups), maps (Mapbox / Google Maps with coordinates, zoom, marker color, navigation controls), CMS-bound select/radio/checkbox options, plus per-layer `hidden`, `filter_on_change`, and placeholder flags.
+Layer settings cover the full surface: sliders (pagination, easing, touch events, slides per group), CMS-bound lightboxes (multi-image fields, groups), maps (Mapbox / Google Maps with coordinates, zoom, marker color, navigation controls), CMS-bound select/radio/checkbox options, plus per-layer `hidden`, `keepInHtml`, `filter_on_change`, and placeholder flags.
 
 The design schema reaches further than the visual controls in the editor sidebar. Agents can also set `mixBlendMode` (multiply, screen, overlay, and the rest), raw `filter` and `backdropFilter` values, and any CSS `backgroundImage` — including inline SVG data URIs for noise and texture overlays. For the rare property with no design field at all (such as `pointer-events`), agents can set a `style` custom attribute on the layer via `update_layer_settings`. Combined with absolute positioning and z-index, this is enough to build tinted scrims, film-grain overlays, and similar effects as native layers instead of HTML embeds.
 
@@ -120,7 +120,9 @@ Bind layers to CMS data without leaving the agent:
 
 ### Components
 
-Create reusable components with variables, edit component layer trees, and manage the component library. Variables now include `rich_text` and `variant` types, plus `placeholder` and `default_value` fallbacks.
+Create reusable components with variables, edit component layer trees, and manage the component library. Variables include `rich_text`, `variant`, and `visibility` types, plus `placeholder` and `default_value` fallbacks.
+
+A `visibility` variable is a boolean (`{ visible: true|false }`) linked to a layer's Settings `Visibility`. Instances override it with `visible` on `set_component_instance`. Nested pass-through works the same as other variable types. Deleting the variable unlinks layers and clears overrides.
 
 Variants have full CRUD: `list_component_variants`, `create_component_variant` (optionally cloning an existing variant), `update_component_variant`, and `delete_component_variant`. `update_component_layers` accepts an optional `variant_id` so edits target a specific variant without clobbering the others.
 

@@ -43,6 +43,7 @@ Components support variables for content that varies per instance. You define va
 | **Audio** | Overridable audio file source |
 | **Video** | Overridable video file source |
 | **Icon** | Overridable SVG icon |
+| **Visibility** | Show or hide a linked layer per instance (`Visible` / `Hidden`) |
 | **Variant** | Drives the variant of a nested component instance from the parent's overrides panel (see [Variants](#variants)) |
 
 ### Linking Variables to Layers
@@ -59,6 +60,18 @@ The linked layer displays the variable's default value. Each instance can then o
 ### Rich Text Variables
 
 Text variables support rich text content. When you override a text variable on an instance, you get the full rich text editor with formatting controls, inline CMS field references, and structured content. This is useful for components like cards, testimonials, or content blocks where the text needs formatting beyond plain strings.
+
+### Visibility Variables
+
+Use a **Visibility** variable when instances should show or hide optional parts of a component — badges, icons, secondary buttons.
+
+1. Open the component in edit mode
+2. Select the layer to show or hide
+3. Next to the `Visibility` label in Settings, choose **Link to variable**, then pick or create a `Visibility` variable (new variables are named `Visibility` by default)
+4. Set the variable's default to `Visible` or `Hidden`
+5. On each instance, override the variable independently — other instances stay as they are
+
+Nested components can pass a parent Visibility variable through to an inner layer. Deleting the variable unlinks it: layers fall back to their static `Visibility` setting, and instance overrides are removed.
 
 ## Editing Components
 

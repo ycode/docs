@@ -65,7 +65,13 @@ The action only appears on genuine block-level text and headings. Inline text us
 
 ## Visibility and Lock
 
-**Visibility** — Toggle the eye icon next to a layer to show or hide it. Hidden elements do not render on the page. Use this to compare layouts or temporarily remove elements without deleting them.
+**Visibility** — Toggle the eye icon next to a layer, or set `Visibility` to `Visible` or `Hidden` in the Settings tab. Both controls use the same flag and stay in sync. Hidden layers collapse on the canvas immediately.
+
+By default, a hidden layer is omitted from published HTML. If you need the markup to stay in the page, hide the layer and add `Keep in HTML when hidden` from the `Advanced` panel. That option only appears while the layer is hidden; the layer then renders collapsed instead of being dropped.
+
+A [Display](/docs/editor/interactions#animated-properties) interaction that reveals a hidden layer also keeps it in the HTML so the animation can run. CMS [conditional visibility](/docs/cms/filtering#item-id) is a separate rule driven by collection data — it does not use this setting.
+
+When you are editing a [component](/docs/editor/components#visibility-variables), the `Visibility` label can be linked to a `Visibility` variable so each instance decides whether that layer shows.
 
 **Lock** — Toggle the lock icon to prevent accidental edits. Locked elements remain visible but cannot be selected or modified until you unlock them.
 

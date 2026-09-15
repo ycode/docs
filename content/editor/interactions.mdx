@@ -64,6 +64,8 @@ Click **+** on a tween to add properties to animate. Each property has a **From*
 | **Grayscale** | Animate desaturation from 0% (full color) to 100% (fully grayscale) |
 | **Display** | Toggle between visible and hidden |
 
+A **Display** tween that goes from hidden to visible also works when the target is hidden via Settings `Visibility` or a Tailwind `hidden` class, including breakpoint-scoped classes such as `max-md:hidden`. Ycode strips and restores the class around the reveal, so a mobile menu can open on small screens without hiding the desktop nav. The on-load / on-trigger choice for Display is unchanged, so existing interactions keep their load-time behavior.
+
 Blur, brightness, and grayscale are filter properties — adding more than one on the same tween composes them (e.g. blur 5px combined with brightness 1.15 plays as a single `filter` declaration), so you can layer effects without one overwriting the next.
 
 ### Apply Timing
