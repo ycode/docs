@@ -25,6 +25,8 @@ The Element Library organizes elements into categories:
 - **Form** — Form, Input, Textarea, Select, Checkbox, Radio, Label
 - **Utilities** — [Map](/docs/editor/map), [Slider](/docs/editor/slider), [Lightbox](/docs/editor/lightbox), Locale Selector, HTML Embed
 
+**Columns**, **Rows**, and **Grid** wrappers and their child blocks default to Fill width (`100%`) so dropped-in content spans the block instead of shrinking to its content. The Sizing panel shows `100%` on those layers; you can still override it.
+
 ## Published Markup
 
 Published and exported HTML drops editor-only flags such as `data-is-empty`. Body-layer classes (background, fonts) are on `<body>` in the initial HTML, so the first paint matches the design.

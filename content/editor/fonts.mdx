@@ -130,6 +130,8 @@ Fonts are injected into the canvas iframe as a combination of `<style>` and `<li
 
 Published pages include font CSS directly in the HTML. Google Fonts render through `<link>` tags in the page head. Custom fonts render through inline `@font-face` rules. Only published fonts appear on the live site — draft fonts that have not been published are not included.
 
+When the page's first hero heading uses a Google Font, Ycode also preloads that family's upright latin `.woff2` (matching the heading's weight) so the text paints without waiting on a late font request. Headings inside `header`, `nav`, or `footer` are skipped. Built-in stacks and custom uploaded fonts are unchanged. The same preload is included in [static exports](/docs/integrations/apps/static-export).
+
 <Callout type="info" title="Publishing fonts">
 Fonts follow the same draft/published workflow as pages and components. After adding or removing fonts, publish your project to make the changes live.
 </Callout>

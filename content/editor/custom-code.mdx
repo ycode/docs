@@ -76,6 +76,12 @@ Reference fields can be traversed with dot notation: `{{Reference.Field}}` resol
 Placeholder field names must match your collection schema exactly. Invalid or missing fields are left as-is (they aren't replaced), so a typo is easy to spot on the rendered page.
 </Callout>
 
+## Element ID
+
+Every layer has an `ID` field in the Settings tab. The value becomes the element's HTML `id` attribute — useful for in-page links, `aria-controls`, and analytics hooks. Values are sanitized to a valid HTML id as you type. The placeholder reads `For in-page linking`.
+
+When you are editing a [component](/docs/editor/components#id-variables), the `ID` label can be linked to an `ID` variable so each instance carries its own id.
+
 ## Custom Attributes
 
 Add arbitrary HTML attributes to any layer without writing custom code. Select a layer, open the **Settings** panel, and use the **Custom Attributes** section to add a name/value pair (for example `rel="nofollow"`, `data-tracking-id="hero-cta"`, `fetchpriority="high"`, `aria-controls="menu"`).

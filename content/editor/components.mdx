@@ -44,6 +44,7 @@ Components support variables for content that varies per instance. You define va
 | **Video** | Overridable video file source |
 | **Icon** | Overridable SVG icon |
 | **Visibility** | Show or hide a linked layer per instance (`Visible` / `Hidden`) |
+| **ID** | Overridable HTML `id` on a linked layer (for in-page links and per-page tracking) |
 | **Variant** | Drives the variant of a nested component instance from the parent's overrides panel (see [Variants](#variants)) |
 
 ### Linking Variables to Layers
@@ -72,6 +73,18 @@ Use a **Visibility** variable when instances should show or hide optional parts 
 5. On each instance, override the variable independently — other instances stay as they are
 
 Nested components can pass a parent Visibility variable through to an inner layer. Deleting the variable unlinks it: layers fall back to their static `Visibility` setting, and instance overrides are removed.
+
+### ID Variables
+
+Use an **ID** variable when a shared component needs a different HTML `id` on each page — for example a CTA button with a per-page analytics or ad-tracking hook.
+
+1. Open the component in edit mode
+2. Select the layer that should expose the id
+3. Next to the `ID` label in Settings, choose **Link to variable**, then pick or create an `ID` variable (new variables are named `ID` by default and seeded from the current id)
+4. Set the variable's default, or leave it empty
+5. On each instance, override the id independently — other instances stay as they are
+
+The value is sanitized to a valid HTML id as you type. Nested components can pass a parent ID variable through to an inner layer. Unlinking or deleting the variable falls back to the layer's static `ID` setting, and instance overrides are removed.
 
 ## Editing Components
 

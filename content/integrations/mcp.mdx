@@ -120,9 +120,11 @@ Bind layers to CMS data without leaving the agent:
 
 ### Components
 
-Create reusable components with variables, edit component layer trees, and manage the component library. Variables include `rich_text`, `variant`, and `visibility` types, plus `placeholder` and `default_value` fallbacks.
+Create reusable components with variables, edit component layer trees, and manage the component library. Variables include `rich_text`, `variant`, `visibility`, and `id` types, plus `placeholder` and `default_value` fallbacks.
 
 A `visibility` variable is a boolean (`{ visible: true|false }`) linked to a layer's Settings `Visibility`. Instances override it with `visible` on `set_component_instance`. Nested pass-through works the same as other variable types. Deleting the variable unlinks layers and clears overrides.
+
+An `id` variable is a string (`{ id: "…" }`) linked to a layer's Settings `ID`. Instances override it with `element_id` on `set_component_instance`. Values are sanitized to a valid HTML id. Unlinking or deleting the variable falls back to the layer's static id.
 
 Variants have full CRUD: `list_component_variants`, `create_component_variant` (optionally cloning an existing variant), `update_component_variant`, and `delete_component_variant`. `update_component_layers` accepts an optional `variant_id` so edits target a specific variant without clobbering the others.
 
