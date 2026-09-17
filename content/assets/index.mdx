@@ -24,7 +24,7 @@ Upload assets through the asset manager in the editor sidebar. Drag and drop fil
 SVG files are validated and sanitized before storage to prevent malicious content. Only trusted SVG sources are recommended.
 </Callout>
 
-Uploaded SVGs larger than 4 KB are served through the `/a/` asset proxy as cached `.svg` files (`/a/{hash}/{name}.svg?v=…`) instead of being embedded as data URIs. Smaller SVG icons stay inline. SVG URLs are excluded from the `?width=` srcset ladder. [Static exports](/docs/integrations/apps/static-export) bundle those large SVGs at the same proxy path.
+Uploaded SVGs larger than 4 KB are served through the `/a/` asset proxy as cached `.svg` files (`/a/{hash}/{name}.svg?v=…`) instead of being embedded as data URIs. Smaller SVG icons stay inline. Proxied SVGs include the asset's stored width and height so viewBox-only files keep their intrinsic size in flex layouts. SVG URLs are excluded from the `?width=` srcset ladder. [Static exports](/docs/integrations/apps/static-export) bundle those large SVGs at the same proxy path.
 
 ## Asset Model
 

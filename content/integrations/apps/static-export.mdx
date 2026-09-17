@@ -23,7 +23,7 @@ The Static HTML Export integration is available on self-hosted Ycode. Cloud supp
 - Canonical, `og:url`, and hreflang when a site base URL is set (`Global Canonical URL` or a primary domain); omitted when it is not
 - Sliders (Swiper) with pagination, easing, and `aria` state
 - Lightboxes with grouping and CMS-bound files
-- Images with `srcset` / `sizes` (SVG URLs are excluded from the width ladder). Uploaded SVGs larger than 4 KB are emitted as `.svg` files at the `/a/` proxy path instead of data URIs
+- Images with `srcset` / `sizes` (SVG URLs are excluded from the width ladder). Uploaded SVGs larger than 4 KB are emitted as `.svg` files at the `/a/` proxy path instead of data URIs, with stored width and height so viewBox-only files keep their size
 - Forms with all field types
 - Link types: URL, page, email, phone, anchor, asset
 - Code Embed (htmlEmbed) layers — your HTML, CSS, and JS render inline at their natural height; pasted `<script>` tags run as authored
