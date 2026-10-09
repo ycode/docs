@@ -177,6 +177,12 @@ When a collection has many items, enable pagination to split them across pages:
 
 Set the **items per page** count to control how many items appear at once. Pagination works with filters — only items that pass the filters are counted and paginated.
 
+### Crawlable Pagination
+
+In **Pages** mode, the previous and next buttons are real links (`?p_<layerId>=2`), so search engines can crawl every page of the list. Other query parameters on the URL are kept, and visitors can Cmd/Ctrl-click a button to open the page in a new tab.
+
+Each paginated page reuses the first page's title and description and gets a canonical URL pointing at itself. Unknown or tracking parameters, and page numbers past the end of the list, canonicalize back to page 1. When exactly one collection on the page is paginated, Ycode also adds `<link rel="prev">` and `<link rel="next">` tags.
+
 ### Styling Pagination Controls
 
 When pagination is enabled, Ycode generates pagination controls (previous/next buttons, page info text). You can style these controls through the pagination layer settings in the design panel.

@@ -34,7 +34,7 @@ The `metadata` object stores:
 | **referrer** | Referring page URL |
 | **page_url** | URL of the page where the form was submitted |
 
-This data helps you analyze traffic sources and troubleshoot submissions.
+Ycode records the IP, user agent, and referrer on the server for every submission. The submission details show them as a list, and hide the referrer when it just repeats the page URL. This data helps you analyze traffic sources and troubleshoot submissions.
 
 ## Statuses
 
@@ -48,6 +48,17 @@ Submissions use four statuses:
 | **spam** | Marked as spam; can be filtered out |
 
 You change status from the submissions list or the submission detail view. Use statuses to track which submissions need attention and which are done.
+
+## Spam Protection
+
+Every published form is protected against spam by default — existing sites included, with no setup:
+
+- **Same-site only** — Submissions must come from your own site. Ycode compares the request origin with the host serving the form, so this works on any custom domain without configuration.
+- **Hidden decoy field** — Each form carries an invisible field that only bots fill in. Those submissions are filed under **spam** and skip email notifications, webhooks, and app integrations. The bot still gets a success response, so it doesn't retry.
+- **Per-visitor rate limit** — One IP address can submit up to 10 times per 10 minutes by default.
+- **Size limits** — Oversized payloads, too many fields, and overly long values are rejected.
+
+To loosen these checks — for example to accept submissions from a headless frontend or a shared office IP — use **Form spam protection** in [Settings → Security](/docs/deployment/security-headers#form-spam-protection).
 
 ## Email Notifications
 

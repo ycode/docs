@@ -1,14 +1,18 @@
 ---
-title: Security Headers
+title: Security Settings
 ---
 
 import { Callout } from 'nextra/components'
 
-# Security Headers
+# Security Settings
 
-Configure HTTP security headers for your published pages from **Settings → Security**. The feature is fully opt-in: no headers are sent until you save a configuration, so existing sites never change behavior without your action.
+**Settings → Security** groups three sections, each with its own **Save changes** button: **Security headers**, **Form spam protection**, and **Vulnerability reporting**.
 
-## Available Headers
+## Security Headers
+
+Configure HTTP security headers for your published pages. The feature is fully opt-in: no headers are sent until you save a configuration, so existing sites never change behavior without your action.
+
+### Available Headers
 
 | Header | What it does |
 |--------|--------------|
@@ -19,16 +23,16 @@ Configure HTTP security headers for your published pages from **Settings → Sec
 | **Permissions-Policy** | Restricts which browser features (camera, microphone, geolocation, …) pages may use |
 | **Strict-Transport-Security** | Tells browsers to only ever connect over HTTPS (HSTS) |
 
-## Configuring
+### Configuring
 
 1. In the editor, go to **Settings** → **Security**
-2. Turn on the master toggle — individual header controls stay disabled until it's on
+2. Turn on **Enable security headers** — individual header controls stay disabled until it's on
 3. Enable the headers you want; recommended values are pre-filled but never auto-applied
 4. Save
 
 Headers apply to your published pages only — the builder itself never receives them. Leaving a header's value empty omits that header entirely, and switching the master toggle off omits all of them.
 
-## Defaults
+### Defaults
 
 The defaults are deliberately conservative so enabling the feature can't break your site:
 
@@ -42,3 +46,28 @@ The **Strict-Transport-Security** control is hidden on Ycode Cloud because the p
 <Callout type="warning" title="Test your CSP">
 A too-strict Content-Security-Policy can block your own custom code, analytics snippets, or embeds. After enabling CSP, load your published site with the browser console open and check for blocked-resource errors before rolling it out.
 </Callout>
+
+## Form Spam Protection
+
+Spam protection is active by default on every form, with nothing to configure. The settings in this section only relax it. See [Spam Protection](/docs/forms/submissions#spam-protection) for how submissions are checked.
+
+| Setting | Default | What it does |
+|---------|---------|--------------|
+| **Enable spam protection** | On | Turn off to accept every submission without any checks |
+| **Limit submissions per visitor** | On | Caps how often a single IP address can submit. Turn off if your visitors share one IP, such as an office network or an in-store kiosk |
+| **Maximum submissions per 10 minutes** | `10` | Further submissions from the same IP address are refused until the window passes |
+| **Allow submissions from other sites** | Off | By default only forms served from your own domains may submit. Enable this if you post to the form API from a separate frontend or a mobile app |
+
+<Callout type="warning" title="Headless frontends">
+If you submit to the form API from your own frontend or app, enable **Allow submissions from other sites** — otherwise those submissions are rejected.
+</Callout>
+
+## Vulnerability Reporting
+
+Publish a `security.txt` file so researchers who find a vulnerability on your site know where to report it. Ycode serves it at `/.well-known/security.txt` as plain text. Leave the field empty to serve nothing (the URL returns `404`).
+
+1. In **Settings** → **Security**, find **Vulnerability reporting**
+2. Click **Generate template** to prefill **Contents of security.txt** using your site's domain
+3. Replace the placeholder `Contact` and `Policy` URLs with your own, then save
+
+The template fills in `Contact`, `Expires`, `Preferred-Languages`, and `Policy` fields in the [RFC 9116](https://www.rfc-editor.org/rfc/rfc9116) format, with `Expires` set just under a year out. Ycode never refreshes `Expires` automatically: keep it less than a year ahead and update it whenever you review the contacts, as a stale file is worse than none. Learn more at [securitytxt.org](https://securitytxt.org).

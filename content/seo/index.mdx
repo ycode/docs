@@ -54,6 +54,10 @@ These files update when you publish or unpublish pages. Configure the sitemap in
 
 A `Ycode generated` sitemap lists each localized URL as its own `<url>` entry, with that locale's URL as `<loc>` and the full reciprocal `hreflang` set (including `x-default` as a child link, not a duplicate `<loc>`). Single-locale sites emit one entry per page with no alternates. Preview, error, and `noindex` pages are excluded. Dynamic CMS pages produce one entry per locale per collection item.
 
+Paginated collection lists are crawlable: previous/next buttons are real links, each page gets a self-referencing canonical, and stray query parameters canonicalize back to page 1. See [Crawlable Pagination](/docs/cms/filtering#crawlable-pagination).
+
+To tell security researchers where to report vulnerabilities, publish a `security.txt` from [Settings → Security](/docs/deployment/security-headers#vulnerability-reporting).
+
 ## hreflang for Multilingual Sites
 
 On sites with more than one published [locale](/docs/localization), Ycode emits `<link rel="alternate" hreflang="...">` tags in the document `<head>` from the first HTML byte, so crawlers see language alternates without waiting for client scripts. Tags cover every published locale plus an `x-default` pointing at the default-locale URL.

@@ -7,7 +7,7 @@ import { Steps } from 'nextra/components'
 
 # MCP Server
 
-Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI coding tools build and edit your site. Connect tools like Cursor, Claude (Desktop or web), ChatGPT, or Windsurf to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
+Ycode includes an embedded [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI tools build and edit your site. Connect Claude (Desktop, Claude.ai, or Claude Code), ChatGPT, Cursor, or VS Code to your Ycode project and use natural language to create pages, design layouts, manage CMS content, and publish changes.
 
 <Callout type="info" title="Built-in alternative">
 For an AI that lives inside the Ycode editor — no external client to install — see the [AI Agent](/docs/editor/ai). It uses the same tool registry as MCP (~130 tools), just wired into the builder's Agent tab instead of an external client. The one difference: the in-app agent can't publish (only you can), while MCP tools can.
@@ -15,56 +15,71 @@ For an AI that lives inside the Ycode editor — no external client to install �
 
 ## How to Connect
 
-The MCP server supports two ways to authenticate:
+AI tools connect over **OAuth**: you paste one URL into the client, sign in to Ycode, and approve access on a consent screen. Open **Integrations** → **MCP** in the builder to find your **MCP server URL**, per-client setup steps under **How to connect**, and your approved **Connections**.
 
-- **OAuth** — The connecting tool walks the user through a sign-in + consent screen and Ycode issues a scoped access token. Required for **Claude.ai (web)** and **ChatGPT**, which only support OAuth-based remote MCP servers. Recommended whenever the tool supports it.
-- **URL token** — A long-lived bearer token embedded directly in the MCP URL. Useful for tools that don't yet implement OAuth, for headless setups, and for self-hosted instances where you want to wire up an MCP endpoint without a sign-in UI. Cursor, Claude Desktop, and Windsurf all work this way.
+Ycode supports both OAuth client registration methods clients use today — Dynamic Client Registration and Client ID Metadata Documents — so any client that speaks the MCP Streamable HTTP transport with OAuth can connect.
 
-Manage both flows from the **Integrations → MCP** page in the builder. Issued tokens are listed there with an **OAuth** or **URL token** badge and an expiry date where relevant; revoke any token from the same page.
+### Ycode Cloud: one URL for all your sites
 
-## Connect via OAuth (Claude.ai web, ChatGPT)
+On Ycode Cloud, the MCP page leads with a single shared URL:
 
-For tools that support remote MCP over OAuth, point them at the bearer endpoint and they'll redirect to Ycode to sign in.
+```
+https://mcp.ycode.cloud/mcp
+```
 
-<Steps>
+Sign in once with your Ycode Cloud account. The connection works on every site you have designer access to — including sites you get access to later. In the conversation, name the site you want to work on and the assistant switches to it with the `list_sites` and `select_site` tools. If you only have one site, it's selected automatically.
 
-### Copy the bearer MCP URL
+In Claude, search the connector directory for **Ycode** and click **Connect**. If Ycode isn't in your directory yet, add it as a custom connector with the URL above. Each site's own URL (`https://your-site.com/ycode/mcp`) remains available on the same page as a secondary option.
 
-In the editor, go to **Integrations** → **MCP** and copy the **OAuth endpoint** — it looks like `https://your-site.com/ycode/mcp` (no token suffix). The endpoint advertises the OAuth metadata, so the connecting tool can discover the sign-in and token endpoints automatically.
+If you start connecting while logged out, Ycode sends you back to the consent screen after you sign in, so the connection request isn't lost.
 
-### Add the connector
+### Self-hosted: one URL per project
 
-**Claude.ai (web)** — Open **Settings** → **Connectors** → **Add custom connector**, paste the OAuth endpoint, and complete the redirect-based sign-in.
+Self-hosted projects aren't listed in the Claude or ChatGPT connector directories, because every project has its own URL. Add your project as a **custom connector** instead, using the **MCP server URL** from **Integrations** → **MCP** — it looks like `https://your-site.com/ycode/mcp`.
 
-**ChatGPT** — Enable [developer mode](https://platform.openai.com/docs/guides/developer-mode) for your account, then go to **Settings** → **Connectors** → **Create**. Set a recognisable **Connector name** and a clear **Description** (the model uses it to decide when to call the tools), paste the OAuth endpoint as the **Connector URL**, and save. ChatGPT walks you through the OAuth flow on first use.
+Clients like Claude.ai and ChatGPT connect from the vendor's servers, so they need a public HTTPS URL and can't reach `localhost`. For local development, use Cursor, Claude Code, or VS Code. If your project is served from several hostnames or behind a reverse proxy, set [`NEXT_PUBLIC_MCP_SERVER_URL`](/docs/getting-started/configuration#environment-variables) to the public URL clients should use.
 
-### Approve consent
+## Client Setup
 
-Ycode shows a consent page listing the client requesting access. Approve to issue the tokens. Access tokens last 1 hour; refresh tokens last 30 days and rotate on every use, so a connected client stays signed in indefinitely until you revoke it.
+The **How to connect** tabs on the MCP page show these steps with your URL filled in.
 
-</Steps>
+**Claude Desktop and Claude.ai** — Open **Settings → Connectors**, scroll past the directory, and click **Add custom connector**. Name it "Ycode", paste the MCP server URL into **Remote MCP server URL**, and leave the OAuth client ID and secret fields empty. Click **Add**, then **Connect**, and sign in to Ycode to approve access. Custom connectors require a paid Claude plan (Pro, Max, Team, or Enterprise); on Team and Enterprise an owner may need to add the connector for the organization.
 
-## Connect via URL Token (Cursor, Claude Desktop, Windsurf)
+**Claude Code** — Run the command below, then run `/mcp` in Claude Code and choose `ycode` to sign in:
 
-For tools that don't support OAuth — or where you want a simple paste-in URL — use a URL token.
+```bash
+claude mcp add --transport http ycode https://your-site.com/ycode/mcp
+```
 
-<Steps>
+**Cursor** — Open **Settings → MCP** and click **Add new MCP server**, or edit `.cursor/mcp.json` directly:
 
-### Generate an MCP URL
+```json
+{
+  "mcpServers": {
+    "ycode": { "url": "https://your-site.com/ycode/mcp" }
+  }
+}
+```
 
-1. In the Ycode editor, go to **Integrations** → **MCP**
-2. Click **Generate MCP URL**
-3. Copy the generated URL (format: `https://your-site.com/ycode/mcp/ymc_...`)
+**ChatGPT** — Open **Settings → Connectors** and enable **Developer mode** (under Advanced). Click **Create**, name it "Ycode", and paste the MCP server URL. Choose **OAuth** authentication, then sign in to Ycode and approve access. Developer mode connectors are available on ChatGPT Plus, Pro, Business, Enterprise, and Edu plans.
 
-### Connect your AI tool
+**VS Code** — Run the command below, then open the Chat view, click the tools icon, and start the `ycode` server to sign in:
 
-**Cursor** — Go to Settings, find MCP, click "Add server", select SSE type, and paste your MCP URL.
+```bash
+code --add-mcp '{"name":"ycode","type":"http","url":"https://your-site.com/ycode/mcp"}'
+```
 
-**Claude Desktop** — Go to Settings, find Connectors, click "Add custom connector", and paste your MCP URL.
+### Approving Access
 
-**Windsurf** — Add a custom server with the MCP URL in the Windsurf settings.
+Ycode shows a consent screen with your site name and the client requesting access. If the client redirects to an app on your own machine (Claude Code, Cursor), the screen warns you that the target is a local application. Approve to connect.
 
-</Steps>
+Access tokens last 1 hour. Refresh tokens last 30 days, rotate on every use, and are bound to the client that received them, so a connected client stays signed in until you revoke it.
+
+### Tool Permissions
+
+The first time the assistant uses a tool, the client asks for your permission. Choose **Always allow** for the editing tools — every change is a draft until you publish — and keep **Publish** and the delete tools on ask. On the Cloud shared URL, one approval covers all your sites.
+
+Every tool reports a title and a read-only or destructive hint, which clients use to decide which calls need confirmation. Editing tools batch a whole turn of changes into one `batch_operations` call, so a page edit usually needs one approval instead of one per layer.
 
 <Callout type="info" title="Live sync">
 Changes made through the MCP server appear in the browser editor in real time via Supabase Realtime. You can watch the AI build your site as it works.
@@ -95,6 +110,8 @@ Layer settings cover the full surface: sliders (pagination, easing, touch events
 The design schema reaches further than the visual controls in the editor sidebar. Agents can also set `mixBlendMode` (multiply, screen, overlay, and the rest), raw `filter` and `backdropFilter` values, and any CSS `backgroundImage` — including inline SVG data URIs for noise and texture overlays. For the rare property with no design field at all (such as `pointer-events`), agents can set a `style` custom attribute on the layer via `update_layer_settings`. Combined with absolute positioning and z-index, this is enough to build tinted scrims, film-grain overlays, and similar effects as native layers instead of HTML embeds.
 
 Links support URLs, internal pages, email, phone, anchors (`anchor_layer_id`), specific dynamic items (`collection_item_id`), assets, plus `rel` and `download` attributes.
+
+`batch_operations` covers the same edits as the single tools — including `update_link`, `update_settings`, and `update_background_image` ops — so an agent can apply a whole turn of changes in one call. `update_component_layers` accepts `update_link` and `update_settings` ops too, preserving any linked component variable.
 
 Move, reorder, and delete layers.
 
@@ -154,6 +171,8 @@ For large or multi-language jobs, keep discovery and writes lean. Pass `untransl
 
 `batch_set_translations` accepts up to 1000 items per call. Set a top-level `locale_id` once and omit it on each item — do not repeat the locale on every row. Prefer one large batch over many small `set_translation` calls. Rich text in a batch uses `content_type` `richtext` with a JSON-stringified Tiptap document; use `set_rich_text_translation` only when you are writing a single field.
 
+Page custom code (the head and body snippets) is translatable too: it comes back from `list_translatable_content` with `content_type` `code`, and `set_translation` and `batch_set_translations` accept the same type.
+
 Translations default to **completed** so they appear on the live site after publishing — pass `is_completed: false` only for work-in-progress drafts. Rich-text payloads are validated against their declared `content_type` and rejected with an actionable error rather than silently stored as unrenderable data. `get_unpublished_changes` reports pending translation and locale counts alongside other unpublished changes, so agents know when there's something to publish.
 
 ### Styles
@@ -194,12 +213,14 @@ The MCP server also provides read-only resources that give AI agents context abo
 | **Site Collections** | CMS schema (collections, fields) |
 | **Site Design Tokens** | Color variables, fonts, and locales |
 
-## Managing Tokens
+## Managing Connections
 
-The **Integrations → MCP** page lists every token issued for your project — both URL tokens you generated manually and OAuth tokens issued through a sign-in flow:
+The **Connections** section on the **Integrations → MCP** page lists every approved AI tool. Each row shows `Connected` (or `Expired` once its refresh token lapses), the date it connected, and when it was last used. Open a row's menu and choose **Revoke connection** to cut the client off — it has to reconnect and approve access again.
 
-- Each row is badged **URL token** or **OAuth** so you can see at a glance how each connection authenticates
-- OAuth tokens show their expiry date; URL tokens don't expire until you revoke them
-- Revoke any token to immediately cut off the corresponding client
+On Ycode Cloud, connections made through the shared URL are listed there too and can be revoked from any of your sites.
 
-You can issue as many URL tokens as you need (e.g. one per AI tool or team member) and as many OAuth connections as you want. Treat URL tokens like API keys — do not share them publicly. OAuth tokens never leave the connecting client, so they're safer to use in shared environments.
+### Legacy URL Tokens
+
+For clients that don't support OAuth, expand **Legacy URL tokens** at the bottom of the page and click **Generate URL token**. Give it a **Connection name** (for example `Windsurf`) and copy the URL shown in **Your MCP URL** — it embeds the token (`https://your-site.com/ycode/mcp/ymc_...`).
+
+URL tokens never expire until you delete them, and anyone with the URL can access the project. Prefer the OAuth URL whenever your client supports it, and treat URL tokens like API keys.
