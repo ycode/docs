@@ -115,6 +115,31 @@ Links support URLs, internal pages, email, phone, anchors (`anchor_layer_id`), s
 
 Move, reorder, and delete layers.
 
+`get_layers` returns the full page tree by default. On large pages, agents read it in pieces instead: `fields: "summary"` returns a compact tree (id, name, tag, html id, link, truncated text, classes, component), `depth` limits how many levels come back (deeper levels report a `children_count`), `layer_id` returns a single subtree, and `search` finds up to 50 layers by id, name, html id, class, or text, with each match's parent and path.
+
+Edit tools return `design_warnings` ranked by severity. An `error` renders wrong (content directly in a section, low contrast, a grid on a collection layer, nav links hidden on mobile without a toggle), a `warning` looks unfinished (missing container, missing typography, clickable layers with no hover state), and a `hint` is optional polish. Agents fix errors and warnings and may skip hints.
+
+### HTML Import
+
+`import_html` turns HTML and Tailwind into native, editable layers in one call. It's opt-in: agents use it when you ask for an HTML import or provide HTML, and keep building with layouts and layer tools otherwise. It uses the same converter as the builder's [Import HTML](/docs/editor/layers#html-import-and-export), so mobile-first breakpoints, gradients, nav rows, anchor links, and form attributes convert the same way.
+
+- **Section by section** — Import into a page (defaults to the body) or a component, under any parent and position. The response returns `refs` mapping each element `id`, `data-ref`, and unnamed landmark (`header`, `nav`, `main`, `section`, `section[2]`, `footer`…) to its new layer id, so the agent can target layers without reading the page. Pass `replace_layer_id` to swap an existing section in place, or `dry_run` to preview the layer count and warnings without saving.
+- **Site links** — `href="/pricing"` becomes a page link, and `href="#id"` or `href="/path#id"` becomes a page + anchor link when the id lives on another page. Paths with no matching page stay URLs.
+- **Warnings** — Anything dropped or converted lossily (`<script>`, `<style>`, relative media URLs, classes with no design control) is reported in groups ranked by severity.
+
+Annotate the HTML with `data-ycode-*` attributes to wire up Ycode features during the import:
+
+| Attribute | What it creates |
+|-----------|-----------------|
+| `data-ycode-component="Name"` | A component from the element, with an instance left in its place. Repeated names, or names matching an existing component, become more instances of it |
+| `data-ycode-toggle="menu"` + `data-ycode-menu="menu"` | A working mobile menu: the button toggles the panel with the same click interaction as the built-in navigation layouts, on the breakpoints where the panel is hidden |
+| `data-ycode-collection="Name"` | A Collection List from the marked card, with optional `data-ycode-limit`, `data-ycode-sort="Field:desc"`, and `data-ycode-filter="Field=value; Other!=value"` |
+| `data-ycode-field="Field"` | A field binding on text, heading, image, video, audio, or link layers. `data-ycode-field-alt` binds image alt text and `data-ycode-field-bg` the background image. Outside a list, it binds the dynamic page's own item |
+| `data-ycode-link="item"` | A link from the card to the item's dynamic page |
+| `data-ycode-preview-only` | Nothing — drops static copies that only exist to preview the list |
+
+Unknown collections, fields, sort or filter values are reported as warnings, and the markup stays static.
+
 ### Layouts
 
 Insert pre-built layout templates — hero sections, headers, feature grids, footers, and more. Layouts provide a quick starting point that the AI can then customize.
@@ -125,15 +150,21 @@ Create and manage collections, fields, items, and item values. Field types inclu
 
 Add per-field metadata (`default`, `fillable`, `hidden`, `is_computed`), set a default `sorting` on each collection (`field`, `direction`), reorder fields with `reorder_collection_fields`, and reposition manually-sorted items with `set_collection_item_order`.
 
+`create_collection_pages` sets up a collection's pages in one call: a folder, an index (listing) page, and a dynamic detail page bound to the collection's slug field, with the SEO title and description bound to fields (`name`, plus `description`, `excerpt`, or `summary` when present, and an optional title suffix). It reuses an existing folder with the same slug and won't create a second dynamic page for a collection.
+
 ### Dynamic Content (Collection Lists, Bindings, Visibility)
 
 Bind layers to CMS data without leaving the agent:
 
-- `bind_collection_layer` turns a layer into a Collection List bound to a collection, with sorting, limit, pagination (Pages or Load More), and **nested-collection sourcing** from a reference, multi-reference, multi-asset, or inverse-reference field — useful for "show this category's products" or "show this post's tags" patterns.
+- `bind_collection_layer` turns a layer into a Collection List bound to a collection (pass `convert` to turn a plain container into one), with sorting, limit, pagination (Pages or Load More), and **nested-collection sourcing** from a reference, multi-reference, multi-asset, or inverse-reference field — useful for "show this category's products" or "show this post's tags" patterns.
 - `set_collection_filters` writes filter rules as AND-of-OR condition groups. Conditions can compare a field to a static value, to a **visitor-facing filter input** (`input_layer_id`), or to the **current page's item** on dynamic pages (the "Current Tag" / "Current Category" pattern). Item ID conditions support both selected items and the current page item.
 - `set_layer_visibility` writes show/hide rules for any layer with the same condition model (`field`, `item_id`, and `page_collection` count sources).
-- `bind_layer_field` binds dynamic content onto a layer: text and rich-text values, image `src` / `alt`, video `src` / `poster`, audio `src`, and background images. Pass an optional `prefix` / `suffix` for inline formatting.
+- `bind_layer_field` binds dynamic content onto a layer: text and rich-text values (including headings), image `src` / `alt`, video `src` / `poster`, audio `src`, background images, and link, email, or phone fields on buttons and links. Pass an optional `prefix` / `suffix` for inline formatting.
 - `set_dynamic_text` composes one text node from an ordered list of literal strings and field references — useful for "Posted on `{Date}` by `{Author}`" patterns.
+- `batch_operations` accepts `bind_collection` and `bind_field` ops, so a whole list can be bound in one call.
+- `update_rich_text_styles` styles the elements inside `richText` layers — h1–h6, paragraphs, links, lists, blockquotes, code, images, separators, and tables — with the same design schema as `update_layer_design`, plus hover styles, per-breakpoint values, and a `reset` list. The styles also apply to CMS rich text bound to the layer, and work on component masters via `component_id`.
+
+The collection layer is the repeated item, not the list container: grid columns, gaps, and dividers belong on its parent.
 
 ### Components
 
@@ -145,6 +176,8 @@ An `id` variable is a string (`{ id: "…" }`) linked to a layer's Settings `ID`
 
 Variants have full CRUD: `list_component_variants`, `create_component_variant` (optionally cloning an existing variant), `update_component_variant`, and `delete_component_variant`. `update_component_layers` accepts an optional `variant_id` so edits target a specific variant without clobbering the others.
 
+`list_components` reports how many instances each component has and on which pages. `replace_component_instances` swaps every instance of one component for another across the site. `get_component` accepts `variant_id`, `depth`, and `fields` filters for a compact read of large components.
+
 ### Animations and Interactions
 
 Add animations from 18 curated presets — reveal, hover, click, parallax, stagger, and loop families — in a single tool call:
@@ -152,6 +185,8 @@ Add animations from 18 curated presets — reveal, hover, click, parallax, stagg
 - `add_animation` — apply a preset to one or more `targets`
 - `list_layer_animations`, `remove_layer_animation`, `clear_layer_animations`
 - `set_layer_interactions` — raw escape hatch for custom GSAP timelines
+
+All of these accept `component_id` (and an optional `variant_id`) to animate layers inside a component master, so every instance gets the animation.
 
 A dedicated **Animation Presets Reference** resource documents every preset, trigger semantics, and the raw interaction shape.
 
@@ -194,6 +229,8 @@ List installed fonts, search Google Fonts, and add new fonts to the project.
 ### Export
 
 `export_layer_html` renders any layer subtree to a self-contained HTML string with Tailwind classes preserved — useful for handing a finished section off to another tool or saving it as a snippet.
+
+Pass `rendered: true` to preview what the layer looks like once published, without publishing. It renders through the same pipeline as the live site: components are expanded, Collection Lists repeat with real draft items, CMS fields are filled in, visibility conditions apply, and links resolve to published URLs. On a dynamic page it renders the first item, or the one whose slug you pass as `collection_item_slug`.
 
 ### Publishing
 

@@ -102,6 +102,14 @@ You can import HTML into the layer tree or export layers as HTML.
 
 **Import HTML** — Right-click a layer and choose **Import HTML**. Paste or type HTML in the code editor dialog and click **Import**. The HTML is converted to layers and added as children of the selected layer. Supported features include standard HTML tags, Tailwind CSS classes, and inline styles — all converted to Ycode design properties automatically.
 
+The importer handles HTML copied from typical Tailwind templates:
+
+- **Mobile-first breakpoints** — `md:` and `lg:` classes convert to Ycode's desktop-first breakpoints, so `flex-col md:flex-row` becomes a row on desktop and a column on mobile, editable in the design panel per breakpoint. Classes without a base value get the CSS default below the breakpoint (`md:col-span-2` spans 2 on desktop, 1 on mobile). `xl:` and `2xl:` classes are kept as raw classes.
+- **Gradients and position** — Tailwind v4 gradients (`bg-linear-to-r from-… to-…`), `inset-*`, negative margins, and filters like `grayscale` import as values the background, position, spacing, and effects controls can edit.
+- **Navigation and buttons** — Links and spans that make up a nav or button row stay separate layers instead of collapsing into one text block. Links inside running text still become rich text.
+- **Anchor links** — `href="#id"` becomes a native anchor link when the target id is in the imported HTML or already on the page.
+- **Forms** — Field attributes (`required`, `name`, `placeholder`, `autocomplete`), accessibility attributes (`aria-*`, `role`, `title`, `tabindex`), `<select>` options, and `<label>` wrappers are kept.
+
 **Export as HTML** — Right-click a layer and choose **Export as HTML**. The layer and its children are converted to clean HTML with Tailwind classes. Copy the output to use in other projects or share with developers.
 
 <Callout type="info" title="Tip">
