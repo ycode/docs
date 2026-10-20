@@ -6,16 +6,17 @@ import { Callout } from 'nextra/components'
 
 # Pricing
 
-Ycode is available two ways: free forever as **Self-host** open source, or paid per-project on **Ycode Cloud**. Both share the same editor, CMS, forms, localization, and integrations — they differ only in hosting and billing.
+Ycode is available two ways: free forever as **Self-host** open source, or paid per-project on **Ycode Cloud** with the **Cloud Basic** or **Cloud Pro** plan. Every plan shares the same editor, CMS, forms, localization, and integrations — they differ in hosting, billing, and CMS and language limits.
 
 ## At a Glance
 
-| Plan | Price | Hosting | Best For |
-|------|-------|---------|----------|
+| Plan | Price per project | Hosting | Best For |
+|------|-------------------|---------|----------|
 | **Self-host** | Free forever | You own the infrastructure | Developers and teams who want full control |
-| **Cloud** | $25/month annual, $30/month monthly — **per project** | Managed by Ycode | Individuals and teams that want a managed site |
+| **Cloud Basic** | $10/month annual, $15/month monthly | Managed by Ycode | Small sites with a few collections and up to 2 languages |
+| **Cloud Pro** | $25/month annual, $30/month monthly | Managed by Ycode | Content-heavy and multilingual sites |
 
-Annual billing saves ~18% versus monthly.
+Annual billing saves up to 33% versus monthly.
 
 ## Self-host
 
@@ -25,7 +26,7 @@ Ycode Open Source is free forever. Fork the [repository](https://github.com/ycod
 
 - Full source code access and the right to modify it
 - Custom domains
-- Unlimited users, pages, CMS items, form entries, and languages
+- Unlimited users, pages, CMS collections, CMS items, form entries, and languages
 - Community support on [Discord](https://discord.gg/ycode) and GitHub
 
 **What you provide**
@@ -38,21 +39,25 @@ See [Deployment](/docs/deployment) for the full self-hosting guide.
 
 ## Cloud
 
-Ycode Cloud is the managed offering: hosting, updates, SSL, and a global CDN are all handled for you. Each Cloud project carries its own subscription.
+Ycode Cloud is the managed offering: hosting, updates, SSL, and a global CDN are all handled for you. Each Cloud project carries its own subscription, on either the **Cloud Basic** or **Cloud Pro** plan.
 
-| Interval | Price per project |
-|----------|-------------------|
-| **Annual** | $25/month (billed yearly) |
-| **Monthly** | $30/month |
+| | Cloud Basic | Cloud Pro |
+|---|-------------|-----------|
+| **Annual** (billed yearly) | $10/month | $25/month |
+| **Monthly** | $15/month | $30/month |
+| **CMS collections** | 5 | 50 |
+| **Languages** | 2 | Unlimited |
 
-**Included on every Cloud project**
+**Included on both Cloud plans**
 
 - Fully managed Ycode hosting with automatic updates and maintenance
 - Global CDN and fast edge delivery
 - Custom domains
-- Unlimited users, pages, form entries, and languages
+- Unlimited users, pages, and form entries
 - Up to **20,000 CMS items** per project
 - Community and email support
+
+Pick **Cloud Basic** for a smaller site — a portfolio, a landing page, or a business site with a blog and up to two languages. Pick **Cloud Pro** when you need more than 5 collections or more than 2 languages.
 
 Projects start on **Free** with the full editor and CMS so you can build. Free is not a hosting plan — keep the project active, then upgrade when you want the site to stay online. Paid features such as a [custom domain](/docs/deployment/custom-domains) unlock on subscribe. See [Billing](/docs/cloud/billing) for how to subscribe and manage a project subscription through the Stripe Customer Portal.
 
@@ -62,26 +67,28 @@ A never-subscribed Free project is deleted after **7 days of inactivity**. Openi
 
 ## Billing Intervals
 
-Cloud subscriptions offer monthly and annual billing. Annual saves roughly 18% versus paying month-to-month: $30/mo monthly → $25/mo annual.
+Both Cloud plans offer monthly and annual billing. Annual saves about 33% on Cloud Basic ($15/mo monthly → $10/mo annual) and about 17% on Cloud Pro ($30/mo monthly → $25/mo annual).
 
-You pick the interval at checkout. To switch later, open the **Stripe Customer Portal** from the project's **Billing details** menu — the portal lets you change interval, update payment methods, download invoices, and cancel.
+You pick the plan and interval at checkout. To switch later, open the **Stripe Customer Portal** from the project's **Billing details** menu — the portal lets you change interval, update payment methods, download invoices, and cancel.
 
 ## Switching Between Plans
 
 Plans aren't locked. You can move between them at any time:
 
-- **Cloud Free → Cloud Paid** — Subscribe per project from the project menu's **Billing details**.
+- **Cloud Free → Cloud Basic or Cloud Pro** — Subscribe per project from the project menu's **Billing details**.
 - **Cloud Paid → Cloud Free** — Cancel the project's subscription in the Stripe Customer Portal. The project keeps editing access on free; paid features lock until you resubscribe. Previously paid projects are not deleted for inactivity.
 - **Cloud → Self-host** — Use [Backup & Restore](/docs/deployment/backup) to export a project from Cloud and import it into a self-hosted Ycode instance.
 - **Self-host → Cloud** — The same backup/restore flow works the other way.
 
 ## Limits and Notes
 
+- **CMS collections** — Self-host is unlimited. Cloud Basic allows 5 collections per project, Cloud Pro 50.
 - **CMS items** — Self-host is unlimited. Cloud projects (free or paid) are capped at 20,000 items per project.
+- **Languages** — Self-host and Cloud Pro are unlimited. Cloud Basic allows 2 languages per project.
 - **Custom domains** — Available on Self-host and paid Cloud projects. Free Cloud projects use the `*.ycode.website` subdomain.
 - **Free project retention** — Never-subscribed Free Cloud projects are deleted after 7 days of inactivity. Paid Cloud and Self-host are not.
 - **Users** — Every plan is unlimited. Cloud projects use per-project teams (see [Teams](/docs/cloud/teams)).
-- **Pages, form entries, and languages** — Unlimited on every plan.
+- **Pages and form entries** — Unlimited on every plan.
 - **Support** — Community on all plans; email support on Cloud.
 - **Migrated Legacy customers** — Ycode Legacy was shut down on July 1, 2026 and all active projects were migrated. Paid Legacy subscriptions carried over to the new Ycode at their existing price. See the migration note in [Billing](/docs/cloud/billing).
 
