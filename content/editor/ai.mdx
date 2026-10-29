@@ -22,6 +22,7 @@ Everything the agent does stays a draft until you hit **Publish**, and every tur
 | **Setup** | None | Add a provider key |
 | **Models** | **Auto**, **Fast**, **Best** | Any enabled model from your providers |
 | **Billing** | [AI credits](/docs/cloud/ai-credits) included with your plan, plus top-ups | Your provider bills you |
+| **[Web access](#web-access)** | Search the web, read pages, screenshot websites | Not available |
 | **Own API key** | Optional — replaces credits while connected | Required |
 
 ## Ycode AI on Cloud
@@ -57,7 +58,7 @@ Ycode ships with a curated list per provider — currently **Claude Opus 5** (th
 
 ### Open the Agent tab
 
-Back in the editor, the right sidebar shows an **Agent / Human** tab switch at the top. Switch to **Agent** and start chatting.
+Back in the editor, the right sidebar shows an **Agent / Human** tab switch at the top. Switch to **Agent** and start chatting. Drag the sidebar's left edge to give long conversations more room.
 
 </Steps>
 
@@ -88,7 +89,7 @@ Instead of hunting for a layer name, enter **pick mode** in the composer and cli
 
 ### Attach images and URLs
 
-Drop images or paste URLs into the composer to give the agent extra context — a design reference, a screenshot to replicate, a link to inspiration. Attachments travel with your message.
+Drop images or paste URLs into the composer to give the agent extra context — a design reference, a screenshot to replicate, a link to inspiration. Attachments travel with your message. On Ycode Cloud, the agent can also open the links you paste — see [Web Access](#web-access).
 
 ### Model picker
 
@@ -103,6 +104,28 @@ With your own key, the composer shows a running badge for the current session: t
 ### Session history
 
 Conversations persist per project. Open a past session from the history dropdown to keep going, or start a new one for a separate line of work. Every turn records the exact model that produced it, so revisiting a chat shows which model wrote which reply. If a turn failed, the error is persisted too — reloading a transcript no longer hides why a run stopped.
+
+## Web Access
+
+On Ycode Cloud, the agent can look things up online and see real websites, so it works from real content and real designs instead of guessing. The chat shows what it's doing as it goes:
+
+| Status in chat | What the agent does |
+|----------------|---------------------|
+| **Searching the web** | Searches for facts it needs — a business's opening hours, a product's features, a company's address |
+| **Reading web page** | Opens a link and reads its text, so a section can use the page's real copy |
+| **Taking screenshot** | Captures a public page to see its layout, colors, typography, and imagery |
+
+Paste a URL and ask for what you want:
+
+- "Build an About section using the copy from https://example.com/about"
+- "Recreate the hero from https://example.com"
+- "Make our pricing section look like https://example.com/pricing on mobile"
+
+Screenshots show the first screen by default, at desktop (1280×800) or mobile (390×844) size. For a whole page, ask for a full-page capture; the agent takes up to four images from top to bottom, and up to four screenshots per message. It only screenshots public pages, never your own work in the builder.
+
+The agent remembers what it read for the rest of the conversation, so follow-up messages don't search again.
+
+Web search and page reading work with Ycode AI credits and with your own **Anthropic** key; screenshots work with every provider. Each search costs about 5 [AI credits](/docs/cloud/ai-credits), and screenshots add to the cost of the message they're in. Self-hosted Ycode doesn't include web access — attach a screenshot to the message instead.
 
 ## Per-Turn Undo and Redo
 

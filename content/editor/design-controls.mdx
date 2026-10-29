@@ -74,7 +74,7 @@ Control element dimensions:
 - **objectFit** — cover, contain, fill, none (for images and videos)
 - **objectPosition** — Pick a focal point for cropped images. The crosshair button next to Object fit opens a 3×3 grid; click any cell to align the image to that corner, edge, or center so the important part of the frame stays visible when the layer is cropped. Per-breakpoint overrides are supported.
 - **overflow** — visible, hidden, scroll, auto, or **ellipsis**. Ellipsis truncates a single line of text with a trailing `…` (maps to Tailwind's `truncate`). Inside a flex container the text element may also need `min-w-0` to shrink and trigger the ellipsis.
-- **Columns** / **Rows** — When the layer sits inside a grid parent, pick `Span 1` … `Span 12` or `Span all`. `Span 1` is the default and does not write a class unless a wider breakpoint spans more.
+- **Columns** / **Rows** — When the layer sits inside a grid parent, pick `Span 1` … `Span 12` or `Span all`. `Span 1` is the default and does not write a class unless a wider breakpoint spans more. Inside a Collection List, bind the span to a **number** or **option** CMS field, the same way you bind a color, so each item sizes itself from its own data — for example, a bento grid where featured items span two columns. Values must be whole numbers and are clamped to 1–12.
 
 ## Position
 
