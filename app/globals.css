@@ -13,3 +13,104 @@ body {
   --x-color-primary-600: #007DFF;
   --x-color-primary-800: #007DFF;
 }
+
+article main :is(ul, ol) {
+  margin-bottom: 1.25em;
+}
+
+article main :is(ul, ol) :is(ul, ol) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+article main li {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+  padding-inline-start: 0.35em;
+  line-height: 1.65;
+}
+
+article main li::marker {
+  color: var(--x-color-gray-400);
+}
+
+article main ol > li::marker {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dark article main li::marker {
+  color: var(--x-color-gray-500);
+}
+
+article table {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--x-color-gray-200);
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+article table tr,
+article table tr:nth-child(even) {
+  border: 0;
+  background-color: transparent;
+}
+
+article table th,
+article table td {
+  border: 0;
+  border-bottom: 1px solid var(--x-color-gray-200);
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+article table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+article table th {
+  background-color: var(--x-color-gray-50);
+  color: var(--x-color-slate-900);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+article table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+article table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+article table td:first-child {
+  color: var(--x-color-slate-900);
+  white-space: nowrap;
+}
+
+article table tbody tr:hover td {
+  background-color: var(--x-color-gray-50);
+}
+
+.dark article table,
+.dark article table th,
+.dark article table td {
+  border-color: rgb(255 255 255 / 0.1);
+}
+
+.dark article table th,
+.dark article table tbody tr:hover td {
+  background-color: rgb(255 255 255 / 0.04);
+}
+
+.dark article table th,
+.dark article table td:first-child {
+  color: var(--x-color-slate-100);
+}
