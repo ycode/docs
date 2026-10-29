@@ -2,7 +2,7 @@
 title: Billing
 ---
 
-import { Callout } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
 # Billing
 
@@ -22,25 +22,69 @@ Idle Free projects are removed automatically after 7 days. There is no restore. 
 
 ## Subscribing
 
-On a Free Cloud project, the editor header shows a **Free** label and an **Upgrade** button after the locale selector and project URL. **Upgrade** opens **Plan & billing** with the heading `Upgrade to Cloud`. Every collaborator on the Free project sees this — not only people who can manage settings. Paid projects hide both.
+You subscribe, change plans, and pay invoices without leaving the builder. Checkout runs inside Ycode — there's no redirect to an external payment page.
 
-Subscribe from **Upgrade**, or from the project's **Billing details** menu. Choose a plan and a billing interval:
+On a Free Cloud project, the editor header shows a **Free** label and an **Upgrade** button after the locale selector and project URL. Every collaborator on the Free project sees this — not only people who can manage settings. Paid projects hide both.
+
+<Steps>
+
+### Pick a plan
+
+Click **Upgrade** to open **Upgrade your project**. Switch between **Monthly** and **Annual** (annual plans carry a **Save yearly** badge), then click **Choose Basic** or **Choose Pro**.
 
 | Plan | Annual (billed yearly) | Monthly | CMS collections | Languages |
 |------|------------------------|---------|-----------------|-----------|
-| **Cloud Basic** | $10/month | $15/month | 5 | 2 |
-| **Cloud Pro** | $25/month | $30/month | 50 | Unlimited |
+| **Basic** | $10/month | $15/month | 5 | 2 |
+| **Pro** | $25/month | $30/month | 50 | Unlimited |
 
-Once subscribed, the project gets access to all paid features including custom domains, publishing, and priority support. See [Pricing](/docs/pricing) for everything included in each plan.
+If the project already uses more than a plan allows, that plan is disabled with a note such as "This project exceeds the Basic plan: 8 CMS collections, limit is 5". Remove the extra collections or languages, or choose a larger plan.
+
+### Enter billing details
+
+Fill in **Full name or company**, **Country or region**, and **Address**. Turn on **I'm purchasing as a business** to add a **Tax ID type** and number. Once saved, the tax ID shows whether it was **Verified**.
+
+### Add a payment method
+
+Enter a card, or pick a card already saved on the project, then click **Continue to review**.
+
+### Review and subscribe
+
+The review shows **Billed to**, **Payment**, the plan price, any **Discount**, the **Tax** line, and **Due today**. Enter a **Promotion code** if you have one, then click **Subscribe**. If your bank asks for 3D Secure confirmation, approve it in the pop-up.
+
+</Steps>
+
+Once subscribed, the project gets access to all paid features including custom domains and publishing. See [Pricing](/docs/pricing) for everything included in each plan.
+
+### Taxes
+
+Plan prices exclude VAT or sales tax. Tax is calculated from your billing address and shown wherever a charge is previewed — at checkout, in the plan-change dialog, and on every invoice. EU businesses that add a valid VAT ID are invoiced with reverse charge instead of VAT.
 
 ## Managing a Subscription
 
-Click the **⋮** menu on a project card and select **Billing details** to open the Stripe Customer Portal, where you can:
+Open the builder menu and choose **Billing**. Billing has its own sidebar:
 
-- **View invoices** and payment history
-- **Update payment methods** — Change your credit card or payment details
-- **Change plan** — Switch between monthly and annual billing
-- **Cancel subscription** — End the subscription at the end of the current billing period
+| Page | What you can do |
+|------|-----------------|
+| **Plan** | See your plan, price, **Current period start**, and **Next invoice** date. Click **Change plan** to switch plans or intervals, or **Cancel plan** |
+| **Invoices** | Every invoice from renewals, plan changes, and purchases, with its status (**Paid**, **Unpaid**, …). Click **View** or **Pay**, or download the PDF |
+| **Payment methods** | Add a card, set the **Default** card used for renewals, or remove a card |
+| **Billing details** | Set the **Billing email** that receives invoices and receipts, and the **Billing address & tax ID** printed on every upcoming invoice |
+
+Only people who can manage the project's members can change billing; everyone else sees a read-only notice. Projects in an agency workspace show **Plan** and **Invoices** only, since the workspace handles payment.
+
+### Changing Plans
+
+Click **Change plan** on the **Plan** page, then **Switch to Basic** or **Switch to Pro**. Switching takes effect immediately and is prorated: the **Switch to** dialog shows the **Payment method**, the amount **Charged today**, and the **Next invoice** before you confirm.
+
+### Cancelling
+
+Click **Cancel plan** and confirm. Your plan stays active until the end of the current billing period, and the **Plan** page shows a **Cancelling** badge with the **Ends on** date. After that, your custom domains are disconnected and the project reverts to the free plan. Click **Resume plan** any time before the end date to keep your subscription.
+
+### Failed Payments
+
+When a payment fails, Billing shows a **Your last payment failed** banner (or **You have an unpaid invoice**) with the outstanding amount. Click **Pay invoice** or **Update card** to keep your custom domains connected.
+
+The **⋮** menu on a dashboard project card still has **Billing details**, which opens the Stripe Customer Portal for the same subscription.
 
 <Callout type="info" title="Migrated from Legacy">
 Ycode Legacy was shut down on July 1, 2026 and all active projects were migrated to the new Ycode. If you had a paid subscription on Legacy, it carried over automatically at your existing price with all features of the new Ycode unlocked.

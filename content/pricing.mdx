@@ -59,7 +59,7 @@ Ycode Cloud is the managed offering: hosting, updates, SSL, and a global CDN are
 
 Pick **Cloud Basic** for a smaller site — a portfolio, a landing page, or a business site with a blog and up to two languages. Pick **Cloud Pro** when you need more than 5 collections or more than 2 languages.
 
-Projects start on **Free** with the full editor and CMS so you can build. Free is not a hosting plan — keep the project active, then upgrade when you want the site to stay online. Paid features such as a [custom domain](/docs/deployment/custom-domains) unlock on subscribe. See [Billing](/docs/cloud/billing) for how to subscribe and manage a project subscription through the Stripe Customer Portal.
+Projects start on **Free** with the full editor and CMS so you can build. Free is not a hosting plan — keep the project active, then upgrade when you want the site to stay online. Paid features such as a [custom domain](/docs/deployment/custom-domains) unlock on subscribe. See [Billing](/docs/cloud/billing) for how to subscribe and manage a project subscription from the builder.
 
 <Callout type="warning" title="Free projects are for building">
 A never-subscribed Free project is deleted after **7 days of inactivity**. Opening the editor, editing, or publishing resets that clock. A published `*.ycode.website` site sitting idle still counts as inactive. There is no use case for running a website forever on the free plan — [upgrade to paid](/docs/cloud/billing) to host it.
@@ -69,14 +69,15 @@ A never-subscribed Free project is deleted after **7 days of inactivity**. Openi
 
 Both Cloud plans offer monthly and annual billing. Annual saves about 33% on Cloud Basic ($15/mo monthly → $10/mo annual) and about 17% on Cloud Pro ($30/mo monthly → $25/mo annual).
 
-You pick the plan and interval at checkout. To switch later, open the **Stripe Customer Portal** from the project's **Billing details** menu — the portal lets you change interval, update payment methods, download invoices, and cancel.
+You pick the plan and interval at checkout. To switch later, open **Billing** from the builder menu and click **Change plan** — the change takes effect immediately and is prorated. Prices exclude VAT or sales tax, which is added based on your billing address.
 
 ## Switching Between Plans
 
 Plans aren't locked. You can move between them at any time:
 
-- **Cloud Free → Cloud Basic or Cloud Pro** — Subscribe per project from the project menu's **Billing details**.
-- **Cloud Paid → Cloud Free** — Cancel the project's subscription in the Stripe Customer Portal. The project keeps editing access on free; paid features lock until you resubscribe. Previously paid projects are not deleted for inactivity.
+- **Cloud Free → Cloud Basic or Cloud Pro** — Click **Upgrade** in the editor header and subscribe from the builder.
+- **Cloud Basic ↔ Cloud Pro** — Click **Change plan** in **Billing**. A project over Basic's limits must remove extra collections or languages before switching down.
+- **Cloud Paid → Cloud Free** — Click **Cancel plan** in **Billing**. The plan stays active until the end of the billing period. The project keeps editing access on free; paid features lock until you resubscribe. Previously paid projects are not deleted for inactivity.
 - **Cloud → Self-host** — Use [Backup & Restore](/docs/deployment/backup) to export a project from Cloud and import it into a self-hosted Ycode instance.
 - **Self-host → Cloud** — The same backup/restore flow works the other way.
 
