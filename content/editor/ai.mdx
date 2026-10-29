@@ -11,19 +11,32 @@ The **AI Agent** is a chat panel built into the Ycode editor. Describe what you 
 
 Everything the agent does stays a draft until you hit **Publish**, and every turn has one-click Undo.
 
-<Callout type="info" title="Bring your own key">
-The agent runs on your own API key from **Anthropic**, **OpenAI**, **Google Gemini**, or **xAI (Grok)**. Pick the provider you already pay for, add the key once, and Ycode routes chat requests through it. Ycode doesn't charge for AI usage — you pay your provider directly.
-</Callout>
+## Getting Started
 
-## Setup
+**On Ycode Cloud, the agent works out of the box.** Open a project, switch the right sidebar to **Agent**, and start chatting — no API key or provider account needed. Usage is paid with [AI credits](/docs/cloud/ai-credits): Free projects get 500 credits to try it, Basic and Pro include monthly credits, and you can top up any time.
 
-Before the agent can chat, connect at least one provider key.
+**On self-hosted Ycode**, the agent runs on your own API key from **Anthropic**, **OpenAI**, **Google Gemini**, or **xAI (Grok)**. Add the key once and Ycode routes chat requests through it; you pay your provider directly. Cloud projects can use their own key too.
+
+| | Ycode Cloud | Self-hosted |
+|---|-------------|-------------|
+| **Setup** | None | Add a provider key |
+| **Models** | **Auto**, **Fast**, **Best** | Any enabled model from your providers |
+| **Billing** | [AI credits](/docs/cloud/ai-credits) included with your plan, plus top-ups | Your provider bills you |
+| **Own API key** | Optional — replaces credits while connected | Required |
+
+## Ycode AI on Cloud
+
+The model picker in the composer offers **Auto** (the default, which picks the model per request), **Fast** (quick edits, fewer credits), and **Best** (highest quality, more credits). Each reply shows roughly what it cost, for example `≈ 12 credits`, and the top of the Agent panel shows your remaining balance. See [AI Credits](/docs/cloud/ai-credits) for allowances, credit packs, and what happens when you run out.
+
+## Use Your Own API Key
+
+On self-hosted Ycode, connect at least one provider key before the agent can chat. On Cloud this is optional: a connected key always takes priority over AI credits, so no credits are used while it's connected.
 
 <Steps>
 
-### Open AI settings
+### Open Agent settings
 
-Go to **Settings → AI** in the builder.
+Go to **Settings → Agent** in the builder. On Cloud, click **Show** next to **Use your own API key**.
 
 ### Add a provider key
 
@@ -49,7 +62,7 @@ Back in the editor, the right sidebar shows an **Agent / Human** tab switch at t
 </Steps>
 
 <Callout type="info" title="Turning the agent off">
-The AI settings page has a master toggle to disable the agent entirely. When off, the Agent tab is hidden and the chat API refuses requests — useful for locking down a project or freezing changes during a review.
+**Settings → Agent** has an **Agent in builder** toggle to disable the agent entirely. When off, the Agent tab is hidden and the chat API refuses requests — useful for locking down a project or freezing changes during a review.
 </Callout>
 
 ## Chatting with the Agent
@@ -79,11 +92,13 @@ Drop images or paste URLs into the composer to give the agent extra context — 
 
 ### Model picker
 
-Switch models on the fly from the composer. The default is whatever you set in Settings → AI; changing it in the chat only affects that turn onwards.
+Switch models on the fly from the composer. On Cloud with AI credits, choose **Auto**, **Fast**, or **Best**. With your own key, the default is whatever you set in **Settings → Agent**; changing it in the chat only affects that turn onwards.
 
-### Usage badge
+### Usage
 
-The composer shows a running badge for the current session: token count in and out, plus an approximate cost. Your provider is the source of truth for billing.
+On Cloud with AI credits, each reply shows its approximate credit cost and the top of the Agent panel shows your remaining balance — see [AI Credits](/docs/cloud/ai-credits).
+
+With your own key, the composer shows a running badge for the current session: token count in and out, plus an approximate cost. Your provider is the source of truth for billing.
 
 ### Session history
 
@@ -147,14 +162,15 @@ Very long builds can bump against your hosting platform's per-request time budge
 
 ## Rate Limiting
 
-Each user is limited to about 30 chat requests per minute per project. Above that the API returns a friendly error and asks you to slow down. This is a project-side cap; your provider may have its own rate limits.
+Each user is limited to about 30 chat requests per minute per project. Above that the API returns a friendly error and asks you to slow down. This is a project-side cap; with your own key, your provider may have its own rate limits.
 
 ## Troubleshooting
 
 | Issue | Fix |
 |-------|-----|
-| **Agent tab missing** | The AI feature is disabled in Settings → AI. Turn it back on. |
-| **"No usable key" empty state** | Add a provider key in Settings → AI and click **Test** to verify. |
-| **Model not appearing in picker** | Enable it in Settings → AI → Models. Only enabled models show up in chat. |
+| **Agent tab missing** | **Agent in builder** is turned off in **Settings → Agent**. Turn it back on. |
+| **"No usable key" empty state** | Self-hosted only: add a provider key in **Settings → Agent** and click **Test** to verify. |
+| **"AI credits used" in the composer** | Cloud only: your credits are used up. Upgrade, buy a credit pack, or use your own API key — see [When You Run Out](/docs/cloud/ai-credits#when-you-run-out). |
+| **Model not appearing in picker** | Enable it in **Settings → Agent**. Only enabled models show up in chat. On Cloud with AI credits, the picker always shows **Auto**, **Fast**, and **Best**. |
 | **Personal key ignored** | Personal keys are per-user. Confirm you're signed in as the user who saved the key. |
 | **Rate-limited error** | Wait ~60 seconds and retry, or split large tasks across separate turns. |

@@ -1,0 +1,86 @@
+---
+title: AI Credits
+---
+
+import { Callout } from 'nextra/components'
+
+# AI Credits
+
+On Ycode Cloud, the [AI Agent](/docs/editor/ai) works out of the box — no API key, no provider account, no setup. Open the **Agent** tab in the builder and start chatting. Usage is metered in **AI credits**, which come with every plan and can be topped up any time.
+
+Credits belong to a project, like its subscription. Everyone working on the project draws from the same balance.
+
+## Credits per Plan
+
+| Plan | AI credits | Renewal |
+|------|------------|---------|
+| **Free** | 500 | One-time trial credits — they do not renew |
+| **Basic** | 1,000 per month | Every month |
+| **Pro** | 3,000 per month | Every month |
+
+Monthly credits renew with your billing period, so a renewal or plan change resets them at the same moment the invoice does. Annual plans get their allowance every month, not once a year. Unused monthly credits don't roll over.
+
+Projects with lifetime access have unlimited credits; usage is still shown so you can see what you've used.
+
+## How Credits Are Used
+
+Each message costs credits based on how much work the agent does — a quick edit like "make this heading blue" costs a few credits, while building a full landing page from a screenshot costs more. Under every reply, the chat shows roughly what that turn cost, for example `≈ 12 credits`.
+
+The model picker in the composer offers three options:
+
+| Option | What it does |
+|--------|--------------|
+| **Auto** | Picks the model per request — a fast model for edits and single sections, the most capable one for full pages and visual references. The default |
+| **Fast** | Quick edits for fewer credits |
+| **Best** | Highest quality for more credits |
+
+**Auto** is the best choice for most work: it saves credits on small changes and only reaches for the most capable model when a request needs it.
+
+If a turn runs past your remaining balance, the agent finishes the work in progress instead of stopping halfway, and wraps up early when your balance is low.
+
+## Checking Your Balance
+
+The top of the Agent panel shows your remaining credits, above the chat history. The number turns amber when you're running low and red when you're out. Hover it to see how many credits you've used, when they renew, and any purchased credits. Click it to open **Billing → AI credits**.
+
+**Billing → AI credits** shows:
+
+- **Balance** — Credits left this period, with a progress bar and the renewal date
+- **Usage** — Credits used per day over the last 30 days
+- **Purchased credits** — Every credit pack you've bought, with its expiry date
+
+You can also reach it from **Settings → Agent** under **Credits** with **View credits**.
+
+## Buying More Credits
+
+When your monthly credits run low, top up with a one-off credit pack. Open **Billing → AI credits** and click **Buy credits**, or click **Buy credits** in the chat when you run out.
+
+| Pack | Price |
+|------|-------|
+| **1,000 credits** | $5 |
+| **5,000 credits** | $20 |
+| **20,000 credits** | $70 |
+
+Pick a pack and pay with the project's default card. Prices exclude VAT or sales tax, which the dialog adds based on your billing address before you pay.
+
+- Purchased credits are used **after** your monthly credits run out.
+- They stay valid for **12 months** from purchase.
+- Credit packs are available on **Basic** and **Pro**. Free projects see the packs with an upgrade prompt — [upgrade](/docs/cloud/billing#subscribing) for monthly credits, then top up whenever you need more.
+- Only people who can manage the project's billing can buy credits. Everyone else sees **Ask a workspace admin to buy more credits**. Projects in an agency workspace can't buy packs from the builder.
+
+## When You Run Out
+
+When a project has no credits left, the composer shows **Free AI credits used** (on Free) or **AI credits used for this period** (on paid plans), with the next renewal date. From there you can:
+
+- **Upgrade plan** — On Free, get monthly credits with Basic or Pro
+- **Buy credits** — Top up with a credit pack
+- **Use your own API key** — Switch the project to your own provider key
+
+## Using Your Own API Key
+
+You can still bring your own key from **Anthropic**, **OpenAI**, **Google Gemini**, or **xAI (Grok)**. Go to **Settings → Agent**, click **Show** next to **Use your own API key**, and add a key. See [AI Agent setup](/docs/editor/ai#use-your-own-api-key).
+
+A connected key always takes priority: the agent runs on your key, your provider bills you directly, and no Ycode credits are used. Replies on your own key don't show a credit estimate. Remove the key to switch back to Ycode AI credits.
+
+<Callout type="info" title="Self-hosted Ycode">
+AI credits are a Ycode Cloud feature. Self-hosted projects run the agent on your own provider key — see [AI Agent](/docs/editor/ai).
+</Callout>
