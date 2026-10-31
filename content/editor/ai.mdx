@@ -123,7 +123,9 @@ Paste a URL and ask for what you want:
 
 Screenshots show the first screen by default, at desktop (1280×800) or mobile (390×844) size. For a whole page, ask for a full-page capture; the agent takes up to four images from top to bottom, and up to four screenshots per message. It only screenshots public pages, never your own work in the builder.
 
-The agent remembers what it read for the rest of the conversation, so follow-up messages don't search again.
+The agent remembers what it read for the rest of the conversation, so follow-up messages don't search again. It also remembers links from earlier messages, and if more than one could match what you mean, it asks which one.
+
+When you give a reference URL or image, the agent recreates that design instead of inventing its own style. If it can't load a reference site, it doesn't guess: it makes no edits and asks you to attach a screenshot. Questions like "can you access this URL?" get an answer, not edits.
 
 Web search and page reading work with Ycode AI credits and with your own **Anthropic** key; screenshots work with every provider. Each search costs about 5 [AI credits](/docs/cloud/ai-credits), and screenshots add to the cost of the message they're in. Self-hosted Ycode doesn't include web access — attach a screenshot to the message instead.
 
