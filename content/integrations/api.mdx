@@ -2,55 +2,68 @@
 title: API
 ---
 
-# API Keys
+# API
 
-Create and manage API keys for authenticating requests to the public v1 API. API keys provide programmatic access to collections, forms, and submissions.
+The public v1 API lets your own code read and write your project's CMS and form submissions over HTTPS. Use it to sync content from another system, update a collection on a schedule (for example from a Cloudflare Worker, Google Apps Script or a cron job), or read submissions into a CRM.
+
+Every request is authenticated with an API key. For the full list of endpoints, see the [REST API reference](/docs/api-reference).
 
 ## Creating an API Key
 
-1. Go to project settings
-2. Navigate to **Integrations** > **API Keys**
-3. Click **Create Key**
-4. Copy the generated key immediately
+1. Open **Integrations** → **Ycode API** in the builder
+2. Click **Generate API key** and give the key a name
+3. Copy the key immediately
 
 <Callout type="warning" title="One-time display">
-The full API key is shown only once at creation. Store it securely. If you lose it, you must create a new key and revoke the old one.
+The full API key is shown only once. Store it securely. If you lose it, generate a new key and delete the old one.
 </Callout>
+
+On Ycode Cloud, generating a key requires the Designer role or higher.
 
 ## Key Format
 
-API keys use a 64-character hexadecimal string, often with a prefix (e.g. `ycode_`). Keys are stored as SHA-256 hashes; the plain value is never stored or displayed again.
+An API key is a 64-character hexadecimal string. The key list shows its first 8 characters so you can tell keys apart. Keys are stored as SHA-256 hashes; the full value is never stored or displayed again.
 
 ## Using API Keys
 
-Include the API key in the `Authorization` header as a Bearer token:
+Send the key in the `Authorization` header as a Bearer token, on your project's own domain:
 
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
-  https://your-project.ycode.dev/ycode/api/v1/collections
+  https://yoursite.ycode.website/ycode/api/v1/collections
 ```
 
-All v1 API endpoints require this header. Requests without a valid key return 401 Unauthorized.
+A key only works on the project it was created in. Requests without a valid key return `401 Unauthorized`.
 
 ## Permissions
 
-API keys grant access to the public v1 API:
+Every API key has full access to the public v1 API of its project:
 
 - List and read collections and items
 - Create, update, and delete collection items
 - List and read forms and submissions
-- Create form submissions
+- Create, update the status of, and delete form submissions
 
-Access is scoped to the project. Keys do not grant access to the Ycode dashboard or admin functions.
+Keys do not grant access to the builder, settings, or any other part of Ycode. Anyone with a key can change your CMS content, so treat it like a password and keep it on the server side — never in browser JavaScript or a public repository.
 
-## Last Used Tracking
+## Changes Go Live Immediately
 
-Each key records `last_used_at` when it is used for a request. Check this in the API Keys settings to identify unused keys and rotate them.
+Items created, updated, or deleted through the API change both the CMS and the live site at once, with no publish step. Pages that show the collection are refreshed automatically.
 
-## Revoking Keys
+API writes do not trigger [webhooks](/docs/integrations/webhooks), and submissions created through the API do not send email notifications or run [apps](/docs/integrations/apps).
 
-Revoke an API key at any time from the API Keys settings page. Revoked keys stop working immediately. Any application using the key will receive 401 responses until you provide a new key.
+## Ycode Cloud
+
+The API works on every Ycode Cloud plan, on the project's `ycode.website` subdomain or its custom domain. If a project is suspended, reads keep working and writes return `403 Forbidden`.
+
+## Last Used
+
+Each key shows when it was created and when it was last used. Check this to find keys that are no longer needed.
+
+## Deleting Keys
+
+Delete a key at any time from its menu on the **Ycode API** page. It stops working immediately, and any application still using it gets `401` responses.
 
 <Callout type="info" title="Security">
-Rotate keys periodically and revoke keys that may have been exposed. Use separate keys per environment (development, staging, production) when possible.
+Use a separate key for each application or environment, and delete keys that may have been exposed.
 </Callout>
