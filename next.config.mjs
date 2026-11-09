@@ -5,5 +5,14 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  reactStrictMode: true
+  reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/docs/integrations/api-keys',
+        destination: '/docs/integrations/api',
+        permanent: true
+      }
+    ]
+  }
 })

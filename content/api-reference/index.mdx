@@ -4,82 +4,66 @@ title: REST API Reference
 
 # REST API Reference
 
-The Ycode public v1 API provides programmatic access to collections, items, forms, and submissions. Use it to build custom integrations, sync data, or power external applications.
+The Ycode public v1 API gives programmatic access to collections, items, forms, and submissions. Use it to build custom integrations, sync data from other systems, or power external applications.
 
 ## Base URL
 
 ```
-https://your-project.ycode.dev/ycode/api/v1
+https://yoursite.ycode.website/ycode/api/v1
 ```
 
-Replace `your-project` with your project subdomain or custom domain.
+Use your project's own domain: its `ycode.website` subdomain or a custom domain on Ycode Cloud, or your server's domain when self-hosting.
 
 ## Authentication
 
-All requests require a Bearer token (API key) in the `Authorization` header:
+Every request needs an API key in the `Authorization` header:
 
 ```bash
 Authorization: Bearer YOUR_API_KEY
 ```
 
-Create API keys in project settings under **Integrations** > **API Keys**. Invalid or missing keys return 401 Unauthorized.
+Generate keys in the builder under **Integrations** → **Ycode API**. See [API keys](/docs/integrations/api) for details.
 
 ## Request Format
 
-- **Content-Type**: `application/json` for request bodies
-- **Accept**: `application/json` for responses
+- Send request bodies as JSON with `Content-Type: application/json`
+- All responses are JSON
 
-## Response Format
+## Errors
 
-Successful responses return JSON. List endpoints include pagination metadata:
-
-```json
-{
-  "items": [...],
-  "pagination": {
-    "total": 42,
-    "page": 1,
-    "per_page": 100
-  }
-}
-```
-
-Single-resource endpoints return the resource directly as a JSON object.
-
-## Error Handling
-
-Errors return appropriate HTTP status codes with a JSON body:
+Errors return an HTTP status code and a JSON body with a message and a code:
 
 ```json
 {
-  "error": {
-    "code": "NOT_FOUND",
-    "message": "The requested resource was not found."
-  }
+  "error": "Item not found",
+  "code": "NOT_FOUND"
 }
 ```
 
-| Status | Meaning |
-|--------|---------|
-| 400 | Bad Request — Invalid parameters or body |
-| 401 | Unauthorized — Missing or invalid API key |
-| 403 | Forbidden — Valid key but insufficient permissions |
-| 404 | Not Found — Resource does not exist |
-| 422 | Unprocessable Entity — Validation failed |
-| 500 | Server Error — Internal error |
+| Status | Code | Meaning |
+|--------|------|---------|
+| 400 | `INVALID_REQUEST` | The request body or parameters are invalid |
+| 401 | `UNAUTHORIZED` | The API key is missing or invalid |
+| 403 | `FORBIDDEN` | The project is suspended (Ycode Cloud); only reads are allowed |
+| 404 | `NOT_FOUND` | The collection, item, form, or submission does not exist |
+| 500 | `INTERNAL_ERROR` | Something went wrong on the server |
 
-## Collections Endpoints
+## Collections
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/collections` | List all collections |
-| GET | `/collections/:id` | Get a single collection |
-| GET | `/collections/:id/items` | List items in a collection |
-| GET | `/collections/:id/items/:itemId` | Get a single item |
-| POST | `/collections/:id/items` | Create a new item |
-| PUT | `/collections/:id/items/:itemId` | Full update of an item |
-| PATCH | `/collections/:id/items/:itemId` | Partial update of an item |
+| GET | `/collections/:id` | Get a collection and its fields |
+| GET | `/collections/:id/items` | List items |
+| GET | `/collections/:id/items/:itemId` | Get an item |
+| POST | `/collections/:id/items` | Create an item |
+| PUT | `/collections/:id/items/:itemId` | Replace an item |
+| PATCH | `/collections/:id/items/:itemId` | Update some fields of an item |
 | DELETE | `/collections/:id/items/:itemId` | Delete an item |
+
+The API works with **published** collections and items: what visitors see on the live site. A collection or field that has never been published is not available yet.
+
+Writes take effect on the live site immediately, with no publish step, and update the CMS in the builder at the same time. Pages that show the collection are refreshed automatically.
 
 ### List Collections
 
@@ -87,7 +71,18 @@ Errors return appropriate HTTP status codes with a JSON body:
 GET /ycode/api/v1/collections
 ```
 
-Returns all collections in the project.
+```json
+{
+  "collections": [
+    {
+      "id": "5f0c…",
+      "displayName": "Blog Posts",
+      "singularName": "Blog Post",
+      "slug": "blog-posts"
+    }
+  ]
+}
+```
 
 ### Get Collection
 
@@ -95,7 +90,43 @@ Returns all collections in the project.
 GET /ycode/api/v1/collections/:id
 ```
 
-Returns a single collection by ID, including field definitions.
+Returns the collection with its fields. Use the field `slug` values as keys when filtering, sorting, and writing items. `isRequired` is `true` for fields you can write and `false` for fields Ycode sets automatically (`ID`, `Created Date`, `Updated Date`).
+
+```json
+{
+  "id": "5f0c…",
+  "displayName": "Blog Posts",
+  "singularName": "Blog Post",
+  "slug": "blog-posts",
+  "fields": [
+    { "id": "e5f6…", "displayName": "ID", "slug": "id", "type": "number", "isRequired": false },
+    { "id": "a1b2…", "displayName": "Name", "slug": "name", "type": "text", "isRequired": true },
+    { "id": "c3d4…", "displayName": "Read Time", "slug": "read-time", "type": "number", "isRequired": true }
+  ]
+}
+```
+
+### Item Format
+
+Items are returned as flat objects keyed by field **display name**, plus an `_id`:
+
+```json
+{
+  "_id": "f299…",
+  "ID": 3,
+  "Name": "Hello world",
+  "Slug": "hello-world",
+  "Created Date": "2026-11-09T08:44:25.257Z",
+  "Updated Date": "2026-11-09T08:44:28.355Z",
+  "Read Time": 4,
+  "Author": { "_id": "9a8b…", "Name": "Jane Doe" }
+}
+```
+
+- `_id` is the item's unique identifier. Use it in item URLs (`:itemId`) and as the value of reference fields.
+- `ID` is the item's sequential number in the collection.
+- Fields without a value are left out.
+- **Reference** fields are expanded into the referenced item, and **multi-reference** fields into an array of items, up to 6 levels deep.
 
 ### List Items
 
@@ -103,30 +134,27 @@ Returns a single collection by ID, including field definitions.
 GET /ycode/api/v1/collections/:id/items
 ```
 
-Query parameters:
+| Parameter | Description |
+|-----------|-------------|
+| `page` | Page number. Default `1` |
+| `per_page` | Items per page. Default `100`, max `1000` |
+| `limit` | Return at most this many items (max `1000`), instead of `per_page` |
+| `sort_by` | Field slug to sort by |
+| `order_by` | `asc` (default) or `desc`, used with `sort_by` |
+| `filter[field_slug]` | Only return items whose field exactly equals this value. Repeat for several fields |
+| `fields[Collection Name]` | Comma-separated display names of the fields to return. Use `fields[Collection Name.Reference Field]` to limit the fields of expanded references |
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| page | number | Page number (default: 1) |
-| per_page | number | Items per page (default: 100, max: 1000) |
-| limit | number | Limit total records returned (max: 1000). Alternative to page-based pagination |
-| sort_by | string | Field slug to sort results by |
-| order_by | string | Sort direction: `asc` (default) or `desc`. Used with `sort_by` |
-| filter[field_slug] | string | Filter by exact field value. Replace `field_slug` with the slug of the field to filter on |
-
-Example request with filtering and sorting:
+Field slugs are matched case-insensitively. Unknown slugs in `sort_by` and `filter` are ignored.
 
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items?sort_by=name&order_by=desc&filter[status]=active&per_page=50"
+  "https://yoursite.ycode.website/ycode/api/v1/collections/:id/items?sort_by=read-time&order_by=desc&filter[category]=news&per_page=50"
 ```
-
-Response:
 
 ```json
 {
   "items": [
-    { "id": "...", "name": "...", "slug": "...", ... }
+    { "_id": "f299…", "ID": 3, "Name": "Hello world", "Slug": "hello-world" }
   ],
   "pagination": {
     "page": 1,
@@ -142,7 +170,25 @@ Response:
 GET /ycode/api/v1/collections/:id/items/:itemId
 ```
 
-Returns a single collection item by ID.
+Returns one item in the [item format](#item-format). Deleted items return `404`.
+
+### Writing Field Values
+
+`POST`, `PUT`, and `PATCH` take a JSON object with field values directly at the top level (no wrapper):
+
+```json
+{
+  "name": "Hello world",
+  "slug": "hello-world",
+  "read-time": 4
+}
+```
+
+- Use each field's `slug` from [Get Collection](#get-collection) as the key; matching is case-insensitive.
+- Keys that don't match a field are ignored without an error, so check the slug if a value doesn't change.
+- Values are stored as text. Numbers and booleans can be sent as JSON values or strings.
+- For a reference field, send the referenced item's `_id`. For a multi-reference field, send a JSON-encoded array of `_id` values as a string, for example `"[\"9a8b…\",\"7c6d…\"]"`.
+- `ID`, `Created Date`, and `Updated Date` are set automatically and can't be written. `Updated Date` is refreshed on every update.
 
 ### Create Item
 
@@ -150,41 +196,15 @@ Returns a single collection item by ID.
 POST /ycode/api/v1/collections/:id/items
 ```
 
-Creates a new item in the collection. The item is created as published immediately.
-
-Send a JSON body with field slugs as keys and their values:
+Creates an item and publishes it immediately. Returns the new item with status `201`.
 
 ```bash
 curl -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"name": "New Blog Post", "slug": "new-blog-post", "content": "Hello world"}' \
-  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items"
+  -d '{"name": "Hello world", "slug": "hello-world", "read-time": 4}' \
+  "https://yoursite.ycode.website/ycode/api/v1/collections/:id/items"
 ```
-
-The `id`, `created_at`, and `updated_at` fields are generated automatically and cannot be set manually.
-
-Returns the created item with status `201`.
-
-### Update Item (Full)
-
-```
-PUT /ycode/api/v1/collections/:id/items/:itemId
-```
-
-Replaces all field values on an item. Fields not included in the request body are cleared to `null`. Use this when you want to overwrite the entire item.
-
-```bash
-curl -X PUT \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Updated Title", "slug": "updated-title", "content": "New content"}' \
-  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items/:itemId"
-```
-
-The `id`, `created_at`, and `updated_at` fields are protected and cannot be overwritten. The `updated_at` timestamp is set automatically.
-
-Returns the updated item.
 
 ### Update Item (Partial)
 
@@ -192,17 +212,31 @@ Returns the updated item.
 PATCH /ycode/api/v1/collections/:id/items/:itemId
 ```
 
-Updates only the fields included in the request body. All other fields remain unchanged. Use this when you want to modify specific fields without affecting the rest.
+Updates only the fields in the request body and leaves every other field unchanged. This is the endpoint to use for recurring updates, such as refreshing a value every few minutes. Returns the updated item.
 
 ```bash
 curl -X PATCH \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Updated Title"}' \
-  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items/:itemId"
+  -d '{"temperature": "21.5"}' \
+  "https://yoursite.ycode.website/ycode/api/v1/collections/:id/items/:itemId"
 ```
 
-Returns the updated item.
+### Replace Item
+
+```
+PUT /ycode/api/v1/collections/:id/items/:itemId
+```
+
+Replaces the item's values. Every writable field that is not in the request body, **including Name and Slug**, is cleared. Use `PATCH` unless you mean to overwrite the whole item. Returns the updated item.
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Hello again", "slug": "hello-again", "read-time": 5}' \
+  "https://yoursite.ycode.website/ycode/api/v1/collections/:id/items/:itemId"
+```
 
 ### Delete Item
 
@@ -210,32 +244,49 @@ Returns the updated item.
 DELETE /ycode/api/v1/collections/:id/items/:itemId
 ```
 
-Permanently deletes an item and its associated data.
+Removes the item from the live site and the CMS.
 
 ```bash
 curl -X DELETE \
   -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-project.ycode.dev/ycode/api/v1/collections/:id/items/:itemId"
+  "https://yoursite.ycode.website/ycode/api/v1/collections/:id/items/:itemId"
 ```
-
-Returns a confirmation:
 
 ```json
 {
   "deleted": true,
-  "_id": "item-uuid"
+  "_id": "f299…"
 }
 ```
 
-## Forms Endpoints
+## Forms
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/forms` | List all forms |
-| GET | `/forms/:id` | Get a single form |
-| GET | `/forms/:id/submissions` | List form submissions |
-| POST | `/forms/:id/submissions` | Create a new submission |
-| GET | `/forms/:id/submissions/:submissionId` | Get a single submission |
+| GET | `/forms` | List forms |
+| GET | `/forms/:formId` | Get a form's submission counts |
+| GET | `/forms/:formId/submissions` | List submissions |
+| POST | `/forms/:formId/submissions` | Create a submission |
+| GET | `/forms/:formId/submissions/:submissionId` | Get a submission |
+| PATCH | `/forms/:formId/submissions/:submissionId` | Change a submission's status |
+| DELETE | `/forms/:formId/submissions/:submissionId` | Delete a submission |
+
+`:formId` is the form's ID (for example `contact-form`), as returned by [List Forms](#list-forms). Forms are listed from their [submissions](/docs/forms/submissions), so a form appears in the API once it has at least one.
+
+### Submission Format
+
+```json
+{
+  "id": "8c7b…",
+  "formId": "contact-form",
+  "payload": { "name": "Jane", "email": "jane@example.com", "message": "Hello!" },
+  "metadata": { "source": "api", "user_agent": "curl/8.7.1" },
+  "status": "new",
+  "createdAt": "2026-11-09T08:45:25.497Z"
+}
+```
+
+`status` is one of `new`, `read`, `archived`, or `spam`.
 
 ### List Forms
 
@@ -243,40 +294,103 @@ Returns a confirmation:
 GET /ycode/api/v1/forms
 ```
 
-Returns all forms in the project.
+```json
+{
+  "forms": [
+    {
+      "id": "contact-form",
+      "submissionCount": 42,
+      "newCount": 5,
+      "latestSubmission": "2026-11-09T08:45:25.497Z"
+    }
+  ]
+}
+```
 
 ### Get Form
 
 ```
-GET /ycode/api/v1/forms/:id
+GET /ycode/api/v1/forms/:formId
 ```
 
-Returns a single form by ID, including field definitions.
+```json
+{
+  "id": "contact-form",
+  "submissionCount": 42,
+  "statusCounts": { "new": 5, "read": 30, "archived": 7, "spam": 0 },
+  "latestSubmission": "2026-11-09T08:45:25.497Z"
+}
+```
 
 ### List Submissions
 
 ```
-GET /ycode/api/v1/forms/:id/submissions
+GET /ycode/api/v1/forms/:formId/submissions
 ```
 
-Returns submissions for the form. Supports pagination.
+| Parameter | Description |
+|-----------|-------------|
+| `page` | Page number. Default `1` |
+| `per_page` | Submissions per page. Default `50`, max `100` |
+| `status` | Only return submissions with this status |
+
+```json
+{
+  "submissions": [ { "id": "8c7b…", "formId": "contact-form", "payload": { … }, "status": "new", … } ],
+  "pagination": {
+    "page": 1,
+    "perPage": 50,
+    "total": 42
+  }
+}
+```
 
 ### Create Submission
 
 ```
-POST /ycode/api/v1/forms/:id/submissions
+POST /ycode/api/v1/forms/:formId/submissions
 ```
 
-Body: JSON object with form field names as keys and submitted values. Creates a new submission.
+Send the submitted fields inside `payload`. `metadata` is optional; `source: "api"` and the request's user agent are added to it automatically. Returns the new submission with status `201`.
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"payload": {"name": "Jane", "email": "jane@example.com", "message": "Hello!"}, "metadata": {"page_url": "/contact"}}' \
+  "https://yoursite.ycode.website/ycode/api/v1/forms/contact-form/submissions"
+```
+
+Submissions created through the API are only stored: they don't send email notifications, run [apps](/docs/integrations/apps), or trigger [webhooks](/docs/integrations/webhooks).
 
 ### Get Submission
 
 ```
-GET /ycode/api/v1/forms/:id/submissions/:submissionId
+GET /ycode/api/v1/forms/:formId/submissions/:submissionId
 ```
 
-Returns a single submission by ID.
+Returns one submission in the [submission format](#submission-format).
 
-<Callout type="info" title="Tip">
-Use the POST submissions endpoint to submit forms from external applications or custom frontends. Ensure field names match the form configuration.
-</Callout>
+### Update Submission Status
+
+```
+PATCH /ycode/api/v1/forms/:formId/submissions/:submissionId
+```
+
+```bash
+curl -X PATCH \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"status": "read"}' \
+  "https://yoursite.ycode.website/ycode/api/v1/forms/contact-form/submissions/:submissionId"
+```
+
+Only `status` can be changed. Returns the updated submission.
+
+### Delete Submission
+
+```
+DELETE /ycode/api/v1/forms/:formId/submissions/:submissionId
+```
+
+Deletes the submission and returns `204 No Content`.
