@@ -69,6 +69,12 @@ When a [component](/docs/editor/components) instance overrides a master value (t
 
 The localization page (Pages and CMS tabs) groups translatable items into accordion sections. Only the first section opens by default and expanding another collapses it, keeping long pages manageable. Search expands matches automatically as you type.
 
+### Translating Custom Attributes
+
+[Custom attributes](/docs/editor/custom-code#custom-attributes) that hold readable text are translatable, so screen readers and tooltips speak the visitor's language. This covers `aria-label`, `aria-description`, `aria-roledescription`, `aria-placeholder`, `aria-valuetext`, `title`, `alt`, and `placeholder`; other attributes such as `data-*` are never translated.
+
+In the sidebar, each attribute gets its own row labelled with the attribute name, and the layer's text sits under a **Content** title. On the localization page, they're listed as `Layer (aria-label)`, `Layer (title)`, and so on. Attributes on layers inside a component are translated once, on the component, and apply on every page that uses it.
+
 ### Translating Page SEO
 
 A page's SEO metadata is translatable per locale: the **SEO title**, **description**, and the **social preview image**. The social preview image appears in the localization panel with the standard asset picker — pick a locale-specific image and localized URLs emit it as the `og:image` / `twitter:image`, falling back to the original wherever no completed translation exists.
