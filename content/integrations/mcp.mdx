@@ -198,6 +198,10 @@ Read and update project settings (site name, description, custom CSS, and more).
 
 View form submissions, update statuses, and manage form data. `update_form_settings` configures success behaviour (`message` or `redirect` to a URL) and email notifications (`to`, `subject`).
 
+### Analytics
+
+On Ycode Cloud, `get_analytics` reads the published site's visitor analytics: visitors, pageviews, bounce rate, visit length, live visitors, a traffic series, and top-10 lists of pages, sources, countries, devices, CMS items, and tracked clicks and form submissions. It's read-only and takes a `period` or a `from`/`to` range, up to five `breakdowns`, and an optional page `path`. On the hub URL, pass `site_id` to pick the site. See [Analytics](/docs/cloud/analytics#mcp-and-the-ai-agent).
+
 ### Localization
 
 Manage locales and translations for multilingual sites. Start with `list_translatable_content` to discover exactly what can be translated for a page, component, or CMS item — the response returns the precise `source_type`, `source_id`, `content_key`, and `content_type` for every translatable string, plus the current source value (and any existing translation when a locale is passed). Use `set_translation` for plain-text values, `set_rich_text_translation` for rich-text fields (it accepts structured blocks and writes a properly-formed translation — no need to hand-assemble the underlying document JSON), or `batch_set_translations` for bulk updates.

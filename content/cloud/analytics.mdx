@@ -1,0 +1,136 @@
+---
+title: Analytics
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Analytics
+
+Every Ycode Cloud site comes with built-in visitor analytics. See how many people visit, which pages they read, where they come from, and which buttons they click — right in the builder, with no tracking script to install and no cookie banner to add.
+
+The same numbers are available to AI agents through [MCP](#mcp-and-the-ai-agent) and to your own code through the [REST API](#rest-api).
+
+<Callout type="info">
+Analytics is a Ycode Cloud feature. Self-hosted Ycode doesn't include it — add a third-party tool such as Google Analytics or Plausible with [Custom Code](/docs/editor/custom-code) instead.
+</Callout>
+
+## Opening Analytics
+
+Click **Analytics** in the top bar of the builder, next to **Forms**. You can also open it from the project menu.
+
+Analytics is open to every project role, including editors, so everyone on the [team](/docs/cloud/teams) can see how the site is doing.
+
+Visits are counted on the published site only. Previews and the builder canvas are never counted. If your site was published before Analytics launched, it starts counting after you publish it again.
+
+## Headline Numbers
+
+The top of the dashboard shows five numbers for the selected period. Hover a number to see how it's calculated.
+
+| Number | What it means |
+|--------|---------------|
+| **Live visitors** | People active on your site in the last 5 minutes |
+| **Unique visitors** | Visitors are counted once per day. Over several days, each day's visitors are added up |
+| **Total pageviews** | Pages viewed, including repeat views by the same visitor |
+| **Bounce rate** | Share of visits that viewed a single page |
+| **Average session** | Average time between the first and last activity of a visit |
+
+Below them, a chart shows **Visitors** and **Pageviews** over the selected period, by hour for a single day and by day, week, or month for longer ranges.
+
+## Breakdowns
+
+Five panels break your traffic down. Use the switch in a panel's header to change its view.
+
+| Panel | Views |
+|-------|-------|
+| **Sources** | **Referrers**, **UTM sources**, **UTM mediums**, **UTM campaigns**, **UTM terms**, **UTM content** |
+| **Pages** | **All pages**, **Entry pages**, **Exit pages**, **CMS items** |
+| **Geography** | **Countries** |
+| **Devices** | **Device types**, **Browsers**, **Operating systems** |
+| **Tracking** | **Clicks and forms** — see [Tracking Clicks and Forms](#tracking-clicks-and-forms) |
+
+**CMS items** lists the collection items people view on your [dynamic pages](/docs/cms/dynamic-pages), so you can see which blog posts, products, or case studies get the most attention.
+
+## Filtering
+
+Click any row in a panel to filter the whole dashboard by it. For example, click `google.com` under **Sources** to see which pages visitors from Google read, or click a country to see its traffic over time. Click the row again, or remove its chip from the filter bar, to clear the filter.
+
+To filter by a value that isn't listed, click **Filter**, choose a field under **Filter by** (**Page**, **Referrer**, **Country**, **Device**, **Browser**, **OS**, or a UTM field), type the value under **Is exactly**, and click **Apply filter**.
+
+Filters stack, and the dashboard URL updates as you filter, so you can bookmark or share a view with your team.
+
+## Date Ranges
+
+Pick a range from the date menu in the top-right corner: **Today**, **Yesterday**, **Last 7 days**, **Last 30 days**, **Last 90 days**, or **Last 12 months**. For a custom range, click the calendar button, set **From** and **To**, and click **Apply**.
+
+Dates in the dashboard follow your browser's time zone.
+
+### History per Plan
+
+Your plan sets how far back the dashboard can look:
+
+| Plan | History |
+|------|---------|
+| **Free** | Last 7 days |
+| **Basic** | Last 30 days |
+| **Pro** | Last 90 days |
+| **Lifetime** | Last 90 days |
+
+Visits are collected on every plan and kept for 13 months, whatever your plan shows. If you pick a range longer than your plan allows, the dashboard shortens it and tells you. When you [upgrade](/docs/cloud/billing#changing-plans), the older history appears right away.
+
+## Tracking Clicks and Forms
+
+The **Tracking** panel counts clicks on the elements you choose, plus form submissions.
+
+<Steps>
+
+### Select a link or button
+
+Select any button, or any element with a link, on the canvas.
+
+### Add a Tracking ID
+
+Open the **Settings** tab and find the **Advanced** panel. Type a name in **Tracking ID**, for example `signup-button`. Spaces are removed automatically.
+
+### Publish
+
+Publish the site. Clicks on that element now show up under that name in **Analytics** → **Tracking**.
+
+</Steps>
+
+Give several elements the same Tracking ID to count them together — for example every "Book a demo" button across the site. Successful [form](/docs/forms) submissions are counted automatically, with no setup.
+
+## Exporting Data
+
+Click **Export** to download a CSV. **Visitors over time** exports the chart. The other entries export any panel view: **Sources**, **Pages**, and **Devices** open a submenu with each of their views. Exports use the current date range and filters.
+
+## Privacy
+
+Analytics is built to count people without tracking them:
+
+- **No cookies** — Nothing is stored in the visitor's browser, so Analytics doesn't need a cookie banner
+- **No stored IP addresses** — Visitors are recognized by an anonymous ID that changes every day, so the same person can't be followed from one day to the next
+- **Real people only** — Bots, crawlers, and headless browsers aren't counted. A page view only counts once the visitor moves the mouse, touches, scrolls, types, or keeps the page visible for 5 seconds, so visits that bounce within a second or two never inflate your numbers
+
+## MCP and the AI Agent
+
+AI agents can read your analytics with the read-only `get_analytics` tool. It's available to the in-builder [AI Agent](/docs/editor/ai) and to external clients connected through the [MCP server](/docs/integrations/mcp), on both site URLs and the Cloud hub URL (pass `site_id` to choose the site).
+
+Ask questions like:
+
+- "Which pages got the most traffic last month?"
+- "Where do our visitors come from, and how many arrive from our newsletter campaign?"
+- "How many people clicked the signup button this week?"
+- "Which blog posts are most read? Write the next one on a similar topic."
+
+The tool returns the same numbers as the dashboard: visitors, pageviews, visits, bounce rate, average visit length, live visitors, a traffic series, and up to five top-10 lists. Agents report what it returns and never estimate figures.
+
+## REST API
+
+Fetch analytics from your own code with `GET /ycode/api/v1/analytics` and an [API key](/docs/integrations/api):
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://yoursite.ycode.website/ycode/api/v1/analytics?period=7d&breakdowns=page,country"
+```
+
+See [Analytics in the API Reference](/docs/api-reference#analytics) for every parameter and the response format.

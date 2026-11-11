@@ -2,9 +2,11 @@
 title: REST API Reference
 ---
 
+import { Callout } from 'nextra/components'
+
 # REST API Reference
 
-The Ycode public v1 API gives programmatic access to collections, items, forms, and submissions. Use it to build custom integrations, sync data from other systems, or power external applications.
+The Ycode public v1 API gives programmatic access to collections, items, forms, and submissions, plus visitor analytics on Ycode Cloud. Use it to build custom integrations, sync data from other systems, or power external applications.
 
 ## Base URL
 
@@ -394,3 +396,68 @@ DELETE /ycode/api/v1/forms/:formId/submissions/:submissionId
 ```
 
 Deletes the submission and returns `204 No Content`.
+
+## Analytics
+
+<Callout type="info">
+Analytics is available on [Ycode Cloud](/docs/cloud/analytics) only. On self-hosted Ycode this endpoint returns `404`.
+</Callout>
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/analytics` | Visitor analytics for the published site |
+
+```
+GET /ycode/api/v1/analytics
+```
+
+| Parameter | Description |
+|-----------|-------------|
+| `period` | `today`, `yesterday`, `7d`, `30d`, `90d`, or `12m`. Defaults to `30d` |
+| `from`, `to` | A custom range as `YYYY-MM-DD`, inclusive. Send both; they override `period` |
+| `breakdowns` | Comma-separated top-10 lists, up to 5. Defaults to `page,referrer` |
+| `path` | Only count views of this page path, for example `/pricing` |
+
+Available breakdowns: `page`, `entry_page`, `exit_page`, `referrer`, `utm_source`, `utm_medium`, `utm_campaign`, `country`, `device`, `browser`, `os`, `item` (CMS items), and `event` (tracked clicks and form submissions).
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://yoursite.ycode.website/ycode/api/v1/analytics?period=7d&breakdowns=page,country"
+```
+
+```json
+{
+  "from": "2026-11-05",
+  "to": "2026-11-11",
+  "timezone": "UTC",
+  "historyDays": 90,
+  "clamped": false,
+  "visitors": 1240,
+  "pageviews": 3815,
+  "visits": 1592,
+  "bounceRate": 0.42,
+  "avgVisitSeconds": 96,
+  "liveVisitors": 7,
+  "interval": "day",
+  "series": [
+    { "start": "2026-11-05", "visitors": 168, "pageviews": 512 }
+  ],
+  "breakdowns": [
+    {
+      "dimension": "page",
+      "rows": [
+        { "label": "/", "visitors": 812, "total": 1430 }
+      ]
+    }
+  ]
+}
+```
+
+- Days are in UTC.
+- `bounceRate` is a share from 0 to 1. `bounceRate` and `avgVisitSeconds` are `null` when there were no visits.
+- `liveVisitors` counts visitors in the last 5 minutes.
+- `interval` is `day`, `week`, or `month`, depending on the length of the range.
+- In breakdown rows, `total` is pageviews; visits for `entry_page` and `exit_page`; and events for `event`.
+- The range is shortened to the plan's [history window](/docs/cloud/analytics#history-per-plan). When that happens, `clamped` is `true` and `historyDays` shows the window.
+
+Invalid parameters return `400` with code `VALIDATION_ERROR`.
