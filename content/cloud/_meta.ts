@@ -6,6 +6,7 @@ const meta: MetaRecord = {
   account: 'Account',
   billing: 'Billing',
   'ai-credits': 'AI Credits',
+  bandwidth: 'Bandwidth',
   analytics: 'Analytics',
   teams: 'Teams'
 }

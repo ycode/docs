@@ -32,12 +32,14 @@ On a Free Cloud project, the editor header shows a **Free** label and an **Upgra
 
 Click **Upgrade** to open **Upgrade your project**. Switch between **Monthly** and **Annual** (annual plans carry a **Save yearly** badge), then click **Choose Basic** or **Choose Pro**.
 
-| Plan | Annual (billed yearly) | Monthly | CMS collections | Languages | AI credits |
-|------|------------------------|---------|-----------------|-----------|------------|
-| **Basic** | $10/month | $15/month | 5 | 2 | 1,000 / month |
-| **Pro** | $25/month | $30/month | 50 | Unlimited | 3,000 / month |
+| Plan | Annual (billed yearly) | Monthly | CMS collections | Languages | Bandwidth | AI credits |
+|------|------------------------|---------|-----------------|-----------|-----------|------------|
+| **Basic** | $10/month | $15/month | 5 | 2 | 50 GB / month | 1,000 / month |
+| **Pro** | $25/month | $30/month | 50 | Unlimited | 100 GB / month, more with add-ons | 3,000 / month |
 
 If the project already uses more than a plan allows, that plan is disabled with a note such as "This project exceeds the Basic plan: 8 CMS collections, limit is 5". Remove the extra collections or languages, or choose a larger plan.
+
+[Bandwidth](/docs/cloud/bandwidth) works differently: a plan that includes less bandwidth than the project used in a month shows a note, but you can still choose it.
 
 ### Enter billing details
 
@@ -65,7 +67,7 @@ Open the builder menu and choose **Billing**. Billing has its own sidebar:
 
 | Page | What you can do |
 |------|-----------------|
-| **Plan** | See your plan, price, **Current period start**, and **Next invoice** date. Click **Change plan** to switch plans or intervals, or **Cancel plan** |
+| **Plan** | See your plan, price, **Current period start**, and **Next invoice** date. Click **Change plan** to switch plans or intervals, or **Cancel plan**. The **Bandwidth** card shows this month's [bandwidth](/docs/cloud/bandwidth) and, on Pro, your add-ons |
 | **AI credits** | Your [AI credit](/docs/cloud/ai-credits) balance, daily usage, and purchased packs. Click **Buy credits** to top up. Hidden while the project uses its own AI provider key |
 | **Invoices** | Every invoice from renewals, plan changes, and purchases, with its status (**Paid**, **Unpaid**, …). Click **View** or **Pay**, or download the PDF |
 | **Payment methods** | Add a card, set the **Default** card used for renewals, or remove a card |
@@ -76,6 +78,8 @@ Only people who can manage the project's members can change billing; everyone el
 ### Changing Plans
 
 Click **Change plan** on the **Plan** page, then **Switch to Basic** or **Switch to Pro**. Switching takes effect immediately and is prorated: the **Switch to** dialog shows the **Payment method**, the amount **Charged today**, and the **Next invoice** before you confirm.
+
+A Pro project with [bandwidth add-ons](/docs/cloud/bandwidth#bandwidth-add-ons) must remove them on the **Plan** page before switching to Basic. Switching a Pro project between monthly and annual moves its add-ons to the same interval.
 
 ### Cancelling
 

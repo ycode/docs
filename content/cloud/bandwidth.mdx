@@ -1,0 +1,96 @@
+---
+title: Bandwidth
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Bandwidth
+
+Bandwidth is the data sent to visitors of your published site. Every Ycode Cloud plan includes a monthly amount, and Pro projects can raise it with add-ons.
+
+Bandwidth belongs to a project, like its subscription. Usage is counted per calendar month and starts again on the 1st of each month (UTC).
+
+## Bandwidth per Plan
+
+| Plan | Bandwidth |
+|------|-----------|
+| **Free** | 1 GB per month |
+| **Basic** | 50 GB per month |
+| **Pro** | 100 GB per month, more with [add-ons](#bandwidth-add-ons) |
+
+1 GB is 1,000 MB. Unused bandwidth doesn't carry over to the next month.
+
+Projects with lifetime access and projects in an agency workspace see their usage, but the limit is not applied to them.
+
+## Checking Your Usage
+
+Open the builder menu, choose **Billing**, and go to **Plan**. The **Bandwidth** card shows:
+
+- What the project has used this month out of its limit, for example `12.4 GB of 50 GB`, with the percentage and a progress bar
+- **Last month** — The total for the previous month
+- **Add-ons** — On Pro, the add-ons the project holds and what they cost
+
+The card carries a badge when the project needs attention: **Near limit** from 80% of the limit, **Over limit** once the limit is reached, and **Site offline** if the site was taken offline.
+
+The same warning appears in two more places, so nobody on the project misses it:
+
+- **The builder top bar** — A **Near bandwidth limit**, **Over bandwidth limit**, or **Site offline** badge, visible on every screen. Hover it for the numbers. For people who can manage billing it links to **Billing → Plan**.
+- **Every Billing page** — A banner with the usage and the one action that fixes it.
+
+## When You Reach the Limit
+
+Going over the limit doesn't take your site offline by itself, and nothing is charged automatically. The project is marked **Over limit** and the banner tells you how to raise the limit:
+
+| Plan | What to do |
+|------|------------|
+| **Free** | Click **Upgrade to Basic** or **Upgrade to Pro** — the banner offers the smallest plan that covers your usage |
+| **Basic** | Click **Upgrade to Pro** |
+| **Pro** | Click **Add bandwidth** to buy [add-ons](#bandwidth-add-ons) |
+
+Sites that stay over their limit can be taken offline, especially when a project is over for the second month in a row. Raise the limit before that happens.
+
+Only people who can manage the project's billing can upgrade or add bandwidth. Everyone else sees **Ask a workspace admin to do this**.
+
+## Bandwidth Add-ons
+
+Add-ons are available on **Pro**. Each add-on raises the project's limit by **100 GB a month** for **$30 per month**, or **$300 per year** on annual billing. An add-on follows your plan's billing interval and renews with the plan until you remove it. A project can hold up to 19 add-ons, for 2,000 GB a month in total.
+
+<Steps>
+
+### Open the add-ons dialog
+
+Go to **Billing → Plan** and click **Add bandwidth** in the **Bandwidth** card. If the project already has add-ons, the button reads **Manage**.
+
+### Choose how many add-ons
+
+In **Bandwidth add-ons**, use **−** and **+** to set the number of add-ons. The dialog shows the new total, for example `200 GB a month in total`.
+
+### Review and confirm
+
+The preview shows the **Payment method**, the amount **Charged today** including tax, and the **Next invoice**. Click **Add 100 GB** (the button names the amount you are adding) to confirm.
+
+</Steps>
+
+- **Adding** — Today's charge covers the rest of the current billing period, and the higher limit applies right away.
+- **Removing** — Open the same dialog and lower the number. The lower limit applies right away, and there is no refund for the rest of the current billing period. You can't remove add-ons the project still needs for this month's or last month's usage.
+- **Switching to Basic** — Basic has no add-ons. Remove your bandwidth add-ons on the **Plan** page before switching.
+- **Tax** — Prices exclude VAT or sales tax, which is added based on your billing address.
+
+<Callout type="info" title="Need more than 2,000 GB a month?">
+Contact us and we will set up a limit that fits your site.
+</Callout>
+
+## If Your Site Is Taken Offline
+
+When a site is taken offline for bandwidth, visitors see a **This site is temporarily unavailable** page instead of your site. The page tells search engines the outage is temporary. You can still open the project and edit it.
+
+To bring the site back, raise the limit until it covers the **higher of this month's and last month's usage**:
+
+- On **Free** or **Basic**, upgrade to a plan that covers it
+- On **Pro**, add bandwidth
+
+The site comes back online as soon as the new limit covers that usage. A new month starting at zero does not bring it back by itself.
+
+<Callout type="info" title="Self-hosted Ycode">
+Bandwidth limits are a Ycode Cloud feature. On a self-hosted project, bandwidth depends on your own hosting provider.
+</Callout>

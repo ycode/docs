@@ -6,7 +6,7 @@ import { Callout } from 'nextra/components'
 
 # Pricing
 
-Ycode is available two ways: free forever as **Self-host** open source, or paid per-project on **Ycode Cloud** with the **Cloud Basic** or **Cloud Pro** plan. Every plan shares the same editor, CMS, forms, localization, and integrations — they differ in hosting, billing, and CMS and language limits.
+Ycode is available two ways: free forever as **Self-host** open source, or paid per-project on **Ycode Cloud** with the **Cloud Basic** or **Cloud Pro** plan. Every plan shares the same editor, CMS, forms, localization, and integrations — they differ in hosting, billing, and CMS, language, and bandwidth limits.
 
 ## At a Glance
 
@@ -47,6 +47,7 @@ Ycode Cloud is the managed offering: hosting, updates, SSL, and a global CDN are
 | **Monthly** | $15/month | $30/month |
 | **CMS collections** | 5 | 50 |
 | **Languages** | 2 | Unlimited |
+| **[Bandwidth](/docs/cloud/bandwidth)** | 50 GB per month | 100 GB per month, more with add-ons |
 | **[AI credits](/docs/cloud/ai-credits)** | 1,000 per month | 3,000 per month |
 | **[Analytics](/docs/cloud/analytics) history** | 30 days | 90 days |
 
@@ -61,7 +62,9 @@ Ycode Cloud is the managed offering: hosting, updates, SSL, and a global CDN are
 - Built-in, cookieless [visitor analytics](/docs/cloud/analytics) in the builder, MCP, and API
 - Community and email support
 
-Pick **Cloud Basic** for a smaller site — a portfolio, a landing page, or a business site with a blog and up to two languages. Pick **Cloud Pro** when you need more than 5 collections or more than 2 languages.
+**Bandwidth add-ons (Cloud Pro)** — Each add-on raises a Pro project's limit by 100 GB a month for $30 per month, or $300 per year on annual billing. See [Bandwidth](/docs/cloud/bandwidth#bandwidth-add-ons).
+
+Pick **Cloud Basic** for a smaller site — a portfolio, a landing page, or a business site with a blog and up to two languages. Pick **Cloud Pro** when you need more than 5 collections, more than 2 languages, or more than 50 GB of bandwidth a month.
 
 Projects start on **Free** with the full editor, CMS, and 500 one-time AI credits so you can build. Free is not a hosting plan — keep the project active, then upgrade when you want the site to stay online. Paid features such as a [custom domain](/docs/deployment/custom-domains) unlock on subscribe. See [Billing](/docs/cloud/billing) for how to subscribe and manage a project subscription from the builder.
 
@@ -80,7 +83,7 @@ You pick the plan and interval at checkout. To switch later, open **Billing** fr
 Plans aren't locked. You can move between them at any time:
 
 - **Cloud Free → Cloud Basic or Cloud Pro** — Click **Upgrade** in the editor header and subscribe from the builder.
-- **Cloud Basic ↔ Cloud Pro** — Click **Change plan** in **Billing**. A project over Basic's limits must remove extra collections or languages before switching down.
+- **Cloud Basic ↔ Cloud Pro** — Click **Change plan** in **Billing**. A project over Basic's limits must remove extra collections, languages, and bandwidth add-ons before switching down.
 - **Cloud Paid → Cloud Free** — Click **Cancel plan** in **Billing**. The plan stays active until the end of the billing period. The project keeps editing access on free; paid features lock until you resubscribe. Previously paid projects are not deleted for inactivity.
 - **Cloud → Self-host** — Use [Backup & Restore](/docs/deployment/backup) to export a project from Cloud and import it into a self-hosted Ycode instance.
 - **Self-host → Cloud** — The same backup/restore flow works the other way.
@@ -90,6 +93,7 @@ Plans aren't locked. You can move between them at any time:
 - **CMS collections** — Self-host is unlimited. Cloud Basic allows 5 collections per project, Cloud Pro 50.
 - **CMS items** — Self-host is unlimited. Cloud projects (free or paid) are capped at 20,000 items per project.
 - **Languages** — Self-host and Cloud Pro are unlimited. Cloud Basic allows 2 languages per project.
+- **Bandwidth** — Cloud projects include 1 GB per month on Free, 50 GB on Basic, and 100 GB on Pro. Pro can add 100 GB blocks for $30 per month each. On Self-host, bandwidth depends on your own hosting provider. See [Bandwidth](/docs/cloud/bandwidth).
 - **AI Agent** — Cloud projects include AI credits: 500 one-time on Free, 1,000 per month on Basic, 3,000 per month on Pro. Self-host runs the agent on your own provider key. See [AI Credits](/docs/cloud/ai-credits).
 - **Analytics** — Built into Cloud. The dashboard shows the last 7 days on Free, 30 on Basic, and 90 on Pro; data is kept for 13 months. Self-host uses a third-party tool. See [Analytics](/docs/cloud/analytics).
 - **Custom domains** — Available on Self-host and paid Cloud projects. Free Cloud projects use the `*.ycode.website` subdomain.
